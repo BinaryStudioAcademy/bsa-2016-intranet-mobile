@@ -5,6 +5,11 @@ namespace IntranetMobile.Core.Services
     public class ServiceBus
     {
         private static IAuthService authService;
+
+        private static INewsService newsService;
+
+        private static IAlertService alertService;
+
         public static IAuthService AuthService
         {
             get
@@ -18,7 +23,6 @@ namespace IntranetMobile.Core.Services
             }
         }
 
-        private static INewsService newsService;
         public static INewsService NewsService
         {
             get
@@ -32,7 +36,6 @@ namespace IntranetMobile.Core.Services
             }
         }
 
-        private static IAlertService alertService;
         public static IAlertService AlertService
         {
             get

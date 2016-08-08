@@ -42,6 +42,7 @@
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IDataBaseService.cs" />
     <Compile Include="Interfaces\INewsService.cs" />
+    <Compile Include="Interfaces\IRestService.cs" />
     <Compile Include="Interfaces\IStorageService.cs" />
     <Compile Include="Models\Dtos\AuthDto.cs" />
     <Compile Include="Models\User.cs" />
@@ -50,7 +51,7 @@
     <Compile Include="Services\ServiceBus.cs" />
     <Compile Include="Services\StorageService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">

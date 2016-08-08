@@ -7,9 +7,9 @@ namespace IntranetMobile.Core.Interfaces
         void ShowMessage(string title, string text);
 
         void ShowDialogBox(string title,
-                            string text,
-                            string okButtonCaption,
-                            string cancelButtonCaption,
-                            Action okButtonAction);
+            string text,
+            string okButtonCaption,
+            string cancelButtonCaption,
+            Action okButtonAction);
     }
 }
