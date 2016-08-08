@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntranetMobile.Core", "IntranetMobile.Core\IntranetMobile.Core.csproj", "{75BE6197-550D-4688-BE97-33788A8B2077}"
 EndProject
@@ -105,7 +105,6 @@ Global
 		{474099F7-8658-4E2C-9377-817815FB176D}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{474099F7-8658-4E2C-9377-817815FB176D}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{474099F7-8658-4E2C-9377-817815FB176D}.Debug|Mixed Platforms.ActiveCfg = Debug|iPhone
-		{474099F7-8658-4E2C-9377-817815FB176D}.Debug|Mixed Platforms.Build.0 = Debug|iPhone
 		{474099F7-8658-4E2C-9377-817815FB176D}.Release|Any CPU.ActiveCfg = Release|iPhone
 		{474099F7-8658-4E2C-9377-817815FB176D}.Release|iPhone.ActiveCfg = Release|iPhone
 		{474099F7-8658-4E2C-9377-817815FB176D}.Release|iPhone.Build.0 = Release|iPhone
