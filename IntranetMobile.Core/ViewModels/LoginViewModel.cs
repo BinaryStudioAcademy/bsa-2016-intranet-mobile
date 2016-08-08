@@ -1,6 +1,6 @@
 ﻿namespace IntranetMobile.Core.ViewModels
 {
-    public class MainViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
         public override void Start()
         {

@@ -3230,6 +3230,15 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f05004e
 			public const int notification_subtext_size = 2131034190;
 			
+			// aapt resource value: 0x7f05006e
+			public const int text_size_large = 2131034222;
+			
+			// aapt resource value: 0x7f05006d
+			public const int text_size_normal = 2131034221;
+			
+			// aapt resource value: 0x7f05006c
+			public const int text_size_small = 2131034220;
+			
 			static Dimension()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -3478,7 +3487,10 @@ namespace IntranetMobile.Droid
 			public const int Icon = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int notification_template_icon_bg = 2130837582;
+			public const int logo = 2130837582;
+			
+			// aapt resource value: 0x7f02004f
+			public const int notification_template_icon_bg = 2130837583;
 			
 			static Drawable()
 			{
@@ -3865,6 +3877,9 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06004e
 			public const int title_template = 2131099726;
 			
+			// aapt resource value: 0x7f060085
+			public const int toolbar = 2131099781;
+			
 			// aapt resource value: 0x7f06001e
 			public const int top = 2131099678;
 			
@@ -4051,7 +4066,7 @@ namespace IntranetMobile.Droid
 			public const int design_navigation_menu_item = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int Main = 2130903077;
+			public const int Login = 2130903077;
 			
 			// aapt resource value: 0x7f030026
 			public const int notification_media_action = 2130903078;
@@ -4088,6 +4103,9 @@ namespace IntranetMobile.Droid
 			
 			// aapt resource value: 0x7f030031
 			public const int support_simple_spinner_dropdown_item = 2130903089;
+			
+			// aapt resource value: 0x7f030032
+			public const int toolbar = 2130903090;
 			
 			static Layout()
 			{
@@ -4210,6 +4228,12 @@ namespace IntranetMobile.Droid
 			
 			// aapt resource value: 0x7f09013f
 			public const int Animation_Design_BottomSheetDialog = 2131296575;
+			
+			// aapt resource value: 0x7f090157
+			public const int BSTheme = 2131296599;
+			
+			// aapt resource value: 0x7f090158
+			public const int BSTheme_Base = 2131296600;
 			
 			// aapt resource value: 0x7f09008a
 			public const int Base_AlertDialog_AppCompat = 2131296394;
@@ -5224,6 +5248,9 @@ namespace IntranetMobile.Droid
 			
 			// aapt resource value: 0x7f090156
 			public const int Widget_Design_TextInputLayout = 2131296598;
+			
+			// aapt resource value: 0x7f090159
+			public const int bsButton = 2131296601;
 			
 			static Style()
 			{
