@@ -1,8 +1,8 @@
-﻿using IntranetMobile.Core.Services;
+﻿using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
 {
-    public class BaseViewModel
+    public class BaseViewModel : MvxViewModel
     {
     }
 }

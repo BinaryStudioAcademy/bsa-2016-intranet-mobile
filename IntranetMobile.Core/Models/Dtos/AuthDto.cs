@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IntranetMobile.Core.Models.Dtos
+﻿namespace IntranetMobile.Core.Models.Dtos
 {
     public class AuthDto
     {
-        public bool success { get; set; }
+        public bool Success { get; set; }
 
-        public string message { get; set; }
+        public string Message { get; set; }
 
-        public string token { get; set; }
+        public string Token { get; set; }
     }
 }
