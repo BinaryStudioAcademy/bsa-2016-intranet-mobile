@@ -41,6 +41,7 @@
     <Compile Include="Interfaces\IAlertService.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\INewsService.cs" />
+    <Compile Include="Interfaces\IRestService.cs" />
     <Compile Include="Interfaces\IStorageService.cs" />
     <Compile Include="Models\Dtos\AuthDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

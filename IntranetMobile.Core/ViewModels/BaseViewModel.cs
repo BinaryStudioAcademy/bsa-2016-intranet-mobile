@@ -2,7 +2,7 @@
 
 namespace IntranetMobile.Core.ViewModels
 {
-    public class BaseViewModel : MvxViewModel
+    public abstract class BaseViewModel : MvxViewModel
     {
     }
 }

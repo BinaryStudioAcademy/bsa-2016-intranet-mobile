@@ -11,8 +11,7 @@ namespace IntranetMobile.Droid.Views
         {
             base.OnViewModelSet();
 
-            // TODO: Fill in
+            // TODO: Fill dat with tons of fancy code :3
         }
     }
 }
-
