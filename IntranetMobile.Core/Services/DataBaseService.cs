@@ -17,18 +17,18 @@ namespace IntranetMobile.Core.Services
 
         public string Path { get; }
 
-        public async Task CreateTableAsync<T>() where T : new()
+        public async Task<SQLiteAsyncConnection> CreateTableAndGetConnectionAsync<T>() where T : new()
         {
-                var connection = new SQLiteAsyncConnection(Path);
-                await connection.CreateTableAsync<T>();
+            var connection = new SQLiteAsyncConnection(Path);
+            await connection.CreateTableAsync<T>();
+            return connection;
         }
 
         public async Task<bool> InsertItemAsync<T>(object obj) where T : new()
         {
             try
             {
-                await CreateTableAsync<T>();
-                var db = new SQLiteAsyncConnection(Path);
+                var db = await CreateTableAndGetConnectionAsync<T>(); 
                 await db.InsertAsync(obj);
                 return true;
             }
@@ -42,8 +42,7 @@ namespace IntranetMobile.Core.Services
         {
             try
             {
-                await CreateTableAsync<T>();
-                var db = new SQLiteAsyncConnection(Path);
+                var db = await CreateTableAndGetConnectionAsync<T>();
                 await db.UpdateAsync(obj);
                 return true;
             }
@@ -57,8 +56,7 @@ namespace IntranetMobile.Core.Services
         {
             try
             {
-                await CreateTableAsync<T>();
-                var db = new SQLiteAsyncConnection(Path);
+                var db = await CreateTableAndGetConnectionAsync<T>();
                 await db.DeleteAsync(obj);
                 return true;
             }
@@ -72,8 +70,7 @@ namespace IntranetMobile.Core.Services
         {
             try
             {
-                await CreateTableAsync<T>();
-                var db = new SQLiteAsyncConnection(Path);
+                var db = await CreateTableAndGetConnectionAsync<T>();
                 return await db.Table<T>().ToListAsync();
             }
             catch (SQLiteException)

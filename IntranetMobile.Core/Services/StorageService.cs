@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models;
-using SQLite;
 
 namespace IntranetMobile.Core.Services
 {

@@ -7,6 +7,7 @@ using SQLite;
 
 namespace IntranetMobile.Core.Models
 {
+    [SQLite.Table("Users")]
     public class User
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
