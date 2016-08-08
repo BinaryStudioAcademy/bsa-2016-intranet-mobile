@@ -1,7 +1,21 @@
-﻿namespace IntranetMobile.Core.ViewModels
+﻿using MvvmCross.Core.ViewModels;
+
+namespace IntranetMobile.Core.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        public LoginViewModel()
+        {
+            LoginCommand = new MvxCommand(Login);
+        }
+
+        public MvxCommand LoginCommand { get; }
+
+        private void Login()
+        {
+            ShowViewModel<NewsViewModel>();
+        }
+
         public override void Start()
         {
             base.Start();

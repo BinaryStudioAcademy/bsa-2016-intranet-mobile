@@ -143,10 +143,14 @@
     <Compile Include="Views\LoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\NewsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <AndroidResource Include="Resources\layout\toolbar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\News.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
