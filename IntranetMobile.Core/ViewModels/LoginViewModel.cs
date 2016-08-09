@@ -1,4 +1,6 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using IntranetMobile.Core.Interfaces;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.ViewModels
 {
@@ -16,11 +18,15 @@ namespace IntranetMobile.Core.ViewModels
             ShowViewModel<NewsViewModel>();
         }
 
-        public override void Start()
+        public async override void Start()
         {
             base.Start();
 
             // TODO: Fill dat with tons of fancy code :3
+
+            var rest = Mvx.Resolve<IRestClient>();
+            //await rest.GetAsync<object>("auth/logout", new { id = 0, lol = "lol", kek = 35 });
+            var resp = await rest.GetAsync("auth/logout");
         }
     }
 }
