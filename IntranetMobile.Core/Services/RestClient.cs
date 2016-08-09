@@ -50,6 +50,8 @@ namespace IntranetMobile.Core.Services
             content.Headers.ContentType.MediaType = "application/json";
             var responseMessage =
 				await httpClient.SendAsync(new HttpRequestMessage(method, new Uri(baseUri, resource)) {Content = content});
+			responseMessage.EnsureSuccessStatusCode();
+
             var responseString = await responseMessage.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseString);
         }
