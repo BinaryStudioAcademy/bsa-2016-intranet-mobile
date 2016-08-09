@@ -140,6 +140,7 @@
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\RestService.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\DrawerActivity.cs" />
     <Compile Include="Views\LoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
