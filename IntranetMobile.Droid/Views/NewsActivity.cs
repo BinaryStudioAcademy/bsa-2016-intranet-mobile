@@ -26,8 +26,6 @@ namespace IntranetMobile.Droid.Views
             SetSupportActionBar(toolbar);
             SupportActionBar.Title = "Binary studio";
             SupportActionBar.Subtitle = "News";
-
-            //Enable support action bar to display hamburger
             SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
