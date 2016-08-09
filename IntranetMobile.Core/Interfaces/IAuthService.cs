@@ -1,7 +1,12 @@
-﻿namespace IntranetMobile.Core.Interfaces
+﻿using System.Threading.Tasks;
+using IntranetMobile.Core.Models.Dtos;
+
+namespace IntranetMobile.Core.Interfaces
 {
     public interface IAuthService
     {
-        //Methods for login, logout and refresh expired token
+		Task <AuthDto> Login(string email, string paswword);
+		Task Logout();
+		Task ResetPassword(string email);
     }
 }
