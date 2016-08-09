@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <color name="colorPrimary">#607D8B</color>
+  <!-- colorPrimaryDark is used for the status bar -->
+  <color name="colorPrimaryDark">#455A64</color>
+  <!-- colorAccent is used as the default value for colorControlActivated
+         which is used to tint widgets -->
+  <color name="colorAccent">#FFA500</color>
+  <!-- You can also set colorControlNormal, colorControlActivated
+         colorControlHighlight and colorSwitchThumbNormal. -->
+  <color name="colorButtonNormal">#FFA500</color>
+</resources>
