@@ -48,29 +48,29 @@ namespace IntranetMobile.Core.Services
             return Execute(resource, requestObject, HttpMethod.Get);
         }
 
-        public Task<T> PostAsync<T>(string resource) where T : new()
+        public Task<T> PostAsync<T>(string resource, string contentType = "application/json") where T : new()
         {
-            return Execute<T>(resource, null, HttpMethod.Post);
+            return Execute<T>(resource, null, HttpMethod.Post, contentType);
         }
 
-        public Task<bool> PostAsync(string resource)
+        public Task<bool> PostAsync(string resource, string contentType = "application/json")
         {
-            return Execute(resource, null, HttpMethod.Post);
+            return Execute(resource, null, HttpMethod.Post, contentType);
         }
 
-        public Task<T> PostAsync<T>(string resource, object requestObject) where T : new()
+        public Task<T> PostAsync<T>(string resource, object requestObject, string contentType = "application/json") where T : new()
         {
-            return Execute<T>(resource, requestObject, HttpMethod.Post);
+            return Execute<T>(resource, requestObject, HttpMethod.Post, contentType);
         }
 
-        public Task<bool> PostAsync(string resource, object requestObject)
+        public Task<bool> PostAsync(string resource, object requestObject, string contentType = "application/json")
         {
-            return Execute(resource, requestObject, HttpMethod.Post);
+            return Execute(resource, requestObject, HttpMethod.Post, contentType);
         }
 
-        private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method) where T : new()
+        private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method, string contentType = "application/json") where T : new()
         {
-            var responseMessage = await GetResponse(resource, requestObject, method);
+            var responseMessage = await GetResponse(resource, requestObject, method, contentType);
             try
             {
                 responseMessage.EnsureSuccessStatusCode();
@@ -83,9 +83,9 @@ namespace IntranetMobile.Core.Services
             }
         }
 
-        private async Task<bool> Execute(string resource, object requestObject, HttpMethod method)
+        private async Task<bool> Execute(string resource, object requestObject, HttpMethod method, string contentType = "application/json")
         {
-            var responseMessage = await GetResponse(resource, requestObject, method);
+            var responseMessage = await GetResponse(resource, requestObject, method, contentType);
             try
             {
                 responseMessage.EnsureSuccessStatusCode();
@@ -97,7 +97,7 @@ namespace IntranetMobile.Core.Services
             return true;
         }
 
-        private async Task<HttpResponseMessage> GetResponse(string resource, object requestObject, HttpMethod method)
+        private async Task<HttpResponseMessage> GetResponse(string resource, object requestObject, HttpMethod method, string contentType)
         {
             HttpResponseMessage responseMessage = null;
             if (method == HttpMethod.Get)
@@ -119,7 +119,7 @@ namespace IntranetMobile.Core.Services
             else
             {
                 var content = new StringContent(JsonConvert.SerializeObject(requestObject), Encoding.UTF8);
-                content.Headers.ContentType.MediaType = "application/json";
+                content.Headers.ContentType.MediaType = contentType;
                 responseMessage =
                     await
                         httpClient.SendAsync(new HttpRequestMessage(method, new Uri(baseUri, resource))
