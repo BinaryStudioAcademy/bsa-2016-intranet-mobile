@@ -1,45 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using IntranetMobile.Core.Interfaces;
 using Newtonsoft.Json;
 
 namespace IntranetMobile.Core.Services
 {
-    public class RestClient
+    public class RestClient : IRestClient
     {
-        public T Get<T>(object dto)
+        private const string UserAgent = "Fiddler";
+        private const string BaseUrl = "http://team.binary-studio.com/";
+        private readonly CookieContainer cookieContainer;
+        private readonly HttpClient httpClient;
+
+        public RestClient()
         {
-            string resultString;
+            cookieContainer = new CookieContainer();
+            httpClient = new HttpClient(new HttpClientHandler {CookieContainer = cookieContainer});
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent);
+        }
 
-            //try
-            //{
-            //    using (var client = new HttpClient())
-            //    using (var response = await client.GetAsync(url))
-            //    {
-            //        var bytes = await response.Content.ReadAsByteArrayAsync();
-            //        resultString = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-            //    }
-            //}
-            //catch (Exception exception)
-            //{
-            //    Logger.Error(exception);
-            //    await AvailabilityCheckService.CheckAvailableAsync(BaseUrl);
-            //    return null;
-            //}
+        public Task<T> GetAsync<T>(string resource) where T : new()
+        {
+            return Execute<T>(resource, null, HttpMethod.Get);
+        }
 
-            //try
-            //{
-            //    return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<OpenWeatherBase.RootObject>(resultString));
-            //}
-            //catch (Exception exception)
-            //{
-            //    Logger.Error(exception);
-            //    return null;
-            //}
+        public Task<T> GetAsync<T>(string resource, object requestObject) where T : new()
+        {
+            return Execute<T>(resource, requestObject, HttpMethod.Get);
+        }
 
-            return default(T);
+        public Task<T> PostAsync<T>(string resource) where T : new()
+        {
+            return Execute<T>(resource, null, HttpMethod.Post);
+        }
+
+        public Task<T> PostAsync<T>(string resource, object requestObject) where T : new()
+        {
+            return Execute<T>(resource, requestObject, HttpMethod.Post);
+        }
+
+        private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method) where T : new()
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(requestObject), Encoding.UTF8);
+            content.Headers.ContentType.MediaType = "application/json";
+            var responseMessage =
+                await httpClient.SendAsync(new HttpRequestMessage(method, BaseUrl + resource) {Content = content});
+            var responseString = await responseMessage.Content.ReadAsStringAsync();
+            return (T) JsonConvert.DeserializeObject(responseString, typeof(T));
         }
     }
 }

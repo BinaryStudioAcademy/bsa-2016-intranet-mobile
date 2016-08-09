@@ -1,10 +1,7 @@
 using Android.Content;
 using IntranetMobile.Core;
-using IntranetMobile.Core.Interfaces;
-using IntranetMobile.Droid.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Platform;
 
 namespace IntranetMobile.Droid
 {
@@ -22,7 +19,6 @@ namespace IntranetMobile.Droid
 
         protected override void InitializeFirstChance()
         {
-            Mvx.RegisterSingleton(typeof(IRestService), new RestService());
             base.InitializeFirstChance();
         }
     }
