@@ -2653,32 +2653,32 @@ namespace IntranetMobile.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0b0044
-			public const int abc_background_cache_hint_selector_material_dark = 2131427396;
+			// aapt resource value: 0x7f0b0048
+			public const int abc_background_cache_hint_selector_material_dark = 2131427400;
 			
-			// aapt resource value: 0x7f0b0045
-			public const int abc_background_cache_hint_selector_material_light = 2131427397;
+			// aapt resource value: 0x7f0b0049
+			public const int abc_background_cache_hint_selector_material_light = 2131427401;
 			
-			// aapt resource value: 0x7f0b0046
-			public const int abc_color_highlight_material = 2131427398;
+			// aapt resource value: 0x7f0b004a
+			public const int abc_color_highlight_material = 2131427402;
 			
 			// aapt resource value: 0x7f0b0000
 			public const int abc_input_method_navigation_guard = 2131427328;
 			
-			// aapt resource value: 0x7f0b0047
-			public const int abc_primary_text_disable_only_material_dark = 2131427399;
-			
-			// aapt resource value: 0x7f0b0048
-			public const int abc_primary_text_disable_only_material_light = 2131427400;
-			
-			// aapt resource value: 0x7f0b0049
-			public const int abc_primary_text_material_dark = 2131427401;
-			
-			// aapt resource value: 0x7f0b004a
-			public const int abc_primary_text_material_light = 2131427402;
-			
 			// aapt resource value: 0x7f0b004b
-			public const int abc_search_url_text = 2131427403;
+			public const int abc_primary_text_disable_only_material_dark = 2131427403;
+			
+			// aapt resource value: 0x7f0b004c
+			public const int abc_primary_text_disable_only_material_light = 2131427404;
+			
+			// aapt resource value: 0x7f0b004d
+			public const int abc_primary_text_material_dark = 2131427405;
+			
+			// aapt resource value: 0x7f0b004e
+			public const int abc_primary_text_material_light = 2131427406;
+			
+			// aapt resource value: 0x7f0b004f
+			public const int abc_search_url_text = 2131427407;
 			
 			// aapt resource value: 0x7f0b0001
 			public const int abc_search_url_text_normal = 2131427329;
@@ -2689,11 +2689,11 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f0b0003
 			public const int abc_search_url_text_selected = 2131427331;
 			
-			// aapt resource value: 0x7f0b004c
-			public const int abc_secondary_text_material_dark = 2131427404;
+			// aapt resource value: 0x7f0b0050
+			public const int abc_secondary_text_material_dark = 2131427408;
 			
-			// aapt resource value: 0x7f0b004d
-			public const int abc_secondary_text_material_light = 2131427405;
+			// aapt resource value: 0x7f0b0051
+			public const int abc_secondary_text_material_light = 2131427409;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int accent_material_dark = 2131427332;
@@ -2736,6 +2736,18 @@ namespace IntranetMobile.Droid
 			
 			// aapt resource value: 0x7f0b0011
 			public const int button_material_light = 2131427345;
+			
+			// aapt resource value: 0x7f0b0046
+			public const int colorAccent = 2131427398;
+			
+			// aapt resource value: 0x7f0b0047
+			public const int colorButtonNormal = 2131427399;
+			
+			// aapt resource value: 0x7f0b0044
+			public const int colorPrimary = 2131427396;
+			
+			// aapt resource value: 0x7f0b0045
+			public const int colorPrimaryDark = 2131427397;
 			
 			// aapt resource value: 0x7f0b003a
 			public const int design_fab_shadow_end_color = 2131427386;
@@ -2881,11 +2893,11 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f0b0037
 			public const int switch_thumb_disabled_material_light = 2131427383;
 			
-			// aapt resource value: 0x7f0b004e
-			public const int switch_thumb_material_dark = 2131427406;
+			// aapt resource value: 0x7f0b0052
+			public const int switch_thumb_material_dark = 2131427410;
 			
-			// aapt resource value: 0x7f0b004f
-			public const int switch_thumb_material_light = 2131427407;
+			// aapt resource value: 0x7f0b0053
+			public const int switch_thumb_material_light = 2131427411;
 			
 			// aapt resource value: 0x7f0b0038
 			public const int switch_thumb_normal_material_dark = 2131427384;
@@ -3484,22 +3496,40 @@ namespace IntranetMobile.Droid
 			public const int design_snackbar_background = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int ic_done_all_black_24dp = 2130837581;
+			public const int ic_accessibility_black_24dp = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int ic_done_all_white_24dp = 2130837582;
+			public const int ic_bug_report_black_24dp = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int ic_menu_white_24dp = 2130837583;
+			public const int ic_done_all_black_24dp = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int Icon = 2130837584;
+			public const int ic_done_all_white_24dp = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int logo = 2130837585;
+			public const int ic_exit_to_app_black_24dp = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public const int notification_template_icon_bg = 2130837586;
+			public const int ic_group_black_24dp = 2130837586;
+			
+			// aapt resource value: 0x7f020053
+			public const int ic_home_black_24dp = 2130837587;
+			
+			// aapt resource value: 0x7f020054
+			public const int ic_menu_white_24dp = 2130837588;
+			
+			// aapt resource value: 0x7f020055
+			public const int ic_settings_black_24dp = 2130837589;
+			
+			// aapt resource value: 0x7f020056
+			public const int Icon = 2130837590;
+			
+			// aapt resource value: 0x7f020057
+			public const int logo = 2130837591;
+			
+			// aapt resource value: 0x7f020058
+			public const int notification_template_icon_bg = 2130837592;
 			
 			static Drawable()
 			{
@@ -3739,35 +3769,23 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06002a
 			public const int multiply = 2131099690;
 			
-			// aapt resource value: 0x7f06008b
-			public const int nav_accounting = 2131099787;
-			
-			// aapt resource value: 0x7f06008f
-			public const int nav_asciit = 2131099791;
+			// aapt resource value: 0x7f06008c
+			public const int nav_asciit = 2131099788;
 			
 			// aapt resource value: 0x7f06008e
-			public const int nav_feedbacks = 2131099790;
-			
-			// aapt resource value: 0x7f060090
-			public const int nav_hunter = 2131099792;
-			
-			// aapt resource value: 0x7f06008a
-			public const int nav_interview = 2131099786;
-			
-			// aapt resource value: 0x7f060092
-			public const int nav_logout = 2131099794;
+			public const int nav_logout = 2131099790;
 			
 			// aapt resource value: 0x7f060089
 			public const int nav_news = 2131099785;
 			
+			// aapt resource value: 0x7f06008b
+			public const int nav_profile = 2131099787;
+			
+			// aapt resource value: 0x7f06008a
+			public const int nav_reviewer = 2131099786;
+			
 			// aapt resource value: 0x7f06008d
-			public const int nav_profile = 2131099789;
-			
-			// aapt resource value: 0x7f06008c
-			public const int nav_reviewer = 2131099788;
-			
-			// aapt resource value: 0x7f060091
-			public const int nav_settings = 2131099793;
+			public const int nav_settings = 2131099789;
 			
 			// aapt resource value: 0x7f06007a
 			public const int nav_view = 2131099770;
