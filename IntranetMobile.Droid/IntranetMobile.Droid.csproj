@@ -144,7 +144,6 @@
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="Views\Controls\CircleDrawable.cs" />
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\DrawerActivity.cs" />
     <Compile Include="Views\Util\BitmapUtils.cs" />
