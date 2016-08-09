@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,11 @@ namespace IntranetMobile.Core.Services
         private const string BaseUrl = "http://team.binary-studio.com/";
         private readonly CookieContainer cookieContainer;
         private readonly HttpClient httpClient;
+		private readonly Uri baseUri;
 
         public RestClient()
         {
+			baseUri = new Uri(BaseUrl);
             cookieContainer = new CookieContainer();
             httpClient = new HttpClient(new HttpClientHandler {CookieContainer = cookieContainer});
             httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent);
@@ -46,9 +49,9 @@ namespace IntranetMobile.Core.Services
             var content = new StringContent(JsonConvert.SerializeObject(requestObject), Encoding.UTF8);
             content.Headers.ContentType.MediaType = "application/json";
             var responseMessage =
-                await httpClient.SendAsync(new HttpRequestMessage(method, BaseUrl + resource) {Content = content});
+				await httpClient.SendAsync(new HttpRequestMessage(method, new Uri(baseUri, resource)) {Content = content});
             var responseString = await responseMessage.Content.ReadAsStringAsync();
-            return (T) JsonConvert.DeserializeObject(responseString, typeof(T));
+            return JsonConvert.DeserializeObject<T>(responseString);
         }
     }
 }
