@@ -15,6 +15,7 @@ namespace IntranetMobile.Core.Services
     public class RestClient : IRestClient
     {
         private const string UserAgent = "Fiddler";
+        private const string ContentType = "application/json";
         private const string BaseUrl = "http://team.binary-studio.com/";
         private readonly Uri baseUri;
         private readonly CookieContainer cookieContainer;
@@ -48,27 +49,27 @@ namespace IntranetMobile.Core.Services
             return Execute(resource, requestObject, HttpMethod.Get);
         }
 
-        public Task<T> PostAsync<T>(string resource, string contentType = "application/json") where T : new()
+        public Task<T> PostAsync<T>(string resource, string contentType = ContentType) where T : new()
         {
             return Execute<T>(resource, null, HttpMethod.Post, contentType);
         }
 
-        public Task<bool> PostAsync(string resource, string contentType = "application/json")
+        public Task<bool> PostAsync(string resource, string contentType = ContentType)
         {
             return Execute(resource, null, HttpMethod.Post, contentType);
         }
 
-        public Task<T> PostAsync<T>(string resource, object requestObject, string contentType = "application/json") where T : new()
+        public Task<T> PostAsync<T>(string resource, object requestObject, string contentType = ContentType) where T : new()
         {
             return Execute<T>(resource, requestObject, HttpMethod.Post, contentType);
         }
 
-        public Task<bool> PostAsync(string resource, object requestObject, string contentType = "application/json")
+        public Task<bool> PostAsync(string resource, object requestObject, string contentType = ContentType)
         {
             return Execute(resource, requestObject, HttpMethod.Post, contentType);
         }
 
-        private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method, string contentType = "application/json") where T : new()
+        private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method, string contentType = ContentType) where T : new()
         {
             var responseMessage = await GetResponse(resource, requestObject, method, contentType);
             try
@@ -83,7 +84,7 @@ namespace IntranetMobile.Core.Services
             }
         }
 
-        private async Task<bool> Execute(string resource, object requestObject, HttpMethod method, string contentType = "application/json")
+        private async Task<bool> Execute(string resource, object requestObject, HttpMethod method, string contentType = ContentType)
         {
             var responseMessage = await GetResponse(resource, requestObject, method, contentType);
             try
