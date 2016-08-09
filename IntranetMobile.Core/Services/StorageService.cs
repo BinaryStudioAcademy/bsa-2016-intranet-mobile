@@ -1,29 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
-using IntranetMobile.Core.Models;
 
 namespace IntranetMobile.Core.Services
 {
     public class StorageService : IStorageService
     {
-        public DataBaseService DbService { get; }
-
         public StorageService(string path)
         {
             DbService = new DataBaseService(path);
-            
         }
 
-        public async Task<bool> RememberUser(User user)
+        public DataBaseService DbService { get; }
+
+        public async Task<bool> AddItem<T>(T item) where T : new()
         {
-            return await DbService.InsertItemAsync<User>(user);
+            return await DbService.InsertItemAsync<T>(item);
         }
 
-        public async Task<bool> ForgetUser(User user)
+        public async Task<bool> RemoveItem<T>(T item) where T : new()
         {
-            return await DbService.DeleteItemAsync<User>(user);
+            return await DbService.DeleteItemAsync<T>(item);
         }
     }
 }

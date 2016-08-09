@@ -7,8 +7,8 @@ namespace IntranetMobile.Core.Interfaces
 {
     public interface IStorageService
     {
-        Task<bool> RememberUser(User user);
-        Task<bool> ForgetUser(User user);
+        Task<bool> AddItem<T>(T item) where T : new();
+        Task<bool> RemoveItem<T>(T item) where T : new();
 
     }
 }

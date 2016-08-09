@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
 using SQLite;
@@ -10,9 +7,11 @@ namespace IntranetMobile.Core.Services
 {
     public class DataBaseService : IDataBaseService
     {
+        private const string FileName = "/db.db";
+
         public DataBaseService(string path)
         {
-            Path = path;
+            Path = path + FileName;
         }
 
         public string Path { get; }
@@ -28,7 +27,7 @@ namespace IntranetMobile.Core.Services
         {
             try
             {
-                var db = await CreateTableAndGetConnectionAsync<T>(); 
+                var db = await CreateTableAndGetConnectionAsync<T>();
                 await db.InsertAsync(obj);
                 return true;
             }
