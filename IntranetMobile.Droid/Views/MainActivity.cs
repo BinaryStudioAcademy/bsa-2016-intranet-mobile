@@ -10,7 +10,7 @@ namespace IntranetMobile.Droid.Views
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
-
+            
             // TODO: Fill in
         }
     }

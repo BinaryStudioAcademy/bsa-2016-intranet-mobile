@@ -13,6 +13,7 @@ namespace IntranetMobile.Core.Services
         public StorageService(string path)
         {
             DbService = new DataBaseService(path);
+            
         }
 
         public async Task<bool> RememberUser(User user)
