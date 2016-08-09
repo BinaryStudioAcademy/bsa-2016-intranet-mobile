@@ -8,9 +8,19 @@ namespace IntranetMobile.Droid.Services
         private const string UserAgent = "Fiddler";
         private const string BaseUrl = "http://team.binary-studio.com/";
 
+        public T Get<T>(string resource) where T : new()
+        {
+            return Execute<T>(resource, null, Method.GET);
+        }
+
         public T Get<T>(string resource, object requestObject) where T : new()
         {
             return Execute<T>(resource, requestObject, Method.GET);
+        }
+
+        public T Post<T>(string resource) where T : new()
+        {
+            return Execute<T>(resource, null, Method.POST);
         }
 
         public T Post<T>(string resource, object requestObject) where T : new()
@@ -22,7 +32,10 @@ namespace IntranetMobile.Droid.Services
         {
             var client = new RestClient(BaseUrl + resource) {UserAgent = UserAgent};
             var request = new RestRequest(method);
-            request.AddObject(requestObject);
+            if (requestObject != null)
+            {
+                request.AddObject(requestObject);
+            }
             return client.Execute<T>(request).Data;
         }
     }
