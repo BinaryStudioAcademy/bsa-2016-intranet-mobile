@@ -3496,22 +3496,40 @@ namespace IntranetMobile.Droid
 			public const int design_snackbar_background = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int ic_done_all_black_24dp = 2130837581;
+			public const int ic_accessibility_black_24dp = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int ic_done_all_white_24dp = 2130837582;
+			public const int ic_bug_report_black_24dp = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int ic_menu_white_24dp = 2130837583;
+			public const int ic_done_all_black_24dp = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int Icon = 2130837584;
+			public const int ic_done_all_white_24dp = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int logo = 2130837585;
+			public const int ic_exit_to_app_black_24dp = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public const int notification_template_icon_bg = 2130837586;
+			public const int ic_group_black_24dp = 2130837586;
+			
+			// aapt resource value: 0x7f020053
+			public const int ic_home_black_24dp = 2130837587;
+			
+			// aapt resource value: 0x7f020054
+			public const int ic_menu_white_24dp = 2130837588;
+			
+			// aapt resource value: 0x7f020055
+			public const int ic_settings_black_24dp = 2130837589;
+			
+			// aapt resource value: 0x7f020056
+			public const int Icon = 2130837590;
+			
+			// aapt resource value: 0x7f020057
+			public const int logo = 2130837591;
+			
+			// aapt resource value: 0x7f020058
+			public const int notification_template_icon_bg = 2130837592;
 			
 			static Drawable()
 			{
@@ -3751,35 +3769,23 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06002a
 			public const int multiply = 2131099690;
 			
-			// aapt resource value: 0x7f06008b
-			public const int nav_accounting = 2131099787;
-			
-			// aapt resource value: 0x7f06008f
-			public const int nav_asciit = 2131099791;
+			// aapt resource value: 0x7f06008c
+			public const int nav_asciit = 2131099788;
 			
 			// aapt resource value: 0x7f06008e
-			public const int nav_feedbacks = 2131099790;
-			
-			// aapt resource value: 0x7f060090
-			public const int nav_hunter = 2131099792;
-			
-			// aapt resource value: 0x7f06008a
-			public const int nav_interview = 2131099786;
-			
-			// aapt resource value: 0x7f060092
-			public const int nav_logout = 2131099794;
+			public const int nav_logout = 2131099790;
 			
 			// aapt resource value: 0x7f060089
 			public const int nav_news = 2131099785;
 			
+			// aapt resource value: 0x7f06008b
+			public const int nav_profile = 2131099787;
+			
+			// aapt resource value: 0x7f06008a
+			public const int nav_reviewer = 2131099786;
+			
 			// aapt resource value: 0x7f06008d
-			public const int nav_profile = 2131099789;
-			
-			// aapt resource value: 0x7f06008c
-			public const int nav_reviewer = 2131099788;
-			
-			// aapt resource value: 0x7f060091
-			public const int nav_settings = 2131099793;
+			public const int nav_settings = 2131099789;
 			
 			// aapt resource value: 0x7f06007a
 			public const int nav_view = 2131099770;
