@@ -22,6 +22,7 @@ namespace IntranetMobile.Droid
 
         protected override void InitializeFirstChance()
         {
+            Mvx.RegisterSingleton<IStorageService>(new StorageService(ApplicationContext.PackageCodePath + "/db.db"));
             Mvx.RegisterSingleton(typeof(IRestService), new RestService());
             base.InitializeFirstChance();
         }
