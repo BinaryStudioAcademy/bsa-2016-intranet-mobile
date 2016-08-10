@@ -42,7 +42,7 @@ namespace IntranetMobile.Core
 
 		public Task ResetPassword(string email)
 		{
-			var resetPassword = restClient.PostAsync<AuthDto>(email, null);
+			var resetPassword = restClient.PostAsync<bool>(email, resetPasswordPath, null);
 			return resetPassword;
 		}
 	}
