@@ -13,6 +13,7 @@ namespace IntranetMobile.Core
 		private const string loginPath = "auth/api/login";
 		private const string logoutPath = "auth/logout";
 		private const string resetPasswordPath = "auth/api/users/forgotPassword";
+		private const string contentType = "application/x-www-form-urlencoded";
 
 		private RestClient restClient;
 
@@ -33,17 +34,15 @@ namespace IntranetMobile.Core
 			return authDto;
 		}
 
-		public Task Logout()
+		public Task<bool> Logout()
 		{
-			var logout = restClient.GetAsync<bool>(logoutPath);
-
-			return logout;
+			return restClient.GetAsync<bool>(logoutPath);
 		}
 
-		public Task ResetPassword(string email)
+		public Task<bool> ResetPassword(string email)
 		{
-			var resetPassword = restClient.PostAsync<bool>(email, resetPasswordPath);
-			return resetPassword;
+			var str = "email=" + email;
+			return restClient.PostAsync<bool>(str, resetPasswordPath, contentType);
 		}
 	}
 }
