@@ -7,44 +7,41 @@ namespace IntranetMobile.Core.Services
 {
     public class StorageService : IStorageService
     {
-        private readonly string path;
         private IDataBaseService dataBaseService;
 
-        public StorageService(string path)
+        public StorageService(IDataBaseService dataBaseService)
         {
-            this.path = path;
+			this.dataBaseService = dataBaseService;
         }
 
-        public IDataBaseService DataBaseService
+        public Task<bool> AddItem<T>(T item) where T : class, new()
         {
-            get { return dataBaseService; }
-            set
-            {
-                dataBaseService = value;
-                DataBaseService.FileDir = path;
-                DataBaseService.Init();
-            }
+            return dataBaseService.InsertItemAsync(item);
         }
 
-
-        public async Task<bool> AddItem<T>(T item) where T : class, new()
+        public Task<bool> UpdateItem<T>(T item) where T : class, new()
         {
-            return await DataBaseService.InsertItemAsync(item);
+            return dataBaseService.UpdateItemAsync(item);
         }
 
-        public async Task<bool> UpdateItem<T>(T item) where T : class, new()
+		public Task<bool> AddOrUpdateItem<T>(T item) where T : class, new()
+		{
+			return dataBaseService.UpdateOrInsertItemAsync(item);
+		}
+
+        public Task<bool> RemoveItem<T>(T item) where T : class, new()
         {
-            return await DataBaseService.UpdateItemAsync(item);
+            return dataBaseService.DeleteItemAsync(item);
         }
 
-        public async Task<bool> RemoveItem<T>(T item) where T : class, new()
+		public Task<IEnumerable<T>> GetAllItems<T>() where T : class, new()
         {
-            return await DataBaseService.DeleteItemAsync(item);
+            return dataBaseService.GetAllItemsAsync<T>();
         }
 
-        public async Task<List<T>> GetAllItems<T>() where T : class, new()
-        {
-            return (await DataBaseService.GetAllItemsAsync<T>()).ToList();
-        }
+		public Task<T> GetFirstOrDefault<T>() where T : class, new()
+		{
+			return dataBaseService.GetFirstOrDefault<T>();
+		}
     }
 }
