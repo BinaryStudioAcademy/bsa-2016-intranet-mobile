@@ -4,13 +4,12 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using IntranetMobile.Core.Interfaces;
 using MvvmCross.Platform;
 using Newtonsoft.Json;
 
 namespace IntranetMobile.Core.Services
 {
-    public class RestClient : IRestClient
+    public class RestClient
     {
         private const string UserAgent = "Fiddler";
         private const string ContentType = "application/json";

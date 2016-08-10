@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace IntranetMobile.Core.Interfaces
 {
+    [Obsolete("Not used anymore due to optional parameters", true)]
     public interface IRestClient
     {
         Task<T> GetAsync<T>(string resource) where T : new();
