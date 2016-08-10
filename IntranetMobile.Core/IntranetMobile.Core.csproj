@@ -56,6 +56,10 @@
     <Compile Include="ViewModels\NewsViewModel.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Models\Dtos\CompNewsDto.cs" />
+    <Compile Include="Models\Dtos\CommentDto.cs" />
+    <Compile Include="Models\Dtos\WeekNewsDto.cs" />
+    <Compile Include="Models\Dtos\FullNewsDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
