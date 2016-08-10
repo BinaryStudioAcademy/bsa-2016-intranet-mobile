@@ -9,6 +9,5 @@ namespace IntranetMobile.Core.Interfaces
     {
         Task<bool> RememberUser(User user);
         Task<bool> ForgetUser(User user);
-
     }
 }
