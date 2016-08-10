@@ -1628,6 +1628,10 @@ namespace IntranetMobile.Droid
 			global::MvvmCross.Droid.Support.Design.Resource.Styleable.ViewStubCompat_android_id = global::IntranetMobile.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::MvvmCross.Droid.Support.Design.Resource.Styleable.ViewStubCompat_android_inflatedId = global::IntranetMobile.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::MvvmCross.Droid.Support.Design.Resource.Styleable.ViewStubCompat_android_layout = global::IntranetMobile.Droid.Resource.Styleable.ViewStubCompat_android_layout;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.String.ApplicationName = global::IntranetMobile.Droid.Resource.String.ApplicationName;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.String.Hello = global::IntranetMobile.Droid.Resource.String.Hello;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::IntranetMobile.Droid.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::IntranetMobile.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Animation
@@ -4232,11 +4236,11 @@ namespace IntranetMobile.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f07001a
-			public const int ApplicationName = 2131165210;
+			// aapt resource value: 0x7f070018
+			public const int ApplicationName = 2131165208;
 			
-			// aapt resource value: 0x7f070019
-			public const int Hello = 2131165209;
+			// aapt resource value: 0x7f070017
+			public const int Hello = 2131165207;
 			
 			// aapt resource value: 0x7f070000
 			public const int abc_action_bar_home_description = 2131165184;
@@ -4304,11 +4308,11 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f070016
 			public const int character_counter_pattern = 2131165206;
 			
-			// aapt resource value: 0x7f070017
-			public const int fab_scroll_shrink_grow_autohide_behavior = 2131165207;
+			// aapt resource value: 0x7f070019
+			public const int fab_scroll_shrink_grow_autohide_behavior = 2131165209;
 			
-			// aapt resource value: 0x7f070018
-			public const int fab_scroll_translation_autohide_behavior = 2131165208;
+			// aapt resource value: 0x7f07001a
+			public const int fab_scroll_translation_autohide_behavior = 2131165210;
 			
 			// aapt resource value: 0x7f070013
 			public const int status_bar_notification_info_overflow = 2131165203;
