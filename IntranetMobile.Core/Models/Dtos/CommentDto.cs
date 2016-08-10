@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace IntranetMobile.Core
+namespace IntranetMobile.Core.Models.Dtos
 {
 	public class CommentDto
 	{

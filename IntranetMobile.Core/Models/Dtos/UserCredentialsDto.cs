@@ -1,5 +1,5 @@
 ﻿using System;
-namespace IntranetMobile.Core
+namespace IntranetMobile.Core.Models.Dtos
 {
 	public class UserCredentialsDto
 	{

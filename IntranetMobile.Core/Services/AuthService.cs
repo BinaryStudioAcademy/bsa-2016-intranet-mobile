@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
-using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Platform;
