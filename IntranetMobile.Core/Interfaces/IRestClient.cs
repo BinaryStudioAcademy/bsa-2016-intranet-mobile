@@ -12,5 +12,6 @@ namespace IntranetMobile.Core.Interfaces
         Task<T> PostAsync<T>(string resource, string contentType) where T : new();
         Task<T> PostAsync<T>(string resource, object requestObject, string contentType) where T : new();
         Task<bool> PostAsync(string resource, object requestObject, string contentType);
+		Task<bool> DeleteAsync(string resource);
     }
 }
