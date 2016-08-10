@@ -5,8 +5,8 @@ namespace IntranetMobile.Core.Interfaces
 {
     public interface IAuthService
     {
-		Task <AuthDto> Login(string email, string paswword);
-		Task Logout();
-		Task ResetPassword(string email);
+		Task<AuthDto> Login(string email, string paswword);
+		Task<bool> Logout();
+		Task<bool> ResetPassword(string email);
     }
 }

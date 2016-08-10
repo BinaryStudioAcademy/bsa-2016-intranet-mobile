@@ -33,17 +33,14 @@ namespace IntranetMobile.Core
 			return authDto;
 		}
 
-		public Task Logout()
+		public Task<bool> Logout()
 		{
-			var logout = restClient.GetAsync<bool>(logoutPath);
-
-			return logout;
+			return restClient.GetAsync<bool>(logoutPath);
 		}
 
-		public Task ResetPassword(string email)
+		public Task<bool> ResetPassword(string email)
 		{
-			var resetPassword = restClient.PostAsync<bool>(email, resetPasswordPath);
-			return resetPassword;
+			return restClient.PostAsync<bool>(email, resetPasswordPath);
 		}
 	}
 }
