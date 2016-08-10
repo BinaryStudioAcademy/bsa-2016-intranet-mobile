@@ -1,4 +1,7 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using IntranetMobile.Core.Interfaces;
+using IntranetMobile.Core.Models;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.ViewModels
 {
@@ -18,10 +21,9 @@ namespace IntranetMobile.Core.ViewModels
             ShowViewModel<NewsViewModel>();
         }
 
-        public override void Start()
+        public override async void Start()
         {
             base.Start();
-
             // TODO: Fill dat with tons of fancy code :3
         }
     }

@@ -2,37 +2,46 @@
 using System.Linq;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
-using MvvmCross.Platform.Core;
 
 namespace IntranetMobile.Core.Services
 {
     public class StorageService : IStorageService
     {
-        public StorageService(string path)
+        private IDataBaseService dataBaseService;
+
+        public StorageService(IDataBaseService dataBaseService)
         {
-            DbService = new DataBaseService(path);
+			this.dataBaseService = dataBaseService;
         }
 
-        public DataBaseService DbService { get; }
-
-        public async Task<bool> AddItem<T>(T item) where T : new()
+        public Task<bool> AddItem<T>(T item) where T : class, new()
         {
-            return await DbService.InsertItemAsync<T>(item);
+            return dataBaseService.InsertItemAsync(item);
         }
 
-        public async Task<bool> UpdateItem<T>(T item) where T : new()
+        public Task<bool> UpdateItem<T>(T item) where T : class, new()
         {
-            return await DbService.UpdateItemAsync<T>(item);
+            return dataBaseService.UpdateItemAsync(item);
         }
 
-        public async Task<bool> RemoveItem<T>(T item) where T : new()
+		public Task<bool> AddOrUpdateItem<T>(T item) where T : class, new()
+		{
+			return dataBaseService.UpdateOrInsertItemAsync(item);
+		}
+
+        public Task<bool> RemoveItem<T>(T item) where T : class, new()
         {
-            return await DbService.DeleteItemAsync<T>(item);
+            return dataBaseService.DeleteItemAsync(item);
         }
 
-        public async Task<List<T>> GetAllItems<T>(T item) where T : new()
+		public Task<IEnumerable<T>> GetAllItems<T>() where T : class, new()
         {
-            return (await DbService.GetAllItemsAsync<T>()).ToList();
+            return dataBaseService.GetAllItemsAsync<T>();
         }
+
+		public Task<T> GetFirstOrDefault<T>() where T : class, new()
+		{
+			return dataBaseService.GetFirstOrDefault<T>();
+		}
     }
 }

@@ -7,27 +7,28 @@ namespace IntranetMobile.Core
 	public class CompNewsDto
 	{
 		[JsonProperty("_id")]
-		public string NewsId { get; set; }
+		public string newsId { get; set; }
 
 		[JsonProperty("author")]
-		public string AuthorId { get; set; }
-		public string Title { get; set; }
+		public string authorId { get; set; }
 
-		public string Body { get; set; }
+		public string title { get; set; }
 
-		public long Date { get; set; }
+		public string body { get; set; }
 
-		public string Type { get; set;}
+		public long date { get; set; }
 
-		public int _V { get; set;}
+		public string type { get; set;}
 
-		public List<string> Restrict_ids { get; set;}
+		public int __v { get; set;}
 
-		public List<string> Access_roles { get; set; }
+		public List<string> restrict_ids { get; set;}
 
-		public List<string> Likes { get; set; }
+		public List<string> access_roles { get; set; }
 
-		public List<CommentDto> Comments { get; set; }
+		public List<string> likes { get; set; }
+
+		public List<CommentDto> comments { get; set; }
 	}
 }
 

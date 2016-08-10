@@ -10,7 +10,9 @@ namespace IntranetMobile.Core
         public override void Initialize()
         {
             base.Initialize();
-			Mvx.RegisterSingleton(new RestClient());
+			Mvx.RegisterType<IStorageService, StorageService>();
+            Mvx.RegisterSingleton(new RestClient());
+			Mvx.RegisterType<IAuthService, AuthService>();
         }
     }
 }

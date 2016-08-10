@@ -36,6 +36,11 @@ namespace IntranetMobile.Core.Services
             return Execute(resource, null, HttpMethod.Get);
         }
 
+		public Task<bool> DeleteAsync(string resource)
+		{
+			return Execute(resource, null, HttpMethod.Delete);
+		}
+
         public Task<T> GetAsync<T>(string resource, object requestObject) where T : new()
         {
             return Execute<T>(resource, requestObject, HttpMethod.Get);
@@ -88,7 +93,7 @@ namespace IntranetMobile.Core.Services
         private async Task<HttpResponseMessage> GetResponse(string resource, object requestObject, HttpMethod method, string contentType)
         {
             HttpResponseMessage responseMessage;
-            if (method == HttpMethod.Get)
+			if (method == HttpMethod.Get || method == HttpMethod.Delete)
             {
 				var uriBuilder = new UriBuilder(new Uri(baseUri, resource));
 

@@ -7,15 +7,16 @@ namespace IntranetMobile.Core
 	public class CommentDto
 	{
 		[JsonProperty("author")]
-		public string AuthorId { get; set;}
+		public string authorId { get; set;}
 
-		public string Body { get; set; }
+		public string body { get; set; }
 
-		public long Date { get; set;}
+		public long date { get; set;}
 
-		public string CommentId { get; set;}
+		[JsonProperty("_id")]
+		public string commentId { get; set;}
 
-		public List<string> Likes { get; set;}
+		public List<string> likes { get; set;}
 	}
 }
 

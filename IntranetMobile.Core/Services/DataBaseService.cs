@@ -1,80 +1,131 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
-using SQLite;
+using MvvmCross.Platform;
+using MvvmCross.Plugins.Sqlite;
+using SQLite.Net.Async;
 
 namespace IntranetMobile.Core.Services
 {
     public class DataBaseService : IDataBaseService
     {
         private const string FileName = "/db.db";
+        private readonly ILogger logger;
+        private SQLiteAsyncConnection connection;
+		private string path { get; set; }
 
-        public DataBaseService(string path)
+        public DataBaseService(string fileDir, IMvxSqliteConnectionFactory sqliteConnectionFactory, ILogger logger)
         {
-            Path = path + FileName;
+			path = fileDir + FileName;
+			this.logger = logger;
+
+			connection = sqliteConnectionFactory.GetAsyncConnection(path);
         }
 
-        public string Path { get; }
-
-        public async Task<SQLiteAsyncConnection> CreateTableAndGetConnectionAsync<T>() where T : new()
-        {
-            var connection = new SQLiteAsyncConnection(Path);
-            await connection.CreateTableAsync<T>();
-            return connection;
-        }
-
-        public async Task<bool> InsertItemAsync<T>(object obj) where T : new()
+        public async Task<bool> InsertItemAsync<T>(T item) where T : class, new()
         {
             try
             {
-                var db = await CreateTableAndGetConnectionAsync<T>();
-                await db.InsertAsync(obj);
+                await createTableAsync<T>();
+                await connection.InsertAsync(item);
+                logger.Info("Item was inserted");
                 return true;
             }
-            catch (SQLiteException)
+            catch (Exception e)
             {
+                logger.Error(e.Message);
                 return false;
             }
         }
 
-        public async Task<bool> UpdateItemAsync<T>(object obj) where T : new()
+        public async Task<bool> UpdateItemAsync<T>(T item) where T : class, new()
         {
             try
             {
-                var db = await CreateTableAndGetConnectionAsync<T>();
-                await db.UpdateAsync(obj);
+                await createTableAsync<T>();
+                await connection.UpdateAsync(item);
+                logger.Info("Item was updated");
                 return true;
             }
-            catch (SQLiteException)
+            catch (Exception e)
             {
+                logger.Error(e.Message);
                 return false;
             }
         }
 
-        public async Task<bool> DeleteItemAsync<T>(object obj) where T : new()
+		public async Task<bool> UpdateOrInsertItemAsync<T>(T item) where T : class, new()
+		{
+			try
+			{
+				await createTableAsync<T>();
+				await connection.InsertOrReplaceAsync(item);
+				logger.Info("Item was inserted or updated");
+				return true;
+			}
+			catch (Exception e)
+			{
+				logger.Error(e.Message);
+				return false;
+			}
+		}
+
+        public async Task<bool> DeleteItemAsync<T>(T item) where T : class, new()
         {
             try
             {
-                var db = await CreateTableAndGetConnectionAsync<T>();
-                await db.DeleteAsync(obj);
+                await createTableAsync<T>();
+                await connection.DeleteAsync(item);
+                logger.Info("Item was deleted");
                 return true;
             }
-            catch (SQLiteException)
+            catch (Exception e)
             {
+                logger.Error(e.Message);
                 return false;
             }
         }
 
-        public async Task<IEnumerable<T>> GetAllItemsAsync<T>() where T : new()
+        public async Task<IEnumerable<T>> GetAllItemsAsync<T>() where T : class, new()
         {
             try
             {
-                var db = await CreateTableAndGetConnectionAsync<T>();
-                return await db.Table<T>().ToListAsync();
+                await createTableAsync<T>();
+                return await connection.Table<T>().ToListAsync();
             }
-            catch (SQLiteException)
+            catch (Exception e)
             {
+                logger.Error(e.Message);
                 return null;
+            }
+        }
+
+		public async Task<T> GetFirstOrDefault<T>() where T : class, new()
+		{
+			try
+			{
+				await createTableAsync<T>();
+				return await connection.Table<T>().FirstOrDefaultAsync();
+			}
+			catch (Exception e)
+			{
+				logger.Error(e.Message);
+				return null;
+			}
+		}
+
+
+        private async Task createTableAsync<T>() where T : class, new()
+        {
+            try
+            {
+                await connection.CreateTableAsync<T>();
+                logger.Info("Db was created");
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message);
             }
         }
     }

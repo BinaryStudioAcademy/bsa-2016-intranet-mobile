@@ -1,14 +1,30 @@
 ﻿using IntranetMobile.Core.Interfaces;
+using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.Services
 {
     public class ServiceBus
     {
+		private static IStorageService storageService;
+
         private static IAuthService authService;
 
         private static INewsService newsService;
 
         private static IAlertService alertService;
+
+		public static IStorageService StorageService
+		{
+			get
+			{
+				if (storageService == null)
+				{
+					storageService = Mvx.Resolve<IStorageService>();
+				}
+
+				return storageService;
+			}
+		}
 
         public static IAuthService AuthService
         {
@@ -16,7 +32,7 @@ namespace IntranetMobile.Core.Services
             {
                 if (authService == null)
                 {
-                    //authService = Get instance from IoC
+					authService = Mvx.Resolve<IAuthService>();
                 }
 
                 return authService;

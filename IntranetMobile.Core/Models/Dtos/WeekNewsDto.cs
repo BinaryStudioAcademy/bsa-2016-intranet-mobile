@@ -7,22 +7,22 @@ namespace IntranetMobile.Core
 	public class WeekNewsDto
 	{
 		[JsonProperty("_id")]
-		public string WeekliesId { get; set; }
+		public string weekliesId { get; set; }
 
-		public string Title { get; set; }
+		public string title { get; set; }
 
 		[JsonProperty("author")]
-		public string AuthorId { get; set; }
+		public string authorId { get; set; }
 
-		public long Date { get; set; }
+		public long date { get; set; }
 
-		public List<string> News { get; set; }
+		public List<string> news { get; set; }
 
-		public bool Published { get; set; }
+		public bool published { get; set; }
 
-		public int __V { get; set; }
+		public int __v { get; set; }
 
-		public List<FullNewsDto> FullNews { get; set; }
+		public List<FullNewsDto> fullNews { get; set; }
 	}
 }
 
