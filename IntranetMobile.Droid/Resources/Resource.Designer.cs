@@ -1919,6 +1919,18 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f01009d
 			public const int checkedTextViewStyle = 2130772125;
 			
+			// aapt resource value: 0x7f010130
+			public const int civ_border_color = 2130772272;
+			
+			// aapt resource value: 0x7f010131
+			public const int civ_border_overlay = 2130772273;
+			
+			// aapt resource value: 0x7f01012f
+			public const int civ_border_width = 2130772271;
+			
+			// aapt resource value: 0x7f010132
+			public const int civ_fill_color = 2130772274;
+			
 			// aapt resource value: 0x7f0100bf
 			public const int closeIcon = 2130772159;
 			
@@ -3490,46 +3502,49 @@ namespace IntranetMobile.Droid
 			public const int abc_textfield_search_material = 2130837578;
 			
 			// aapt resource value: 0x7f02004b
-			public const int design_fab_background = 2130837579;
+			public const int avatar_circle_grey_512dp = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public const int design_snackbar_background = 2130837580;
+			public const int design_fab_background = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int ic_accessibility_black_24dp = 2130837581;
+			public const int design_snackbar_background = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int ic_bug_report_black_24dp = 2130837582;
+			public const int ic_accessibility_black_24dp = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int ic_done_all_black_24dp = 2130837583;
+			public const int ic_bug_report_black_24dp = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int ic_done_all_white_24dp = 2130837584;
+			public const int ic_done_all_black_24dp = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int ic_exit_to_app_black_24dp = 2130837585;
+			public const int ic_done_all_white_24dp = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public const int ic_group_black_24dp = 2130837586;
+			public const int ic_exit_to_app_black_24dp = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int ic_home_black_24dp = 2130837587;
+			public const int ic_group_black_24dp = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int ic_menu_white_24dp = 2130837588;
+			public const int ic_home_black_24dp = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int ic_settings_black_24dp = 2130837589;
+			public const int ic_menu_white_24dp = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int Icon = 2130837590;
+			public const int ic_settings_black_24dp = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int logo = 2130837591;
+			public const int Icon = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int notification_template_icon_bg = 2130837592;
+			public const int logo_black_1 = 2130837592;
+			
+			// aapt resource value: 0x7f020059
+			public const int notification_template_icon_bg = 2130837593;
 			
 			static Drawable()
 			{
@@ -3550,8 +3565,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06000c
 			public const int MvxBindingTagUnique = 2131099660;
 			
-			// aapt resource value: 0x7f06007b
-			public const int action0 = 2131099771;
+			// aapt resource value: 0x7f06007e
+			public const int action0 = 2131099774;
 			
 			// aapt resource value: 0x7f060060
 			public const int action_bar = 2131099744;
@@ -3577,8 +3592,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060061
 			public const int action_context_bar = 2131099745;
 			
-			// aapt resource value: 0x7f06007f
-			public const int action_divider = 2131099775;
+			// aapt resource value: 0x7f060082
+			public const int action_divider = 2131099778;
 			
 			// aapt resource value: 0x7f060003
 			public const int action_menu_divider = 2131099651;
@@ -3619,8 +3634,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06004a
 			public const int buttonPanel = 2131099722;
 			
-			// aapt resource value: 0x7f06007c
-			public const int cancel_action = 2131099772;
+			// aapt resource value: 0x7f06007f
+			public const int cancel_action = 2131099775;
 			
 			// aapt resource value: 0x7f060012
 			public const int center = 2131099666;
@@ -3634,8 +3649,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060058
 			public const int checkbox = 2131099736;
 			
-			// aapt resource value: 0x7f060082
-			public const int chronometer = 2131099778;
+			// aapt resource value: 0x7f060085
+			public const int chronometer = 2131099781;
 			
 			// aapt resource value: 0x7f060015
 			public const int clip_horizontal = 2131099669;
@@ -3679,8 +3694,17 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060022
 			public const int disableHome = 2131099682;
 			
+			// aapt resource value: 0x7f06007a
+			public const int drawer_header_additional_info_textview = 2131099770;
+			
 			// aapt resource value: 0x7f060078
-			public const int drawer_layout = 2131099768;
+			public const int drawer_header_avatar_imageview = 2131099768;
+			
+			// aapt resource value: 0x7f060079
+			public const int drawer_header_user_name_textview = 2131099769;
+			
+			// aapt resource value: 0x7f06007b
+			public const int drawer_layout = 2131099771;
 			
 			// aapt resource value: 0x7f060062
 			public const int edit_query = 2131099746;
@@ -3688,8 +3712,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060017
 			public const int end = 2131099671;
 			
-			// aapt resource value: 0x7f060087
-			public const int end_padder = 2131099783;
+			// aapt resource value: 0x7f06008a
+			public const int end_padder = 2131099786;
 			
 			// aapt resource value: 0x7f060036
 			public const int enterAlways = 2131099702;
@@ -3736,8 +3760,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060045
 			public const int image = 2131099717;
 			
-			// aapt resource value: 0x7f060086
-			public const int info = 2131099782;
+			// aapt resource value: 0x7f060089
+			public const int info = 2131099785;
 			
 			// aapt resource value: 0x7f060000
 			public const int item_touch_helper_previous_elevation = 2131099648;
@@ -3745,11 +3769,11 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06001b
 			public const int left = 2131099675;
 			
-			// aapt resource value: 0x7f060080
-			public const int line1 = 2131099776;
+			// aapt resource value: 0x7f060083
+			public const int line1 = 2131099779;
 			
-			// aapt resource value: 0x7f060084
-			public const int line3 = 2131099780;
+			// aapt resource value: 0x7f060087
+			public const int line3 = 2131099783;
 			
 			// aapt resource value: 0x7f06001f
 			public const int listMode = 2131099679;
@@ -3757,8 +3781,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060047
 			public const int list_item = 2131099719;
 			
-			// aapt resource value: 0x7f06007e
-			public const int media_actions = 2131099774;
+			// aapt resource value: 0x7f060081
+			public const int media_actions = 2131099777;
 			
 			// aapt resource value: 0x7f060030
 			public const int middle = 2131099696;
@@ -3769,26 +3793,26 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06002a
 			public const int multiply = 2131099690;
 			
+			// aapt resource value: 0x7f06008f
+			public const int nav_asciit = 2131099791;
+			
+			// aapt resource value: 0x7f060091
+			public const int nav_logout = 2131099793;
+			
 			// aapt resource value: 0x7f06008c
-			public const int nav_asciit = 2131099788;
+			public const int nav_news = 2131099788;
 			
 			// aapt resource value: 0x7f06008e
-			public const int nav_logout = 2131099790;
-			
-			// aapt resource value: 0x7f060089
-			public const int nav_news = 2131099785;
-			
-			// aapt resource value: 0x7f06008b
-			public const int nav_profile = 2131099787;
-			
-			// aapt resource value: 0x7f06008a
-			public const int nav_reviewer = 2131099786;
+			public const int nav_profile = 2131099790;
 			
 			// aapt resource value: 0x7f06008d
-			public const int nav_settings = 2131099789;
+			public const int nav_reviewer = 2131099789;
 			
-			// aapt resource value: 0x7f06007a
-			public const int nav_view = 2131099770;
+			// aapt resource value: 0x7f060090
+			public const int nav_settings = 2131099792;
+			
+			// aapt resource value: 0x7f06007d
+			public const int nav_view = 2131099773;
 			
 			// aapt resource value: 0x7f060073
 			public const int navigation_header_container = 2131099763;
@@ -3796,8 +3820,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060034
 			public const int never = 2131099700;
 			
-			// aapt resource value: 0x7f060079
-			public const int news_toolbar = 2131099769;
+			// aapt resource value: 0x7f06007c
+			public const int news_toolbar = 2131099772;
 			
 			// aapt resource value: 0x7f060024
 			public const int none = 2131099684;
@@ -3916,8 +3940,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06001d
 			public const int start = 2131099677;
 			
-			// aapt resource value: 0x7f06007d
-			public const int status_bar_latest_event_content = 2131099773;
+			// aapt resource value: 0x7f060080
+			public const int status_bar_latest_event_content = 2131099776;
 			
 			// aapt resource value: 0x7f06006b
 			public const int submit_area = 2131099755;
@@ -3925,17 +3949,17 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060021
 			public const int tabMode = 2131099681;
 			
-			// aapt resource value: 0x7f060085
-			public const int text = 2131099781;
+			// aapt resource value: 0x7f060088
+			public const int text = 2131099784;
 			
-			// aapt resource value: 0x7f060083
-			public const int text2 = 2131099779;
+			// aapt resource value: 0x7f060086
+			public const int text2 = 2131099782;
 			
 			// aapt resource value: 0x7f060053
 			public const int textSpacerNoButtons = 2131099731;
 			
-			// aapt resource value: 0x7f060081
-			public const int time = 2131099777;
+			// aapt resource value: 0x7f060084
+			public const int time = 2131099780;
 			
 			// aapt resource value: 0x7f060049
 			public const int title = 2131099721;
@@ -3943,8 +3967,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06004e
 			public const int title_template = 2131099726;
 			
-			// aapt resource value: 0x7f060088
-			public const int toolbar = 2131099784;
+			// aapt resource value: 0x7f06008b
+			public const int toolbar = 2131099787;
 			
 			// aapt resource value: 0x7f06001e
 			public const int top = 2131099678;
@@ -6048,6 +6072,24 @@ namespace IntranetMobile.Droid
 			
 			// aapt resource value: 0
 			public const int ButtonBarLayout_allowStacking = 0;
+			
+			public static int[] CircleImageView = new int[] {
+					2130772271,
+					2130772272,
+					2130772273,
+					2130772274};
+			
+			// aapt resource value: 1
+			public const int CircleImageView_civ_border_color = 1;
+			
+			// aapt resource value: 2
+			public const int CircleImageView_civ_border_overlay = 2;
+			
+			// aapt resource value: 0
+			public const int CircleImageView_civ_border_width = 0;
+			
+			// aapt resource value: 3
+			public const int CircleImageView_civ_fill_color = 3;
 			
 			public static int[] CollapsingAppBarLayout_LayoutParams = new int[] {
 					2130772200,
