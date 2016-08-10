@@ -3541,7 +3541,7 @@ namespace IntranetMobile.Droid
 			public const int Icon = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int logo = 2130837592;
+			public const int logo_black_1 = 2130837592;
 			
 			// aapt resource value: 0x7f020059
 			public const int notification_template_icon_bg = 2130837593;
