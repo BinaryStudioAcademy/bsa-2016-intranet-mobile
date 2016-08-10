@@ -14,11 +14,11 @@ namespace IntranetMobile.Core
 		private const string logoutPath = "auth/logout";
 		private const string resetPasswordPath = "auth/api/users/forgotPassword";
 
-		private IRestClient restClient;
+		private RestClient restClient;
 
 		public AuthService()
 		{
-			restClient = Mvx.Resolve<IRestClient>();
+			restClient = Mvx.Resolve<RestClient>();
 		}
 
 		public Task<AuthDto> Login(string email, string paswword)
@@ -28,7 +28,7 @@ namespace IntranetMobile.Core
 			user.Email = email;
 			user.Password = paswword;
 
-			var authDto = restClient.PostAsync<AuthDto>(loginPath, user, null);
+			var authDto = restClient.PostAsync<AuthDto>(loginPath, user);
 
 			return authDto;
 		}
@@ -42,7 +42,7 @@ namespace IntranetMobile.Core
 
 		public Task ResetPassword(string email)
 		{
-			var resetPassword = restClient.PostAsync<bool>(email, resetPasswordPath, null);
+			var resetPassword = restClient.PostAsync<bool>(email, resetPasswordPath);
 			return resetPassword;
 		}
 	}
