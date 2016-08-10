@@ -1,7 +1,8 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
+using Android.Widget;
 using IntranetMobile.Core.ViewModels;
 using IntranetMobile.Droid.Views.Fragments;
-using MvvmCross.Droid.Shared.Caching;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views
@@ -15,10 +16,30 @@ namespace IntranetMobile.Droid.Views
 
             SetContentView(Resource.Layout.Login);
 
+            BackToLoginTextViewOnClick(null, null);
+        }
+
+        public void ForgotPasswordTextViewOnClick(object sender, EventArgs eventArgs)
+        {
+            // Create a new fragment and a transaction.
+            var fragmentTx = SupportFragmentManager.BeginTransaction();
+            var forgotPasswordFragment = new ForgotPasswordFragment();
+            fragmentTx.SetCustomAnimations(Android.Resource.Animation.SlideInLeft,
+                Android.Resource.Animation.SlideOutRight);
+            // The fragment will have the ID of Resource.Id.login_fragment_container.
+            fragmentTx.Replace(Resource.Id.login_fragment_container, forgotPasswordFragment, "ForgotPasswordFragment");
+            // Commit the transaction.
+            fragmentTx.Commit();
+        }
+
+        public void BackToLoginTextViewOnClick(object sender, EventArgs eventArgs)
+        {
             // Create a new fragment and a transaction.
             var fragmentTx = SupportFragmentManager.BeginTransaction();
             var loginFragment = new LoginFragment();
-            // The fragment will have the ID of Resource.Id.fragment_container.
+            fragmentTx.SetCustomAnimations(Android.Resource.Animation.SlideInLeft,
+                Android.Resource.Animation.SlideOutRight);
+            // The fragment will have the ID of Resource.Id.login_fragment_container.
             fragmentTx.Replace(Resource.Id.login_fragment_container, loginFragment, "LoginFragment");
             // Commit the transaction.
             fragmentTx.Commit();
