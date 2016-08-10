@@ -9,6 +9,8 @@ namespace IntranetMobile.Core.Interfaces
     {
         Task<bool> AddItem<T>(T item) where T : new();
         Task<bool> RemoveItem<T>(T item) where T : new();
+        Task<bool> UpdateItem<T>(T item) where T : new();
+        Task<List<T>> GetAllItems<T>(T item) where T : new();
 
     }
 }
