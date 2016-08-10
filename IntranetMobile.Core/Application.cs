@@ -12,6 +12,7 @@ namespace IntranetMobile.Core
             base.Initialize();
 			Mvx.RegisterType<IStorageService, StorageService>();
             Mvx.RegisterSingleton(new RestClient());
+			Mvx.RegisterType<IAuthService, AuthService>();
         }
     }
 }
