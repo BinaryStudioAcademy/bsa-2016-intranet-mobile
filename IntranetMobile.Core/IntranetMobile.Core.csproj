@@ -52,6 +52,8 @@
     <Compile Include="Services\ServiceBus.cs" />
     <Compile Include="Services\StorageService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ForgotPasswordFragmentViewModel.cs" />
+    <Compile Include="ViewModels\LoginFragmentViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NewsViewModel.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
