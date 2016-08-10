@@ -4,9 +4,11 @@ namespace IntranetMobile.Core.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public LoginViewModel()
+        
+		public LoginViewModel()
         {
             LoginCommand = new MvxCommand(Login);
+
         }
 
         public MvxCommand LoginCommand { get; }
