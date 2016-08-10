@@ -24,10 +24,10 @@ namespace IntranetMobile.Core
 
 		public Task<AuthDto> Login(string email, string paswword)
 		{
-			var user = new User();
+			var user = new UserCredentialsDto();
 
-			user.Email = email;
-			user.Password = paswword;
+			user.email = email;
+			user.password = paswword;
 
 			var authDto = restClient.PostAsync<AuthDto>(loginPath, user);
 
