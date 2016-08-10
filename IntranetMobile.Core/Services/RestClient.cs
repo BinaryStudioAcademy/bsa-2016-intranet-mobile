@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Flurl;
 using IntranetMobile.Core.Interfaces;
 using MvvmCross.Platform;
 using Newtonsoft.Json;
@@ -44,19 +42,9 @@ namespace IntranetMobile.Core.Services
             return Execute<T>(resource, requestObject, HttpMethod.Get);
         }
 
-        public Task<bool> GetAsync(string resource, object requestObject)
-        {
-            return Execute(resource, requestObject, HttpMethod.Get);
-        }
-
         public Task<T> PostAsync<T>(string resource, string contentType = ContentType) where T : new()
         {
             return Execute<T>(resource, null, HttpMethod.Post, contentType);
-        }
-
-        public Task<bool> PostAsync(string resource, string contentType = ContentType)
-        {
-            return Execute(resource, null, HttpMethod.Post, contentType);
         }
 
         public Task<T> PostAsync<T>(string resource, object requestObject, string contentType = ContentType) where T : new()
@@ -86,9 +74,9 @@ namespace IntranetMobile.Core.Services
 
         private async Task<bool> Execute(string resource, object requestObject, HttpMethod method, string contentType = ContentType)
         {
-            var responseMessage = await GetResponse(resource, requestObject, method, contentType);
             try
             {
+				var responseMessage = await GetResponse(resource, requestObject, method, contentType);
                 responseMessage.EnsureSuccessStatusCode();
             }
             catch
@@ -103,19 +91,20 @@ namespace IntranetMobile.Core.Services
             HttpResponseMessage responseMessage;
             if (method == HttpMethod.Get)
             {
-                IDictionary propertiesDictionary = null;
-                if (requestObject != null)
-                {
-                    propertiesDictionary = requestObject.GetType()
-                        .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                        .ToDictionary(prop => prop.Name, prop => prop.GetValue(requestObject, null));
-                }
+				var uriBuilder = new UriBuilder(new Uri(baseUri, resource));
 
-                var url = BaseUrl
-                    .AppendPathSegment(resource)
-                    .SetQueryParams(propertiesDictionary);
+				if (requestObject != null)
+				{
+					var propertiesDictionary = requestObject.GetType()
+						.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                        .ToDictionary(prop => prop.Name, prop => prop.GetValue(requestObject).ToString())
+                        .ToList();
 
-                responseMessage = await httpClient.SendAsync(new HttpRequestMessage(method, url));
+					var param = new FormUrlEncodedContent(propertiesDictionary);
+					uriBuilder.Query = await param.ReadAsStringAsync();
+				}
+
+				responseMessage = await httpClient.SendAsync(new HttpRequestMessage(method, uriBuilder.ToString()));
             }
             else
             {
