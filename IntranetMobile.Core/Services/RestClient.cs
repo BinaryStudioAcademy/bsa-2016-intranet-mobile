@@ -100,7 +100,7 @@ namespace IntranetMobile.Core.Services
 
         private async Task<HttpResponseMessage> GetResponse(string resource, object requestObject, HttpMethod method, string contentType)
         {
-            HttpResponseMessage responseMessage = null;
+            HttpResponseMessage responseMessage;
             if (method == HttpMethod.Get)
             {
                 IDictionary propertiesDictionary = null;
