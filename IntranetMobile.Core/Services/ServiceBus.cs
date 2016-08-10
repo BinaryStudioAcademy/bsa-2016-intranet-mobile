@@ -32,7 +32,7 @@ namespace IntranetMobile.Core.Services
             {
                 if (authService == null)
                 {
-                    //authService = Get instance from IoC
+					authService = Mvx.Resolve<IAuthService>();
                 }
 
                 return authService;

@@ -60,6 +60,7 @@
     <Compile Include="Models\Dtos\CommentDto.cs" />
     <Compile Include="Models\Dtos\WeekNewsDto.cs" />
     <Compile Include="Models\Dtos\FullNewsDto.cs" />
+    <Compile Include="Models\Dtos\UserCredentialsDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
