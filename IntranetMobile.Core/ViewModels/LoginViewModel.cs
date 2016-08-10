@@ -24,11 +24,6 @@ namespace IntranetMobile.Core.ViewModels
         public override async void Start()
         {
             base.Start();
-            var a = Mvx.Resolve<IStorageService>();
-            //a.DataBaseService = Mvx.Resolve<IDataBaseService>();
-            var user = new User() {Email = "123",Password = "123"};
-            await a.AddItem<User>(user);
-            var b = await a.GetAllItems<User>();
             // TODO: Fill dat with tons of fancy code :3
         }
     }
