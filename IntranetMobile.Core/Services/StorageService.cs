@@ -2,37 +2,49 @@
 using System.Linq;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
-using MvvmCross.Platform.Core;
 
 namespace IntranetMobile.Core.Services
 {
     public class StorageService : IStorageService
     {
+        private readonly string path;
+        private IDataBaseService dataBaseService;
+
         public StorageService(string path)
         {
-            DbService = new DataBaseService(path);
+            this.path = path;
         }
 
-        public DataBaseService DbService { get; }
-
-        public async Task<bool> AddItem<T>(T item) where T : new()
+        public IDataBaseService DataBaseService
         {
-            return await DbService.InsertItemAsync<T>(item);
+            get { return dataBaseService; }
+            set
+            {
+                dataBaseService = value;
+                DataBaseService.FileDir = path;
+                DataBaseService.Init();
+            }
         }
 
-        public async Task<bool> UpdateItem<T>(T item) where T : new()
+
+        public async Task<bool> AddItem<T>(T item) where T : class, new()
         {
-            return await DbService.UpdateItemAsync<T>(item);
+            return await DataBaseService.InsertItemAsync(item);
         }
 
-        public async Task<bool> RemoveItem<T>(T item) where T : new()
+        public async Task<bool> UpdateItem<T>(T item) where T : class, new()
         {
-            return await DbService.DeleteItemAsync<T>(item);
+            return await DataBaseService.UpdateItemAsync(item);
         }
 
-        public async Task<List<T>> GetAllItems<T>(T item) where T : new()
+        public async Task<bool> RemoveItem<T>(T item) where T : class, new()
         {
-            return (await DbService.GetAllItemsAsync<T>()).ToList();
+            return await DataBaseService.DeleteItemAsync(item);
+        }
+
+        public async Task<List<T>> GetAllItems<T>() where T : class, new()
+        {
+            return (await DataBaseService.GetAllItemsAsync<T>()).ToList();
         }
     }
 }

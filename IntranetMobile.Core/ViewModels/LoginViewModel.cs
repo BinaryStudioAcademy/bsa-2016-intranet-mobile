@@ -1,4 +1,7 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using IntranetMobile.Core.Interfaces;
+using IntranetMobile.Core.Models;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.ViewModels
 {
@@ -18,10 +21,14 @@ namespace IntranetMobile.Core.ViewModels
             ShowViewModel<NewsViewModel>();
         }
 
-        public override void Start()
+        public override async void Start()
         {
             base.Start();
-
+            var a = Mvx.Resolve<IStorageService>();
+            //a.DataBaseService = Mvx.Resolve<IDataBaseService>();
+            var user = new User() {Email = "123",Password = "123"};
+            await a.AddItem<User>(user);
+            var b = await a.GetAllItems<User>();
             // TODO: Fill dat with tons of fancy code :3
         }
     }
