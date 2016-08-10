@@ -1,7 +1,20 @@
-﻿namespace IntranetMobile.Core.Interfaces
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace IntranetMobile.Core.Interfaces
 {
     public interface INewsService
     {
-        //Methods for getting list of news and so on
+		Task<List<CompNewsDto>> CompanyNews(int skip, int limit);
+
+		Task<List<WeekNewsDto>> Weeklies(int skip, int limit);
+
+		Task LikeNews(string id);
+
+		Task UnLikeNews(string id);
+
+		Task LikeComment(string newsId, string commentId);
+
+		Task UnlikeComment(string newsId, string CommentId);
     }
 }
