@@ -10,7 +10,7 @@ using MvvmCross.Droid.Support.V4;
 
 namespace IntranetMobile.Droid.Views.Fragments
 {
-    [MvxFragment(typeof(LoginViewModel), Resource.Id.login_fragment_container, true)]
+    [MvxFragment(typeof(LoginViewModel), Resource.Id.login_fragment_container)]
     [Register("intranetmobile.droid.views.fragments.LoginFragment")]
     public class LoginFragment : MvxFragment<LoginFragmentViewModel>
     {
