@@ -4,13 +4,23 @@ namespace IntranetMobile.Core.ViewModels
 {
     public class ForgotPasswordFragmentViewModel : BaseFragmentViewModel
     {
+        private string _email;
+
         public ForgotPasswordFragmentViewModel()
         {
             BackToLoginCommand = new MvxCommand(ForgotPassword);
-            SendCommand = new MvxCommand(Send);
+            SendCommand = new MvxCommand(Send, CanExecuteSend);
         }
 
-        public string Email { get; set; }
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                SendCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         public MvxCommand BackToLoginCommand { get; }
 
@@ -18,6 +28,11 @@ namespace IntranetMobile.Core.ViewModels
 
         private void Send()
         {
+        }
+
+        private bool CanExecuteSend()
+        {
+            return !string.IsNullOrEmpty(Email);
         }
 
         private void ForgotPassword()
