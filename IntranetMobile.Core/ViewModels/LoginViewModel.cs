@@ -7,7 +7,7 @@
             base.Start();
             // TODO: Fill dat with tons of fancy code :3
             ShowViewModel<LoginFragmentViewModel>();
-            //ShowViewModel<LoadingFrarmentViewModel>();
+            //ShowViewModel<LoadingFragmentViewModel>();
         }
     }
 }
