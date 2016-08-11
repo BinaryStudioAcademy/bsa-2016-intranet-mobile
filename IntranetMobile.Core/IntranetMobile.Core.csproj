@@ -66,6 +66,7 @@
     <Compile Include="Models\Dtos\UserCredentialsDto.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="Models\Dtos\CompNewsReqParams.cs" />
+    <Compile Include="Models\Dtos\WeekNewsReqParams.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">

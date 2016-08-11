@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models.Dtos;
+using IntranetMobile.Core.Services;
 using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.Services
 {
-    public class NewsService : INewsService
-    {
-        private const string type = "company";
-        private const string companyNewsPath = "api/news?";
+	public class NewsService : INewsService
+	{
+		private const string type = "company";
+		private const string published = "yes";
+		private const string companyNewsPath = "api/news?";
+		private const string weekNewsPath = "api/packs?";
 
+		private RestClient restClient;
         private readonly RestClient restClient;
 
         public NewsService()
@@ -50,9 +54,16 @@ namespace IntranetMobile.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<WeekNewsDto>> Weeklies(int skip, int limit)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public Task<List<WeekNewsDto>> Weeklies(int skip, int limit)
+		{
+			var weekNewsReqParams = new WeekNewsReqParams();
+
+			weekNewsReqParams.skip = skip;
+			weekNewsReqParams.limit = limit;
+			weekNewsReqParams.published = published;
+
+			return restClient.GetAsync<List<WeekNewsDto>>(weekNewsPath, weekNewsReqParams);
+		}
+	}
 }
+
