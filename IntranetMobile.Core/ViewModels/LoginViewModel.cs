@@ -4,17 +4,9 @@ namespace IntranetMobile.Core.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public MvxCommand ForgotPasswordCommand { get; set; }
-
         public LoginViewModel()
         {
             LoginCommand = new MvxCommand(Login);
-            ForgotPasswordCommand = new MvxCommand(ForgotPassword);
-        }
-
-        private void ForgotPassword()
-        {
-            
         }
 
         public MvxCommand LoginCommand { get; }
