@@ -11,7 +11,7 @@ namespace IntranetMobile.Core
         private const string loginPath = "auth/api/login";
         private const string logoutPath = "auth/logout";
         private const string resetPasswordPath = "auth/api/users/forgotPassword";
-        private const string contentType = "application/x-www-form-urlencoded";
+        private const string resetPasswordContentType = "application/x-www-form-urlencoded";
 
         private readonly RestClient restClient;
 
@@ -39,8 +39,7 @@ namespace IntranetMobile.Core
 
         public Task<bool> ResetPassword(string email)
         {
-            var str = "email=" + email;
-            return restClient.PostAsync(str, resetPasswordPath, contentType);
+            return restClient.PostAsync(resetPasswordPath, new {email}, resetPasswordContentType);
         }
     }
 }
