@@ -179,6 +179,7 @@
     <Compile Include="Views\Controls\ByteArrayImageView.cs" />
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\Controls\RecycleNewsView.cs" />
+    <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />
     <Compile Include="Views\Fragments\NewsFragment.cs" />
     <Compile Include="Views\IDrawerActivity.cs" />
     <Compile Include="Views\MainActivity.cs" />
