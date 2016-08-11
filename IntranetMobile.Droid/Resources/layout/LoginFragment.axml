@@ -15,7 +15,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:inputType="textEmailAddress"
-      android:hint="Email" />
+      android:hint="Email"
+      app:MvxBind="Text Email" />
   </android.support.design.widget.TextInputLayout>
   <android.support.design.widget.TextInputLayout
     android:layout_width="match_parent"
@@ -26,7 +27,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:inputType="textPassword"
-      android:hint="Password" />
+      android:hint="Password"
+      app:MvxBind="Text Password" />
   </android.support.design.widget.TextInputLayout>
   <android.support.v7.widget.AppCompatButton
     android:layout_width="match_parent"
