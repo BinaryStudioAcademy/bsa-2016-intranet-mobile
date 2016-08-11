@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models.Dtos;
-using IntranetMobile.Core.Services;
 using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.Services
@@ -15,7 +14,6 @@ namespace IntranetMobile.Core.Services
 		private const string companyNewsPath = "api/news?";
 		private const string weekNewsPath = "api/packs?";
 
-		private RestClient restClient;
         private readonly RestClient restClient;
 
         public NewsService()
