@@ -1,31 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
 {
     public class ItemNewsViewModel : BaseViewModel
     {
-        private string coverImageViewUrl;
-        public ICommand ClickLikeCommand { get; private set; }
-        private string likeImageViewUrl;
         private bool _isLiked;
+        private string coverImageViewUrl;
+        private string likeImageViewUrl;
 
         public ItemNewsViewModel()
         {
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
         }
 
-        private void ClickLikeCommandExecute()
-        {
-            IsLiked = !_isLiked;
-        }
+        public ICommand ClickLikeCommand { get; private set; }
 
-        public string CoverImageViewUrl {
+        public string CoverImageViewUrl
+        {
             get
             {
                 if (string.IsNullOrEmpty(coverImageViewUrl))
@@ -37,7 +29,7 @@ namespace IntranetMobile.Core.ViewModels
             set
             {
                 coverImageViewUrl = value;
-                RaisePropertyChanged(()=> CoverImageViewUrl);
+                RaisePropertyChanged(() => CoverImageViewUrl);
             }
         }
 
@@ -51,7 +43,8 @@ namespace IntranetMobile.Core.ViewModels
             }
         }
 
-        public string LikeImageViewUrl {
+        public string LikeImageViewUrl
+        {
             get
             {
                 if (string.IsNullOrEmpty(likeImageViewUrl))
@@ -62,12 +55,18 @@ namespace IntranetMobile.Core.ViewModels
             }
             set
             {
-                likeImageViewUrl = value; 
-                RaisePropertyChanged(()=> LikeImageViewUrl);
+                likeImageViewUrl = value;
+                RaisePropertyChanged(() => LikeImageViewUrl);
             }
         }
+
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string NewsUrl { get; set; }
+
+        private void ClickLikeCommandExecute()
+        {
+            IsLiked = !_isLiked;
+        }
     }
 }
