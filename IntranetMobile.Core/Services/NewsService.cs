@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
-using IntranetMobile.Core.Services;
+using IntranetMobile.Core.Models.Dtos;
 using MvvmCross.Platform;
 
-namespace IntranetMobile.Core
+namespace IntranetMobile.Core.Services
 {
 	public class NewsService : INewsService
 	{
