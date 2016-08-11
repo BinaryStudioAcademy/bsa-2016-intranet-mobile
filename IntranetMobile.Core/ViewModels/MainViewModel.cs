@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using IntranetMobile.Core.ViewModels.Fragments;
-using MvvmCross.Core.ViewModels;
+﻿using IntranetMobile.Core.ViewModels.Fragments;
 
 namespace IntranetMobile.Core.ViewModels
 {
@@ -10,9 +7,7 @@ namespace IntranetMobile.Core.ViewModels
         public override void Start()
         {
             base.Start();
-
             ShowViewModel<MenuFragmentViewModel>();
-            //ShowViewModel<NewsFragmentViewModel>();
         }
     }
 }

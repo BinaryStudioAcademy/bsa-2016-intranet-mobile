@@ -21,7 +21,8 @@ namespace IntranetMobile.Core.ViewModels.Fragments
             {
                 return;
             }
-            await ServiceBus.StorageService.RemoveItem(await ServiceBus.StorageService.GetFirstOrDefault<User>());
+            var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
+            await ServiceBus.StorageService.RemoveItem(user);
             ShowViewModel<LoginViewModel>();
         }
     }

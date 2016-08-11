@@ -7,9 +7,7 @@ namespace IntranetMobile.Core.ViewModels
         public override void Start()
         {
             base.Start();
-            // TODO: Fill dat with tons of fancy code :3
             ShowViewModel<LoginFragmentViewModel>();
-            //ShowViewModel<LoadingFragmentViewModel>();
         }
     }
 }
