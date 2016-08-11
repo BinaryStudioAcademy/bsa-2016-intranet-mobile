@@ -28,10 +28,10 @@
         android:id="@+id/drawer_header_user_name_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        app:MvxBind="Text UserName" />
       <TextView
         android:id="@+id/drawer_header_additional_info_textview"
         android:layout_width="wrap_content"
