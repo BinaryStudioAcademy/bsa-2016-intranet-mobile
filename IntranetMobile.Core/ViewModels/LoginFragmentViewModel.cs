@@ -1,11 +1,15 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using IntranetMobile.Core.Models;
+using IntranetMobile.Core.Services;
+using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
 {
     public class LoginFragmentViewModel : BaseFragmentViewModel
     {
-        private string _email;
-        private string _password;
+        private string _email = "tester_a@example.com";
+        private string _errorText;
+        private bool _hasErrors;
+        private string _password = "123456";
 
         public LoginFragmentViewModel()
         {
@@ -33,6 +37,26 @@ namespace IntranetMobile.Core.ViewModels
             }
         }
 
+        public bool HasErrors
+        {
+            get { return _hasErrors; }
+            set
+            {
+                _hasErrors = value;
+                RaisePropertyChanged(() => HasErrors);
+            }
+        }
+
+        public string ErrorText
+        {
+            get { return _errorText; }
+            set
+            {
+                _errorText = value;
+                RaisePropertyChanged(() => ErrorText);
+            }
+        }
+
         public MvxCommand ForgotPasswordCommand { get; }
 
         public MvxCommand LoginCommand { get; }
@@ -42,9 +66,21 @@ namespace IntranetMobile.Core.ViewModels
             return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
         }
 
-        private void Login()
+        private async void Login()
         {
-            ShowViewModel<NewsViewModel>();
+            ShowViewModel<LoadingFragmentViewModel>();
+            var auth = await ServiceBus.AuthService.Login(Email, Password);
+            if (auth.success)
+            {
+                await ServiceBus.StorageService.AddItem(new User {Email = Email, Password = Password});
+                ShowViewModel<NewsViewModel>();
+            }
+            else
+            {
+                HasErrors = true;
+                ErrorText = "Login failed";
+                ShowViewModel<LoginFragmentViewModel>();
+            }
         }
 
         private void ForgotPassword()
