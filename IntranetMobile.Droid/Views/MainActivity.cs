@@ -12,8 +12,7 @@ namespace IntranetMobile.Droid.Views
     [Activity(Label = "MainActivity", Theme = "@style/BSTheme")]
     public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>
     {
-        private DrawerLayout drawerLayout;
-        private NavigationView navigationView;
+        public DrawerLayout DrawerLayout { get; private set; }
 
         protected override void OnViewModelSet()
         {
@@ -29,7 +28,7 @@ namespace IntranetMobile.Droid.Views
             SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
-            drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -37,7 +36,7 @@ namespace IntranetMobile.Droid.Views
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
-                    drawerLayout.OpenDrawer(GravityCompat.Start);
+                    DrawerLayout.OpenDrawer(GravityCompat.Start);
                     return true;
             }
             return base.OnOptionsItemSelected(item);
@@ -45,9 +44,9 @@ namespace IntranetMobile.Droid.Views
 
         public override void OnBackPressed()
         {
-            if (drawerLayout != null && drawerLayout.IsDrawerOpen(GravityCompat.Start))
+            if (DrawerLayout != null && DrawerLayout.IsDrawerOpen(GravityCompat.Start))
             {
-                drawerLayout.CloseDrawers();
+                DrawerLayout.CloseDrawers();
             }
             else
             {

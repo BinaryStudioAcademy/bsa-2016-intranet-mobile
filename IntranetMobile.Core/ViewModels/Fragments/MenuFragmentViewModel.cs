@@ -6,21 +6,15 @@ namespace IntranetMobile.Core.ViewModels.Fragments
 {
     public class MenuFragmentViewModel : BaseFragmentViewModel
     {
-        public MenuFragmentViewModel()
-        {
-            ShowNewsCommand = new MvxCommand(ShowNews);
-            LogoutCommand = new MvxCommand(Logout);
-        }
-
         public MvxCommand ShowNewsCommand { get; set; }
         public MvxCommand LogoutCommand { get; set; }
 
-        private void ShowNews()
+        public void ShowNews()
         {
             ShowViewModel<MainViewModel>();
         }
 
-        private async void Logout()
+        public async void Logout()
         {
             var logoutResult = await ServiceBus.AuthService.Logout();
             if (!logoutResult)
