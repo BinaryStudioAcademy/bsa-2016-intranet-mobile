@@ -19,44 +19,12 @@
       android:src="@drawable/logo_black_1"
       android:layout_width="200dp"
       android:layout_height="wrap_content"
-      android:scaleType="fitCenter"    
+      android:scaleType="fitCenter"
       android:adjustViewBounds="true"
       android:layout_marginBottom="24dp" />
-    <android.support.design.widget.TextInputLayout
+    <FrameLayout
+      android:id="@+id/login_fragment_container"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="8dp">
-      <android.support.v7.widget.AppCompatEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="Email" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="8dp">
-      <android.support.v7.widget.AppCompatEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="Password" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.v7.widget.AppCompatButton
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="24dp"
-      android:layout_marginBottom="24dp"
-      android:padding="12dp"
-      android:text="Login"
-      app:MvxBind="Click LoginCommand" />
-    <TextView
-      android:gravity="center"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="24dp"
-      android:text="Forgot password?" />
+      android:layout_height="wrap_content" />
   </LinearLayout>
 </ScrollView>
