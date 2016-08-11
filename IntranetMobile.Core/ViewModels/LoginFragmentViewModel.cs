@@ -1,4 +1,5 @@
-﻿using IntranetMobile.Core.Services;
+﻿using IntranetMobile.Core.Models;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
@@ -71,6 +72,7 @@ namespace IntranetMobile.Core.ViewModels
             var auth = await ServiceBus.AuthService.Login(Email, Password);
             if (auth.success)
             {
+                await ServiceBus.StorageService.AddItem(new User {Email = Email, Password = Password});
                 ShowViewModel<NewsViewModel>();
             }
             else
