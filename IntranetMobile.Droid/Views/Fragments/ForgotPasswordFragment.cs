@@ -19,13 +19,5 @@ namespace IntranetMobile.Droid.Views.Fragments
 
             return this.BindingInflate(Resource.Layout.ForgotPasswordFragment, null);
         }
-
-        public override void OnViewCreated(View view, Bundle savedInstanceState)
-        {
-            base.OnViewCreated(view, savedInstanceState);
-            
-            var backToLoginTextView = View.FindViewById<TextView>(Resource.Id.forgot_password_back_to_login_textview);
-            backToLoginTextView.Click += ((LoginActivity)Activity).BackToLoginTextViewOnClick;
-        }
     }
 }

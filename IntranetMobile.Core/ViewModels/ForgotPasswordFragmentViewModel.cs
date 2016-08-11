@@ -1,6 +1,19 @@
-﻿namespace IntranetMobile.Core.ViewModels
+﻿using MvvmCross.Core.ViewModels;
+
+namespace IntranetMobile.Core.ViewModels
 {
-    public class ForgotPasswordFragmentViewModel : BaseViewModel
+    public class ForgotPasswordFragmentViewModel : BaseFragmentViewModel
     {
+        public ForgotPasswordFragmentViewModel()
+        {
+            BackToLoginCommand = new MvxCommand(ForgotPassword);
+        }
+
+        public MvxCommand BackToLoginCommand { get; }
+
+        private void ForgotPassword()
+        {
+            ShowViewModel<LoginFragmentViewModel>();
+        }
     }
 }

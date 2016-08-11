@@ -19,15 +19,7 @@ namespace IntranetMobile.Droid.Views
 
         public void ForgotPasswordTextViewOnClick(object sender, EventArgs eventArgs)
         {
-            // Create a new fragment and a transaction.
-            var fragmentTx = SupportFragmentManager.BeginTransaction();
-            var forgotPasswordFragment = new ForgotPasswordFragment();
-            fragmentTx.SetCustomAnimations(Android.Resource.Animation.SlideInLeft,
-                Android.Resource.Animation.SlideOutRight);
-            // The fragment will have the ID of Resource.Id.login_fragment_container.
-            fragmentTx.Replace(Resource.Id.login_fragment_container, forgotPasswordFragment, "ForgotPasswordFragment");
-            // Commit the transaction.
-            fragmentTx.Commit();
+
         }
 
         public void BackToLoginTextViewOnClick(object sender, EventArgs eventArgs)

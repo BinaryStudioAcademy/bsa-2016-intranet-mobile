@@ -1,3 +1,4 @@
+using System;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -20,12 +21,17 @@ namespace IntranetMobile.Droid.Views.Fragments
             return this.BindingInflate(Resource.Layout.LoginFragment, null);
         }
 
-        public override void OnViewCreated(View view, Bundle savedInstanceState)
+        private void ForgotPasswordTextViewOnClick()
         {
-            base.OnViewCreated(view, savedInstanceState);
-            
-            var forgotPasswordTextView = View.FindViewById<TextView>(Resource.Id.login_forgot_password_textview);
-            forgotPasswordTextView.Click += ((LoginActivity)Activity).ForgotPasswordTextViewOnClick;
+            // Create a new fragment and a transaction.
+            var fragmentTx = FragmentManager.BeginTransaction();
+            var forgotPasswordFragment = new ForgotPasswordFragment();
+            fragmentTx.SetCustomAnimations(Android.Resource.Animation.SlideInLeft,
+                Android.Resource.Animation.SlideOutRight);
+            // The fragment will have the ID of Resource.Id.login_fragment_container.
+            fragmentTx.Replace(Resource.Id.login_fragment_container, forgotPasswordFragment, "ForgotPasswordFragment");
+            // Commit the transaction.
+            fragmentTx.Commit();
         }
     }
 }
