@@ -6,8 +6,17 @@ namespace IntranetMobile.Core.ViewModels.Fragments
 {
     public class MenuFragmentViewModel : BaseFragmentViewModel
     {
-        public MvxCommand ShowNewsCommand { get; set; }
-        public MvxCommand LogoutCommand { get; set; }
+        private string _userName;
+
+        public string UserName
+        {
+            get { return _userName; }
+            set
+            {
+                _userName = value;
+                RaisePropertyChanged(() => UserName);
+            }
+        }
 
         public void ShowNews()
         {
@@ -25,6 +34,13 @@ namespace IntranetMobile.Core.ViewModels.Fragments
             var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
             await ServiceBus.StorageService.RemoveItem(user);
             ShowViewModel<LoginViewModel>();
+        }
+
+        public override async void Start()
+        {
+            base.Start();
+
+            UserName = (await ServiceBus.StorageService.GetFirstOrDefault<User>()).Email;
         }
     }
 }
