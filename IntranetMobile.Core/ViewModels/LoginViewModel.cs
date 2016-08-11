@@ -1,4 +1,6 @@
-﻿namespace IntranetMobile.Core.ViewModels
+﻿using IntranetMobile.Core.ViewModels.Fragments;
+
+namespace IntranetMobile.Core.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {

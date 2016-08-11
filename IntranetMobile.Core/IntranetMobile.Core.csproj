@@ -51,12 +51,13 @@
     <Compile Include="Services\RestClient.cs" />
     <Compile Include="Services\ServiceBus.cs" />
     <Compile Include="Services\StorageService.cs" />
-    <Compile Include="ViewModels\BaseFragmentViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ForgotPasswordFragmentViewModel.cs" />
-    <Compile Include="ViewModels\LoadingFragmentViewModel.cs" />
-    <Compile Include="ViewModels\LoginFragmentViewModel.cs" />
+    <Compile Include="ViewModels\Fragments\BaseFragmentViewModel.cs" />
+    <Compile Include="ViewModels\Fragments\ForgotPasswordFragmentViewModel.cs" />
+    <Compile Include="ViewModels\Fragments\LoadingFragmentViewModel.cs" />
+    <Compile Include="ViewModels\Fragments\LoginFragmentViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\NewsViewModel.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Services\AuthService.cs" />

@@ -4,7 +4,7 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
 {
-    public class NewsViewModel : BaseViewModel
+    public class NewsViewModel : MenuViewModel
     {
         private ItemNewsViewModel selectedItem;
 

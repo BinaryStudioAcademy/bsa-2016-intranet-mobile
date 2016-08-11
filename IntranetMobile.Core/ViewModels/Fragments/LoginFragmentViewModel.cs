@@ -2,7 +2,7 @@
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core.ViewModels
+namespace IntranetMobile.Core.ViewModels.Fragments
 {
     public class LoginFragmentViewModel : BaseFragmentViewModel
     {

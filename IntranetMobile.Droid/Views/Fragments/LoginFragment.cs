@@ -2,6 +2,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using IntranetMobile.Core.ViewModels;
+using IntranetMobile.Core.ViewModels.Fragments;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
