@@ -16,11 +16,12 @@ namespace IntranetMobile.Core.ViewModels
             ShowViewModel<NewsViewModel>();
         }
 
-        public override async void Start()
+        public override void Start()
         {
             base.Start();
             // TODO: Fill dat with tons of fancy code :3
-            ShowViewModel<LoginFragmentViewModel>();
+            //ShowViewModel<LoginFragmentViewModel>();
+            ShowViewModel<LoadingFrarmentViewModel>();
         }
     }
 }
