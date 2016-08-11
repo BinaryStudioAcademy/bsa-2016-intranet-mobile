@@ -1,4 +1,5 @@
-﻿using IntranetMobile.Core.Services;
+﻿using IntranetMobile.Core.Interfaces;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
@@ -10,6 +11,8 @@ namespace IntranetMobile.Core
         {
             base.Initialize();
             Mvx.RegisterSingleton(new RestClient());
+            Mvx.RegisterType<IStorageService, StorageService>();
+            Mvx.RegisterType<IAuthService, AuthService>();
         }
     }
 }

@@ -36,10 +36,10 @@ namespace IntranetMobile.Core.Services
             return Execute(resource, null, HttpMethod.Get);
         }
 
-		public Task<bool> DeleteAsync(string resource)
-		{
-			return Execute(resource, null, HttpMethod.Delete);
-		}
+        public Task<bool> DeleteAsync(string resource)
+        {
+            return Execute(resource, null, HttpMethod.Delete);
+        }
 
         public Task<T> GetAsync<T>(string resource, object requestObject) where T : new()
         {
@@ -51,7 +51,8 @@ namespace IntranetMobile.Core.Services
             return Execute<T>(resource, null, HttpMethod.Post, contentType);
         }
 
-        public Task<T> PostAsync<T>(string resource, object requestObject, string contentType = ContentType) where T : new()
+        public Task<T> PostAsync<T>(string resource, object requestObject, string contentType = ContentType)
+            where T : new()
         {
             return Execute<T>(resource, requestObject, HttpMethod.Post, contentType);
         }
@@ -61,7 +62,8 @@ namespace IntranetMobile.Core.Services
             return Execute(resource, requestObject, HttpMethod.Post, contentType);
         }
 
-        private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method, string contentType = ContentType) where T : new()
+        private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method,
+            string contentType = ContentType) where T : new()
         {
             var responseMessage = await GetResponse(resource, requestObject, method, contentType);
             try
@@ -76,11 +78,12 @@ namespace IntranetMobile.Core.Services
             }
         }
 
-        private async Task<bool> Execute(string resource, object requestObject, HttpMethod method, string contentType = ContentType)
+        private async Task<bool> Execute(string resource, object requestObject, HttpMethod method,
+            string contentType = ContentType)
         {
             try
             {
-				var responseMessage = await GetResponse(resource, requestObject, method, contentType);
+                var responseMessage = await GetResponse(resource, requestObject, method, contentType);
                 responseMessage.EnsureSuccessStatusCode();
             }
             catch
@@ -90,25 +93,26 @@ namespace IntranetMobile.Core.Services
             return true;
         }
 
-        private async Task<HttpResponseMessage> GetResponse(string resource, object requestObject, HttpMethod method, string contentType)
+        private async Task<HttpResponseMessage> GetResponse(string resource, object requestObject, HttpMethod method,
+            string contentType)
         {
             HttpResponseMessage responseMessage;
-			if (method == HttpMethod.Get || method == HttpMethod.Delete)
+            if (method == HttpMethod.Get || method == HttpMethod.Delete)
             {
-				var uriBuilder = new UriBuilder(new Uri(baseUri, resource));
+                var uriBuilder = new UriBuilder(new Uri(baseUri, resource));
 
-				if (requestObject != null)
-				{
-					var propertiesDictionary = requestObject.GetType()
-						.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                if (requestObject != null)
+                {
+                    var propertiesDictionary = requestObject.GetType()
+                        .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                         .ToDictionary(prop => prop.Name, prop => prop.GetValue(requestObject).ToString())
                         .ToList();
 
-					var param = new FormUrlEncodedContent(propertiesDictionary);
-					uriBuilder.Query = await param.ReadAsStringAsync();
-				}
+                    var param = new FormUrlEncodedContent(propertiesDictionary);
+                    uriBuilder.Query = await param.ReadAsStringAsync();
+                }
 
-				responseMessage = await httpClient.SendAsync(new HttpRequestMessage(method, uriBuilder.ToString()));
+                responseMessage = await httpClient.SendAsync(new HttpRequestMessage(method, uriBuilder.ToString()));
             }
             else
             {

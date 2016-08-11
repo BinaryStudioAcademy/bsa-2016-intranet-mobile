@@ -178,6 +178,9 @@
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\Controls\RecycleNewsView.cs" />
     <Compile Include="Views\DrawerActivity.cs" />
+    <Compile Include="Views\Fragments\ForgotPasswordFragment.cs" />
+    <Compile Include="Views\Fragments\LoadingFragment.cs" />
+    <Compile Include="Views\Fragments\LoginFragment.cs" />
     <Compile Include="Views\Util\BitmapUtils.cs" />
     <Compile Include="Views\LoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -201,6 +204,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\recycle_news.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LoginFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ForgotPasswordFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LoadingFragment.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
