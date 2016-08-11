@@ -179,7 +179,7 @@
     <Compile Include="Views\Controls\ByteArrayImageView.cs" />
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\Controls\RecycleNewsView.cs" />
-    <Compile Include="Views\DrawerActivity.cs" />
+    <Compile Include="Views\MainActivity.cs" />
     <Compile Include="Views\Fragments\ForgotPasswordFragment.cs" />
     <Compile Include="Views\Fragments\LoadingFragment.cs" />
     <Compile Include="Views\Fragments\LoginFragment.cs" />
@@ -187,7 +187,6 @@
     <Compile Include="Views\LoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\NewsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -199,7 +198,7 @@
     <AndroidResource Include="Resources\layout\toolbar.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\News.axml">
+    <AndroidResource Include="Resources\layout\activity_main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\drawer_header.axml">
@@ -208,21 +207,21 @@
     <AndroidResource Include="Resources\layout\recycle_news.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\LoginFragment.axml">
+    <AndroidResource Include="Resources\layout\fragment_login.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ForgotPasswordFragment.axml">
+    <AndroidResource Include="Resources\layout\fragment_forgot_password.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\LoadingFragment.axml">
+    <AndroidResource Include="Resources\layout\fragment_loading.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\MenuFragment.axml">
+    <AndroidResource Include="Resources\layout\fragment_menu.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Login.axml">
+    <AndroidResource Include="Resources\layout\activity_login.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

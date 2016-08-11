@@ -11,7 +11,7 @@ using MvvmCross.Droid.Shared.Attributes;
 
 namespace IntranetMobile.Droid.Views.Fragments
 {
-    [MvxFragment(typeof(NewsViewModel), Resource.Id.menu_frame)]
+    [MvxFragment(typeof(MainViewModel), Resource.Id.menu_frame)]
     [Register("intranetmobile.droid.views.fragments.MenuFragment")]
     public class MenuFragment : MvxFragment<MenuFragmentViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
@@ -21,7 +21,7 @@ namespace IntranetMobile.Droid.Views.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.MenuFragment, null);
+            var view = this.BindingInflate(Resource.Layout.fragment_menu, null);
 
             navigationView = view.FindViewById<NavigationView>(Resource.Id.nav_view);
             navigationView.SetNavigationItemSelectedListener(this);

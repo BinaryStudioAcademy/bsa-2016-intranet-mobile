@@ -17,7 +17,7 @@ namespace IntranetMobile.Droid.Views.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            return this.BindingInflate(Resource.Layout.ForgotPasswordFragment, null);
+            return this.BindingInflate(Resource.Layout.fragment_forgot_password, null);
         }
     }
 }

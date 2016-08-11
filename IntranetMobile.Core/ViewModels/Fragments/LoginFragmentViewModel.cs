@@ -73,7 +73,7 @@ namespace IntranetMobile.Core.ViewModels.Fragments
             if (auth.success)
             {
                 await ServiceBus.StorageService.AddItem(new User {Email = Email, Password = Password});
-                ShowViewModel<NewsViewModel>();
+                ShowViewModel<MainViewModel>();
             }
             else
             {

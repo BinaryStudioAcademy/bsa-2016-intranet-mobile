@@ -17,7 +17,7 @@ namespace IntranetMobile.Core.ViewModels.Fragments
 
         private void ShowNews()
         {
-            ShowViewModel<NewsViewModel>();
+            ShowViewModel<MainViewModel>();
         }
 
         private async void Logout()

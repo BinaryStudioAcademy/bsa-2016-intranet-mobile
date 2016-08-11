@@ -17,7 +17,7 @@ namespace IntranetMobile.Droid.Views.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            return this.BindingInflate(Resource.Layout.LoginFragment, null);
+            return this.BindingInflate(Resource.Layout.fragment_login, null);
         }
     }
 }

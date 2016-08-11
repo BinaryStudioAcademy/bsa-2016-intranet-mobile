@@ -1,32 +1,31 @@
+using Android.App;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
-using MvvmCross.Core.ViewModels;
+using IntranetMobile.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views
 {
-    public abstract class DrawerActivity<T> : MvxCachingFragmentCompatActivity<T> where T : class, IMvxViewModel
+    [Activity(Label = "MainActivity", Theme = "@style/BSTheme")]
+    public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>
     {
         private DrawerLayout drawerLayout;
         private NavigationView navigationView;
-
-        protected abstract int LayoutResId { get; }
-        protected abstract string Subtitle { get; }
 
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
 
-            SetContentView(LayoutResId);
+            SetContentView(Resource.Layout.activity_main);
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.news_toolbar);
 
             SetSupportActionBar(toolbar);
             SupportActionBar.Title = "Binary studio";
-            SupportActionBar.Subtitle = Subtitle;
+            SupportActionBar.Subtitle = "Fancy subheader";
             SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 

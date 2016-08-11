@@ -13,7 +13,7 @@ namespace IntranetMobile.Droid.Views
         {
             base.OnViewModelSet();
 
-            SetContentView(Resource.Layout.Login);
+            SetContentView(Resource.Layout.activity_login);
         }
 
         public override void OnBeforeFragmentChanging(
