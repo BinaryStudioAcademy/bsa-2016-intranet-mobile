@@ -45,7 +45,7 @@ namespace IntranetMobile.Core.Services
             {
                 if (newsService == null)
                 {
-                    //newsService = Get instance from IoC
+					newsService = Mvx.Resolve<INewsService>();
                 }
 
                 return newsService;
