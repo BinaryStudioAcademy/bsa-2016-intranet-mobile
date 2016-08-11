@@ -11,8 +11,9 @@ namespace IntranetMobile.Core.Services
 	{
 		private const string type = "company";
 		private const string published = "yes";
-		private const string companyNewsPath = "api/news?";
 		private const string weekNewsPath = "api/packs?";
+		private const string likeUnlikeCommentPath = "api/news/{0}/comments/{1}/likes";
+		private const string likeUnlikeNews = "api/news/{0}/likes";
 
         private readonly RestClient restClient;
 
@@ -23,33 +24,53 @@ namespace IntranetMobile.Core.Services
 
         public Task<List<CompNewsDto>> CompanyNews(int skip, int limit)
         {
+			var resource = "api/news?";
+
             var compNewsReqParams = new CompNewsReqParams();
 
             compNewsReqParams.type = type;
             compNewsReqParams.limit = limit;
             compNewsReqParams.skip = skip;
 
-            return restClient.GetAsync<List<CompNewsDto>>(companyNewsPath, compNewsReqParams);
+			return restClient.GetAsync<List<CompNewsDto>>(resource, compNewsReqParams);
         }
 
-        public Task LikeComment(string newsId, string commentId)
+		public Task<bool> LikeComment(string newsId, string commentId)
         {
-            throw new NotImplementedException();
+			var resource = String.Format(likeUnlikeCommentPath, newsId, commentId);
+
+			var requestObject = new CompNewsLikeCommentDto();
+
+			requestObject.newsId = newsId;
+			requestObject.commentId = commentId;
+
+			return restClient.PostAsync(resource, requestObject);
         }
 
-        public Task LikeNews(string id)
+        public Task<bool> LikeNews(string newsId)
         {
-            throw new NotImplementedException();
+			var resource = String.Format(likeUnlikeNews, newsId);
+
+			var requestObject = new CompNewsLikeNewsDto();
+
+			requestObject.id = newsId;
+
+			return restClient.PostAsync(resource, requestObject);
         }
 
-        public Task UnlikeComment(string newsId, string CommentId)
+        public Task<bool> UnlikeComment(string newsId, string CommentId)
         {
-            throw new NotImplementedException();
+			var resource = String.Format(likeUnlikeCommentPath, newsId, CommentId);
+
+			return restClient.DeleteAsync(resource);
+
         }
 
-        public Task UnLikeNews(string id)
+        public Task<bool> UnLikeNews(string id)
         {
-            throw new NotImplementedException();
+			var resource = String.Format(likeUnlikeNews, id);
+
+			return restClient.DeleteAsync(resource);
         }
 
 		public Task<List<WeekNewsDto>> Weeklies(int skip, int limit)

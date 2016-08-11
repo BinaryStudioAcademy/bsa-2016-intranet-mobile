@@ -10,12 +10,12 @@ namespace IntranetMobile.Core.Interfaces
 
         Task<List<WeekNewsDto>> Weeklies(int skip, int limit);
 
-        Task LikeNews(string id);
+        Task<bool> LikeNews(string newsId);
 
-        Task UnLikeNews(string id);
+        Task<bool> UnLikeNews(string newsId);
 
-        Task LikeComment(string newsId, string commentId);
+		Task<bool> LikeComment(string newsId, string commentId);
 
-        Task UnlikeComment(string newsId, string CommentId);
+        Task<bool> UnlikeComment(string newsId, string CommentId);
     }
 }
