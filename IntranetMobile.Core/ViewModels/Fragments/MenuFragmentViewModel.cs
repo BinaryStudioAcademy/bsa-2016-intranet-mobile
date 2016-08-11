@@ -19,7 +19,8 @@ namespace IntranetMobile.Core.ViewModels.Fragments
             var logoutResult = await ServiceBus.AuthService.Logout();
             if (!logoutResult)
             {
-                return;
+                // return;
+                // TODO: Log dat?
             }
             var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
             await ServiceBus.StorageService.RemoveItem(user);
