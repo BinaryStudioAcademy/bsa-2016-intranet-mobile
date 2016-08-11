@@ -38,6 +38,8 @@ namespace IntranetMobile.Droid.Views.Fragments
             navigationView.SetNavigationItemSelectedListener(this);
             navigationView.Menu.FindItem(Resource.Id.nav_news).SetChecked(true);
 
+            Navigate(Resource.Id.nav_news);
+
             return view;
         }
 

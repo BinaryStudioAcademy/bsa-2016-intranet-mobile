@@ -7,29 +7,15 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:fitsSystemWindows="true">
-  <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include
-      android:id="@+id/news_toolbar"
-      layout="@layout/toolbar" />
-    <LinearLayout
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_below="@id/news_toolbar">
-      <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:MvxItemTemplate="@layout/recycle_news"
-        app:MvxBind="ItemsSource ListNews; ItemClick SelectItem" />
-    </LinearLayout>
-  </RelativeLayout>
   <FrameLayout
-      android:id="@+id/menu_frame"
-      android:layout_height="match_parent"
-      android:layout_width="wrap_content"
-      android:layout_gravity="left|start" />
+    android:id="@+id/content_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+  <FrameLayout
+    android:id="@+id/menu_frame"
+    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_gravity="left|start" />
   <!--<android.support.design.widget.NavigationView
     android:layout_width="wrap_content"
     android:layout_height="match_parent"

@@ -20,14 +20,6 @@ namespace IntranetMobile.Droid.Views
 
             SetContentView(Resource.Layout.activity_main);
 
-            var toolbar = FindViewById<Toolbar>(Resource.Id.news_toolbar);
-
-            SetSupportActionBar(toolbar);
-            SupportActionBar.Title = "Binary studio";
-            SupportActionBar.Subtitle = "Fancy subheader";
-            SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-
             DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
         }
 

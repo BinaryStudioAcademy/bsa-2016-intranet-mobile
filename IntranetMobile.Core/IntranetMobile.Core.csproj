@@ -57,6 +57,7 @@
     <Compile Include="ViewModels\Fragments\LoadingFragmentViewModel.cs" />
     <Compile Include="ViewModels\Fragments\LoginFragmentViewModel.cs" />
     <Compile Include="ViewModels\Fragments\MenuFragmentViewModel.cs" />
+    <Compile Include="ViewModels\Fragments\NewsFragmentViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
