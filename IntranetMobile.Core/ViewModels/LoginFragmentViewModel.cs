@@ -10,6 +10,10 @@ namespace IntranetMobile.Core.ViewModels
             LoginCommand = new MvxCommand(Login);
         }
 
+        public string Email { get; set; }
+
+        public string Password { get; set; }
+
         public MvxCommand ForgotPasswordCommand { get; }
 
         public MvxCommand LoginCommand { get; }
