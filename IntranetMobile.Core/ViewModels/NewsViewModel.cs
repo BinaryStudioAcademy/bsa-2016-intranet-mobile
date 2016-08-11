@@ -1,10 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using IntranetMobile.Core.ViewModels.Fragments;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
 {
-    public class NewsViewModel : MenuViewModel
+    public class NewsViewModel : BaseViewModel
     {
         private ItemNewsViewModel selectedItem;
 
@@ -30,6 +31,13 @@ namespace IntranetMobile.Core.ViewModels
         public ICommand SelectItem
         {
             get { return new MvxCommand<ItemNewsViewModel>(item => { SelectedItem = item; }); }
+        }
+
+        public override void Start()
+        {
+            base.Start();
+
+            ShowViewModel<MenuFragmentViewModel>();
         }
     }
 }

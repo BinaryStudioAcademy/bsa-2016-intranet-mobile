@@ -171,6 +171,7 @@
   <ItemGroup>
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Bootstrap\SqlitePluginBootstrap.cs" />
+    <Compile Include="DebugTrace.cs" />
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\AndroidLogger.cs" />
     <Compile Include="Setup.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Views\Fragments\ForgotPasswordFragment.cs" />
     <Compile Include="Views\Fragments\LoadingFragment.cs" />
     <Compile Include="Views\Fragments\LoginFragment.cs" />
+    <Compile Include="Views\Fragments\MenuFragment.cs" />
     <Compile Include="Views\LoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,6 +215,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\LoadingFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\MenuFragment.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

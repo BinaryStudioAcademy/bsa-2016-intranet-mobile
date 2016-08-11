@@ -1,13 +1,12 @@
-﻿using System;
-using IntranetMobile.Core.Models;
+﻿using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core.ViewModels
+namespace IntranetMobile.Core.ViewModels.Fragments
 {
-    public abstract class MenuViewModel : BaseViewModel
+    public class MenuFragmentViewModel : BaseFragmentViewModel
     {
-        protected MenuViewModel()
+        public MenuFragmentViewModel()
         {
             ShowNewsCommand = new MvxCommand(ShowNews);
             LogoutCommand = new MvxCommand(Logout);
@@ -31,7 +30,5 @@ namespace IntranetMobile.Core.ViewModels
             await ServiceBus.StorageService.RemoveItem(await ServiceBus.StorageService.GetFirstOrDefault<User>());
             ShowViewModel<LoginViewModel>();
         }
-
-        
     }
 }

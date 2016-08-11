@@ -8,7 +8,7 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views
 {
-    public abstract class DrawerActivity<T> : MvxAppCompatActivity<T> where T : class, IMvxViewModel
+    public abstract class DrawerActivity<T> : MvxCachingFragmentCompatActivity<T> where T : class, IMvxViewModel
     {
         private DrawerLayout drawerLayout;
         private NavigationView navigationView;
@@ -31,14 +31,6 @@ namespace IntranetMobile.Droid.Views
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-            navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
-
-            navigationView.NavigationItemSelected += (sender, e) =>
-            {
-                e.MenuItem.SetChecked(true);
-                //react to click here and swap fragments or navigate
-                drawerLayout.CloseDrawers();
-            };
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -50,6 +42,18 @@ namespace IntranetMobile.Droid.Views
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        public override void OnBackPressed()
+        {
+            if (drawerLayout != null && drawerLayout.IsDrawerOpen(GravityCompat.Start))
+            {
+                drawerLayout.CloseDrawers();
+            }
+            else
+            {
+                base.OnBackPressed();
+            }
         }
     }
 }
