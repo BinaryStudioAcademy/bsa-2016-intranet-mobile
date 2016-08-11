@@ -5,26 +5,26 @@ using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
-    {
-        
+	public class LoginViewModel : BaseViewModel
+	{
+		
 		public LoginViewModel()
-        {
-            LoginCommand = new MvxCommand(Login);
+		{
+			LoginCommand = new MvxCommand(Login);
 
-        }
+		}
 
-        public MvxCommand LoginCommand { get; }
+		public MvxCommand LoginCommand { get; }
 
-        private void Login()
-        {
-            ShowViewModel<NewsViewModel>();
-        }
+		private void Login()
+		{
+			ShowViewModel<NewsViewModel>();
+		}
 
-        public override async void Start()
-        {
-            base.Start();
-            // TODO: Fill dat with tons of fancy code :3
-        }
-    }
+		public override async void Start()
+		{
+			base.Start();
+			// TODO: Fill dat with tons of fancy code :3
+		}
+	}
 }
