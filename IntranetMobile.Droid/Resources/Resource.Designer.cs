@@ -3748,6 +3748,9 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060031
 			public const int always = 2131099697;
 			
+			// aapt resource value: 0x7f060090
+			public const int appbar = 2131099792;
+			
 			// aapt resource value: 0x7f06002f
 			public const int beginning = 2131099695;
 			
@@ -3931,23 +3934,23 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06002a
 			public const int multiply = 2131099690;
 			
-			// aapt resource value: 0x7f060094
-			public const int nav_asciit = 2131099796;
+			// aapt resource value: 0x7f060095
+			public const int nav_asciit = 2131099797;
 			
-			// aapt resource value: 0x7f060096
-			public const int nav_logout = 2131099798;
-			
-			// aapt resource value: 0x7f060091
-			public const int nav_news = 2131099793;
-			
-			// aapt resource value: 0x7f060093
-			public const int nav_profile = 2131099795;
+			// aapt resource value: 0x7f060097
+			public const int nav_logout = 2131099799;
 			
 			// aapt resource value: 0x7f060092
-			public const int nav_reviewer = 2131099794;
+			public const int nav_news = 2131099794;
 			
-			// aapt resource value: 0x7f060095
-			public const int nav_settings = 2131099797;
+			// aapt resource value: 0x7f060094
+			public const int nav_profile = 2131099796;
+			
+			// aapt resource value: 0x7f060093
+			public const int nav_reviewer = 2131099795;
+			
+			// aapt resource value: 0x7f060096
+			public const int nav_settings = 2131099798;
 			
 			// aapt resource value: 0x7f060081
 			public const int nav_view = 2131099777;
@@ -4105,8 +4108,8 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f06004e
 			public const int title_template = 2131099726;
 			
-			// aapt resource value: 0x7f060090
-			public const int toolbar = 2131099792;
+			// aapt resource value: 0x7f060091
+			public const int toolbar = 2131099793;
 			
 			// aapt resource value: 0x7f06001e
 			public const int top = 2131099678;
@@ -4459,6 +4462,12 @@ namespace IntranetMobile.Droid
 			
 			// aapt resource value: 0x7f090016
 			public const int character_counter_pattern = 2131296278;
+			
+			// aapt resource value: 0x7f09001c
+			public const int drawer_close = 2131296284;
+			
+			// aapt resource value: 0x7f09001b
+			public const int drawer_open = 2131296283;
 			
 			// aapt resource value: 0x7f090019
 			public const int fab_scroll_shrink_grow_autohide_behavior = 2131296281;

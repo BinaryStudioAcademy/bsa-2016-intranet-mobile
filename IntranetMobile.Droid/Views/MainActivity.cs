@@ -10,9 +10,9 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 namespace IntranetMobile.Droid.Views
 {
     [Activity(Label = "MainActivity", Theme = "@style/BSTheme")]
-    public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>
+    public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>, IDrawerActivity
     {
-        public DrawerLayout DrawerLayout { get; private set; }
+        public DrawerLayout DrawerLayout { get; set; }
 
         protected override void OnViewModelSet()
         {

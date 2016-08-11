@@ -180,6 +180,7 @@
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\Controls\RecycleNewsView.cs" />
     <Compile Include="Views\Fragments\NewsFragment.cs" />
+    <Compile Include="Views\IDrawerActivity.cs" />
     <Compile Include="Views\MainActivity.cs" />
     <Compile Include="Views\Fragments\ForgotPasswordFragment.cs" />
     <Compile Include="Views\Fragments\LoadingFragment.cs" />

@@ -1,3 +1,4 @@
+using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.Widget;
@@ -15,7 +16,10 @@ namespace IntranetMobile.Droid.Views.Fragments
     [Register("intranetmobile.droid.views.fragments.NewsFragment")]
     public class NewsFragment : MvxFragment<NewsFragmentViewModel>
     {
-        public MvxCachingFragmentCompatActivity ParentActivity => ((MvxCachingFragmentCompatActivity)Activity);
+        private MvxActionBarDrawerToggle drawerToggle;
+        private Toolbar toolbar;
+
+        public MvxCachingFragmentCompatActivity ParentActivity => (MvxCachingFragmentCompatActivity) Activity;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -23,15 +27,38 @@ namespace IntranetMobile.Droid.Views.Fragments
 
             var view = this.BindingInflate(Resource.Layout.fragment_news, null);
 
-            var toolbar = view.FindViewById<Toolbar>(Resource.Id.news_toolbar);
+            toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
 
             ParentActivity.SetSupportActionBar(toolbar);
             ParentActivity.SupportActionBar.Title = "Binary studio";
             ParentActivity.SupportActionBar.Subtitle = "Fancy subheader";
-            ParentActivity.SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
             ParentActivity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
+            var drawerActivity = (IDrawerActivity) ParentActivity;
+
+            drawerToggle = new MvxActionBarDrawerToggle(
+                Activity, // host Activity
+                drawerActivity.DrawerLayout, // DrawerLayout object
+                toolbar, // nav drawer icon to replace 'Up' caret
+                Resource.String.drawer_open, // "open drawer" description
+                Resource.String.drawer_close // "close drawer" description
+                );
+
+            drawerActivity.DrawerLayout.AddDrawerListener(drawerToggle);
+
             return view;
+        }
+
+        public override void OnConfigurationChanged(Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+            drawerToggle.OnConfigurationChanged(newConfig);
+        }
+
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            base.OnActivityCreated(savedInstanceState);
+            drawerToggle.SyncState();
         }
     }
 }
