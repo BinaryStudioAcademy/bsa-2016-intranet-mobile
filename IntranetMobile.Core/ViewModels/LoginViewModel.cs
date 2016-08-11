@@ -29,6 +29,7 @@ namespace IntranetMobile.Core.ViewModels
             base.Start();
 
             // TODO: Fill dat with tons of fancy code :3
+            ShowViewModel<LoginFragmentViewModel>();
         }
     }
 }

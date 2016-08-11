@@ -15,8 +15,6 @@ namespace IntranetMobile.Droid.Views
             base.OnViewModelSet();
 
             SetContentView(Resource.Layout.Login);
-
-            BackToLoginTextViewOnClick(null, null);
         }
 
         public void ForgotPasswordTextViewOnClick(object sender, EventArgs eventArgs)

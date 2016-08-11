@@ -1,4 +1,5 @@
 using Android.OS;
+using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using IntranetMobile.Core.ViewModels;
@@ -9,6 +10,7 @@ using MvvmCross.Droid.Support.V4;
 namespace IntranetMobile.Droid.Views.Fragments
 {
     [MvxFragment(typeof(LoginViewModel), Resource.Id.login_fragment_container, true)]
+    [Register("intranetmobile.droid.views.fragments.LoginFragment")]
     public class LoginFragment : MvxFragment<LoginFragmentViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
