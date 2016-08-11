@@ -79,6 +79,7 @@ namespace IntranetMobile.Core.ViewModels
             {
                 HasErrors = true;
                 ErrorText = "Login failed";
+                Password = string.Empty;
                 ShowViewModel<LoginFragmentViewModel>();
             }
         }
