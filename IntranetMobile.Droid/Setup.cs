@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using Android.Support.Design.Widget;
+using Android.Support.V4.View;
+using Android.Support.V4.Widget;
+using Android.Support.V7.Widget;
 using IntranetMobile.Core;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Services;
@@ -22,38 +26,38 @@ namespace IntranetMobile.Droid
         {
         }
 
+        protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
+        {
+            typeof(NavigationView).Assembly,
+            typeof(FloatingActionButton).Assembly,
+            typeof(Toolbar).Assembly,
+            typeof(DrawerLayout).Assembly,
+            typeof(ViewPager).Assembly
+        };
+
         protected override IMvxApplication CreateApp()
         {
             var application = new Application();
             return application;
         }
 
-		// Called before Application.Initialize()
-		public override void Initialize()
-		{
-			base.Initialize();
+        // Called before Application.Initialize()
+        public override void Initialize()
+        {
+            base.Initialize();
 
-			Mvx.RegisterSingleton<ILogger>(new AndroidLogger());
-			Mvx.RegisterSingleton<IDataBaseService>(new DataBaseService(
-								ApplicationContext.FilesDir.Path,
-								Mvx.Resolve<IMvxSqliteConnectionFactory>(),
-								Mvx.Resolve<ILogger>()));
-		}
+            Mvx.RegisterSingleton<ILogger>(new AndroidLogger());
+            Mvx.RegisterSingleton<IDataBaseService>(new DataBaseService(
+                ApplicationContext.FilesDir.Path,
+                Mvx.Resolve<IMvxSqliteConnectionFactory>(),
+                Mvx.Resolve<ILogger>()));
+        }
 
-		// Called after Application.Initialize()
-		protected override void InitializeLastChance()
+        // Called after Application.Initialize()
+        protected override void InitializeLastChance()
         {
             base.InitializeLastChance();
         }
-
-        protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
-        {
-            typeof(Android.Support.Design.Widget.NavigationView).Assembly,
-            typeof(Android.Support.Design.Widget.FloatingActionButton).Assembly,
-            typeof(Android.Support.V7.Widget.Toolbar).Assembly,
-            typeof(Android.Support.V4.Widget.DrawerLayout).Assembly,
-            typeof(Android.Support.V4.View.ViewPager).Assembly
-        };
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {

@@ -1,7 +1,4 @@
-﻿using IntranetMobile.Core.Interfaces;
-using IntranetMobile.Core.Models;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
+﻿using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
 {

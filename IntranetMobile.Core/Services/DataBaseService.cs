@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
-using MvvmCross.Platform;
 using MvvmCross.Plugins.Sqlite;
 using SQLite.Net.Async;
 
@@ -12,16 +11,17 @@ namespace IntranetMobile.Core.Services
     {
         private const string FileName = "/db.db";
         private readonly ILogger logger;
-        private SQLiteAsyncConnection connection;
-		private string path { get; set; }
+        private readonly SQLiteAsyncConnection connection;
 
         public DataBaseService(string fileDir, IMvxSqliteConnectionFactory sqliteConnectionFactory, ILogger logger)
         {
-			path = fileDir + FileName;
-			this.logger = logger;
+            path = fileDir + FileName;
+            this.logger = logger;
 
-			connection = sqliteConnectionFactory.GetAsyncConnection(path);
+            connection = sqliteConnectionFactory.GetAsyncConnection(path);
         }
+
+        private string path { get; }
 
         public async Task<bool> InsertItemAsync<T>(T item) where T : class, new()
         {
@@ -55,21 +55,21 @@ namespace IntranetMobile.Core.Services
             }
         }
 
-		public async Task<bool> UpdateOrInsertItemAsync<T>(T item) where T : class, new()
-		{
-			try
-			{
-				await createTableAsync<T>();
-				await connection.InsertOrReplaceAsync(item);
-				logger.Info("Item was inserted or updated");
-				return true;
-			}
-			catch (Exception e)
-			{
-				logger.Error(e.Message);
-				return false;
-			}
-		}
+        public async Task<bool> UpdateOrInsertItemAsync<T>(T item) where T : class, new()
+        {
+            try
+            {
+                await createTableAsync<T>();
+                await connection.InsertOrReplaceAsync(item);
+                logger.Info("Item was inserted or updated");
+                return true;
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message);
+                return false;
+            }
+        }
 
         public async Task<bool> DeleteItemAsync<T>(T item) where T : class, new()
         {
@@ -101,19 +101,19 @@ namespace IntranetMobile.Core.Services
             }
         }
 
-		public async Task<T> GetFirstOrDefault<T>() where T : class, new()
-		{
-			try
-			{
-				await createTableAsync<T>();
-				return await connection.Table<T>().FirstOrDefaultAsync();
-			}
-			catch (Exception e)
-			{
-				logger.Error(e.Message);
-				return null;
-			}
-		}
+        public async Task<T> GetFirstOrDefault<T>() where T : class, new()
+        {
+            try
+            {
+                await createTableAsync<T>();
+                return await connection.Table<T>().FirstOrDefaultAsync();
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message);
+                return null;
+            }
+        }
 
 
         private async Task createTableAsync<T>() where T : class, new()

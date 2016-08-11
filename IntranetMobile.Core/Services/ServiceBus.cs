@@ -5,7 +5,7 @@ namespace IntranetMobile.Core.Services
 {
     public class ServiceBus
     {
-		private static IStorageService storageService;
+        private static IStorageService storageService;
 
         private static IAuthService authService;
 
@@ -13,18 +13,18 @@ namespace IntranetMobile.Core.Services
 
         private static IAlertService alertService;
 
-		public static IStorageService StorageService
-		{
-			get
-			{
-				if (storageService == null)
-				{
-					storageService = Mvx.Resolve<IStorageService>();
-				}
+        public static IStorageService StorageService
+        {
+            get
+            {
+                if (storageService == null)
+                {
+                    storageService = Mvx.Resolve<IStorageService>();
+                }
 
-				return storageService;
-			}
-		}
+                return storageService;
+            }
+        }
 
         public static IAuthService AuthService
         {
@@ -32,7 +32,7 @@ namespace IntranetMobile.Core.Services
             {
                 if (authService == null)
                 {
-					authService = Mvx.Resolve<IAuthService>();
+                    authService = Mvx.Resolve<IAuthService>();
                 }
 
                 return authService;

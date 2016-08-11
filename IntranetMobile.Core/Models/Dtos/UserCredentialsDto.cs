@@ -1,10 +1,8 @@
-﻿using System;
-namespace IntranetMobile.Core.Models.Dtos
+﻿namespace IntranetMobile.Core.Models.Dtos
 {
-	public class UserCredentialsDto
-	{
-		public string email { get; set; }
-		public string password { get; set; }
-	}
+    public class UserCredentialsDto
+    {
+        public string email { get; set; }
+        public string password { get; set; }
+    }
 }
-
