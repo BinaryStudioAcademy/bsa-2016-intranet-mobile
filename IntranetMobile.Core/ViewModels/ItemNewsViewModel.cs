@@ -8,6 +8,7 @@ namespace IntranetMobile.Core.ViewModels
         private bool _isLiked;
         private string coverImageViewUrl;
         private string likeImageViewUrl;
+        private byte[] imageBytesArray;
 
         public ItemNewsViewModel()
         {
@@ -15,7 +16,18 @@ namespace IntranetMobile.Core.ViewModels
         }
 
         public ICommand ClickLikeCommand { get; private set; }
-
+        public byte[] ImageBytesArray
+        {
+            get
+            {
+                return imageBytesArray;
+            }
+            set
+            {
+                imageBytesArray = value;
+                RaisePropertyChanged(() => ImageBytesArray);
+            }
+        }
         public string CoverImageViewUrl
         {
             get
