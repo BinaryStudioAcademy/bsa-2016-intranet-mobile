@@ -175,8 +175,9 @@
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\AndroidLogger.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\Controls\UrlImageView.cs" />
     <Compile Include="Util\BitmapUtils.cs" />
-    <Compile Include="Views\Controls\ByteArrayImageView.cs" />
+ 
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\Controls\RecycleNewsView.cs" />
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />

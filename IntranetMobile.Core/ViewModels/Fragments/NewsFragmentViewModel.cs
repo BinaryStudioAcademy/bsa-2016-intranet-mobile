@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
@@ -7,6 +10,7 @@ namespace IntranetMobile.Core.ViewModels.Fragments
     public class NewsFragmentViewModel : BaseFragmentViewModel
     {
         private ItemNewsViewModel selectedItem;
+        private byte[] imageBytesArray;
 
         public ObservableCollection<ItemNewsViewModel> ListNews { set; get; } = new ObservableCollection
             <ItemNewsViewModel>
@@ -15,6 +19,20 @@ namespace IntranetMobile.Core.ViewModels.Fragments
             new ItemNewsViewModel {Title = "New2", SubTitle = "Author222"},
             new ItemNewsViewModel {Title = "New3", SubTitle = "Author333"}
         };
+
+
+        public byte[] ImageBytesArray
+        {
+            get
+            {
+                return imageBytesArray;
+            }
+            set
+            {
+                imageBytesArray = value;
+                RaisePropertyChanged(() => ImageBytesArray);
+            }
+        }
 
         public ItemNewsViewModel SelectedItem
         {
