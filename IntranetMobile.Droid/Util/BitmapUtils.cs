@@ -1,7 +1,7 @@
 using Android.Graphics;
 using Android.Graphics.Drawables;
 
-namespace IntranetMobile.Droid.Views.Util
+namespace IntranetMobile.Droid.Util
 {
     public static class BitmapUtils
     {
