@@ -52,13 +52,8 @@
     <Compile Include="Services\ServiceBus.cs" />
     <Compile Include="Services\StorageService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Fragments\BaseFragmentViewModel.cs" />
-    <Compile Include="ViewModels\Fragments\ForgotPasswordFragmentViewModel.cs" />
-    <Compile Include="ViewModels\Fragments\LoadingFragmentViewModel.cs" />
-    <Compile Include="ViewModels\Fragments\LoginFragmentViewModel.cs" />
     <Compile Include="ViewModels\Fragments\MenuFragmentViewModel.cs" />
     <Compile Include="ViewModels\Fragments\NewsFragmentViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Services\AuthService.cs" />
@@ -73,6 +68,11 @@
     <Compile Include="Models\Dtos\WeekNewsReqParams.cs" />
     <Compile Include="Models\Dtos\CompNewsLikeCommentDto.cs" />
     <Compile Include="Models\Dtos\CompNewsLikeNewsDto.cs" />
+    <Compile Include="ViewModels\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Login\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Login\LoginLoadingViewModel.cs" />
+    <Compile Include="ViewModels\Login\UserCredentialsViewModel.cs" />
+    <Compile Include="ViewModels\Fragments\BaseFragmentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -135,6 +135,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\Login\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
