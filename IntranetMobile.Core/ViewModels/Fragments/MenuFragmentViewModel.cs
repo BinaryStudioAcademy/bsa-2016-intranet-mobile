@@ -1,5 +1,6 @@
 ﻿using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
+using IntranetMobile.Core.ViewModels.Login;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Fragments

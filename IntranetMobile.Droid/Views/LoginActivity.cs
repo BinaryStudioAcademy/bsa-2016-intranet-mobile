@@ -1,5 +1,5 @@
 ﻿using Android.App;
-using IntranetMobile.Core.ViewModels;
+using IntranetMobile.Core.ViewModels.Login;
 using MvvmCross.Droid.Shared.Caching;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
@@ -21,8 +21,8 @@ namespace IntranetMobile.Droid.Views
             FragmentTransaction transaction)
         {
             transaction.SetCustomAnimations(
-                Android.Resource.Animation.SlideInLeft,
-                Android.Resource.Animation.SlideOutRight);
+				Resource.Animation.fastfadein,
+				Resource.Animation.fastfadeout);
 
             base.OnBeforeFragmentChanging(fragmentInfo, transaction);
         }

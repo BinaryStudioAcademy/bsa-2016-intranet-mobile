@@ -1,8 +1,7 @@
 ﻿using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
-using IntranetMobile.Core.ViewModels.Fragments;
 
-namespace IntranetMobile.Core.ViewModels
+namespace IntranetMobile.Core.ViewModels.Login
 {
     public class LoginViewModel : BaseViewModel
     {
@@ -13,7 +12,7 @@ namespace IntranetMobile.Core.ViewModels
             var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
             if (user != null)
             {
-                ShowViewModel<LoadingFragmentViewModel>();
+                ShowViewModel<LoginLoadingViewModel>();
                 var result = await ServiceBus.AuthService.Login(user.Email, user.Password);
                 if (result.success)
                 {
@@ -22,12 +21,12 @@ namespace IntranetMobile.Core.ViewModels
                 else
                 {
                     await ServiceBus.StorageService.RemoveItem(user);
-                    ShowViewModel<LoginFragmentViewModel>();
+                    ShowViewModel<UserCredentialsViewModel>();
                 }
             }
             else
             {
-                ShowViewModel<LoginFragmentViewModel>();
+                ShowViewModel<UserCredentialsViewModel>();
             }
         }
     }

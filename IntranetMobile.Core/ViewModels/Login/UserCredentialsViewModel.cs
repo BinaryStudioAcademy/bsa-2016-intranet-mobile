@@ -2,19 +2,19 @@
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core.ViewModels.Fragments
+namespace IntranetMobile.Core.ViewModels.Login
 {
-    public class LoginFragmentViewModel : BaseFragmentViewModel
+	public class UserCredentialsViewModel : BaseViewModel
     {
         private string _email = "tester_a@example.com";
         private string _errorText;
         private bool _hasErrors;
         private string _password = "123456";
 
-        public LoginFragmentViewModel()
+        public UserCredentialsViewModel()
         {
-            ForgotPasswordCommand = new MvxCommand(ForgotPassword);
-            LoginCommand = new MvxCommand(Login, CanExecuteLogin);
+			ForgotPasswordCommand = new MvxCommand(showForgotPasswordVM);
+            LoginCommand = new MvxCommand(login, canExecuteLogin);
         }
 
         public string Email
@@ -61,14 +61,14 @@ namespace IntranetMobile.Core.ViewModels.Fragments
 
         public MvxCommand LoginCommand { get; }
 
-        private bool CanExecuteLogin()
+        private bool canExecuteLogin()
         {
             return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
         }
 
-        private async void Login()
+        private async void login()
         {
-            ShowViewModel<LoadingFragmentViewModel>();
+            ShowViewModel<LoginLoadingViewModel>();
             var auth = await ServiceBus.AuthService.Login(Email, Password);
             if (auth.success)
             {
@@ -80,13 +80,13 @@ namespace IntranetMobile.Core.ViewModels.Fragments
                 HasErrors = true;
                 ErrorText = "Login failed";
                 Password = string.Empty;
-                ShowViewModel<LoginFragmentViewModel>();
+                ShowViewModel<UserCredentialsViewModel>();
             }
         }
 
-        private void ForgotPassword()
+        private void showForgotPasswordVM()
         {
-            ShowViewModel<ForgotPasswordFragmentViewModel>();
+            ShowViewModel<ForgotPasswordViewModel>();
         }
     }
 }

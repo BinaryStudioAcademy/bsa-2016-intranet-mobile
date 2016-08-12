@@ -17,12 +17,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal">
-                <UrlImageView
-                    android:layout_width="match_parent"
+              <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView
+                  android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    card_view:MvxBind="ImageBytes ImageBytesArray" />
+                    card_view:MvxBind="ImageUrl ImageUri" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,7 +54,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/icon_padding"
-                            android:src="@drawable/ic_comment_white_24dp" />
+                            android:src="@drawable/ic_comment_white_24dp"
+                            card_view:MvxBind ="Click ClickCommentCommand"/>
                         <Mvx.MvxImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

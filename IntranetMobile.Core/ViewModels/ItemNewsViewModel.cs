@@ -7,31 +7,35 @@ namespace IntranetMobile.Core.ViewModels
     {
         private bool _isLiked;
         private string coverImageViewUrl;
+        private string imageUri;
         private string likeImageViewUrl;
 
         public ItemNewsViewModel()
         {
+            ClickCommentCommand = new MvxCommand(ClickCommentCommandExecute);
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
+            ImageUri =
+                "https://gallery.mailchimp.com/d962b18774558cf34c062e6b3/images/5bd435e8-9528-4dff-be19-828845e44bab.jpg";
+        }
+
+        public string Title { get; set; }
+        public string SubTitle { get; set; }
+        public string NewsUrl { get; set; }
+
+
+        public string ImageUri
+        {
+            get { return imageUri; }
+            set
+            {
+                imageUri = value;
+                RaisePropertyChanged(() => ImageUri);
+            }
         }
 
         public ICommand ClickLikeCommand { get; private set; }
+        public ICommand ClickCommentCommand { get; private set; }
 
-        public string CoverImageViewUrl
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(coverImageViewUrl))
-                {
-                    coverImageViewUrl = "logo_black_1";
-                }
-                return coverImageViewUrl;
-            }
-            set
-            {
-                coverImageViewUrl = value;
-                RaisePropertyChanged(() => CoverImageViewUrl);
-            }
-        }
 
         public bool IsLiked
         {
@@ -60,13 +64,15 @@ namespace IntranetMobile.Core.ViewModels
             }
         }
 
-        public string Title { get; set; }
-        public string SubTitle { get; set; }
-        public string NewsUrl { get; set; }
 
         private void ClickLikeCommandExecute()
         {
             IsLiked = !_isLiked;
+        }
+
+        private void ClickCommentCommandExecute()
+        {
+            //TODO: Show Comments Window
         }
     }
 }
