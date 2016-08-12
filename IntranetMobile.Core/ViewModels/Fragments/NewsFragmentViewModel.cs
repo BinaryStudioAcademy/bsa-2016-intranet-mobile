@@ -2,9 +2,9 @@
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core.ViewModels
+namespace IntranetMobile.Core.ViewModels.Fragments
 {
-    public class NewsViewModel : BaseViewModel
+    public class NewsFragmentViewModel : BaseFragmentViewModel
     {
         private ItemNewsViewModel selectedItem;
 

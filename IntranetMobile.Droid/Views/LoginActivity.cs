@@ -6,14 +6,14 @@ using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 
 namespace IntranetMobile.Droid.Views
 {
-    [Activity(Label = "IntranetMobile.Droid", MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/BSTheme")]
+    [Activity(Label = "IntranetMobile.Droid", MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/BSTheme", NoHistory = true)]
     public class LoginActivity : MvxCachingFragmentCompatActivity<LoginViewModel>
     {
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
 
-            SetContentView(Resource.Layout.Login);
+            SetContentView(Resource.Layout.activity_login);
         }
 
         public override void OnBeforeFragmentChanging(

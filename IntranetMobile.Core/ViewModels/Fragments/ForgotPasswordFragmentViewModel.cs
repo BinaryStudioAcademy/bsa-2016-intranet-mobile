@@ -1,6 +1,6 @@
-﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core.ViewModels
+namespace IntranetMobile.Core.ViewModels.Fragments
 {
     public class ForgotPasswordFragmentViewModel : BaseFragmentViewModel
     {
