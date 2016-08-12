@@ -8,12 +8,5 @@ namespace IntranetMobile.Droid.Views
     {
         protected override int LayoutResId { get; } = Resource.Layout.News;
         protected override string Subtitle { get; } = "News";
-
-        protected override void OnViewModelSet()
-        {
-            base.OnViewModelSet();
-
-            // SetContentView(Resource.Layout.News);
-        }
     }
 }
