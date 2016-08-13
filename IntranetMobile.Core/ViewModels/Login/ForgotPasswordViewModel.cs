@@ -5,7 +5,7 @@ namespace IntranetMobile.Core.ViewModels.Login
 {
 	public class ForgotPasswordViewModel : BaseViewModel
     {
-        private string _email;
+		private string email;
 
         public ForgotPasswordViewModel()
         {
@@ -15,10 +15,10 @@ namespace IntranetMobile.Core.ViewModels.Login
 
         public string Email
         {
-            get { return _email; }
+            get { return email; }
             set
             {
-                _email = value;
+                email = value;
                 SendCommand.RaiseCanExecuteChanged();
             }
         }

@@ -6,10 +6,10 @@ namespace IntranetMobile.Core.ViewModels.Login
 {
 	public class UserCredentialsViewModel : BaseViewModel
     {
-        private string _email = "tester_a@example.com";
-        private string _errorText;
-        private bool _hasErrors;
-        private string _password = "123456";
+		private string email = "tester_a@example.com";
+		private string errorText;
+		private bool   hasErrors;
+		private string password = "123456";
 
         public UserCredentialsViewModel()
         {
@@ -19,40 +19,40 @@ namespace IntranetMobile.Core.ViewModels.Login
 
         public string Email
         {
-            get { return _email; }
+            get { return email; }
             set
             {
-                _email = value;
+                email = value;
                 LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
         public string Password
         {
-            get { return _password; }
+            get { return password; }
             set
             {
-                _password = value;
+                password = value;
                 LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
         public bool HasErrors
         {
-            get { return _hasErrors; }
+            get { return hasErrors; }
             set
             {
-                _hasErrors = value;
+                hasErrors = value;
                 RaisePropertyChanged(() => HasErrors);
             }
         }
 
         public string ErrorText
         {
-            get { return _errorText; }
+            get { return errorText; }
             set
             {
-                _errorText = value;
+                errorText = value;
                 RaisePropertyChanged(() => ErrorText);
             }
         }
