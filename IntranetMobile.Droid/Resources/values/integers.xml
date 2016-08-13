@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="fadein_duration">380</integer>
+    <integer name="fadeout_duration">320</integer>
+</resources>

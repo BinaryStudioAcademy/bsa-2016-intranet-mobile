@@ -4178,6 +4178,12 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f0b0005
 			public const int design_snackbar_text_max_lines = 2131427333;
 			
+			// aapt resource value: 0x7f0b0007
+			public const int fadein_duration = 2131427335;
+			
+			// aapt resource value: 0x7f0b0008
+			public const int fadeout_duration = 2131427336;
+			
 			// aapt resource value: 0x7f0b0004
 			public const int status_bar_notification_info_maxnum = 2131427332;
 			
