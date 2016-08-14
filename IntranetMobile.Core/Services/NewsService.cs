@@ -11,33 +11,30 @@ namespace IntranetMobile.Core.Services
 	{
 		private const string type = "company";
 		private const string published = "yes";
-		private const string weekNewsPath = "api/packs?";
 		private const string likeUnlikeCommentPath = "api/news/{0}/comments/{1}/likes";
 		private const string likeUnlikeNews = "api/news/{0}/likes";
 
         private readonly RestClient restClient;
 
-        public NewsService()
+		public NewsService(RestClient client)
         {
-            restClient = Mvx.Resolve<RestClient>();
+			restClient = client;
         }
 
         public Task<List<CompNewsDto>> CompanyNews(int skip, int limit)
         {
-			var resource = "api/news?";
-
             var compNewsReqParams = new CompNewsReqParams();
 
             compNewsReqParams.type = type;
             compNewsReqParams.limit = limit;
             compNewsReqParams.skip = skip;
 
-			return restClient.GetAsync<List<CompNewsDto>>(resource, compNewsReqParams);
+			return restClient.GetAsync<List<CompNewsDto>>("api/news", compNewsReqParams);
         }
 
 		public Task<bool> LikeComment(string newsId, string commentId)
         {
-			var resource = String.Format(likeUnlikeCommentPath, newsId, commentId);
+			var resource = string.Format(likeUnlikeCommentPath, newsId, commentId);
 
 			var requestObject = new CompNewsLikeCommentDto();
 
@@ -49,7 +46,7 @@ namespace IntranetMobile.Core.Services
 
         public Task<bool> LikeNews(string newsId)
         {
-			var resource = String.Format(likeUnlikeNews, newsId);
+			var resource = string.Format(likeUnlikeNews, newsId);
 
 			var requestObject = new CompNewsLikeNewsDto();
 
@@ -60,7 +57,7 @@ namespace IntranetMobile.Core.Services
 
         public Task<bool> UnlikeComment(string newsId, string CommentId)
         {
-			var resource = String.Format(likeUnlikeCommentPath, newsId, CommentId);
+			var resource = string.Format(likeUnlikeCommentPath, newsId, CommentId);
 
 			return restClient.DeleteAsync(resource);
 
@@ -68,7 +65,7 @@ namespace IntranetMobile.Core.Services
 
         public Task<bool> UnLikeNews(string id)
         {
-			var resource = String.Format(likeUnlikeNews, id);
+			var resource = string.Format(likeUnlikeNews, id);
 
 			return restClient.DeleteAsync(resource);
         }
@@ -81,7 +78,7 @@ namespace IntranetMobile.Core.Services
 			weekNewsReqParams.limit = limit;
 			weekNewsReqParams.published = published;
 
-			return restClient.GetAsync<List<WeekNewsDto>>(weekNewsPath, weekNewsReqParams);
+			return restClient.GetAsync<List<WeekNewsDto>>("api/packs", weekNewsReqParams);
 		}
 	}
 }
