@@ -5,7 +5,7 @@ namespace IntranetMobile.Core.ViewModels
 {
     public class ItemNewsViewModel : BaseViewModel
     {
-        private bool _isLiked;
+		private bool   isLiked;
         private string coverImageViewUrl;
         private string imageUri;
         private string likeImageViewUrl;
@@ -39,11 +39,11 @@ namespace IntranetMobile.Core.ViewModels
 
         public bool IsLiked
         {
-            get { return _isLiked; }
+            get { return isLiked; }
             set
             {
-                _isLiked = value;
-                LikeImageViewUrl = _isLiked ? "ic_favorite_white_24dp" : "ic_favorite_border_white_24dp";
+                isLiked = value;
+                LikeImageViewUrl = isLiked ? "ic_favorite_white_24dp" : "ic_favorite_border_white_24dp";
             }
         }
 
@@ -67,7 +67,7 @@ namespace IntranetMobile.Core.ViewModels
 
         private void ClickLikeCommandExecute()
         {
-            IsLiked = !_isLiked;
+            IsLiked = !isLiked;
         }
 
         private void ClickCommentCommandExecute()

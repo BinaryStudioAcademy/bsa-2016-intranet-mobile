@@ -3661,19 +3661,22 @@ namespace IntranetMobile.Droid
 			public const int ic_home_black_24dp = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int ic_menu_white_24dp = 2130837594;
+			public const int ic_launcher = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int ic_settings_black_24dp = 2130837595;
+			public const int ic_menu_white_24dp = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int Icon = 2130837596;
+			public const int ic_settings_black_24dp = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int logo_black_1 = 2130837597;
+			public const int Icon = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int notification_template_icon_bg = 2130837598;
+			public const int logo_black_1 = 2130837598;
+			
+			// aapt resource value: 0x7f02005f
+			public const int notification_template_icon_bg = 2130837599;
 			
 			static Drawable()
 			{
@@ -4174,6 +4177,12 @@ namespace IntranetMobile.Droid
 			
 			// aapt resource value: 0x7f0b0005
 			public const int design_snackbar_text_max_lines = 2131427333;
+			
+			// aapt resource value: 0x7f0b0007
+			public const int fadein_duration = 2131427335;
+			
+			// aapt resource value: 0x7f0b0008
+			public const int fadeout_duration = 2131427336;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int status_bar_notification_info_maxnum = 2131427332;

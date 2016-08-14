@@ -47,7 +47,8 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="14dp"
+        android:padding="10dp"
         android:text="Forgot password?"
         app:MvxBind="Click ForgotPasswordCommand" />
 </LinearLayout>
