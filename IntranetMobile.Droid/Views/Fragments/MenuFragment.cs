@@ -15,7 +15,7 @@ namespace IntranetMobile.Droid.Views.Fragments
     [Register("intranetmobile.droid.views.fragments.MenuFragment")]
     public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
-        private NavigationView navigationView;
+        private NavigationView _navigationView;
 
         public bool OnNavigationItemSelected(IMenuItem menuItem)
         {
@@ -33,9 +33,9 @@ namespace IntranetMobile.Droid.Views.Fragments
 
             var view = this.BindingInflate(Resource.Layout.fragment_menu, null);
 
-            navigationView = view.FindViewById<NavigationView>(Resource.Id.nav_view);
-            navigationView.SetNavigationItemSelectedListener(this);
-            navigationView.Menu.FindItem(Resource.Id.nav_news).SetChecked(true);
+            _navigationView = view.FindViewById<NavigationView>(Resource.Id.nav_view);
+            _navigationView.SetNavigationItemSelectedListener(this);
+            _navigationView.Menu.FindItem(Resource.Id.nav_news).SetChecked(true);
 
             ViewModel.ShowNews();
 

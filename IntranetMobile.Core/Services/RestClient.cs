@@ -14,16 +14,16 @@ namespace IntranetMobile.Core.Services
         private const string UserAgent = "Fiddler";
         private const string ContentType = "application/json";
         private const string BaseUrl = "http://team.binary-studio.com/";
-        private readonly Uri baseUri;
-        private readonly CookieContainer cookieContainer;
-        private readonly HttpClient httpClient;
+        private readonly Uri _baseUri;
+        private readonly CookieContainer _cookieContainer;
+        private readonly HttpClient _httpClient;
 
         public RestClient()
         {
-            baseUri = new Uri(BaseUrl);
-            cookieContainer = new CookieContainer();
-            httpClient = new HttpClient(new HttpClientHandler {CookieContainer = cookieContainer});
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent);
+            _baseUri = new Uri(BaseUrl);
+            _cookieContainer = new CookieContainer();
+            _httpClient = new HttpClient(new HttpClientHandler {CookieContainer = _cookieContainer});
+            _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent);
         }
 
         public Task<T> GetAsync<T>(string resource) where T : new()
@@ -99,7 +99,7 @@ namespace IntranetMobile.Core.Services
             HttpResponseMessage responseMessage;
             if (method == HttpMethod.Get || method == HttpMethod.Delete)
             {
-                var uriBuilder = new UriBuilder(new Uri(baseUri, resource));
+                var uriBuilder = new UriBuilder(new Uri(_baseUri, resource));
 
                 if (requestObject != null)
                 {
@@ -112,7 +112,7 @@ namespace IntranetMobile.Core.Services
                     uriBuilder.Query = await param.ReadAsStringAsync();
                 }
 
-                responseMessage = await httpClient.SendAsync(new HttpRequestMessage(method, uriBuilder.ToString()));
+                responseMessage = await _httpClient.SendAsync(new HttpRequestMessage(method, uriBuilder.ToString()));
             }
             else
             {
@@ -120,7 +120,7 @@ namespace IntranetMobile.Core.Services
                 content.Headers.ContentType.MediaType = contentType;
                 responseMessage =
                     await
-                        httpClient.SendAsync(new HttpRequestMessage(method, new Uri(baseUri, resource))
+                        _httpClient.SendAsync(new HttpRequestMessage(method, new Uri(_baseUri, resource))
                         {
                             Content = content
                         });

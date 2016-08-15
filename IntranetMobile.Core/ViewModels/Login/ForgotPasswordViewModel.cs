@@ -3,45 +3,45 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Login
 {
-	public class ForgotPasswordViewModel : BaseViewModel
+    public class ForgotPasswordViewModel : BaseViewModel
     {
-		private string email;
+        private string _email;
 
         public ForgotPasswordViewModel()
         {
-            BackToLoginCommand = new MvxCommand(backToLogin);
-            SendCommand = new MvxCommand(send, canExecuteSend);
+            BackToLoginCommand = new MvxCommand(BackToLogin);
+            SendCommand = new MvxCommand(send, CanExecuteSend);
         }
 
         public string Email
         {
-            get { return email; }
+            get { return _email; }
             set
             {
-                email = value;
+                _email = value;
                 SendCommand.RaiseCanExecuteChanged();
             }
         }
 
         public MvxCommand BackToLoginCommand { get; private set; }
 
-        public MvxCommand SendCommand { get; private set; }
+        public MvxCommand SendCommand { get; }
 
         private async void send()
         {
-			var result = await ServiceBus.AuthService.ResetPassword(Email);
-			if (result)
-			{
-				backToLogin();
-			}
+            var result = await ServiceBus.AuthService.ResetPassword(Email);
+            if (result)
+            {
+                BackToLogin();
+            }
         }
 
-        private bool canExecuteSend()
+        private bool CanExecuteSend()
         {
             return !string.IsNullOrEmpty(Email);
         }
 
-        private void backToLogin()
+        private void BackToLogin()
         {
             ShowViewModel<UserCredentialsViewModel>();
         }

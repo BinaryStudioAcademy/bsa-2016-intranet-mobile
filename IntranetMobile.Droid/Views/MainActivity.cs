@@ -1,8 +1,6 @@
 using Android.App;
-using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
-using Android.Support.V7.Widget;
 using Android.Views;
 using IntranetMobile.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;

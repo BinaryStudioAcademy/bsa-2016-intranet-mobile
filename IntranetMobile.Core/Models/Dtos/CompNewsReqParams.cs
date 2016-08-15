@@ -1,4 +1,6 @@
-﻿namespace IntranetMobile.Core
+﻿// ReSharper disable InconsistentNaming
+
+namespace IntranetMobile.Core.Models.Dtos
 {
     public class CompNewsReqParams
     {

@@ -5,7 +5,7 @@ using IntranetMobile.Core.ViewModels.News;
 
 namespace IntranetMobile.Core.ViewModels
 {
-	public class MenuViewModel : BaseViewModel
+    public class MenuViewModel : BaseViewModel
     {
         private string _userName;
 
@@ -41,11 +41,11 @@ namespace IntranetMobile.Core.ViewModels
         {
             base.Start();
 
-			var currentUser = await ServiceBus.StorageService.GetFirstOrDefault<User>();
-			if (currentUser != null)
-			{
-				UserName = currentUser.Email;
-			}
+            var currentUser = await ServiceBus.StorageService.GetFirstOrDefault<User>();
+            if (currentUser != null)
+            {
+                UserName = currentUser.Email;
+            }
         }
     }
 }

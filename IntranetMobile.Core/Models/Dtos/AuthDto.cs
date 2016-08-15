@@ -1,4 +1,6 @@
-﻿namespace IntranetMobile.Core.Models.Dtos
+﻿// ReSharper disable InconsistentNaming
+
+namespace IntranetMobile.Core.Models.Dtos
 {
     public class AuthDto
     {

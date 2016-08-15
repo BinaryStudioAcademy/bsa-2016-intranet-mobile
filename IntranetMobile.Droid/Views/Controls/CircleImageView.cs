@@ -8,6 +8,8 @@ using Java.Lang;
 using Exception = System.Exception;
 using Math = System.Math;
 
+// ReSharper disable InconsistentNaming
+
 namespace IntranetMobile.Droid.Views.Controls
 {
     public class CircleImageView : ImageView

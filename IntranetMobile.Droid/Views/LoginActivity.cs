@@ -6,7 +6,8 @@ using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 
 namespace IntranetMobile.Droid.Views
 {
-    [Activity(Label = "Intranet Mobile", MainLauncher = true, Icon = "@drawable/ic_launcher", Theme = "@style/BSTheme", NoHistory = true)]
+    [Activity(Label = "Intranet Mobile", MainLauncher = true, Icon = "@drawable/ic_launcher", Theme = "@style/BSTheme",
+        NoHistory = true)]
     public class LoginActivity : MvxCachingFragmentCompatActivity<LoginViewModel>
     {
         protected override void OnViewModelSet()
@@ -21,8 +22,8 @@ namespace IntranetMobile.Droid.Views
             FragmentTransaction transaction)
         {
             transaction.SetCustomAnimations(
-				Resource.Animation.fastfadein,
-				Resource.Animation.fastfadeout);
+                Resource.Animation.fastfadein,
+                Resource.Animation.fastfadeout);
 
             base.OnBeforeFragmentChanging(fragmentInfo, transaction);
         }

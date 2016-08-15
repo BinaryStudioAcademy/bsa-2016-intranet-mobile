@@ -12,13 +12,10 @@ namespace IntranetMobile.Droid.Views.Fragments
     public abstract class BaseDrawerFragment<TViewModel> : MvxFragment<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
-        private MvxActionBarDrawerToggle drawerToggle;
-        private Toolbar toolbar;
+        private MvxActionBarDrawerToggle _drawerToggle;
+        private Toolbar _toolbar;
 
-        public MvxCachingFragmentCompatActivity ParentActivity
-        {
-            get { return (MvxCachingFragmentCompatActivity)Activity; }
-        }
+        public MvxCachingFragmentCompatActivity ParentActivity => (MvxCachingFragmentCompatActivity) Activity;
 
         public int FragmentLayout { get; protected set; }
         public string Title { get; protected set; }
@@ -30,24 +27,24 @@ namespace IntranetMobile.Droid.Views.Fragments
 
             var view = this.BindingInflate(FragmentLayout, null);
 
-            toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
+            _toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
 
-            ParentActivity.SetSupportActionBar(toolbar);
+            ParentActivity.SetSupportActionBar(_toolbar);
             ParentActivity.SupportActionBar.Title = Title;
             ParentActivity.SupportActionBar.Subtitle = Subtitle;
             ParentActivity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
             var drawerActivity = (IDrawerActivity) ParentActivity;
 
-            drawerToggle = new MvxActionBarDrawerToggle(
+            _drawerToggle = new MvxActionBarDrawerToggle(
                 Activity, // host Activity
                 drawerActivity.DrawerLayout, // DrawerLayout object
-                toolbar, // nav drawer icon to replace 'Up' caret
+                _toolbar, // nav drawer icon to replace 'Up' caret
                 Resource.String.drawer_open, // "open drawer" description
                 Resource.String.drawer_close // "close drawer" description
                 );
 
-            drawerActivity.DrawerLayout.AddDrawerListener(drawerToggle);
+            drawerActivity.DrawerLayout.AddDrawerListener(_drawerToggle);
 
             return view;
         }
@@ -55,13 +52,13 @@ namespace IntranetMobile.Droid.Views.Fragments
         public override void OnConfigurationChanged(Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);
-            drawerToggle.OnConfigurationChanged(newConfig);
+            _drawerToggle.OnConfigurationChanged(newConfig);
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
-            drawerToggle.SyncState();
+            _drawerToggle.SyncState();
         }
     }
 }

@@ -4,69 +4,69 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Login
 {
-	public class UserCredentialsViewModel : BaseViewModel
+    public class UserCredentialsViewModel : BaseViewModel
     {
-		private string email = "tester_a@example.com";
-		private string errorText;
-		private bool   hasErrors;
-		private string password = "123456";
+        private string _email = "tester_a@example.com";
+        private string _errorText;
+        private bool _hasErrors;
+        private string _password = "123456";
 
         public UserCredentialsViewModel()
         {
-			ForgotPasswordCommand = new MvxCommand(showForgotPasswordVM);
-            LoginCommand = new MvxCommand(login, canExecuteLogin);
+            ForgotPasswordCommand = new MvxCommand(ShowForgotPasswordVm);
+            LoginCommand = new MvxCommand(Login, CanExecuteLogin);
         }
 
         public string Email
         {
-            get { return email; }
+            get { return _email; }
             set
             {
-                email = value;
+                _email = value;
                 LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
         public string Password
         {
-            get { return password; }
+            get { return _password; }
             set
             {
-                password = value;
+                _password = value;
                 LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
         public bool HasErrors
         {
-            get { return hasErrors; }
+            get { return _hasErrors; }
             set
             {
-                hasErrors = value;
+                _hasErrors = value;
                 RaisePropertyChanged(() => HasErrors);
             }
         }
 
         public string ErrorText
         {
-            get { return errorText; }
+            get { return _errorText; }
             set
             {
-                errorText = value;
+                _errorText = value;
                 RaisePropertyChanged(() => ErrorText);
             }
         }
 
         public MvxCommand ForgotPasswordCommand { get; private set; }
 
-        public MvxCommand LoginCommand { get; private set; }
+        public MvxCommand LoginCommand { get; }
 
-        private bool canExecuteLogin()
+        private bool CanExecuteLogin()
         {
             return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
         }
 
-        private async void login()
+        private async void Login()
         {
             ShowViewModel<LoginLoadingViewModel>();
             var auth = await ServiceBus.AuthService.Login(Email, Password);
@@ -84,7 +84,7 @@ namespace IntranetMobile.Core.ViewModels.Login
             }
         }
 
-        private void showForgotPasswordVM()
+        private void ShowForgotPasswordVm()
         {
             ShowViewModel<ForgotPasswordViewModel>();
         }

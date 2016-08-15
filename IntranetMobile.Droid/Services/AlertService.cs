@@ -7,16 +7,14 @@ namespace IntranetMobile.Droid.Services
     {
         public void ShowMessage(string title, string text)
         {
-            
         }
 
         public void ShowDialogBox(string title,
-                                string text,
-                                string okButtonCaption,
-                                string cancelButtonCaption,
-                                Action okButtonAction)
+            string text,
+            string okButtonCaption,
+            string cancelButtonCaption,
+            Action okButtonAction)
         {
-            
         }
     }
 }

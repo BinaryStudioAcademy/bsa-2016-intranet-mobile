@@ -14,8 +14,8 @@ namespace IntranetMobile.Core.Interfaces
 
         Task<bool> UnLikeNews(string newsId);
 
-		Task<bool> LikeComment(string newsId, string commentId);
+        Task<bool> LikeComment(string newsId, string commentId);
 
-        Task<bool> UnlikeComment(string newsId, string CommentId);
+        Task<bool> UnlikeComment(string newsId, string commentId);
     }
 }

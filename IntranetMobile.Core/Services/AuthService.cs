@@ -7,16 +7,16 @@ namespace IntranetMobile.Core.Services
 {
     public class AuthService : IAuthService
     {
-        private const string loginPath = "auth/api/login";
-        private const string logoutPath = "auth/logout";
-        private const string resetPasswordPath = "auth/api/users/forgotPassword";
-        private const string resetPasswordContentType = "application/x-www-form-urlencoded";
+        private const string LoginPath = "auth/api/login";
+        private const string LogoutPath = "auth/logout";
+        private const string ResetPasswordPath = "auth/api/users/forgotPassword";
+        private const string ResetPasswordContentType = "application/x-www-form-urlencoded";
 
-        private readonly RestClient restClient;
+        private readonly RestClient _restClient;
 
         public AuthService()
         {
-            restClient = Mvx.Resolve<RestClient>();
+            _restClient = Mvx.Resolve<RestClient>();
         }
 
         public Task<AuthDto> Login(string email, string paswword)
@@ -27,19 +27,19 @@ namespace IntranetMobile.Core.Services
                 password = paswword
             };
 
-            var authDto = restClient.PostAsync<AuthDto>(loginPath, user);
+            var authDto = _restClient.PostAsync<AuthDto>(LoginPath, user);
 
             return authDto;
         }
 
         public Task<bool> Logout()
         {
-            return restClient.GetAsync(logoutPath);
+            return _restClient.GetAsync(LogoutPath);
         }
 
         public Task<bool> ResetPassword(string email)
         {
-            return restClient.PostAsync(resetPasswordPath, new {email}, resetPasswordContentType);
+            return _restClient.PostAsync(ResetPasswordPath, new {email}, ResetPasswordContentType);
         }
     }
 }
