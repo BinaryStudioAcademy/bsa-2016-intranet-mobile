@@ -10,7 +10,7 @@ namespace IntranetMobile.Core.ViewModels.Login
         public ForgotPasswordViewModel()
         {
             BackToLoginCommand = new MvxCommand(BackToLogin);
-            SendCommand = new MvxCommand(send, CanExecuteSend);
+            SendCommand = new MvxCommand(Send, CanExecuteSend);
         }
 
         public string Email
@@ -27,7 +27,7 @@ namespace IntranetMobile.Core.ViewModels.Login
 
         public MvxCommand SendCommand { get; }
 
-        private async void send()
+        private async void Send()
         {
             var result = await ServiceBus.AuthService.ResetPassword(Email);
             if (result)
