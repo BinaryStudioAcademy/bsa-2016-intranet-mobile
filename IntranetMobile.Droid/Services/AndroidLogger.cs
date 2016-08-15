@@ -6,22 +6,25 @@ namespace IntranetMobile.Droid.Services
 {
     public class AndroidLogger : ILogger
     {
+        private const string Tag = "IntranetMobile"; 
         public void Error(Exception e)
         {
+            Log.Error(Tag,e.ToString());
         }
 
         public void Error(string message)
         {
-            Log.Error("Error", message);
+            Log.Error(Tag, message);
         }
 
         public void Error(string message, Exception e)
         {
+            Log.Error(Tag, message + e);
         }
 
         public void Info(string message)
         {
-            Log.Info("Info", message);
+            Log.Info(Tag, message);
         }
     }
 }
