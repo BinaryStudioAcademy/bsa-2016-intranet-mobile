@@ -227,7 +227,7 @@
     <AndroidResource Include="Resources\layout\drawer_header.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\recycle_news.axml">
+    <AndroidResource Include="Resources\layout\news_preview_card.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_login.axml">

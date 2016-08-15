@@ -6,21 +6,21 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class NewsViewModel : BaseViewModel
     {
-        private ItemNewsViewModel _selectedItem;
+        private NewsPreviewViewModel _selectedItem;
 
         public NewsViewModel()
         {
-            ListNews = new ObservableCollection<ItemNewsViewModel>
+            ListNews = new ObservableCollection<NewsPreviewViewModel>
             {
-                new ItemNewsViewModel {Title = "New1", Subtitle = "Author111"},
-                new ItemNewsViewModel {Title = "New2", Subtitle = "Author222"},
-                new ItemNewsViewModel {Title = "New3", Subtitle = "Author333"}
+                new NewsPreviewViewModel {Title = "New1", Subtitle = "Author111"},
+                new NewsPreviewViewModel {Title = "New2", Subtitle = "Author222"},
+                new NewsPreviewViewModel {Title = "New3", Subtitle = "Author333"}
             };
         }
 
-        public ObservableCollection<ItemNewsViewModel> ListNews { set; get; }
+        public ObservableCollection<NewsPreviewViewModel> ListNews { set; get; }
 
-        public ItemNewsViewModel SelectedItem
+        public NewsPreviewViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -35,7 +35,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ICommand SelectItem
         {
-            get { return new MvxCommand<ItemNewsViewModel>(item => { SelectedItem = item; }); }
+            get { return new MvxCommand<NewsPreviewViewModel>(item => { SelectedItem = item; }); }
         }
     }
 }

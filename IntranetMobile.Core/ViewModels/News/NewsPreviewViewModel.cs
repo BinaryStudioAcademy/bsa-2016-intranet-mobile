@@ -3,14 +3,14 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class ItemNewsViewModel : BaseViewModel
+    public class NewsPreviewViewModel : BaseViewModel
     {
         private string _coverImageViewUrl;
         private string _imageUri;
         private bool _isLiked;
         private string _likeImageViewUrl;
 
-        public ItemNewsViewModel()
+        public NewsPreviewViewModel()
         {
             ClickCommentCommand = new MvxCommand(ClickCommentCommandExecute);
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);

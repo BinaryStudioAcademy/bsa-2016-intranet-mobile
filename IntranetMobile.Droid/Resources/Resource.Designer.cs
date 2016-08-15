@@ -4354,31 +4354,31 @@ namespace IntranetMobile.Droid
 			public const int mvx_toolbar = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int notification_media_action = 2130903087;
+			public const int news_preview_card = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int notification_media_cancel_action = 2130903088;
+			public const int notification_media_action = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int notification_template_big_media = 2130903089;
+			public const int notification_media_cancel_action = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public const int notification_template_big_media_narrow = 2130903090;
+			public const int notification_template_big_media = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public const int notification_template_lines = 2130903091;
+			public const int notification_template_big_media_narrow = 2130903091;
 			
 			// aapt resource value: 0x7f030034
-			public const int notification_template_media = 2130903092;
+			public const int notification_template_lines = 2130903092;
 			
 			// aapt resource value: 0x7f030035
-			public const int notification_template_part_chronometer = 2130903093;
+			public const int notification_template_media = 2130903093;
 			
 			// aapt resource value: 0x7f030036
-			public const int notification_template_part_time = 2130903094;
+			public const int notification_template_part_chronometer = 2130903094;
 			
 			// aapt resource value: 0x7f030037
-			public const int recycle_news = 2130903095;
+			public const int notification_template_part_time = 2130903095;
 			
 			// aapt resource value: 0x7f030038
 			public const int select_dialog_item_material = 2130903096;

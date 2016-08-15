@@ -41,10 +41,10 @@ namespace IntranetMobile.Core.ViewModels.News
             ServiceBus.AlertService.ShowMessage(Tag, "Like clicked!");
         }
 
-        public void Init(ItemNewsViewModel itemNewsViewModel)
+        public void Init(NewsPreviewViewModel newsPreviewViewModel)
         {
-            Title = itemNewsViewModel.Title;
-            Subtitle = itemNewsViewModel.Subtitle;
+            Title = newsPreviewViewModel.Title;
+            Subtitle = newsPreviewViewModel.Subtitle;
         }
     }
 }
