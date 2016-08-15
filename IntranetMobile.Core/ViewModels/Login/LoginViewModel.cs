@@ -5,6 +5,8 @@ namespace IntranetMobile.Core.ViewModels.Login
 {
     public class LoginViewModel : BaseViewModel
     {
+        private const string Tag = "LoginViewModel";
+
         public override async void Start()
         {
             base.Start();
@@ -20,6 +22,7 @@ namespace IntranetMobile.Core.ViewModels.Login
                 }
                 else
                 {
+                    ServiceBus.AlertService.ShowMessage(Tag, result.message);
                     await ServiceBus.StorageService.RemoveItem(user);
                     ShowViewModel<UserCredentialsViewModel>();
                 }

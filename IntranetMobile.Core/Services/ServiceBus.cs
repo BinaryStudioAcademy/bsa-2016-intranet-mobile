@@ -23,16 +23,6 @@ namespace IntranetMobile.Core.Services
             => _newsService ?? (_newsService = Mvx.Resolve<INewsService>());
 
         public static IAlertService AlertService
-        {
-            get
-            {
-                if (_alertService == null)
-                {
-                    //alertService = Get instance from IoC
-                }
-
-                return _alertService;
-            }
-        }
+            => _alertService ?? (_alertService = Mvx.Resolve<IAlertService>());
     }
 }

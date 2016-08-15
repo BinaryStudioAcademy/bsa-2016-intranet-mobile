@@ -6,6 +6,7 @@ namespace IntranetMobile.Core.ViewModels.Login
 {
     public class UserCredentialsViewModel : BaseViewModel
     {
+        private const string Tag = "UserCredentialsViewModel";
         private string _email = "tester_a@example.com";
         private string _errorText;
         private bool _hasErrors;
@@ -77,6 +78,7 @@ namespace IntranetMobile.Core.ViewModels.Login
             }
             else
             {
+                ServiceBus.AlertService.ShowMessage(Tag, auth.message);
                 HasErrors = true;
                 ErrorText = "Login failed";
                 Password = string.Empty;

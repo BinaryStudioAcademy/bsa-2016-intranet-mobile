@@ -48,6 +48,7 @@ namespace IntranetMobile.Droid
             base.Initialize();
 
             Mvx.RegisterSingleton<ILogger>(new AndroidLogger());
+            Mvx.RegisterSingleton<IAlertService>(new AlertService(ApplicationContext));
             Mvx.RegisterSingleton<IDataBaseService>(new DataBaseService(
                 ApplicationContext.FilesDir.Path,
                 Mvx.Resolve<IMvxSqliteConnectionFactory>(),
