@@ -9,7 +9,7 @@ namespace IntranetMobile.Droid.Services
         private const string Tag = "IntranetMobile"; 
         public void Error(Exception e)
         {
-            Log.Error(Tag,e.ToString());
+            Log.Error(Tag, e.ToString());
         }
 
         public void Error(string message)
@@ -19,7 +19,7 @@ namespace IntranetMobile.Droid.Services
 
         public void Error(string message, Exception e)
         {
-            Log.Error(Tag, message + e);
+            Log.Error(Tag, string.Format("{0}\n{1}", message, e));
         }
 
         public void Info(string message)
