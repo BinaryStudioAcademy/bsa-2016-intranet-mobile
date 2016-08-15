@@ -17,6 +17,11 @@
     android:layout_height="match_parent"
     android:layout_below="@id/activity_news_details_toolbar"
     android:background="@color/colorAccent">
-
+    <TextView
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:autoLink="all"
+      android:padding="10dp"
+      app:MvxBind="TextFormatted FromHtml(Content)" />
   </LinearLayout>
 </RelativeLayout>
