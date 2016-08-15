@@ -2,6 +2,8 @@ using Android.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using IntranetMobile.Core.ViewModels.News;
+using IntranetMobile.Droid.Views.Util;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views.Activities
@@ -9,6 +11,7 @@ namespace IntranetMobile.Droid.Views.Activities
     [Activity(Label = "Intranet Mobile", Theme = "@style/BSTheme")]
     public class NewsDetailsActivity : MvxAppCompatActivity<NewsDetailsViewModel>
     {
+        private LikeActionButtonWrapper _refreshWrapper;
         private Toolbar _toolbar;
 
         protected override void OnViewModelSet()
@@ -44,6 +47,12 @@ namespace IntranetMobile.Droid.Views.Activities
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_news_details, menu);
+
+            _refreshWrapper = new LikeActionButtonWrapper(menu);
+            var set = this.CreateBindingSet<NewsDetailsActivity, NewsDetailsViewModel>();
+            set.Bind(_refreshWrapper).For("IsLiked").To(viewModel => viewModel.IsLiked);
+            set.Apply();
+
             return base.OnCreateOptionsMenu(menu);
         }
     }

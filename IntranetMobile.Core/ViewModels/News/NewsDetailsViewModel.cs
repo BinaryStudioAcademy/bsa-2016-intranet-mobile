@@ -6,6 +6,7 @@ namespace IntranetMobile.Core.ViewModels.News
     public class NewsDetailsViewModel : BaseViewModel
     {
         private const string Tag = "NewsDetailsViewModel";
+        private bool _isLiked;
         private string _subtitile;
         private string _title;
 
@@ -36,8 +37,19 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
+        public bool IsLiked
+        {
+            get { return _isLiked; }
+            set
+            {
+                _isLiked = value;
+                RaisePropertyChanged(() => IsLiked);
+            }
+        }
+
         private void Like()
         {
+            IsLiked = !IsLiked;
             ServiceBus.AlertService.ShowMessage(Tag, "Like clicked!");
         }
 
@@ -45,6 +57,7 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             Title = newsPreviewViewModel.Title;
             Subtitle = newsPreviewViewModel.Subtitle;
+            IsLiked = newsPreviewViewModel.IsLiked;
         }
     }
 }
