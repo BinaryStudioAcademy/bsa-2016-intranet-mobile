@@ -32,8 +32,19 @@ namespace IntranetMobile.Droid.Views.Activities
                     Finish();
                     break;
                 }
+                case Resource.Id.menu_news_details_like:
+                {
+                    ViewModel.LikeCommand.Execute();
+                    break;
+                }
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.menu_news_details, menu);
+            return base.OnCreateOptionsMenu(menu);
         }
     }
 }

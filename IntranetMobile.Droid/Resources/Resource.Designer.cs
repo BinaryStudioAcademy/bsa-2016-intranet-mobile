@@ -3937,6 +3937,9 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060072
 			public const int menu_frame = 2131099762;
 			
+			// aapt resource value: 0x7f060095
+			public const int menu_news_details_like = 2131099797;
+			
 			// aapt resource value: 0x7f060030
 			public const int middle = 2131099696;
 			
@@ -3952,23 +3955,23 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f060085
 			public const int mvx_toolbar = 2131099781;
 			
-			// aapt resource value: 0x7f060098
-			public const int nav_asciit = 2131099800;
+			// aapt resource value: 0x7f060099
+			public const int nav_asciit = 2131099801;
 			
-			// aapt resource value: 0x7f06009a
-			public const int nav_logout = 2131099802;
-			
-			// aapt resource value: 0x7f060095
-			public const int nav_news = 2131099797;
-			
-			// aapt resource value: 0x7f060097
-			public const int nav_profile = 2131099799;
+			// aapt resource value: 0x7f06009b
+			public const int nav_logout = 2131099803;
 			
 			// aapt resource value: 0x7f060096
-			public const int nav_reviewer = 2131099798;
+			public const int nav_news = 2131099798;
 			
-			// aapt resource value: 0x7f060099
-			public const int nav_settings = 2131099801;
+			// aapt resource value: 0x7f060098
+			public const int nav_profile = 2131099800;
+			
+			// aapt resource value: 0x7f060097
+			public const int nav_reviewer = 2131099799;
+			
+			// aapt resource value: 0x7f06009a
+			public const int nav_settings = 2131099802;
 			
 			// aapt resource value: 0x7f060082
 			public const int nav_view = 2131099778;
@@ -4406,7 +4409,10 @@ namespace IntranetMobile.Droid
 		{
 			
 			// aapt resource value: 0x7f0c0000
-			public const int nav_menu = 2131492864;
+			public const int menu_news_details = 2131492864;
+			
+			// aapt resource value: 0x7f0c0001
+			public const int nav_menu = 2131492865;
 			
 			static Menu()
 			{
