@@ -19,7 +19,7 @@ namespace IntranetMobile.Core.ViewModels.News
         }
 
         public string Title { get; set; }
-        public string SubTitle { get; set; }
+        public string Subtitle { get; set; }
         public string NewsUrl { get; set; }
 
         public string ImageUri

@@ -9,7 +9,7 @@
   android:background="@color/colorPrimaryDark">
   <include
     android:id="@+id/activity_news_details_toolbar"
-    layout="@layout/toolbar" />
+    layout="@layout/mvx_toolbar" />
   <LinearLayout
     android:fitsSystemWindows="true"
     android:orientation="vertical"

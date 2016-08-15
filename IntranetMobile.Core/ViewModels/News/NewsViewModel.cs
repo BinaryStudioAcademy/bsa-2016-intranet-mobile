@@ -12,9 +12,9 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             ListNews = new ObservableCollection<ItemNewsViewModel>
             {
-                new ItemNewsViewModel {Title = "New1", SubTitle = "Author111"},
-                new ItemNewsViewModel {Title = "New2", SubTitle = "Author222"},
-                new ItemNewsViewModel {Title = "New3", SubTitle = "Author333"}
+                new ItemNewsViewModel {Title = "New1", Subtitle = "Author111"},
+                new ItemNewsViewModel {Title = "New2", Subtitle = "Author222"},
+                new ItemNewsViewModel {Title = "New3", Subtitle = "Author333"}
             };
         }
 
@@ -27,7 +27,7 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                ShowViewModel<NewsDetailsViewModel>();
+                ShowViewModel<NewsDetailsViewModel>(SelectedItem);
 
                 RaisePropertyChanged(() => SelectedItem);
             }
