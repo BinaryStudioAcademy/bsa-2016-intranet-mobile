@@ -9,11 +9,8 @@ namespace IntranetMobile.Droid.Views.Fragments
     [Register("intranetmobile.droid.views.fragments.NewsFragment")]
     public class NewsFragment : BaseDrawerFragment<NewsViewModel>
     {
-        public NewsFragment()
-        {
-            FragmentLayout = Resource.Layout.fragment_news;
-            Title = "Binary studio";
-            Subtitle = "Fancy subheader";
-        }
+        public override int FragmentLayout { get; protected set; } = Resource.Layout.fragment_news;
+        public override string ToolbarTitle { get; protected set; } = "Binary studio";
+        public override string ToolbarSubtitle { get; protected set; } = "Fancy subheader";
     }
 }

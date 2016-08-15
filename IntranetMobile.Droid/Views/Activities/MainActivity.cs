@@ -5,9 +5,9 @@ using Android.Views;
 using IntranetMobile.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
-namespace IntranetMobile.Droid.Views
+namespace IntranetMobile.Droid.Views.Activities
 {
-    [Activity(Label = "MainActivity", Theme = "@style/BSTheme")]
+    [Activity(Label = "Intranet Mobile", Theme = "@style/BSTheme")]
     public class MainActivity : MvxCachingFragmentCompatActivity<MainViewModel>, IDrawerActivity
     {
         public DrawerLayout DrawerLayout { get; set; }

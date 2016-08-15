@@ -2,6 +2,7 @@ using Android.Content.Res;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
+using IntranetMobile.Droid.Views.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V4;
@@ -17,9 +18,11 @@ namespace IntranetMobile.Droid.Views.Fragments
 
         public MvxCachingFragmentCompatActivity ParentActivity => (MvxCachingFragmentCompatActivity) Activity;
 
-        public int FragmentLayout { get; protected set; }
-        public string Title { get; protected set; }
-        public string Subtitle { get; protected set; }
+        public abstract int FragmentLayout { get; protected set; }
+
+        public abstract string ToolbarTitle { get; protected set; }
+
+        public abstract string ToolbarSubtitle { get; protected set; }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -30,8 +33,8 @@ namespace IntranetMobile.Droid.Views.Fragments
             _toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
 
             ParentActivity.SetSupportActionBar(_toolbar);
-            ParentActivity.SupportActionBar.Title = Title;
-            ParentActivity.SupportActionBar.Subtitle = Subtitle;
+            ParentActivity.SupportActionBar.Title = ToolbarTitle;
+            ParentActivity.SupportActionBar.Subtitle = ToolbarSubtitle;
             ParentActivity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
             var drawerActivity = (IDrawerActivity) ParentActivity;

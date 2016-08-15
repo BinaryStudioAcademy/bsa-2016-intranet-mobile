@@ -196,16 +196,18 @@
     <Compile Include="Services\AndroidLogger.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Util\BitmapUtils.cs" />
+    <Compile Include="Views\Activities\BaseToolbarActivity.cs" />
+    <Compile Include="Views\Activities\IDrawerActivity.cs" />
+    <Compile Include="Views\Activities\LoginActivity.cs" />
+    <Compile Include="Views\Activities\MainActivity.cs" />
+    <Compile Include="Views\Activities\NewsDetailsActivity.cs" />
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />
     <Compile Include="Views\Fragments\NewsFragment.cs" />
-    <Compile Include="Views\IDrawerActivity.cs" />
-    <Compile Include="Views\MainActivity.cs" />
     <Compile Include="Views\Fragments\ForgotPasswordFragment.cs" />
     <Compile Include="Views\Fragments\LoadingFragment.cs" />
     <Compile Include="Views\Fragments\LoginFragment.cs" />
     <Compile Include="Views\Fragments\MenuFragment.cs" />
-    <Compile Include="Views\LoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -252,6 +254,9 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\values\integers.xml" />
+    <AndroidResource Include="Resources\layout\activity_news_details.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">

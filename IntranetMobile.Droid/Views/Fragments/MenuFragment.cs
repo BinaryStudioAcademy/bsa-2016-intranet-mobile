@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using IntranetMobile.Core.ViewModels;
+using IntranetMobile.Droid.Views.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
