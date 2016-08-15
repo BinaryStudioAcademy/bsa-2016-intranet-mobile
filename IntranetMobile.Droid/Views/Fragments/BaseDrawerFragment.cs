@@ -15,11 +15,14 @@ namespace IntranetMobile.Droid.Views.Fragments
         private MvxActionBarDrawerToggle drawerToggle;
         private Toolbar toolbar;
 
-        public MvxCachingFragmentCompatActivity ParentActivity => (MvxCachingFragmentCompatActivity) Activity;
+        public MvxCachingFragmentCompatActivity ParentActivity
+        {
+            get { return (MvxCachingFragmentCompatActivity)Activity; }
+        }
 
-        public abstract int FragmentLayout { get; }
-        public abstract string Title { get; }
-        public abstract string Subtitle { get; }
+        public int FragmentLayout { get; protected set; }
+        public string Title { get; protected set; }
+        public string Subtitle { get; protected set; }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

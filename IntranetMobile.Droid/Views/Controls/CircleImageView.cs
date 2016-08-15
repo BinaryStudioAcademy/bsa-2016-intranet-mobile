@@ -73,7 +73,10 @@ namespace IntranetMobile.Droid.Views.Controls
             init();
         }
 
-        public override ColorFilter ColorFilter => mColorFilter;
+        public override ColorFilter ColorFilter
+        {
+            get { return mColorFilter; }
+        }
 
         private void init()
         {
@@ -255,7 +258,8 @@ namespace IntranetMobile.Droid.Views.Controls
 
         private void ApplyColorFilter()
         {
-            mBitmapPaint?.SetColorFilter(mColorFilter);
+            if (mBitmapPaint != null)
+                mBitmapPaint.SetColorFilter(mColorFilter);
         }
 
         private Bitmap GetBitmapFromDrawable(Drawable drawable)

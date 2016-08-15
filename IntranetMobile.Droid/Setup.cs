@@ -28,14 +28,20 @@ namespace IntranetMobile.Droid
         {
         }
 
-        protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
+        protected override IEnumerable<Assembly> AndroidViewAssemblies
         {
-            typeof(NavigationView).Assembly,
-            typeof(FloatingActionButton).Assembly,
-            typeof(Toolbar).Assembly,
-            typeof(DrawerLayout).Assembly,
-            typeof(ViewPager).Assembly
-        };
+            get
+            {
+                return new List<Assembly>(base.AndroidViewAssemblies)
+                {
+                    typeof (NavigationView).Assembly,
+                    typeof (FloatingActionButton).Assembly,
+                    typeof (Toolbar).Assembly,
+                    typeof (DrawerLayout).Assembly,
+                    typeof (ViewPager).Assembly
+                };
+            }
+        }
 
         protected override IMvxApplication CreateApp()
         {

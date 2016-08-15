@@ -23,9 +23,9 @@ namespace IntranetMobile.Core.ViewModels.Login
             }
         }
 
-        public MvxCommand BackToLoginCommand { get; }
+        public MvxCommand BackToLoginCommand { get; private set; }
 
-        public MvxCommand SendCommand { get; }
+        public MvxCommand SendCommand { get; private set; }
 
         private async void send()
         {

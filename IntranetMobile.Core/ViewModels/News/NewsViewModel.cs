@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core.ViewModels.Fragments
+namespace IntranetMobile.Core.ViewModels.News
 {
-    public class NewsFragmentViewModel : BaseFragmentViewModel
+	public class NewsViewModel : BaseViewModel
     {
         private ItemNewsViewModel selectedItem;
 
-        public ObservableCollection<ItemNewsViewModel> ListNews { set; get; } = new ObservableCollection
-            <ItemNewsViewModel>
-        {
-            new ItemNewsViewModel {Title = "New1", SubTitle = "Author111"},
-            new ItemNewsViewModel {Title = "New2", SubTitle = "Author222"},
-            new ItemNewsViewModel {Title = "New3", SubTitle = "Author333"}
-        };
-
+        public ObservableCollection<ItemNewsViewModel> ListNews { set; get; }
 
         public ItemNewsViewModel SelectedItem
         {
@@ -30,6 +21,16 @@ namespace IntranetMobile.Core.ViewModels.Fragments
                 RaisePropertyChanged(() => SelectedItem);
             }
         }
+
+	    public NewsViewModel()
+	    {
+            ListNews = new ObservableCollection<ItemNewsViewModel>
+            {
+                new ItemNewsViewModel {Title = "New1", SubTitle = "Author111"},
+                new ItemNewsViewModel {Title = "New2", SubTitle = "Author222"},
+                new ItemNewsViewModel {Title = "New3", SubTitle = "Author333"}
+            };
+	    }
 
         public ICommand SelectItem
         {

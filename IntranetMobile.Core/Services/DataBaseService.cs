@@ -12,6 +12,7 @@ namespace IntranetMobile.Core.Services
         private const string FileName = "/db.db";
         private readonly ILogger logger;
         private readonly SQLiteAsyncConnection connection;
+        private string path;
 
         public DataBaseService(string fileDir, IMvxSqliteConnectionFactory sqliteConnectionFactory, ILogger logger)
         {
@@ -20,8 +21,6 @@ namespace IntranetMobile.Core.Services
 
             connection = sqliteConnectionFactory.GetAsyncConnection(path);
         }
-
-        private string path { get; }
 
         public async Task<bool> InsertItemAsync<T>(T item) where T : class, new()
         {

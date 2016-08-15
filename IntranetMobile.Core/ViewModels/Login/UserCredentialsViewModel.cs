@@ -57,9 +57,9 @@ namespace IntranetMobile.Core.ViewModels.Login
             }
         }
 
-        public MvxCommand ForgotPasswordCommand { get; }
+        public MvxCommand ForgotPasswordCommand { get; private set; }
 
-        public MvxCommand LoginCommand { get; }
+        public MvxCommand LoginCommand { get; private set; }
 
         private bool canExecuteLogin()
         {

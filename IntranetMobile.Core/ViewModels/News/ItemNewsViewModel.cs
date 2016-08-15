@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core.ViewModels
+namespace IntranetMobile.Core.ViewModels.News
 {
     public class ItemNewsViewModel : BaseViewModel
     {
