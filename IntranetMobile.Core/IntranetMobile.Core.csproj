@@ -72,10 +72,12 @@
     <Compile Include="ViewModels\Login\LoginLoadingViewModel.cs" />
     <Compile Include="ViewModels\Login\UserCredentialsViewModel.cs" />
     <Compile Include="ViewModels\News\AllNewsViewModel.cs" />
+    <Compile Include="ViewModels\News\BaseNewsViewModel.cs" />
     <Compile Include="ViewModels\News\NewsDetailsViewModel.cs" />
-    <Compile Include="ViewModels\News\NewsViewModel.cs" />
+    <Compile Include="ViewModels\News\CompanyViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\News\NewsPreviewViewModel.cs" />
+    <Compile Include="ViewModels\News\WeekliesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">

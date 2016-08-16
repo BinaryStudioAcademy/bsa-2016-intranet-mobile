@@ -1,14 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class NewsViewModel : BaseViewModel
+    public class CompanyViewModel : BaseNewsViewModel
     {
         private NewsPreviewViewModel _selectedItem;
 
-        public NewsViewModel()
+        public CompanyViewModel()
         {
             ListNews = new ObservableCollection<NewsPreviewViewModel>
             {
@@ -36,6 +38,37 @@ namespace IntranetMobile.Core.ViewModels.News
         public ICommand SelectItem
         {
             get { return new MvxCommand<NewsPreviewViewModel>(item => { SelectedItem = item; }); }
+        }
+        private bool _isRefreshing;
+
+        public virtual bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set
+            {
+                _isRefreshing = value;
+                RaisePropertyChanged(() => IsRefreshing);
+            }
+        }
+
+        public ICommand ReloadCommand
+        {
+            get
+            {
+                return new MvxCommand(async () =>
+                {
+                    IsRefreshing = true;
+
+                    await ReloadData();
+
+                    IsRefreshing = false;
+                });
+            }
+        }
+
+        public virtual async Task ReloadData()
+        {
+            
         }
     }
 }
