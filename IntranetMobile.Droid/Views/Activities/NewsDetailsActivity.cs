@@ -1,7 +1,9 @@
 using Android.App;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Webkit;
 using IntranetMobile.Core.ViewModels.News;
+using IntranetMobile.Droid.Views.Controls;
 using IntranetMobile.Droid.Views.Util;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.AppCompat;
@@ -25,6 +27,9 @@ namespace IntranetMobile.Droid.Views.Activities
 
             SetSupportActionBar(_toolbar);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
+            var webWiew = FindViewById<BindableWebView>(Resource.Id.activity_news_details_webview);
+            webWiew.Settings.SetLayoutAlgorithm(WebSettings.LayoutAlgorithm.SingleColumn);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

@@ -8,7 +8,13 @@
   <include
     android:id="@+id/activity_news_details_toolbar"
     layout="@layout/mvx_toolbar" />
-  <ScrollView
+  <BindableWebView
+    android:id="@+id/activity_news_details_webview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@id/activity_news_details_toolbar"
+    app:MvxBind="Text Content" />
+  <!--<ScrollView
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:scrollbarStyle="outsideOverlay"
@@ -25,5 +31,5 @@
         android:padding="10dp"
         app:MvxBind="TextFormatted FromHtml(Content)" />
     </LinearLayout>
-  </ScrollView>
+  </ScrollView>-->
 </RelativeLayout>
