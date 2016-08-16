@@ -6,17 +6,22 @@ namespace IntranetMobile.Core.ViewModels.News
     public class NewsDetailsViewModel : BaseViewModel
     {
         private const string Tag = "NewsDetailsViewModel";
+        private int _commentsCount = 2;
         private string _content;
         private bool _isLiked;
+        private int _likesCount = 5;
         private string _subtitile;
         private string _title;
 
         public NewsDetailsViewModel()
         {
             LikeCommand = new MvxCommand(Like);
+            CommentCommand = new MvxCommand(Comment);
         }
 
         public MvxCommand LikeCommand { get; private set; }
+
+        public MvxCommand CommentCommand { get; private set; }
 
         public string Title
         {
@@ -48,6 +53,26 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
+        public int LikesCount
+        {
+            get { return _likesCount; }
+            private set
+            {
+                _likesCount = value;
+                RaisePropertyChanged(() => LikesCount);
+            }
+        }
+
+        public int CommentsCount
+        {
+            get { return _commentsCount; }
+            set
+            {
+                _commentsCount = value;
+                RaisePropertyChanged(() => CommentsCount);
+            }
+        }
+
         public string Content
         {
             get { return _content; }
@@ -62,6 +87,11 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             IsLiked = !IsLiked;
             ServiceBus.AlertService.ShowMessage(Tag, "Like clicked!");
+        }
+
+        private void Comment()
+        {
+            ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
         }
 
         public void Init(NewsPreviewViewModel newsPreviewViewModel)

@@ -11,7 +11,8 @@ namespace IntranetMobile.Droid.Views.Activities
     [Activity(Label = "Intranet Mobile", Theme = "@style/BSTheme")]
     public class NewsDetailsActivity : MvxAppCompatActivity<NewsDetailsViewModel>
     {
-        private LikeActionButtonWrapper _refreshWrapper;
+        private LikeActionsWrapper _likeActionsWrapper;
+        private CommentActionsWrapper _commentActionsWrapper;
         private Toolbar _toolbar;
 
         protected override void OnViewModelSet()
@@ -40,6 +41,11 @@ namespace IntranetMobile.Droid.Views.Activities
                     ViewModel.LikeCommand.Execute();
                     break;
                 }
+                case Resource.Id.menu_news_details_comment:
+                    {
+                        ViewModel.CommentCommand.Execute();
+                        break;
+                    }
             }
             return base.OnOptionsItemSelected(item);
         }
@@ -48,10 +54,17 @@ namespace IntranetMobile.Droid.Views.Activities
         {
             MenuInflater.Inflate(Resource.Menu.menu_news_details, menu);
 
-            _refreshWrapper = new LikeActionButtonWrapper(menu);
-            var set = this.CreateBindingSet<NewsDetailsActivity, NewsDetailsViewModel>();
-            set.Bind(_refreshWrapper).For("IsLiked").To(viewModel => viewModel.IsLiked);
-            set.Apply();
+            _likeActionsWrapper = new LikeActionsWrapper(menu);
+            var likeActionsBindingSet = this.CreateBindingSet<NewsDetailsActivity, NewsDetailsViewModel>();
+            likeActionsBindingSet.Bind(_likeActionsWrapper).For("IsLiked").To(viewModel => viewModel.IsLiked);
+            likeActionsBindingSet.Bind(_likeActionsWrapper).For("LikesCount").To(viewModel => viewModel.LikesCount);
+            likeActionsBindingSet.Apply();
+
+
+            _commentActionsWrapper = new CommentActionsWrapper(menu);
+            var commentActionsBindingSet = this.CreateBindingSet<NewsDetailsActivity, NewsDetailsViewModel>();
+            commentActionsBindingSet.Bind(_commentActionsWrapper).For("CommentsCount").To(viewModel => viewModel.CommentsCount);
+            commentActionsBindingSet.Apply();
 
             return base.OnCreateOptionsMenu(menu);
         }
