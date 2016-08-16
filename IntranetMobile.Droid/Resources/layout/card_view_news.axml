@@ -19,12 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal">
-        <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView
+        <CompressedMvxAppCompatImageView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:layout_gravity="center"
           android:scaleType="centerCrop"
-          app:MvxBind="ImageUrl ImageUri" />
+          app:MvxBind="ImageUrlToCompress ImageUri" />
         <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

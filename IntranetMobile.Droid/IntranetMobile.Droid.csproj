@@ -215,6 +215,7 @@
     <Compile Include="Views\Activities\NewsDetailsActivity.cs" />
     <Compile Include="Views\Controls\BindableWebView.cs" />
     <Compile Include="Views\Controls\CircleImageView.cs" />
+    <Compile Include="Views\Controls\CompressedMvxAppCompatImageView.cs" />
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />
     <Compile Include="Views\Fragments\News\NewsFragment.cs" />
     <Compile Include="Views\Fragments\News\NewsRecycleViewFragment.cs" />
