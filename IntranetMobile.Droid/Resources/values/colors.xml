@@ -9,5 +9,6 @@
   <color name="colorAccent">#FFA500</color>
   <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
+  <color name="colorPrimaryLight">#F5F5F5</color>
   <color name="colorButtonNormal">#FFA500</color>
 </resources>

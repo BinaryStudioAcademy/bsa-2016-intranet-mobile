@@ -13,6 +13,8 @@ namespace IntranetMobile.Droid.Views.Util
     {
         public Drawable GetDrawable(string source)
         {
+            // TODO: Use precreated HttpClient? Create separate service?
+            // TODO: Try to async staff
             using (var client = new HttpClient())
             {
                 try
@@ -29,6 +31,7 @@ namespace IntranetMobile.Droid.Views.Util
                                 memStream.Position = 0;
                                 var bitmap = BitmapFactory.DecodeStream(memStream);
                                 var bitmapDrawable = new BitmapDrawable(bitmap);
+                                // TODO: Find out bound handling
                                 bitmapDrawable.SetBounds(0, 0, bitmap.Width, bitmap.Height);
                                 return bitmapDrawable;
                             }
