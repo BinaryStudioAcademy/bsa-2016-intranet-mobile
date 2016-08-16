@@ -1,4 +1,5 @@
-﻿using IntranetMobile.Core.Models.Dtos;
+﻿using System.Linq;
+using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -95,22 +96,14 @@ namespace IntranetMobile.Core.ViewModels.News
             ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
         }
 
-        public void Init(CompNewsDto news)
+        public async void Init(int id)
         {
-            Title = news.title;
-            Subtitle = news.authorId;
+            var allCompanyNews = await ServiceBus.StorageService.GetAllItems<CompNewsDto>();
+            var companyNews = allCompanyNews.FirstOrDefault(item => item.Id == id);
+            Title = companyNews.title;
+            Subtitle = companyNews.authorId;
             IsLiked = true;
-            Content =
-                "<div><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://gallery.mailchimp.com/d962b18774558cf34c062e6b3/images/5bd435e8-9528-4dff-be19-828845e44bab.jpg\" alt=\"\" width=\"599\" height=\"371\" /></div>\n<div>Что одеть на geek party?! Все просто - очки, подтяжки, нелепый галстук или бабочка, застегнутая до&nbsp;последней&nbsp;пуговицы&nbsp;рубашка, книги в руке, пиджак не по размеру, короткие брюки, небрежный хаер - и ты король этой вечеринки :) Хотим напомнить, что за лучший костюм предусмотрен крутейший подарок!&nbsp;<br /><br />Ждем тебя и твою вторую половинку&nbsp;25 декабря в нашем львовском офисе, где&nbsp;состоится празднование Нового Года и десятилетия компании!&nbsp;<br />Начало ивента в &nbsp;18.00 - <strong>если тебе позволяет проект и есть необходимость, то можно будет уйти с работы в 17.00</strong>, чтобы за час успеть съездить домой и переодеться.</div>\n<div><strong>Come to&nbsp;the geek side!</strong></div>";
-        }
-
-        public void Init(WeekNewsDto news)
-        {
-            Title = news.title;
-            Subtitle = news.authorId;
-            IsLiked = true;
-            Content =
-                "<div><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://gallery.mailchimp.com/d962b18774558cf34c062e6b3/images/5bd435e8-9528-4dff-be19-828845e44bab.jpg\" alt=\"\" width=\"599\" height=\"371\" /></div>\n<div>Что одеть на geek party?! Все просто - очки, подтяжки, нелепый галстук или бабочка, застегнутая до&nbsp;последней&nbsp;пуговицы&nbsp;рубашка, книги в руке, пиджак не по размеру, короткие брюки, небрежный хаер - и ты король этой вечеринки :) Хотим напомнить, что за лучший костюм предусмотрен крутейший подарок!&nbsp;<br /><br />Ждем тебя и твою вторую половинку&nbsp;25 декабря в нашем львовском офисе, где&nbsp;состоится празднование Нового Года и десятилетия компании!&nbsp;<br />Начало ивента в &nbsp;18.00 - <strong>если тебе позволяет проект и есть необходимость, то можно будет уйти с работы в 17.00</strong>, чтобы за час успеть съездить домой и переодеться.</div>\n<div><strong>Come to&nbsp;the geek side!</strong></div>";
+            Content = companyNews.body;
         }
     }
 }
