@@ -12,13 +12,12 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
-    local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    local:layout_scrollFlags="scroll|enterAlways" />
+    local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
   <android.support.design.widget.TabLayout
     android:id="@+id/tabs"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="16dp"
-    local:tabGravity="center"
-    local:tabMode="scrollable" />
+    android:layout_height="match_parent"
+    local:tabMaxWidth="0dp"
+    local:tabGravity="fill"
+    local:tabMode="fixed" />
 </android.support.design.widget.AppBarLayout>
