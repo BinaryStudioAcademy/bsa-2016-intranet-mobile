@@ -2,7 +2,7 @@
 
 namespace IntranetMobile.Core.Models.Dtos
 {
-    public class WeekNewsReqParams
+    public class WeekNewsReqParams : Persist
     {
         public int skip { get; set; }
         public int limit { get; set; }

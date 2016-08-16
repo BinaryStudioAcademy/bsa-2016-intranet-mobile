@@ -2,7 +2,7 @@
 
 namespace IntranetMobile.Core.Models.Dtos
 {
-    public class AuthDto
+    public class AuthDto : Persist
     {
         public bool success { get; set; }
 

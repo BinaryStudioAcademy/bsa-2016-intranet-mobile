@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using MvvmCross.Platform;
@@ -105,6 +106,7 @@ namespace IntranetMobile.Core.Services
                 {
                     var propertiesDictionary = requestObject.GetType()
                         .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                        .Where(prop => !prop.GetCustomAttributes(typeof(JsonIgnoreAttribute), false).Any())
                         .ToDictionary(prop => prop.Name, prop => prop.GetValue(requestObject).ToString())
                         .ToList();
 

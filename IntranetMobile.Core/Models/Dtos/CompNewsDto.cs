@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace IntranetMobile.Core.Models.Dtos
 {
-    public class CompNewsDto
+    public class CompNewsDto : Persist
     {
         [JsonProperty("_id")]
         public string newsId { get; set; }
