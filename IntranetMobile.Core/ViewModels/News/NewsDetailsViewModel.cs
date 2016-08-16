@@ -16,9 +16,12 @@ namespace IntranetMobile.Core.ViewModels.News
         public NewsDetailsViewModel()
         {
             LikeCommand = new MvxCommand(Like);
+            CommentCommand = new MvxCommand(Comment);
         }
 
         public MvxCommand LikeCommand { get; private set; }
+
+        public MvxCommand CommentCommand { get; private set; }
 
         public string Title
         {
@@ -84,6 +87,11 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             IsLiked = !IsLiked;
             ServiceBus.AlertService.ShowMessage(Tag, "Like clicked!");
+        }
+
+        private void Comment()
+        {
+            ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
         }
 
         public void Init(NewsPreviewViewModel newsPreviewViewModel)

@@ -41,6 +41,11 @@ namespace IntranetMobile.Droid.Views.Activities
                     ViewModel.LikeCommand.Execute();
                     break;
                 }
+                case Resource.Id.menu_news_details_comment:
+                    {
+                        ViewModel.CommentCommand.Execute();
+                        break;
+                    }
             }
             return base.OnOptionsItemSelected(item);
         }
