@@ -6,8 +6,10 @@ namespace IntranetMobile.Core.ViewModels.News
     public class NewsDetailsViewModel : BaseViewModel
     {
         private const string Tag = "NewsDetailsViewModel";
+        private int _commentsCount = 2;
         private string _content;
         private bool _isLiked;
+        private int _likesCount = 5;
         private string _subtitile;
         private string _title;
 
@@ -45,6 +47,26 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _isLiked = value;
                 RaisePropertyChanged(() => IsLiked);
+            }
+        }
+
+        public int LikesCount
+        {
+            get { return _likesCount; }
+            private set
+            {
+                _likesCount = value;
+                RaisePropertyChanged(() => LikesCount);
+            }
+        }
+
+        public int CommentsCount
+        {
+            get { return _commentsCount; }
+            set
+            {
+                _commentsCount = value;
+                RaisePropertyChanged(() => CommentsCount);
             }
         }
 

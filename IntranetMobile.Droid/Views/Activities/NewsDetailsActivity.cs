@@ -51,6 +51,7 @@ namespace IntranetMobile.Droid.Views.Activities
             _refreshWrapper = new LikeActionButtonWrapper(menu);
             var set = this.CreateBindingSet<NewsDetailsActivity, NewsDetailsViewModel>();
             set.Bind(_refreshWrapper).For("IsLiked").To(viewModel => viewModel.IsLiked);
+            set.Bind(_refreshWrapper).For("LikesCount").To(viewModel => viewModel.LikesCount);
             set.Apply();
 
             return base.OnCreateOptionsMenu(menu);
