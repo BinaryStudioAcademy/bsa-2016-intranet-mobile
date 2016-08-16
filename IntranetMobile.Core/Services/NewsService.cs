@@ -19,7 +19,7 @@ namespace IntranetMobile.Core.Services
             _restClient = client;
         }
 
-        public Task<List<CompNewsDto>> CompanyNews(int skip, int limit)
+        public Task<List<NewsDto>> CompanyNews(int skip, int limit)
         {
             var compNewsReqParams = new CompNewsReqParams
             {
@@ -28,7 +28,7 @@ namespace IntranetMobile.Core.Services
                 skip = skip
             };
 
-            return _restClient.GetAsync<List<CompNewsDto>>("api/news", compNewsReqParams);
+            return _restClient.GetAsync<List<NewsDto>>("api/news", compNewsReqParams);
         }
 
         public Task<bool> LikeComment(string newsId, string commentId)

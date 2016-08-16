@@ -59,10 +59,9 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Services\AuthService.cs" />
-    <Compile Include="Models\Dtos\CompNewsDto.cs" />
+    <Compile Include="Models\Dtos\NewsDto.cs" />
     <Compile Include="Models\Dtos\CommentDto.cs" />
     <Compile Include="Models\Dtos\WeekNewsDto.cs" />
-    <Compile Include="Models\Dtos\FullNewsDto.cs" />
     <Compile Include="Models\Dtos\UserCredentialsDto.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="Models\Dtos\CompNewsReqParams.cs" />

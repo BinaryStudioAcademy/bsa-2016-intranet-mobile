@@ -23,6 +23,6 @@ namespace IntranetMobile.Core.Models.Dtos
 
         public int __v { get; set; }
 
-        public List<FullNewsDto> fullNews { get; set; }
+        public List<NewsDto> fullNews { get; set; }
     }
 }
