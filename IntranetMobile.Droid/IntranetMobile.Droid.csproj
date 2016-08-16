@@ -205,8 +205,6 @@
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />
     <Compile Include="Views\Fragments\News\NewsFragment.cs" />
     <Compile Include="Views\Fragments\News\NewsRecycleViewFragment.cs" />
-    <Compile Include="Views\IDrawerActivity.cs" />
-    <Compile Include="Views\MainActivity.cs" />
     <Compile Include="Views\Fragments\ForgotPasswordFragment.cs" />
     <Compile Include="Views\Fragments\LoadingFragment.cs" />
     <Compile Include="Views\Fragments\LoginFragment.cs" />

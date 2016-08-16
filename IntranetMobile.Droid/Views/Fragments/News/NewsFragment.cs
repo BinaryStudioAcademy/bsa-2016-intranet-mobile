@@ -17,13 +17,11 @@ namespace IntranetMobile.Droid.Views.Fragments.News
     [Register("intranetmobile.droid.views.fragments.news.NewsFragment")]
     public class NewsFragment : BaseDrawerFragment<AllNewsViewModel>
     {
-        public NewsFragment()
-        {
-            FragmentLayout = Resource.Layout.fragment_news;
-            ToolbarLayout = Resource.Id.tabbed_toolbar;
-            Title = "Binary studio";
-            Subtitle = "Fancy subheader";
-        }
+        public override int ToolbarLayout { get; protected set; } = Resource.Id.tabbed_toolbar;
+        public override int FragmentLayout { get; protected set; } = Resource.Layout.fragment_news;
+
+        public override string ToolbarTitle { get; protected set; } = "Binary studio";
+        public override string ToolbarSubtitle { get; protected set; } = "Fancy subheader";
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

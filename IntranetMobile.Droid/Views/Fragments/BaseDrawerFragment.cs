@@ -19,7 +19,7 @@ namespace IntranetMobile.Droid.Views.Fragments
         public MvxCachingFragmentCompatActivity ParentActivity => (MvxCachingFragmentCompatActivity) Activity;
 
         public abstract int FragmentLayout { get; protected set; }
-        public int ToolbarLayout { get; protected set; } = Resource.Id.toolbar;
+        public virtual int ToolbarLayout { get; protected set; } = Resource.Id.toolbar;
 
         public abstract string ToolbarTitle { get; protected set; }
 
