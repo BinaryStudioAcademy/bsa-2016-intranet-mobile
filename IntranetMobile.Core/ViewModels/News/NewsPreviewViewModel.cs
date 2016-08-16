@@ -1,9 +1,10 @@
 ﻿using System.Windows.Input;
+using IntranetMobile.Core.Models;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class NewsPreviewViewModel : BaseViewModel
+    public class NewsPreviewViewModel<T> : BaseViewModel where T: Persist
     {
         private string _coverImageViewUrl;
         private string _imageUri;
@@ -18,6 +19,7 @@ namespace IntranetMobile.Core.ViewModels.News
                 "https://gallery.mailchimp.com/d962b18774558cf34c062e6b3/images/5bd435e8-9528-4dff-be19-828845e44bab.jpg";
         }
 
+        public T Dto { get; set; }
         public string Title { get; set; }
         public string Subtitle { get; set; }
         public string NewsUrl { get; set; }

@@ -19,23 +19,23 @@ namespace IntranetMobile.Core.Services
             _restClient = client;
         }
 
-        public Task<List<CompNewsDto>> CompanyNews(int skip, int limit)
+        public Task<List<NewsDto>> CompanyNews(int skip, int limit)
         {
-            var compNewsReqParams = new CompNewsReqParams
+            var compNewsReqParams = new NewsReqParams
             {
                 type = Type,
                 limit = limit,
                 skip = skip
             };
 
-            return _restClient.GetAsync<List<CompNewsDto>>("api/news", compNewsReqParams);
+            return _restClient.GetAsync<List<NewsDto>>("api/news", compNewsReqParams);
         }
 
         public Task<bool> LikeComment(string newsId, string commentId)
         {
             var resource = string.Format(LikeUnlikeCommentPath, newsId, commentId);
 
-            var requestObject = new CompNewsLikeCommentDto
+            var requestObject = new NewsCommentLikeDto
             {
                 newsId = newsId,
                 commentId = commentId
@@ -48,7 +48,7 @@ namespace IntranetMobile.Core.Services
         {
             var resource = string.Format(LikeUnlikeNews, newsId);
 
-            var requestObject = new CompNewsLikeNewsDto {id = newsId};
+            var requestObject = new NewsLikeDto {id = newsId};
 
             return _restClient.PostAsync(resource, requestObject);
         }
