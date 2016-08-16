@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AngleSharp.Parser.Html;
@@ -15,6 +11,7 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class WeekliesViewModel : BaseNewsViewModel
     {
+        private bool _isRefreshing;
         private NewsPreviewViewModel<NewsDto> _selectedItem;
 
         public WeekliesViewModel()
@@ -22,7 +19,8 @@ namespace IntranetMobile.Core.ViewModels.News
             AsyncHelper.RunSync(ReloadData);
         }
 
-        public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } = new ObservableCollection<NewsPreviewViewModel<NewsDto>>();
+        public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } =
+            new ObservableCollection<NewsPreviewViewModel<NewsDto>>();
 
         public NewsPreviewViewModel<NewsDto> SelectedItem
         {
@@ -31,8 +29,8 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                // TODO: Pass id here
-                ShowViewModel<NewsDetailsViewModel>();
+                AsyncHelper.RunSync(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto));
+                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.Dto.Id});
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -42,7 +40,6 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             get { return new MvxCommand<NewsPreviewViewModel<NewsDto>>(item => { SelectedItem = item; }); }
         }
-        private bool _isRefreshing;
 
         public virtual bool IsRefreshing
         {
@@ -87,8 +84,14 @@ namespace IntranetMobile.Core.ViewModels.News
                     }
                     var title = list.title;
                     var author = list.authorId;
-                    ListNews.Add(new NewsPreviewViewModel<NewsDto>() { ImageUri = image, Title = title, Subtitle = author, Dto = news });
-                }              
+                    ListNews.Add(new NewsPreviewViewModel<NewsDto>
+                    {
+                        ImageUri = image,
+                        Title = title,
+                        Subtitle = author,
+                        Dto = news
+                    });
+                }
             }
         }
     }

@@ -30,8 +30,6 @@ namespace IntranetMobile.Core.ViewModels.News
                 _selectedItem = value;
 
                 AsyncHelper.RunSync(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto));
-
-                // TODO: Pass id here
                 ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.Dto.Id});
 
                 RaisePropertyChanged(() => SelectedItem);

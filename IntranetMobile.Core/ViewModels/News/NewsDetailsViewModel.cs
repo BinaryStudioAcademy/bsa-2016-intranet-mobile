@@ -100,6 +100,7 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             var allCompanyNews = await ServiceBus.StorageService.GetAllItems<NewsDto>();
             var companyNews = allCompanyNews.FirstOrDefault(item => item.Id == id);
+            await ServiceBus.StorageService.RemoveItem(companyNews);
             Title = companyNews.title;
             Subtitle = companyNews.authorId;
             IsLiked = true;
