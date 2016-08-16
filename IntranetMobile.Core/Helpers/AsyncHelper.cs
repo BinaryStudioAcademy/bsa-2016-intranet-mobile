@@ -8,7 +8,7 @@ namespace IntranetMobile.Core.Helpers
     public static class AsyncHelper
     {
         /// <summary>
-        /// Execute's an async Task<T> method which has a void return value synchronously
+        ///     Execute's an async Task<T> method which has a void return value synchronously
         /// </summary>
         /// <param name="task">Task<T> method to execute</param>
         public static void RunSync(Func<Task> task)
@@ -38,7 +38,7 @@ namespace IntranetMobile.Core.Helpers
         }
 
         /// <summary>
-        /// Execute's an async Task<T> method which has a T return type synchronously
+        ///     Execute's an async Task<T> method which has a T return type synchronously
         /// </summary>
         /// <typeparam name="T">Return Type</typeparam>
         /// <param name="task">Task<T> method to execute</param>
@@ -48,7 +48,7 @@ namespace IntranetMobile.Core.Helpers
             var oldContext = SynchronizationContext.Current;
             var synch = new ExclusiveSynchronizationContext();
             SynchronizationContext.SetSynchronizationContext(synch);
-            T ret = default(T);
+            var ret = default(T);
             synch.Post(async _ =>
             {
                 try
@@ -72,11 +72,12 @@ namespace IntranetMobile.Core.Helpers
 
         private class ExclusiveSynchronizationContext : SynchronizationContext
         {
-            private bool done;
-            public Exception InnerException { get; set; }
-            readonly AutoResetEvent workItemsWaiting = new AutoResetEvent(false);
-            readonly Queue<Tuple<SendOrPostCallback, object>> items =
+            private readonly Queue<Tuple<SendOrPostCallback, object>> _items =
                 new Queue<Tuple<SendOrPostCallback, object>>();
+
+            private readonly AutoResetEvent _workItemsWaiting = new AutoResetEvent(false);
+            private bool _done;
+            public Exception InnerException { get; set; }
 
             public override void Send(SendOrPostCallback d, object state)
             {
@@ -85,28 +86,28 @@ namespace IntranetMobile.Core.Helpers
 
             public override void Post(SendOrPostCallback d, object state)
             {
-                lock (items)
+                lock (_items)
                 {
-                    items.Enqueue(Tuple.Create(d, state));
+                    _items.Enqueue(Tuple.Create(d, state));
                 }
-                workItemsWaiting.Set();
+                _workItemsWaiting.Set();
             }
 
             public void EndMessageLoop()
             {
-                Post(_ => done = true, null);
+                Post(_ => _done = true, null);
             }
 
             public void BeginMessageLoop()
             {
-                while (!done)
+                while (!_done)
                 {
                     Tuple<SendOrPostCallback, object> task = null;
-                    lock (items)
+                    lock (_items)
                     {
-                        if (items.Count > 0)
+                        if (_items.Count > 0)
                         {
-                            task = items.Dequeue();
+                            task = _items.Dequeue();
                         }
                     }
                     if (task != null)
@@ -119,7 +120,7 @@ namespace IntranetMobile.Core.Helpers
                     }
                     else
                     {
-                        workItemsWaiting.WaitOne();
+                        _workItemsWaiting.WaitOne();
                     }
                 }
             }
