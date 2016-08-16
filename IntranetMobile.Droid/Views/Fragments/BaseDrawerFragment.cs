@@ -18,6 +18,8 @@ namespace IntranetMobile.Droid.Views.Fragments
         public MvxCachingFragmentCompatActivity ParentActivity => (MvxCachingFragmentCompatActivity) Activity;
 
         public int FragmentLayout { get; protected set; }
+        public int ToolbarLayout { get; protected set; } = Resource.Id.toolbar;
+
         public string Title { get; protected set; }
         public string Subtitle { get; protected set; }
 
@@ -27,7 +29,7 @@ namespace IntranetMobile.Droid.Views.Fragments
 
             var view = this.BindingInflate(FragmentLayout, null);
 
-            _toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
+            _toolbar = view.FindViewById<Toolbar>(ToolbarLayout);
 
             ParentActivity.SetSupportActionBar(_toolbar);
             ParentActivity.SupportActionBar.Title = Title;
