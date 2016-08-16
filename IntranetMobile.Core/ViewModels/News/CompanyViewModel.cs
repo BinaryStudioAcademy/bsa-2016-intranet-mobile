@@ -13,16 +13,16 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class CompanyViewModel : BaseNewsViewModel
     {
-        private NewsPreviewViewModel _selectedItem;
+        private NewsPreviewViewModel<NewsDto> _selectedItem;
 
         public CompanyViewModel()
         {
             AsyncHelper.RunSync(ReloadData);
         }
 
-        public ObservableCollection<NewsPreviewViewModel> ListNews { set; get; } = new ObservableCollection<NewsPreviewViewModel>();
+        public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } = new ObservableCollection<NewsPreviewViewModel<NewsDto>>();
 
-        public NewsPreviewViewModel SelectedItem
+        public NewsPreviewViewModel<NewsDto> SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -37,7 +37,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ICommand SelectItem
         {
-            get { return new MvxCommand<NewsPreviewViewModel>(item => { SelectedItem = item; }); }
+            get { return new MvxCommand<NewsPreviewViewModel<NewsDto>>(item => { SelectedItem = item; }); }
         }
         private bool _isRefreshing;
 
@@ -72,17 +72,17 @@ namespace IntranetMobile.Core.ViewModels.News
             ListNews.Clear();
             var parser = new HtmlParser();
             var news = await ServiceBus.NewsService.CompanyNews(0, 10);
-            foreach (var compNewsDto in news)
+            foreach (var compFullNewsDto in news)
             {
-                var parseObj = parser.Parse(compNewsDto.body);
+                var parseObj = parser.Parse(compFullNewsDto.body);
                 var image = string.Empty;
                 if (parseObj.Images.Length > 0)
                 {
                     image = parseObj.Images[0].Source;
                 }
-                var title = compNewsDto.title;
-                var author = compNewsDto.authorId;
-                ListNews.Add(new NewsPreviewViewModel() { ImageUri = image, Title = title, Subtitle = author });
+                var title = compFullNewsDto.title;
+                var author = compFullNewsDto.authorId;
+                ListNews.Add(new NewsPreviewViewModel<NewsDto>() { ImageUri = image, Title = title, Subtitle = author, Dto = compFullNewsDto});
             }
         }
     }

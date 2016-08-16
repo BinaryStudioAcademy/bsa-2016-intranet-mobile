@@ -95,7 +95,7 @@ namespace IntranetMobile.Core.ViewModels.News
             ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
         }
 
-        public void Init(CompNewsDto news)
+        public void Init(NewsDto news)
         {
             Title = news.title;
             Subtitle = news.authorId;
