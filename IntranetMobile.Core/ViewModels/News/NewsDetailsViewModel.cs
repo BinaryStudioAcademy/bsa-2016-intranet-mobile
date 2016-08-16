@@ -98,7 +98,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public async void Init(int id)
         {
-            var allCompanyNews = await ServiceBus.StorageService.GetAllItems<CompNewsDto>();
+            var allCompanyNews = await ServiceBus.StorageService.GetAllItems<NewsDto>();
             var companyNews = allCompanyNews.FirstOrDefault(item => item.Id == id);
             Title = companyNews.title;
             Subtitle = companyNews.authorId;

@@ -31,7 +31,8 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                ShowViewModel<NewsDetailsViewModel>(SelectedItem);
+                // TODO: Pass id here
+                ShowViewModel<NewsDetailsViewModel>();
 
                 RaisePropertyChanged(() => SelectedItem);
             }
