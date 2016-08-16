@@ -1,4 +1,5 @@
 using Android.Views;
+using Android.Widget;
 using MvvmCross.Platform.Core;
 
 namespace IntranetMobile.Droid.Views.Util
@@ -8,6 +9,7 @@ namespace IntranetMobile.Droid.Views.Util
         private readonly IMenu _optionsMenu;
 
         private bool _isLiked;
+        private int _likesCount;
 
         public LikeActionButtonWrapper(IMenu optionsMenu)
         {
@@ -26,6 +28,18 @@ namespace IntranetMobile.Droid.Views.Util
             }
         }
 
+        public int LikesCount
+        {
+            get { return _likesCount; }
+            set
+            {
+                _likesCount = value;
+
+                var dispatcher = MvxMainThreadDispatcher.Instance;
+                dispatcher.RequestMainThreadAction(() => SetLikeActionText(_likesCount));
+            }
+        }
+
         public void SetLikeActionButtonState(bool isLiked)
         {
             if (_optionsMenu == null)
@@ -36,6 +50,16 @@ namespace IntranetMobile.Droid.Views.Util
             refreshItem.SetIcon(isLiked
                 ? Resource.Drawable.ic_favorite_white_24dp
                 : Resource.Drawable.ic_favorite_border_white_24dp);
+        }
+
+        public void SetLikeActionText(int likesCount)
+        {
+            if (_optionsMenu == null)
+            {
+                return;
+            }
+            var refreshItem = _optionsMenu.FindItem(Resource.Id.menu_news_details_like_text);
+            refreshItem.ActionView.FindViewById<TextView>(Resource.Id.menu_news_details_textview).Text = likesCount.ToString();
         }
     }
 }
