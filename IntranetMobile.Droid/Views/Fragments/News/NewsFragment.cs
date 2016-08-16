@@ -34,9 +34,9 @@ namespace IntranetMobile.Droid.Views.Fragments.News
                 var fragments = new List<MvxFragmentPagerAdapter.FragmentInfo>
                 {
                     new MvxFragmentPagerAdapter.FragmentInfo("COMPANY NEWS", typeof (NewsRecyclerViewFragment),
-                        typeof (NewsViewModel)),
+                        typeof (CompanyViewModel)),
                     new MvxFragmentPagerAdapter.FragmentInfo("WEEKLIES", typeof (NewsRecyclerViewFragment),
-                    typeof (NewsViewModel))
+                    typeof (WeekliesViewModel))
                 };
                 viewPager.Adapter = new MvxFragmentPagerAdapter(Activity, ChildFragmentManager, fragments);
             }
