@@ -1,7 +1,4 @@
 using System;
-using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
@@ -12,6 +9,7 @@ using Android.Util;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
+using MvvmCross.Plugins.DownloadCache;
 
 namespace IntranetMobile.Droid.Views.Controls
 {
@@ -63,82 +61,49 @@ namespace IntranetMobile.Droid.Views.Controls
 
                     Task.Factory.StartNew(async delegate
                     {
-                        BitmapDrawable bitmapDrawable = null;
-                        using (var client = new HttpClient())
+                        var cache = Mvx.Resolve<IMvxImageCache<Bitmap>>();
+                        var bitmap = await cache.RequestImage(_imageUrlToCompress);
+
+                        var maxSize = 400;
+                        int outWidth;
+                        int outHeight;
+                        var inWidth = bitmap.Width;
+                        var inHeight = bitmap.Height;
+                        if (inWidth > inHeight)
                         {
-                            try
-                            {
-                                var response = await client.GetAsync(new Uri(_imageUrlToCompress));
-
-                                if (response != null && response.StatusCode == HttpStatusCode.OK)
-                                {
-                                    using (var stream = await response.Content.ReadAsStreamAsync())
-                                    {
-                                        using (var memStream = new MemoryStream())
-                                        {
-                                            await stream.CopyToAsync(memStream);
-
-                                            if (cancelToken.IsCancellationRequested)
-                                            {
-                                                return;
-                                            }
-
-                                            memStream.Position = 0;
-                                            var bitmap = BitmapFactory.DecodeStream(memStream);
-
-                                            if (cancelToken.IsCancellationRequested)
-                                            {
-                                                return;
-                                            }
-
-                                            var maxSize = 400;
-                                            int outWidth;
-                                            int outHeight;
-                                            var inWidth = bitmap.Width;
-                                            var inHeight = bitmap.Height;
-                                            if (inWidth > inHeight)
-                                            {
-                                                outWidth = maxSize;
-                                                outHeight = inHeight*maxSize/inWidth;
-                                            }
-                                            else
-                                            {
-                                                outHeight = maxSize;
-                                                outWidth = inWidth*maxSize/inHeight;
-                                            }
-
-                                            var resizedBitmap = Bitmap.CreateScaledBitmap(bitmap, outWidth,
-                                                outHeight,
-                                                false);
-
-                                            if (cancelToken.IsCancellationRequested)
-                                            {
-                                                return;
-                                            }
-
-                                            bitmapDrawable = new BitmapDrawable(resizedBitmap);
-
-                                            if (cancelToken.IsCancellationRequested)
-                                            {
-                                                return;
-                                            }
-
-                                            // TODO: Find out bound handling
-                                            bitmapDrawable.SetBounds(0, 0, outWidth, outHeight);
-
-                                            if (cancelToken.IsCancellationRequested)
-                                            {
-                                                return;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            catch (Exception e)
-                            {
-                                // TODO: Log here
-                            }
+                            outWidth = maxSize;
+                            outHeight = inHeight*maxSize/inWidth;
                         }
+                        else
+                        {
+                            outHeight = maxSize;
+                            outWidth = inWidth*maxSize/inHeight;
+                        }
+
+                        if (cancelToken.IsCancellationRequested)
+                        {
+                            return;
+                        }
+
+                        var resizedBitmap = Bitmap.CreateScaledBitmap(bitmap, outWidth,
+                            outHeight,
+                            false);
+
+                        if (cancelToken.IsCancellationRequested)
+                        {
+                            return;
+                        }
+
+                        var bitmapDrawable = new BitmapDrawable(resizedBitmap);
+
+                        // TODO: Find out bound handling
+                        bitmapDrawable.SetBounds(0, 0, outWidth, outHeight);
+
+                        if (cancelToken.IsCancellationRequested)
+                        {
+                            return;
+                        }
+
                         dispatcher = Mvx.Resolve<IMvxMainThreadDispatcher>();
                         dispatcher.RequestMainThreadAction(() =>
                         {
