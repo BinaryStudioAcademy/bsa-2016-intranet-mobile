@@ -2,7 +2,7 @@
 
 namespace IntranetMobile.Core.Models.Dtos
 {
-    public class CompNewsReqParams : Persist
+    public class NewsReqParams : Persist
     {
         public string type { get; set; }
 

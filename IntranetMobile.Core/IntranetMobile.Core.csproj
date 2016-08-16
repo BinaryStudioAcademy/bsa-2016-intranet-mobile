@@ -64,10 +64,10 @@
     <Compile Include="Models\Dtos\WeekNewsDto.cs" />
     <Compile Include="Models\Dtos\UserCredentialsDto.cs" />
     <Compile Include="Services\NewsService.cs" />
-    <Compile Include="Models\Dtos\CompNewsReqParams.cs" />
+    <Compile Include="Models\Dtos\NewsReqParams.cs" />
     <Compile Include="Models\Dtos\WeekNewsReqParams.cs" />
-    <Compile Include="Models\Dtos\CompNewsLikeCommentDto.cs" />
-    <Compile Include="Models\Dtos\CompNewsLikeNewsDto.cs" />
+    <Compile Include="Models\Dtos\NewsCommentLikeDto.cs" />
+    <Compile Include="Models\Dtos\NewsLikeDto.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
     <Compile Include="ViewModels\Login\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginLoadingViewModel.cs" />

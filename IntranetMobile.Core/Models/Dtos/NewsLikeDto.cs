@@ -2,7 +2,7 @@
 
 namespace IntranetMobile.Core.Models.Dtos
 {
-    public class CompNewsLikeNewsDto : Persist
+    public class NewsLikeDto : Persist
     {
         public string id { get; set; }
     }

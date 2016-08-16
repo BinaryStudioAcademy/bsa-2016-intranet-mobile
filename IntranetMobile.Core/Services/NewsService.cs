@@ -21,7 +21,7 @@ namespace IntranetMobile.Core.Services
 
         public Task<List<NewsDto>> CompanyNews(int skip, int limit)
         {
-            var compNewsReqParams = new CompNewsReqParams
+            var compNewsReqParams = new NewsReqParams
             {
                 type = Type,
                 limit = limit,
@@ -35,7 +35,7 @@ namespace IntranetMobile.Core.Services
         {
             var resource = string.Format(LikeUnlikeCommentPath, newsId, commentId);
 
-            var requestObject = new CompNewsLikeCommentDto
+            var requestObject = new NewsCommentLikeDto
             {
                 newsId = newsId,
                 commentId = commentId
@@ -48,7 +48,7 @@ namespace IntranetMobile.Core.Services
         {
             var resource = string.Format(LikeUnlikeNews, newsId);
 
-            var requestObject = new CompNewsLikeNewsDto {id = newsId};
+            var requestObject = new NewsLikeDto {id = newsId};
 
             return _restClient.PostAsync(resource, requestObject);
         }
