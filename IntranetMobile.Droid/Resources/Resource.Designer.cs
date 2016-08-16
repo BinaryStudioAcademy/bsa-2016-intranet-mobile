@@ -3947,13 +3947,13 @@ namespace IntranetMobile.Droid
 			public const int menu_news_details_comment = 2131099801;
 			
 			// aapt resource value: 0x7f06009a
-			public const int menu_news_details_comment_text = 2131099802;
+			public const int menu_news_details_comments_text = 2131099802;
 			
 			// aapt resource value: 0x7f060097
 			public const int menu_news_details_like = 2131099799;
 			
 			// aapt resource value: 0x7f060098
-			public const int menu_news_details_like_text = 2131099800;
+			public const int menu_news_details_likes_text = 2131099800;
 			
 			// aapt resource value: 0x7f060085
 			public const int menu_news_details_textview = 2131099781;

@@ -9,7 +9,7 @@
     android:title="Like"
     app:showAsAction="always" />
   <item
-    android:id="@+id/menu_news_details_like_text"
+    android:id="@+id/menu_news_details_likes_text"
     app:showAsAction="always"
     app:actionLayout="@layout/menu_news_details_text_layout"
     android:title="Likes" />
@@ -19,7 +19,7 @@
     android:title="Comment"
     app:showAsAction="always" />
   <item
-    android:id="@+id/menu_news_details_comment_text"
+    android:id="@+id/menu_news_details_comments_text"
     app:showAsAction="always"
     app:actionLayout="@layout/menu_news_details_text_layout"
     android:title="Comments" />

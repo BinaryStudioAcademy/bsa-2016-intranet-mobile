@@ -4,14 +4,14 @@ using MvvmCross.Platform.Core;
 
 namespace IntranetMobile.Droid.Views.Util
 {
-    public class LikeActionButtonWrapper
+    public class LikeActionsWrapper
     {
         private readonly IMenu _optionsMenu;
 
         private bool _isLiked;
         private int _likesCount;
 
-        public LikeActionButtonWrapper(IMenu optionsMenu)
+        public LikeActionsWrapper(IMenu optionsMenu)
         {
             _optionsMenu = optionsMenu;
         }
@@ -36,7 +36,7 @@ namespace IntranetMobile.Droid.Views.Util
                 _likesCount = value;
 
                 var dispatcher = MvxMainThreadDispatcher.Instance;
-                dispatcher.RequestMainThreadAction(() => SetLikeActionText(_likesCount));
+                dispatcher.RequestMainThreadAction(() => SetLikesText(_likesCount));
             }
         }
 
@@ -52,14 +52,15 @@ namespace IntranetMobile.Droid.Views.Util
                 : Resource.Drawable.ic_favorite_border_white_24dp);
         }
 
-        public void SetLikeActionText(int likesCount)
+        public void SetLikesText(int likesCount)
         {
             if (_optionsMenu == null)
             {
                 return;
             }
-            var refreshItem = _optionsMenu.FindItem(Resource.Id.menu_news_details_like_text);
-            refreshItem.ActionView.FindViewById<TextView>(Resource.Id.menu_news_details_textview).Text = likesCount.ToString();
+            var refreshItem = _optionsMenu.FindItem(Resource.Id.menu_news_details_likes_text);
+            refreshItem.ActionView.FindViewById<TextView>(Resource.Id.menu_news_details_textview).Text =
+                likesCount.ToString();
         }
     }
 }
