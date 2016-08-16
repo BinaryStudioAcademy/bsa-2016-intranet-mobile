@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Interfaces\IAlertService.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IDataBaseService.cs" />
@@ -80,6 +81,10 @@
     <Compile Include="ViewModels\News\WeekliesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.0.9.7\lib\portable-windows8+net45+windowsphone8+wpa+monoandroid+monotouch\AngleSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Binding.4.2.2\lib\portable-net45+win+wpa81+wp80\MvvmCross.Binding.dll</HintPath>
       <Private>True</Private>

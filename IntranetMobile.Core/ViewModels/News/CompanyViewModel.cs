@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using AngleSharp.Parser.Html;
+using IntranetMobile.Core.Helpers;
+using IntranetMobile.Core.Models.Dtos;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
@@ -12,15 +17,10 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public CompanyViewModel()
         {
-            ListNews = new ObservableCollection<NewsPreviewViewModel>
-            {
-                new NewsPreviewViewModel {Title = "New1", Subtitle = "Author111"},
-                new NewsPreviewViewModel {Title = "New2", Subtitle = "Author222"},
-                new NewsPreviewViewModel {Title = "New3", Subtitle = "Author333"}
-            };
+            AsyncHelper.RunSync(ReloadData);
         }
 
-        public ObservableCollection<NewsPreviewViewModel> ListNews { set; get; }
+        public ObservableCollection<NewsPreviewViewModel> ListNews { set; get; } = new ObservableCollection<NewsPreviewViewModel>();
 
         public NewsPreviewViewModel SelectedItem
         {
@@ -68,7 +68,22 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public virtual async Task ReloadData()
         {
-            
+            //TODO: Normalize news pull
+            ListNews.Clear();
+            var parser = new HtmlParser();
+            var news = await ServiceBus.NewsService.CompanyNews(0, 10);
+            foreach (var compNewsDto in news)
+            {
+                var parseObj = parser.Parse(compNewsDto.body);
+                var image = string.Empty;
+                if (parseObj.Images.Length > 0)
+                {
+                    image = parseObj.Images[0].Source;
+                }
+                var title = compNewsDto.title;
+                var author = compNewsDto.authorId;
+                ListNews.Add(new NewsPreviewViewModel() { ImageUri = image, Title = title, Subtitle = author });
+            }
         }
     }
 }
