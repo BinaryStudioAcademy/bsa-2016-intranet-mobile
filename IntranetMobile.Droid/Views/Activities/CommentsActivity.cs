@@ -10,17 +10,19 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using IntranetMobile.Core;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid
 {
     [Activity(Label = "CommentActivity", Theme = "@style/BSTheme")]
-    public class CommentActivity : Activity
+    public class CommentsActivity : MvxAppCompatActivity<CommentsViewModel>
     {
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override void OnViewModelSet()
         {
-            base.OnCreate(savedInstanceState);
+            base.OnViewModelSet();
 
-            // Create your application here
+            SetContentView(Resource.Layout.activity_comments);
         }
     }
 }

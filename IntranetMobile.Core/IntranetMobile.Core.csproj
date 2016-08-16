@@ -75,6 +75,8 @@
     <Compile Include="ViewModels\News\NewsViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\News\NewsPreviewViewModel.cs" />
+    <Compile Include="ViewModels\News\CommentsViewModel.cs" />
+    <Compile Include="Models\Comment.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
