@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AngleSharp.Parser.Html;
@@ -13,6 +11,7 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class CompanyViewModel : BaseNewsViewModel
     {
+        private bool _isRefreshing;
         private NewsPreviewViewModel<NewsDto> _selectedItem;
 
         public CompanyViewModel()
@@ -20,7 +19,8 @@ namespace IntranetMobile.Core.ViewModels.News
             AsyncHelper.RunSync(ReloadData);
         }
 
-        public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } = new ObservableCollection<NewsPreviewViewModel<NewsDto>>();
+        public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } =
+            new ObservableCollection<NewsPreviewViewModel<NewsDto>>();
 
         public NewsPreviewViewModel<NewsDto> SelectedItem
         {
@@ -29,8 +29,10 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
+                AsyncHelper.RunSync(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto));
+
                 // TODO: Pass id here
-                ShowViewModel<NewsDetailsViewModel>(SelectedItem);
+                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.Dto.Id});
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -40,7 +42,6 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             get { return new MvxCommand<NewsPreviewViewModel<NewsDto>>(item => { SelectedItem = item; }); }
         }
-        private bool _isRefreshing;
 
         public virtual bool IsRefreshing
         {
@@ -73,17 +74,23 @@ namespace IntranetMobile.Core.ViewModels.News
             ListNews.Clear();
             var parser = new HtmlParser();
             var news = await ServiceBus.NewsService.CompanyNews(0, 10);
-            foreach (var compFullNewsDto in news)
+            foreach (var newsDto in news)
             {
-                var parseObj = parser.Parse(compFullNewsDto.body);
+                var parseObj = parser.Parse(newsDto.body);
                 var image = string.Empty;
                 if (parseObj.Images.Length > 0)
                 {
                     image = parseObj.Images[0].Source;
                 }
-                var title = compFullNewsDto.title;
-                var author = compFullNewsDto.authorId;
-                ListNews.Add(new NewsPreviewViewModel<NewsDto>() { ImageUri = image, Title = title, Subtitle = author, Dto = compFullNewsDto});
+                var title = newsDto.title;
+                var author = newsDto.authorId;
+                ListNews.Add(new NewsPreviewViewModel<NewsDto>
+                {
+                    ImageUri = image,
+                    Title = title,
+                    Subtitle = author,
+                    Dto = newsDto
+                });
             }
         }
     }
