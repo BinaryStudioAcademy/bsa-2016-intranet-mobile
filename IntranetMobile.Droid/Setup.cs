@@ -17,7 +17,6 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Plugins;
 using MvvmCross.Plugins.Sqlite;
 
 namespace IntranetMobile.Droid
@@ -46,11 +45,10 @@ namespace IntranetMobile.Droid
         // Called before Application.Initialize()
         public override void Initialize()
         {
-
-
             base.Initialize();
 
             Mvx.RegisterSingleton<ILogger>(new AndroidLogger());
+            Mvx.RegisterSingleton<IAlertService>(new AlertService(ApplicationContext));
             Mvx.RegisterSingleton<IDataBaseService>(new DataBaseService(
                 ApplicationContext.FilesDir.Path,
                 Mvx.Resolve<IMvxSqliteConnectionFactory>(),
@@ -62,8 +60,6 @@ namespace IntranetMobile.Droid
         {
             base.InitializeLastChance();
         }
-
-       
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {

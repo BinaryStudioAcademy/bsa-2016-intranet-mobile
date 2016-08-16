@@ -4,12 +4,12 @@
   <style name="BSTheme" parent="BSTheme.Base">
   </style>
   <!-- Base theme applied no matter what API -->
-  <style name="BSTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
-    <item name="android:windowTranslucentStatus">true</item>
-    <!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
+  <style name="BSTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="windowNoTitle">true</item>
-    <!--We will be using the toolbar so no need to show ActionBar-->
     <item name="windowActionBar">false</item>
+    <item name="windowActionModeOverlay">false</item>
+    <item name="android:windowBackground">@color/colorPrimaryLight</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
     <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
     <!-- colorPrimary is used for the default action bar background -->
     <item name="colorPrimary">@color/colorPrimary</item>

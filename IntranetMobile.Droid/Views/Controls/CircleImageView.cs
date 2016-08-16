@@ -8,6 +8,8 @@ using Java.Lang;
 using Exception = System.Exception;
 using Math = System.Math;
 
+// ReSharper disable InconsistentNaming
+
 namespace IntranetMobile.Droid.Views.Controls
 {
     public class CircleImageView : ImageView
@@ -73,7 +75,10 @@ namespace IntranetMobile.Droid.Views.Controls
             init();
         }
 
-        public override ColorFilter ColorFilter => mColorFilter;
+        public override ColorFilter ColorFilter
+        {
+            get { return mColorFilter; }
+        }
 
         private void init()
         {
@@ -255,7 +260,8 @@ namespace IntranetMobile.Droid.Views.Controls
 
         private void ApplyColorFilter()
         {
-            mBitmapPaint?.SetColorFilter(mColorFilter);
+            if (mBitmapPaint != null)
+                mBitmapPaint.SetColorFilter(mColorFilter);
         }
 
         private Bitmap GetBitmapFromDrawable(Drawable drawable)

@@ -1,16 +1,16 @@
 ﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core.ViewModels
+namespace IntranetMobile.Core.ViewModels.News
 {
-    public class ItemNewsViewModel : BaseViewModel
+    public class NewsPreviewViewModel : BaseViewModel
     {
-		private bool   isLiked;
-        private string coverImageViewUrl;
-        private string imageUri;
-        private string likeImageViewUrl;
+        private string _coverImageViewUrl;
+        private string _imageUri;
+        private bool _isLiked;
+        private string _likeImageViewUrl;
 
-        public ItemNewsViewModel()
+        public NewsPreviewViewModel()
         {
             ClickCommentCommand = new MvxCommand(ClickCommentCommandExecute);
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
@@ -19,16 +19,15 @@ namespace IntranetMobile.Core.ViewModels
         }
 
         public string Title { get; set; }
-        public string SubTitle { get; set; }
+        public string Subtitle { get; set; }
         public string NewsUrl { get; set; }
-
 
         public string ImageUri
         {
-            get { return imageUri; }
+            get { return _imageUri; }
             set
             {
-                imageUri = value;
+                _imageUri = value;
                 RaisePropertyChanged(() => ImageUri);
             }
         }
@@ -36,14 +35,13 @@ namespace IntranetMobile.Core.ViewModels
         public ICommand ClickLikeCommand { get; private set; }
         public ICommand ClickCommentCommand { get; private set; }
 
-
         public bool IsLiked
         {
-            get { return isLiked; }
+            get { return _isLiked; }
             set
             {
-                isLiked = value;
-                LikeImageViewUrl = isLiked ? "ic_favorite_white_24dp" : "ic_favorite_border_white_24dp";
+                _isLiked = value;
+                LikeImageViewUrl = _isLiked ? "ic_favorite_white_24dp" : "ic_favorite_border_white_24dp";
             }
         }
 
@@ -51,23 +49,22 @@ namespace IntranetMobile.Core.ViewModels
         {
             get
             {
-                if (string.IsNullOrEmpty(likeImageViewUrl))
+                if (string.IsNullOrEmpty(_likeImageViewUrl))
                 {
-                    likeImageViewUrl = "ic_favorite_border_white_24dp";
+                    _likeImageViewUrl = "ic_favorite_border_white_24dp";
                 }
-                return likeImageViewUrl;
+                return _likeImageViewUrl;
             }
             set
             {
-                likeImageViewUrl = value;
+                _likeImageViewUrl = value;
                 RaisePropertyChanged(() => LikeImageViewUrl);
             }
         }
 
-
         private void ClickLikeCommandExecute()
         {
-            IsLiked = !isLiked;
+            IsLiked = !_isLiked;
         }
 
         private void ClickCommentCommandExecute()

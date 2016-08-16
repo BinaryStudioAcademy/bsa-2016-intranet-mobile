@@ -20,6 +20,8 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -194,19 +196,23 @@
     <Compile Include="Services\AndroidLogger.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Util\BitmapUtils.cs" />
+    <Compile Include="Views\Activities\BaseToolbarActivity.cs" />
+    <Compile Include="Views\Activities\IDrawerActivity.cs" />
+    <Compile Include="Views\Activities\LoginActivity.cs" />
+    <Compile Include="Views\Activities\MainActivity.cs" />
+    <Compile Include="Views\Activities\NewsDetailsActivity.cs" />
     <Compile Include="Views\Controls\CircleImageView.cs" />
-    <Compile Include="Views\Controls\RecycleNewsView.cs" />
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />
     <Compile Include="Views\Fragments\NewsFragment.cs" />
-    <Compile Include="Views\IDrawerActivity.cs" />
-    <Compile Include="Views\MainActivity.cs" />
     <Compile Include="Views\Fragments\ForgotPasswordFragment.cs" />
     <Compile Include="Views\Fragments\LoadingFragment.cs" />
     <Compile Include="Views\Fragments\LoginFragment.cs" />
     <Compile Include="Views\Fragments\MenuFragment.cs" />
-    <Compile Include="Views\LoginActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Util\FromHtmlValueConverter.cs" />
+    <Compile Include="Views\Util\ImageGetter.cs" />
+    <Compile Include="Views\Util\LikeActionButtonWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -224,7 +230,7 @@
     <AndroidResource Include="Resources\layout\drawer_header.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\recycle_news.axml">
+    <AndroidResource Include="Resources\layout\news_preview_card.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_login.axml">
@@ -251,6 +257,12 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\values\integers.xml" />
+    <AndroidResource Include="Resources\layout\activity_news_details.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\mvx_toolbar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
@@ -296,7 +308,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Resources\anim\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />
@@ -536,6 +547,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_favorite_white_24dp.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\menu_news_details.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -544,8 +558,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
 		<Target Name="BeforeBuild">

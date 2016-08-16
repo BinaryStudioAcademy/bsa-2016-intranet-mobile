@@ -1,38 +1,30 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Util;
-using Android.Views;
-using Android.Widget;
-using IntranetMobile.Core;
 using IntranetMobile.Core.Interfaces;
 
 namespace IntranetMobile.Droid.Services
 {
     public class AndroidLogger : ILogger
     {
+        private const string Tag = "IntranetMobile"; 
         public void Error(Exception e)
         {
+            Log.Error(Tag, e.ToString());
         }
 
         public void Error(string message)
         {
-            Log.Error("Error", message);
+            Log.Error(Tag, message);
         }
 
         public void Error(string message, Exception e)
         {
+            Log.Error(Tag, string.Format("{0}\n{1}", message, e));
         }
 
         public void Info(string message)
         {
-            Log.Info("Info", message);
+            Log.Info(Tag, message);
         }
     }
 }

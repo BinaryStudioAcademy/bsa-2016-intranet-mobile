@@ -16,7 +16,7 @@
     <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      app:MvxItemTemplate="@layout/recycle_news"
+      app:MvxItemTemplate="@layout/news_preview_card"
       app:MvxBind="ItemsSource ListNews; ItemClick SelectItem" />
   </LinearLayout>
 </RelativeLayout>

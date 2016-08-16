@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.AppBarLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/mvx_appbar"
+  android:fitsSystemWindows="true"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+  <android.support.v7.widget.Toolbar
+    android:id="@+id/mvx_toolbar"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:MvxBind="Title Title; Subtitle Subtitle" />
+</android.support.design.widget.AppBarLayout>

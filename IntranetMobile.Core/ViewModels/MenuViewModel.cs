@@ -1,11 +1,11 @@
 ﻿using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Login;
-using MvvmCross.Core.ViewModels;
+using IntranetMobile.Core.ViewModels.News;
 
-namespace IntranetMobile.Core.ViewModels.Fragments
+namespace IntranetMobile.Core.ViewModels
 {
-    public class MenuFragmentViewModel : BaseFragmentViewModel
+    public class MenuViewModel : BaseViewModel
     {
         private string _userName;
 
@@ -21,7 +21,7 @@ namespace IntranetMobile.Core.ViewModels.Fragments
 
         public void ShowNews()
         {
-            ShowViewModel<NewsFragmentViewModel>();
+            ShowViewModel<NewsViewModel>();
         }
 
         public async void Logout()
@@ -41,7 +41,11 @@ namespace IntranetMobile.Core.ViewModels.Fragments
         {
             base.Start();
 
-            UserName = (await ServiceBus.StorageService.GetFirstOrDefault<User>()).Email;
+            var currentUser = await ServiceBus.StorageService.GetFirstOrDefault<User>();
+            if (currentUser != null)
+            {
+                UserName = currentUser.Email;
+            }
         }
     }
 }
