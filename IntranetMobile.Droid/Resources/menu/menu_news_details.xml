@@ -4,23 +4,23 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
   <item
-    android:id="@+id/menu_news_details_like"
-    android:icon="@drawable/ic_favorite_border_white_24dp"
-    android:title="Like"
-    app:showAsAction="always" />
-  <item
     android:id="@+id/menu_news_details_likes_text"
     app:showAsAction="always"
     app:actionLayout="@layout/menu_news_details_text_layout"
     android:title="Likes" />
   <item
-    android:id="@+id/menu_news_details_comment"
-    android:icon="@drawable/ic_comment_white_24dp"
-    android:title="Comment"
+    android:id="@+id/menu_news_details_like"
+    android:icon="@drawable/ic_favorite_border_white_24dp"
+    android:title="Like"
     app:showAsAction="always" />
   <item
     android:id="@+id/menu_news_details_comments_text"
     app:showAsAction="always"
     app:actionLayout="@layout/menu_news_details_text_layout"
     android:title="Comments" />
+  <item
+    android:id="@+id/menu_news_details_comment"
+    android:icon="@drawable/ic_comment_white_24dp"
+    android:title="Comment"
+    app:showAsAction="always" />
 </menu>
