@@ -21,7 +21,7 @@ namespace IntranetMobile.Core.ViewModels
 
         public void ShowNews()
         {
-            ShowViewModel<NewsViewModel>();
+            ShowViewModel<AllNewsViewModel>();
         }
 
         public async void Logout()

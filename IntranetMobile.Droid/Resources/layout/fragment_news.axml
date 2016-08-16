@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:local="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/main_content"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
   <include
     android:id="@+id/news_toolbar"
-    layout="@layout/toolbar" />
+    layout="@layout/tabbed_toolbar" />
   <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/news_toolbar">
-    <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+    android:layout_height="match_parent">
+    <android.support.v4.view.ViewPager
+      android:id="@+id/viewpager"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:MvxItemTemplate="@layout/news_preview_card"
-      app:MvxBind="ItemsSource ListNews; ItemClick SelectItem" />
+      android:layout_height="fill_parent"
+      local:layout_behavior="@string/appbar_scrolling_view_behavior" />
   </LinearLayout>
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -203,7 +203,10 @@
     <Compile Include="Views\Activities\NewsDetailsActivity.cs" />
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />
-    <Compile Include="Views\Fragments\NewsFragment.cs" />
+    <Compile Include="Views\Fragments\News\NewsFragment.cs" />
+    <Compile Include="Views\Fragments\News\NewsRecycleViewFragment.cs" />
+    <Compile Include="Views\IDrawerActivity.cs" />
+    <Compile Include="Views\MainActivity.cs" />
     <Compile Include="Views\Fragments\ForgotPasswordFragment.cs" />
     <Compile Include="Views\Fragments\LoadingFragment.cs" />
     <Compile Include="Views\Fragments\LoginFragment.cs" />
@@ -230,7 +233,7 @@
     <AndroidResource Include="Resources\layout\drawer_header.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\news_preview_card.axml">
+    <AndroidResource Include="Resources\layout\card_view_news.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_login.axml">
@@ -257,6 +260,12 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\values\integers.xml" />
+    <AndroidResource Include="Resources\layout\recycle_view_news.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\tabbed_toolbar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_news_details.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
