@@ -79,6 +79,8 @@
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\News\NewsPreviewViewModel.cs" />
     <Compile Include="ViewModels\News\WeekliesViewModel.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="ViewModels\News\CommentsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
