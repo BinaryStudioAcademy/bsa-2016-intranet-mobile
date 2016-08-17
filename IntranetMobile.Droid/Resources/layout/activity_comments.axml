@@ -1,3 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Mvx.MvxListView
+        android:id="@+id/commentListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:MvxItemTemplate="@layout/listview_comments"
+        app:MvxBind="ItemsSource Comments" />
 </LinearLayout>

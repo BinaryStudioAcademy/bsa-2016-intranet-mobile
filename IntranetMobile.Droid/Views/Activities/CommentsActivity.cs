@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +9,19 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using IntranetMobile.Core;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid
 {
-    [Activity(Label = "CommentsActivity")]
-    public class CommentsActivity : Activity
+    [Activity(Label = "CommentsActivity", Theme = "@style/BSTheme")]
+    public class CommentsActivity : MvxAppCompatActivity<CommentsViewModel>
     {
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override void OnViewModelSet()
         {
-            base.OnCreate(savedInstanceState);
+            base.OnViewModelSet();
 
-            // Create your application here
+            SetContentView(Resource.Layout.activity_comments);
         }
     }
 }
-
