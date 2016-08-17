@@ -1,6 +1,6 @@
 using MvvmCross.Platform.Plugins;
 
-namespace IntranetMobile.Droid.Bootstrap
+namespace IntranetMobile.Universal.Bootstrap
 {
     public class FilePluginBootstrap
         : MvxPluginBootstrapAction<MvvmCross.Plugins.File.PluginLoader>

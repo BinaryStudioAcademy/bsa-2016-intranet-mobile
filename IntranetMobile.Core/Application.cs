@@ -2,6 +2,7 @@
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 
 namespace IntranetMobile.Core
 {

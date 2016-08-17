@@ -17,7 +17,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       local:MvxItemTemplate="@layout/card_view_news"
-      local:MvxBind="ItemsSource ListNews; ItemClick SelectItem" />
+      local:MvxBind="ItemsSource News; ItemClick SelectItem" />
   </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
   <!--<android.support.design.widget.FloatingActionButton
       android:id="@+id/autoScrollFab"

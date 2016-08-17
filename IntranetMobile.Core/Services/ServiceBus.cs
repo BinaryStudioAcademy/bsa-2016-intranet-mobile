@@ -4,6 +4,7 @@ using IntranetMobile.Core.Helpers;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models.Dtos;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 
 namespace IntranetMobile.Core.Services
 {
@@ -18,6 +19,8 @@ namespace IntranetMobile.Core.Services
         private static IAlertService _alertService;
         private static IUserService _userService;
         private static List<UserDto> _listUsers;   
+
+        private static IMvxMessenger _messengerHub;
 
         public static IStorageService StorageService
             => _storageService ?? (_storageService = Mvx.Resolve<IStorageService>());
@@ -35,5 +38,8 @@ namespace IntranetMobile.Core.Services
 
         public static List<UserDto> ListUsers
             => _listUsers ?? (_listUsers = AsyncHelper.RunSync(UserService.GetAllUsers));
+
+        public static IMvxMessenger MessengerHub
+            => _messengerHub ?? (_messengerHub = Mvx.Resolve<IMvxMessenger>());
     }
 }

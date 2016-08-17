@@ -11,18 +11,18 @@ namespace IntranetMobile.Core.ViewModels.News
     public class WeekliesViewModel : BaseViewModel
     {
         private bool _isRefreshing;
-        private NewsPreviewViewModel<NewsDto> _selectedItem;
+        private NewsViewModel _selectedItem;
 
-        public WeekliesViewModel()
+        public WeeklyNewsViewModel()
         {
             Title = "Weeklies";
             Task.Run(ReloadData);
         }
 
-        public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } =
-            new ObservableCollection<NewsPreviewViewModel<NewsDto>>();
+        public ObservableCollection<NewsViewModel> News { set; get; } =
+            new ObservableCollection<NewsViewModel>();
 
-        public NewsPreviewViewModel<NewsDto> SelectedItem
+        public NewsViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -38,7 +38,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ICommand SelectItem
         {
-            get { return new MvxCommand<NewsPreviewViewModel<NewsDto>>(item => { SelectedItem = item; }); }
+            get { return new MvxCommand<NewsViewModel>(item => { SelectedItem = item; }); }
         }
 
         public virtual bool IsRefreshing
@@ -76,22 +76,19 @@ namespace IntranetMobile.Core.ViewModels.News
             
             foreach (var list in weeklies)
             {
-                foreach (var news in list.fullNews)
+                foreach (var news in newsBundle.fullNews)
                 {
                     var parseObj = parser.Parse(news.body);
-                    var image = string.Empty;
+                    var previewImageUrl = string.Empty;
                     if (parseObj.Images.Length > 0)
                     {
-                        image = parseObj.Images[0].Source;
+                        previewImageUrl = parseObj.Images[0].Source;
                     }
-                    var title = list.title;
-                    var author = list.authorId;
-                    ListNews.Add(new NewsPreviewViewModel<NewsDto>
+
+                    News.Add(new NewsViewModel
                     {
-                        ImageUri = image,
-                        Title = title,
-                        Subtitle = author,
-                        Dto = news
+                        PreviewImageUri = previewImageUrl,
+                        NewsId = news.newsId
                     });
                 }
             }
