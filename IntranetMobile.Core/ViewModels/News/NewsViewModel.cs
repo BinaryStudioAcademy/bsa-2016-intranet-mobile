@@ -1,18 +1,17 @@
 ﻿using System.Windows.Input;
-using IntranetMobile.Core.Models;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
     public class NewsViewModel : BaseViewModel
     {
-        private string _previewImageUri;
         private bool _isLiked;
         private string _likeImageViewUrl;
-        private string _title;
-        private string _subtitle;
-        private string _newsUrl;
         private string _newsId;
+        private string _newsUrl;
+        private string _previewImageUri;
+        private string _subtitle;
+        private string _title;
 
         public NewsViewModel()
         {

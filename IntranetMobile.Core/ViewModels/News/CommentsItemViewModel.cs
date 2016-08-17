@@ -5,12 +5,12 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class CommentsItemViewModel : BaseViewModel
     {
-        private string _name;
-        private long _date;
         private string _body;
         private int _countLikes;
-        private string _likeImageViewUrl;
+        private long _date;
         private bool _isLiked;
+        private string _likeImageViewUrl;
+        private string _name;
 
         public CommentsItemViewModel(string name, long date, string body, int countLikes)
         {
@@ -98,4 +98,3 @@ namespace IntranetMobile.Core.ViewModels.News
         }
     }
 }
-

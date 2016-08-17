@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using AngleSharp.Parser.Html;
 using IntranetMobile.Core.Helpers;
-using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -28,7 +27,7 @@ namespace IntranetMobile.Core.ViewModels.News
             set
             {
                 _selectedItem = value;
-                
+
                 ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.NewsId});
 
                 RaisePropertyChanged(() => SelectedItem);

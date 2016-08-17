@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using IntranetMobile.Core.Models.Dtos;
-using IntranetMobile.Core.Services;
+﻿using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
@@ -12,8 +10,6 @@ namespace IntranetMobile.Core.ViewModels.News
         private string _content;
         private bool _isLiked;
         private int _likesCount;
-
-        private NewsDto _news;
         private string _subtitile;
         private string _title;
 
@@ -95,24 +91,12 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void Comment()
         {
-            if (_news.comments != null) ShowViewModel<CommentsViewModel>(_news.comments);
+            // TODO: Call CommentsViewModel here
             ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
         }
 
-        public void Init(string newId)
+        public void Init(string newsId)
         {
-            
-            Title = _news.title;
-            Subtitle = _news.authorId;
-            Content = _news.body;
-            if (_news.comments != null)
-            {
-                CommentsCount = _news.comments.Count;
-            }
-            if (_news.likes != null)
-            {
-                LikesCount = _news.likes.Count;
-            }
         }
     }
 }
