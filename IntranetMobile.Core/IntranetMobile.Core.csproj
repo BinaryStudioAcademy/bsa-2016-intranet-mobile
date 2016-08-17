@@ -41,13 +41,16 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
+    <Compile Include="Helpers\TimeConvertHelper.cs" />
     <Compile Include="Interfaces\IAlertService.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IDataBaseService.cs" />
     <Compile Include="Interfaces\INewsService.cs" />
     <Compile Include="Interfaces\IRestClient.cs" />
     <Compile Include="Interfaces\IStorageService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\Dtos\AuthDto.cs" />
+    <Compile Include="Models\Dtos\UserDto.cs" />
     <Compile Include="Models\Persist.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="Services\RestClient.cs" />
     <Compile Include="Services\ServiceBus.cs" />
     <Compile Include="Services\StorageService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
