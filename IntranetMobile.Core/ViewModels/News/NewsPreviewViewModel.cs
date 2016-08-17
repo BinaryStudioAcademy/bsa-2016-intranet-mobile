@@ -4,33 +4,72 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class NewsPreviewViewModel<T> : BaseViewModel where T: Persist
+    public class NewsPreviewViewModel : BaseViewModel
     {
-        private string _coverImageViewUrl;
-        private string _imageUri;
+        private string _previewImageUri;
         private bool _isLiked;
         private string _likeImageViewUrl;
+        private string _title;
+        private string _subtitle;
+        private string _newsUrl;
+        private string _newsId;
 
         public NewsPreviewViewModel()
         {
             ClickCommentCommand = new MvxCommand(ClickCommentCommandExecute);
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
-            ImageUri =
-                "https://gallery.mailchimp.com/d962b18774558cf34c062e6b3/images/5bd435e8-9528-4dff-be19-828845e44bab.jpg";
         }
 
-        public T Dto { get; set; }
-        public string Title { get; set; }
-        public string Subtitle { get; set; }
-        public string NewsUrl { get; set; }
-
-        public string ImageUri
+        public string Title
         {
-            get { return _imageUri; }
+            get { return _title; }
             set
             {
-                _imageUri = value;
-                RaisePropertyChanged(() => ImageUri);
+                _title = value;
+                RaisePropertyChanged(() => Title);
+            }
+        }
+
+        public string Subtitle
+        {
+            get { return _subtitle; }
+            set
+            {
+                _subtitle = value;
+                RaisePropertyChanged(() => Subtitle);
+            }
+        }
+
+        public string NewsUrl
+        {
+            get { return _newsUrl; }
+            set
+            {
+                _newsUrl = value;
+                RaisePropertyChanged(() => NewsUrl);
+            }
+        }
+
+        public string NewsId
+        {
+            get { return _newsId; }
+            set
+            {
+                _newsId = value;
+
+                // TODO: Set all the staff here
+
+                RaisePropertyChanged(() => NewsId);
+            }
+        }
+
+        public string PreviewImageUri
+        {
+            get { return _previewImageUri; }
+            set
+            {
+                _previewImageUri = value;
+                RaisePropertyChanged(() => PreviewImageUri);
             }
         }
 

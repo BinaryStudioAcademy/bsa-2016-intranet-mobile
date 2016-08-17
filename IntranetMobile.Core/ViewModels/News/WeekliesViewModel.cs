@@ -12,25 +12,24 @@ namespace IntranetMobile.Core.ViewModels.News
     public class WeekliesViewModel : BaseNewsViewModel
     {
         private bool _isRefreshing;
-        private NewsPreviewViewModel<NewsDto> _selectedItem;
+        private NewsPreviewViewModel _selectedItem;
 
         public WeekliesViewModel()
         {
             AsyncHelper.RunSync(ReloadData);
         }
 
-        public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } =
-            new ObservableCollection<NewsPreviewViewModel<NewsDto>>();
+        public ObservableCollection<NewsPreviewViewModel> News { set; get; } =
+            new ObservableCollection<NewsPreviewViewModel>();
 
-        public NewsPreviewViewModel<NewsDto> SelectedItem
+        public NewsPreviewViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
             {
                 _selectedItem = value;
-
-                AsyncHelper.RunSync(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto));
-                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.Dto.Id});
+                
+                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.NewsId});
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -38,7 +37,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ICommand SelectItem
         {
-            get { return new MvxCommand<NewsPreviewViewModel<NewsDto>>(item => { SelectedItem = item; }); }
+            get { return new MvxCommand<NewsPreviewViewModel>(item => { SelectedItem = item; }); }
         }
 
         public virtual bool IsRefreshing
@@ -69,7 +68,7 @@ namespace IntranetMobile.Core.ViewModels.News
         public virtual async Task ReloadData()
         {
             //TODO: Normalize news pull
-            ListNews.Clear();
+            News.Clear();
             var parser = new HtmlParser();
             var weeklies = await ServiceBus.NewsService.Weeklies(0, 10);
             foreach (var list in weeklies)
@@ -77,19 +76,16 @@ namespace IntranetMobile.Core.ViewModels.News
                 foreach (var news in list.fullNews)
                 {
                     var parseObj = parser.Parse(news.body);
-                    var image = string.Empty;
+                    var previewImageUrl = string.Empty;
                     if (parseObj.Images.Length > 0)
                     {
-                        image = parseObj.Images[0].Source;
+                        previewImageUrl = parseObj.Images[0].Source;
                     }
-                    var title = list.title;
-                    var author = list.authorId;
-                    ListNews.Add(new NewsPreviewViewModel<NewsDto>
+
+                    News.Add(new NewsPreviewViewModel
                     {
-                        ImageUri = image,
-                        Title = title,
-                        Subtitle = author,
-                        Dto = news
+                        PreviewImageUri = previewImageUrl,
+                        NewsId = news.newsId
                     });
                 }
             }

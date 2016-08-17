@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\Login\UserCredentialsViewModel.cs" />
     <Compile Include="ViewModels\News\AllNewsViewModel.cs" />
     <Compile Include="ViewModels\News\BaseNewsViewModel.cs" />
+    <Compile Include="ViewModels\News\INewsContainer.cs" />
     <Compile Include="ViewModels\News\NewsDetailsViewModel.cs" />
     <Compile Include="ViewModels\News\CompanyViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />

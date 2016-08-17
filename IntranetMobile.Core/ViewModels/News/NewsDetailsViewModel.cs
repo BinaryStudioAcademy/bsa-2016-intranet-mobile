@@ -8,14 +8,14 @@ namespace IntranetMobile.Core.ViewModels.News
     public class NewsDetailsViewModel : BaseViewModel
     {
         private const string Tag = "NewsDetailsViewModel";
-        private int _commentsCount = 2;
+        private int _commentsCount;
         private string _content;
         private bool _isLiked;
-        private int _likesCount = 5;
-        private string _subtitile;
-        private string _title;
+        private int _likesCount;
 
         private NewsDto _news;
+        private string _subtitile;
+        private string _title;
 
         public NewsDetailsViewModel()
         {
@@ -99,15 +99,20 @@ namespace IntranetMobile.Core.ViewModels.News
             ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
         }
 
-        public async void Init(int id)
+        public void Init(string newId)
         {
-            var allNews = await ServiceBus.StorageService.GetAllItems<NewsDto>();
-            _news = allNews.FirstOrDefault(item => item.Id == id);
-            await ServiceBus.StorageService.RemoveItem(_news);
+            
             Title = _news.title;
             Subtitle = _news.authorId;
-            IsLiked = true;
             Content = _news.body;
+            if (_news.comments != null)
+            {
+                CommentsCount = _news.comments.Count;
+            }
+            if (_news.likes != null)
+            {
+                LikesCount = _news.likes.Count;
+            }
         }
     }
 }

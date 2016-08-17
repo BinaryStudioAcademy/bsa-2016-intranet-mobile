@@ -12,25 +12,24 @@ namespace IntranetMobile.Core.ViewModels.News
     public class CompanyViewModel : BaseNewsViewModel
     {
         private bool _isRefreshing;
-        private NewsPreviewViewModel<NewsDto> _selectedItem;
+        private NewsPreviewViewModel _selectedItem;
 
         public CompanyViewModel()
         {
             AsyncHelper.RunSync(ReloadData);
         }
 
-        public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } =
-            new ObservableCollection<NewsPreviewViewModel<NewsDto>>();
+        public ObservableCollection<NewsPreviewViewModel> News { set; get; } =
+            new ObservableCollection<NewsPreviewViewModel>();
 
-        public NewsPreviewViewModel<NewsDto> SelectedItem
+        public NewsPreviewViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
             {
                 _selectedItem = value;
-
-                AsyncHelper.RunSync(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto));
-                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.Dto.Id});
+                
+                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.NewsId});
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -38,7 +37,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ICommand SelectItem
         {
-            get { return new MvxCommand<NewsPreviewViewModel<NewsDto>>(item => { SelectedItem = item; }); }
+            get { return new MvxCommand<NewsPreviewViewModel>(item => { SelectedItem = item; }); }
         }
 
         public virtual bool IsRefreshing
@@ -69,7 +68,7 @@ namespace IntranetMobile.Core.ViewModels.News
         public virtual async Task ReloadData()
         {
             //TODO: Normalize news pull
-            ListNews.Clear();
+            News.Clear();
             var parser = new HtmlParser();
             var news = await ServiceBus.NewsService.CompanyNews(0, 10);
             foreach (var newsDto in news)
@@ -82,12 +81,11 @@ namespace IntranetMobile.Core.ViewModels.News
                 }
                 var title = newsDto.title;
                 var author = newsDto.authorId;
-                ListNews.Add(new NewsPreviewViewModel<NewsDto>
+                News.Add(new NewsPreviewViewModel
                 {
-                    ImageUri = image,
+                    PreviewImageUri = image,
                     Title = title,
-                    Subtitle = author,
-                    Dto = newsDto
+                    Subtitle = author
                 });
             }
         }

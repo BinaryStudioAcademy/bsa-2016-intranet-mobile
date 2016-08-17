@@ -25,7 +25,7 @@ namespace IntranetMobile.Droid.Views.Util
         #endregion ImageState enum
 
         // TODO: Dynamically bind dat
-        private const int MaxSize = 400;
+        private const int MaxSize = 800;
         private readonly object _mutex = new object();
 
         private CancellationTokenSource _cancellationSource;
