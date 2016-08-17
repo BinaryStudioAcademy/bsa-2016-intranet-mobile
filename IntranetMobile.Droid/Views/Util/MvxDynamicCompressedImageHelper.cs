@@ -13,9 +13,6 @@ namespace IntranetMobile.Droid.Views.Util
     public class MvxDynamicCompressedBitmapHelper
         : IMvxImageHelper<Bitmap>
     {
-        // TODO: Dynamically bind dat
-        const int MaxSize = 400;
-
         #region ImageState enum
 
         public enum ImageState
@@ -26,6 +23,10 @@ namespace IntranetMobile.Droid.Views.Util
         }
 
         #endregion ImageState enum
+
+        // TODO: Dynamically bind dat
+        private const int MaxSize = 400;
+        private readonly object _mutex = new object();
 
         private CancellationTokenSource _cancellationSource;
 
@@ -72,7 +73,7 @@ namespace IntranetMobile.Droid.Views.Util
                 if (_imageUrl == value)
                     return;
                 _imageUrl = value;
-                RequestImageAsync(_imageUrl).ConfigureAwait(false);
+                RequestImage(_imageUrl);
             }
         }
 
@@ -102,108 +103,166 @@ namespace IntranetMobile.Droid.Views.Util
             handler?.Invoke(this, new MvxValueEventArgs<Bitmap>(image));
         }
 
-        private async Task RequestImageAsync(string imageSource)
+        private void RequestImage(string imageSource)
         {
-            if (_cancellationSource != null)
+            lock (_mutex)
             {
-                _cancellationSource.Cancel();
-                _cancellationSource = null;
-            }
-
-            var cancelTokenSource = new CancellationTokenSource();
-            var cancelToken = cancelTokenSource.Token;
-            _cancellationSource = cancelTokenSource;
-
-            FireImageChanged(null);
-
-            if (string.IsNullOrEmpty(imageSource))
-            {
-                await ShowDefaultImage().ConfigureAwait(false);
-                return;
-            }
-
-            if (imageSource.ToUpper().StartsWith("HTTP"))
-            {
-                await NewHttpImageRequestedAsync().ConfigureAwait(false);
-
-                var error = false;
-                try
+                if (_cancellationSource != null)
                 {
-                    var cache = Mvx.Resolve<IMvxImageCache<Bitmap>>();
-                    var image = await cache.RequestImage(imageSource).ConfigureAwait(false);
+                    _cancellationSource.Cancel();
+                    _cancellationSource = null;
+                }
 
-                    if (image == null)
-                    {
-                        await ShowErrorImage().ConfigureAwait(false);
-                    }
-                    else
+                var cancelTokenSource = new CancellationTokenSource();
+                var cancelToken = cancelTokenSource.Token;
+                _cancellationSource = cancelTokenSource;
+
+                Task.Factory.StartNew(async delegate
+                {
+                    // Critical check
+                    lock (_mutex)
                     {
                         if (cancelToken.IsCancellationRequested)
                         {
                             return;
                         }
+                        FireImageChanged(null);
+                    }
 
-                        var bitmap = await Task.Factory.StartNew(() =>
+                    if (string.IsNullOrEmpty(imageSource))
+                    {                    
+                        // Critical check
+                        lock (_mutex)
                         {
-                            int outWidth;
-                            int outHeight;
-                            var inWidth = image.Width;
-                            var inHeight = image.Height;
-                            if (inWidth > inHeight)
-                            {
-                                outWidth = MaxSize;
-                                outHeight = inHeight*MaxSize/inWidth;
-                            }
-                            else
-                            {
-                                outHeight = MaxSize;
-                                outWidth = inWidth*MaxSize/inHeight;
-                            }
-
                             if (cancelToken.IsCancellationRequested)
                             {
-                                return null;
+                                return;
                             }
-
-                            var resizedBitmap = Bitmap.CreateScaledBitmap(image, outWidth,
-                                outHeight,
-                                false);
-
-                            return resizedBitmap;
-                        }, cancelToken);
-
-                        NewImageAvailable(bitmap);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Mvx.Trace("failed to download image {0} : {1}", imageSource, ex.ToLongString());
-                    error = true;
-                }
-
-                if (error)
-                    await HttpImageErrorSeenAsync().ConfigureAwait(false);
-            }
-            else
-            {
-                try
-                {
-                    var image = await ImageFromLocalFileAsync(imageSource).ConfigureAwait(false);
-
-                    if (cancelToken.IsCancellationRequested)
-                    {
+                            ShowDefaultImage().Wait(cancelToken);
+                        }
                         return;
                     }
 
-                    if (image == null)
-                        await ShowErrorImage().ConfigureAwait(false);
+                    if (imageSource.ToUpper().StartsWith("HTTP"))
+                    {
+                        await NewHttpImageRequestedAsync().ConfigureAwait(false);
+
+                        var error = false;
+                        try
+                        {
+                            var cache = Mvx.Resolve<IMvxImageCache<Bitmap>>();
+                            var image = await cache.RequestImage(imageSource).ConfigureAwait(false);
+
+                            if (image == null)
+                            {
+                                // Critical check
+                                lock (_mutex)
+                                {
+                                    if (cancelToken.IsCancellationRequested)
+                                    {
+                                        return;
+                                    }
+                                    ShowErrorImage().Wait(cancelToken);
+                                }
+                            }
+                            else
+                            {
+                                // Performance-friendly check
+                                lock (_mutex)
+                                {
+                                    if (cancelToken.IsCancellationRequested)
+                                    {
+                                        return;
+                                    }
+                                }
+
+                                int outWidth;
+                                int outHeight;
+                                var inWidth = image.Width;
+                                var inHeight = image.Height;
+                                if (inWidth > inHeight)
+                                {
+                                    outWidth = MaxSize;
+                                    outHeight = inHeight*MaxSize/inWidth;
+                                }
+                                else
+                                {
+                                    outHeight = MaxSize;
+                                    outWidth = inWidth*MaxSize/inHeight;
+                                }
+
+                                // Performance-friendly check
+                                lock (_mutex)
+                                {
+                                    if (cancelToken.IsCancellationRequested)
+                                    {
+                                        return;
+                                    }
+                                }
+
+                                var resizedBitmap = Bitmap.CreateScaledBitmap(image, outWidth,
+                                    outHeight,
+                                    false);
+
+                                // Critical check
+                                lock (_mutex)
+                                {
+                                    if (cancelToken.IsCancellationRequested)
+                                    {
+                                        return;
+                                    }
+                                    NewImageAvailable(resizedBitmap);
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Mvx.Trace("failed to download image {0} : {1}", imageSource, ex.ToLongString());
+                            error = true;
+                        }
+
+                        if (error)
+                        {
+                            await HttpImageErrorSeenAsync().ConfigureAwait(false);
+                        }
+                    }
                     else
-                        NewImageAvailable(image);
-                }
-                catch (Exception ex)
-                {
-                    Mvx.Error(ex.Message);
-                }
+                    {
+                        try
+                        {
+                            var image = await ImageFromLocalFileAsync(imageSource).ConfigureAwait(false);
+
+                            if (image == null)
+                            {
+                                // Critical check
+                                lock (_mutex)
+                                {
+                                    if (cancelToken.IsCancellationRequested)
+                                    {
+                                        return;
+                                    }
+                                    ShowErrorImage().Wait(cancelToken);
+                                }
+                            }
+                            else
+                            {
+                                // Critical check
+                                lock (_mutex)
+                                {
+                                    if (cancelToken.IsCancellationRequested)
+                                    {
+                                        return;
+                                    }
+                                    NewImageAvailable(image);
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Mvx.Error(ex.Message);
+                        }
+                    }
+                }, cancelToken);
             }
         }
 
