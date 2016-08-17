@@ -93,7 +93,8 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void Comment()
         {
-            ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
+            //ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
+            ShowViewModel<CommentsViewModel>();
         }
 
         public async void Init(int id)

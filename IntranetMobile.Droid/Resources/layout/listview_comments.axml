@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,20 +13,20 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/name" />
+            app:MvxBind="Text Name" />
         <TextView
             android:text="DatePublication"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="right"
-            android:id="@+id/datePublication" />
+            app:MvxBind="Text Date" />
     </LinearLayout>
     <TextView
         android:text="Some body comments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/bodyComment" />
+        app:MvxBind="Text Body" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
