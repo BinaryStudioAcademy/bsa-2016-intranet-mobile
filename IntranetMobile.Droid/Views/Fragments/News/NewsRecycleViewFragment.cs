@@ -32,8 +32,7 @@ namespace IntranetMobile.Droid.Views.Fragments.News
                 var layoutManager = new LinearLayoutManager(Activity);
                 recyclerView.SetLayoutManager(layoutManager);
             }
-
-
+            
             var swipeToRefresh = view.FindViewById<MvxSwipeRefreshLayout>(Resource.Id.refresher);
             var appBar = Activity.FindViewById<AppBarLayout>(Resource.Id.appbar);
             if (appBar != null)

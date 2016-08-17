@@ -229,6 +229,7 @@
     <Compile Include="Views\Util\FromHtmlValueConverter.cs" />
     <Compile Include="Views\Util\ImageGetter.cs" />
     <Compile Include="Views\Util\LikeActionsWrapper.cs" />
+    <Compile Include="Views\Util\MvxDynamicCompressedImageHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

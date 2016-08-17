@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
+using Android.Graphics;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
@@ -9,6 +10,7 @@ using IntranetMobile.Core;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Services;
 using IntranetMobile.Droid.Services;
+using IntranetMobile.Droid.Views.Util;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
@@ -53,6 +55,7 @@ namespace IntranetMobile.Droid
                 ApplicationContext.FilesDir.Path,
                 Mvx.Resolve<IMvxSqliteConnectionFactory>(),
                 Mvx.Resolve<ILogger>()));
+            Mvx.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicCompressedBitmapHelper>();
         }
 
         // Called after Application.Initialize()
