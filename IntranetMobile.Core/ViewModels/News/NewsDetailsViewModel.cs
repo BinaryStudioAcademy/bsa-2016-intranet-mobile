@@ -95,7 +95,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void Comment()
         {
-            if (_companyNews.comments != null) ShowViewModel<CommentsViewModel>(_companyNews.comments);
+            ShowViewModel<CommentsViewModel>(_companyNews);
             ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
         }
 
