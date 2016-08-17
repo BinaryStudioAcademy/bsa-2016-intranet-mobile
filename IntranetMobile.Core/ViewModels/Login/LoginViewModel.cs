@@ -7,6 +7,11 @@ namespace IntranetMobile.Core.ViewModels.Login
     {
         private const string Tag = "LoginViewModel";
 
+        public LoginViewModel()
+        {
+            Title = "Login";
+        }
+
         public override async void Start()
         {
             base.Start();

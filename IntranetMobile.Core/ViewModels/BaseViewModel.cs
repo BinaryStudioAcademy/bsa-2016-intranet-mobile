@@ -2,7 +2,13 @@
 
 namespace IntranetMobile.Core.ViewModels
 {
-    public abstract class BaseViewModel : MvxViewModel
+    public class BaseViewModel : MvxViewModel
     {
+        public BaseViewModel()
+        {
+            Title = "";
+        }
+        
+        public string Title { get; protected set; }
     }
 }

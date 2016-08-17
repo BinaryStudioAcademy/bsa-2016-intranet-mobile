@@ -1,18 +1,15 @@
 using Android.Support.V7.Widget;
 using Android.Views;
+using IntranetMobile.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
     public abstract class BaseToolbarActivity<TViewModel> : MvxAppCompatActivity<TViewModel>
-        where TViewModel : class, IMvxViewModel
+        where TViewModel : BaseViewModel
     {
         private Toolbar _toolbar;
-
-        public abstract string ToolbarTitle { get; protected set; }
-
-        public abstract string ToolbarSubtitle { get; protected set; }
 
         protected override void OnViewModelSet()
         {
@@ -23,8 +20,7 @@ namespace IntranetMobile.Droid.Views.Activities
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
 
             SetSupportActionBar(_toolbar);
-            SupportActionBar.Title = ToolbarTitle;
-            SupportActionBar.Subtitle = ToolbarSubtitle;
+            SupportActionBar.Title = ViewModel.Title;
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
         }
 

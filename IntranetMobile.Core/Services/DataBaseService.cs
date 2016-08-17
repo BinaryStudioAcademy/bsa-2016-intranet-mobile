@@ -103,8 +103,9 @@ namespace IntranetMobile.Core.Services
         {
             try
             {
-                await CreateTableAsync<T>();
-                return await _connection.Table<T>().FirstOrDefaultAsync();
+                //await CreateTableAsync<T>();
+                return null;
+                //return await _connection.Table<T>().FirstOrDefaultAsync();
             }
             catch (Exception e)
             {

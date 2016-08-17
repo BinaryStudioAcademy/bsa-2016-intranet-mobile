@@ -9,14 +9,15 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class WeekliesViewModel : BaseNewsViewModel
+    public class WeekliesViewModel : BaseViewModel
     {
         private bool _isRefreshing;
         private NewsPreviewViewModel<NewsDto> _selectedItem;
 
         public WeekliesViewModel()
         {
-            AsyncHelper.RunSync(ReloadData);
+            Title = "Weeklies";
+            Task.Run(ReloadData);
         }
 
         public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } =
