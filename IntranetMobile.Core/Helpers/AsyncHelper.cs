@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +10,7 @@ namespace IntranetMobile.Core.Helpers
     public static class AsyncHelper
     {
         /// <summary>
-        ///     Execute's an async Task<T> method which has a void return value synchronously
+        /// Execute's an async Task<T> method which has a void return value synchronously
         /// </summary>
         /// <param name="task">Task<T> method to execute</param>
         public static void RunSync(Func<Task> task)
@@ -38,7 +40,7 @@ namespace IntranetMobile.Core.Helpers
         }
 
         /// <summary>
-        ///     Execute's an async Task<T> method which has a T return type synchronously
+        /// Execute's an async Task<T> method which has a T return type synchronously
         /// </summary>
         /// <typeparam name="T">Return Type</typeparam>
         /// <param name="task">Task<T> method to execute</param>
@@ -48,7 +50,7 @@ namespace IntranetMobile.Core.Helpers
             var oldContext = SynchronizationContext.Current;
             var synch = new ExclusiveSynchronizationContext();
             SynchronizationContext.SetSynchronizationContext(synch);
-            var ret = default(T);
+            T ret = default(T);
             synch.Post(async _ =>
             {
                 try
@@ -72,12 +74,11 @@ namespace IntranetMobile.Core.Helpers
 
         private class ExclusiveSynchronizationContext : SynchronizationContext
         {
-            private readonly Queue<Tuple<SendOrPostCallback, object>> _items =
-                new Queue<Tuple<SendOrPostCallback, object>>();
-
-            private readonly AutoResetEvent _workItemsWaiting = new AutoResetEvent(false);
-            private bool _done;
+            private bool done;
             public Exception InnerException { get; set; }
+            readonly AutoResetEvent workItemsWaiting = new AutoResetEvent(false);
+            readonly Queue<Tuple<SendOrPostCallback, object>> items =
+                new Queue<Tuple<SendOrPostCallback, object>>();
 
             public override void Send(SendOrPostCallback d, object state)
             {
@@ -86,28 +87,28 @@ namespace IntranetMobile.Core.Helpers
 
             public override void Post(SendOrPostCallback d, object state)
             {
-                lock (_items)
+                lock (items)
                 {
-                    _items.Enqueue(Tuple.Create(d, state));
+                    items.Enqueue(Tuple.Create(d, state));
                 }
-                _workItemsWaiting.Set();
+                workItemsWaiting.Set();
             }
 
             public void EndMessageLoop()
             {
-                Post(_ => _done = true, null);
+                Post(_ => done = true, null);
             }
 
             public void BeginMessageLoop()
             {
-                while (!_done)
+                while (!done)
                 {
                     Tuple<SendOrPostCallback, object> task = null;
-                    lock (_items)
+                    lock (items)
                     {
-                        if (_items.Count > 0)
+                        if (items.Count > 0)
                         {
-                            task = _items.Dequeue();
+                            task = items.Dequeue();
                         }
                     }
                     if (task != null)
@@ -120,7 +121,7 @@ namespace IntranetMobile.Core.Helpers
                     }
                     else
                     {
-                        _workItemsWaiting.WaitOne();
+                        workItemsWaiting.WaitOne();
                     }
                 }
             }

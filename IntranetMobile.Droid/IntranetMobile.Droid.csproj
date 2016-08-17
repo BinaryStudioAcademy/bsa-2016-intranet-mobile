@@ -292,6 +292,7 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_comments.axml" />
     <AndroidResource Include="Resources\layout\listview_comments.axml" />
+    <AndroidResource Include="Resources\drawable\news_default.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">

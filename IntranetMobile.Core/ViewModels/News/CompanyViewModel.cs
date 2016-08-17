@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using AngleSharp.Parser.Html;
 using IntranetMobile.Core.Helpers;
-using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
@@ -12,14 +11,15 @@ using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class CompanyViewModel : BaseNewsViewModel
+    public class CompanyViewModel : BaseViewModel
     {
         private bool _isRefreshing;
         private NewsPreviewViewModel<NewsDto> _selectedItem;
 
         public CompanyViewModel()
         {
-            AsyncHelper.RunSync(ReloadData);
+            Title = "Company";
+            Task.Run(ReloadData);
         }
 
         public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } =
@@ -32,8 +32,8 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                AsyncHelper.RunSync(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto));
-                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.Dto.Id});
+                Task.Run(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto))
+                    .ContinueWith(t => ShowViewModel<NewsDetailsViewModel>(new { id = _selectedItem.Dto.Id }));
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -68,13 +68,15 @@ namespace IntranetMobile.Core.ViewModels.News
                 });
             }
         }
-        
+
         public virtual async Task ReloadData()
         {
             //TODO: Normalize news pull
-            ListNews.Clear();
             var parser = new HtmlParser();
             var news = await ServiceBus.NewsService.CompanyNews(0, 10);
+            if (ListNews.Count > 0)
+                ListNews.Clear();
+            
             foreach (var newsDto in news)
             {
                 var parseObj = parser.Parse(newsDto.body);

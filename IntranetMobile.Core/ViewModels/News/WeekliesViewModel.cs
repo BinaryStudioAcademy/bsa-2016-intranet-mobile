@@ -2,21 +2,21 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AngleSharp.Parser.Html;
-using IntranetMobile.Core.Helpers;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class WeekliesViewModel : BaseNewsViewModel
+    public class WeekliesViewModel : BaseViewModel
     {
         private bool _isRefreshing;
         private NewsPreviewViewModel<NewsDto> _selectedItem;
 
         public WeekliesViewModel()
         {
-            AsyncHelper.RunSync(ReloadData);
+            Title = "Weeklies";
+            Task.Run(ReloadData);
         }
 
         public ObservableCollection<NewsPreviewViewModel<NewsDto>> ListNews { set; get; } =
@@ -29,8 +29,8 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                AsyncHelper.RunSync(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto));
-                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.Dto.Id});
+                Task.Run(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto))
+                    .ContinueWith(t => ShowViewModel<NewsDetailsViewModel>(new { id = _selectedItem.Dto.Id }));
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -69,9 +69,11 @@ namespace IntranetMobile.Core.ViewModels.News
         public virtual async Task ReloadData()
         {
             //TODO: Normalize news pull
-            ListNews.Clear();
             var parser = new HtmlParser();
             var weeklies = await ServiceBus.NewsService.Weeklies(0, 10);
+            if (ListNews.Count > 0)
+                ListNews.Clear();
+            
             foreach (var list in weeklies)
             {
                 foreach (var news in list.fullNews)

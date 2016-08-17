@@ -2,6 +2,7 @@ using Android.Content.Res;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
+using IntranetMobile.Core.ViewModels;
 using IntranetMobile.Droid.Views.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
@@ -11,7 +12,7 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 namespace IntranetMobile.Droid.Views.Fragments
 {
     public abstract class BaseDrawerFragment<TViewModel> : MvxFragment<TViewModel>
-        where TViewModel : class, IMvxViewModel
+        where TViewModel : BaseViewModel
     {
         private MvxActionBarDrawerToggle _drawerToggle;
         private Toolbar _toolbar;
@@ -20,10 +21,6 @@ namespace IntranetMobile.Droid.Views.Fragments
 
         public abstract int FragmentLayout { get; protected set; }
         public virtual int ToolbarLayout { get; protected set; } = Resource.Id.toolbar;
-
-        public abstract string ToolbarTitle { get; protected set; }
-
-        public abstract string ToolbarSubtitle { get; protected set; }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -34,8 +31,7 @@ namespace IntranetMobile.Droid.Views.Fragments
             _toolbar = view.FindViewById<Toolbar>(ToolbarLayout);
 
             ParentActivity.SetSupportActionBar(_toolbar);
-            ParentActivity.SupportActionBar.Title = ToolbarTitle;
-            ParentActivity.SupportActionBar.Subtitle = ToolbarSubtitle;
+            ParentActivity.SupportActionBar.Title = ViewModel.Title;
             ParentActivity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
             var drawerActivity = (IDrawerActivity) ParentActivity;
