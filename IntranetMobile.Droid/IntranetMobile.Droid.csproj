@@ -230,6 +230,7 @@
     <Compile Include="Views\Util\ImageGetter.cs" />
     <Compile Include="Views\Util\LikeActionsWrapper.cs" />
     <Compile Include="Views\Util\MvxDynamicCompressedImageHelper.cs" />
+    <Compile Include="Views\Activities\CommentsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -289,6 +290,8 @@
     <AndroidResource Include="Resources\layout\menu_news_details_text_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_comments.axml" />
+    <AndroidResource Include="Resources\layout\listview_comments.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
