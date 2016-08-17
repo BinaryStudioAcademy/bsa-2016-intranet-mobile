@@ -15,7 +15,7 @@ namespace IntranetMobile.Core.ViewModels.News
         private string _subtitile;
         private string _title;
 
-        private NewsDto _companyNews;
+        private NewsDto _news;
 
         public NewsDetailsViewModel()
         {
@@ -95,19 +95,19 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void Comment()
         {
-            if (_companyNews.comments != null) ShowViewModel<CommentsViewModel>(_companyNews.comments);
+            if (_news.comments != null) ShowViewModel<CommentsViewModel>(_news.comments);
             ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
         }
 
         public async void Init(int id)
         {
-            var allCompanyNews = await ServiceBus.StorageService.GetAllItems<NewsDto>();
-            _companyNews = allCompanyNews.FirstOrDefault(item => item.Id == id);
-            await ServiceBus.StorageService.RemoveItem(_companyNews);
-            Title = _companyNews.title;
-            Subtitle = _companyNews.authorId;
+            var allNews = await ServiceBus.StorageService.GetAllItems<NewsDto>();
+            _news = allNews.FirstOrDefault(item => item.Id == id);
+            await ServiceBus.StorageService.RemoveItem(_news);
+            Title = _news.title;
+            Subtitle = _news.authorId;
             IsLiked = true;
-            Content = _companyNews.body;
+            Content = _news.body;
         }
     }
 }
