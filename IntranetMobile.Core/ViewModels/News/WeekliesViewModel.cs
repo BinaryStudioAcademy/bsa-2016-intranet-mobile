@@ -69,9 +69,11 @@ namespace IntranetMobile.Core.ViewModels.News
         public virtual async Task ReloadData()
         {
             //TODO: Normalize news pull
-            ListNews.Clear();
             var parser = new HtmlParser();
             var weeklies = await ServiceBus.NewsService.Weeklies(0, 10);
+            if (ListNews.Count > 0)
+                ListNews.Clear();
+            
             foreach (var list in weeklies)
             {
                 foreach (var news in list.fullNews)
