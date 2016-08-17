@@ -145,7 +145,15 @@ namespace IntranetMobile.Droid.Views.Util
 
                     if (imageSource.ToUpper().StartsWith("HTTP"))
                     {
-                        await NewHttpImageRequestedAsync().ConfigureAwait(false);
+                        // Critical check
+                        lock (_mutex)
+                        {
+                            if (cancelToken.IsCancellationRequested)
+                            {
+                                return;
+                            }
+                            NewHttpImageRequestedAsync().Wait(cancelToken);
+                        }
 
                         var error = false;
                         try
@@ -223,7 +231,15 @@ namespace IntranetMobile.Droid.Views.Util
 
                         if (error)
                         {
-                            await HttpImageErrorSeenAsync().ConfigureAwait(false);
+                            // Critical check
+                            lock (_mutex)
+                            {
+                                if (cancelToken.IsCancellationRequested)
+                                {
+                                    return;
+                                }
+                                HttpImageErrorSeenAsync().Wait(cancelToken);
+                            }
                         }
                     }
                     else
