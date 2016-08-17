@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AngleSharp.Parser.Html;
-using IntranetMobile.Core.Helpers;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
@@ -30,8 +29,8 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                AsyncHelper.RunSync(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto));
-                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.Dto.Id});
+                Task.Run(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto))
+                    .ContinueWith(t => ShowViewModel<NewsDetailsViewModel>(new { id = _selectedItem.Dto.Id }));
 
                 RaisePropertyChanged(() => SelectedItem);
             }
