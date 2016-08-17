@@ -6,6 +6,7 @@ using IntranetMobile.Core.Helpers;
 using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Messages;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Messenger;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
@@ -13,10 +14,21 @@ namespace IntranetMobile.Core.ViewModels.News
     {
         private bool _isRefreshing;
         private NewsViewModel _selectedItem;
+        private readonly MvxSubscriptionToken _token;
 
-        public CompanyNewsViewModel()
+        public CompanyNewsViewModel(IMvxMessenger messenger)
         {
+            _token = messenger.Subscribe<MvxSubscriberChangeMessage>(MvxSubscriberChangeMessageDeliveryAction);
             AsyncHelper.RunSync(ReloadData);
+        }
+
+        private void MvxSubscriberChangeMessageDeliveryAction(MvxSubscriberChangeMessage subscriberChangeMessage)
+        {
+            if (subscriberChangeMessage.MessageType == typeof(NewsViewModelMessage))
+            {
+                var message = new NewsViewModelMessage(this, _selectedItem);
+                ServiceBus.MessengerHub.Publish(message);
+            }
         }
 
         public ObservableCollection<NewsViewModel> News { set; get; } =
@@ -30,10 +42,7 @@ namespace IntranetMobile.Core.ViewModels.News
                 _selectedItem = value;
 
                 ShowViewModel<NewsDetailsViewModel>();
-
-                var message = new NewsViewModelMessage(this, _selectedItem);
-                ServiceBus.MessengerHub.Publish(message);
-
+                
                 RaisePropertyChanged(() => SelectedItem);
             }
         }

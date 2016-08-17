@@ -1,5 +1,4 @@
-﻿using System;
-using IntranetMobile.Core.Services;
+﻿using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Messages;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
@@ -10,12 +9,7 @@ namespace IntranetMobile.Core.ViewModels.News
     {
         private const string Tag = "NewsDetailsViewModel";
         private readonly MvxSubscriptionToken _token;
-        private int _commentsCount;
-        private string _content;
-        private bool _isLiked;
-        private int _likesCount;
-        private string _subtitile;
-        private string _title;
+        private NewsViewModel _newsViewModel;
 
         public NewsDetailsViewModel(IMvxMessenger messenger)
         {
@@ -24,78 +18,29 @@ namespace IntranetMobile.Core.ViewModels.News
             CommentCommand = new MvxCommand(Comment);
         }
 
-        private void DeliveryAction(NewsViewModelMessage newsViewModelMessage)
-        {
-            Title = newsViewModelMessage.ViewModel.Title;
-        }
-
         public MvxCommand LikeCommand { get; private set; }
 
         public MvxCommand CommentCommand { get; private set; }
 
-        public string Title
+        public NewsViewModel NewsViewModel
         {
-            get { return _title; }
+            get { return _newsViewModel; }
             private set
             {
-                _title = value;
-                RaisePropertyChanged(() => Title);
-            }
-        }
-
-        public string Subtitle
-        {
-            get { return _subtitile; }
-            private set
-            {
-                _subtitile = value;
-                RaisePropertyChanged(() => Subtitle);
-            }
-        }
-
-        public bool IsLiked
-        {
-            get { return _isLiked; }
-            private set
-            {
-                _isLiked = value;
-                RaisePropertyChanged(() => IsLiked);
-            }
-        }
-
-        public int LikesCount
-        {
-            get { return _likesCount; }
-            private set
-            {
-                _likesCount = value;
-                RaisePropertyChanged(() => LikesCount);
-            }
-        }
-
-        public int CommentsCount
-        {
-            get { return _commentsCount; }
-            set
-            {
-                _commentsCount = value;
-                RaisePropertyChanged(() => CommentsCount);
-            }
-        }
-
-        public string Content
-        {
-            get { return _content; }
-            private set
-            {
-                _content = value;
+                _newsViewModel = value;
                 RaisePropertyChanged(() => Content);
             }
         }
 
+        public string Content => NewsViewModel != null ? NewsViewModel.Body : string.Empty;
+
+        private void DeliveryAction(NewsViewModelMessage newsViewModelMessage)
+        {
+            NewsViewModel = newsViewModelMessage.ViewModel;
+        }
+
         private void Like()
         {
-            IsLiked = !IsLiked;
             ServiceBus.AlertService.ShowMessage(Tag, "Like clicked!");
         }
 

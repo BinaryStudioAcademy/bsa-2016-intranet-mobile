@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using SQLiteNetExtensions.Attributes;
 
 // ReSharper disable InconsistentNaming
 
@@ -18,7 +17,6 @@ namespace IntranetMobile.Core.Models.Dtos
         [JsonProperty("_id")]
         public string commentId { get; set; }
 
-        [TextBlob("LikesBlobbed")]
         public List<string> likes { get; set; }
     }
 }

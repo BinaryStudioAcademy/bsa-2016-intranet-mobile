@@ -11,6 +11,7 @@ namespace IntranetMobile.Core.Services
         private const string Published = "yes";
         private const string LikeUnlikeCommentPath = "api/news/{0}/comments/{1}/likes";
         private const string LikeUnlikeNews = "api/news/{0}/likes";
+        private const string NewsByIdPath = "api/news/{0}/";
 
         private readonly RestClient _restClient;
 
@@ -77,6 +78,11 @@ namespace IntranetMobile.Core.Services
             };
 
             return _restClient.GetAsync<List<WeekNewsDto>>("api/packs", weekNewsReqParams);
+        }
+
+        public Task<NewsDto> GetNewsByIdAsync(string newsId)
+        {
+            return _restClient.GetAsync<NewsDto>(string.Format(NewsByIdPath, newsId));
         }
     }
 }

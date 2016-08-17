@@ -1,22 +1,48 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
     public class NewsViewModel : BaseViewModel
     {
+        private string _authorId;
+        private string _body;
+        private int _commentsCount;
+        private long _date;
         private bool _isLiked;
         private string _likeImageViewUrl;
+        private int _likesCount;
         private string _newsId;
-        private string _newsUrl;
         private string _previewImageUri;
-        private string _subtitle;
         private string _title;
+        private string _type;
 
         public NewsViewModel()
         {
             ClickCommentCommand = new MvxCommand(ClickCommentCommandExecute);
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
+        }
+
+        public string NewsId
+        {
+            get { return _newsId; }
+            set
+            {
+                _newsId = value;
+                Task.Factory.StartNew(async delegate
+                {
+                    var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
+                    Title = news.title;
+                    AuthorId = news.authorId;
+                    Body = news.body;
+                    Date = news.date;
+                    Type = news.type;
+                    LikesCount = news.likes.Count;
+                    CommentsCount = news.comments.Count;
+                });
+            }
         }
 
         public string Title
@@ -29,36 +55,63 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        public string Subtitle
+        public string AuthorId
         {
-            get { return _subtitle; }
+            get { return _authorId; }
             set
             {
-                _subtitle = value;
-                RaisePropertyChanged(() => Subtitle);
+                _authorId = value;
+                RaisePropertyChanged(() => AuthorId);
             }
         }
 
-        public string NewsUrl
+        public string Body
         {
-            get { return _newsUrl; }
+            get { return _body; }
             set
             {
-                _newsUrl = value;
-                RaisePropertyChanged(() => NewsUrl);
+                _body = value;
+                RaisePropertyChanged(() => Body);
             }
         }
 
-        public string NewsId
+        public long Date
         {
-            get { return _newsId; }
+            get { return _date; }
             set
             {
-                _newsId = value;
+                _date = value;
+                RaisePropertyChanged(() => Date);
+            }
+        }
 
-                // TODO: Set all the staff here
+        public string Type
+        {
+            get { return _type; }
+            set
+            {
+                _type = value;
+                RaisePropertyChanged(() => Type);
+            }
+        }
 
-                RaisePropertyChanged(() => NewsId);
+        public int LikesCount
+        {
+            get { return _likesCount; }
+            set
+            {
+                _likesCount = value;
+                RaisePropertyChanged(() => LikesCount);
+            }
+        }
+
+        public int CommentsCount
+        {
+            get { return _commentsCount; }
+            set
+            {
+                _commentsCount = value;
+                RaisePropertyChanged(() => CommentsCount);
             }
         }
 
@@ -82,6 +135,7 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _isLiked = value;
                 LikeImageViewUrl = _isLiked ? "ic_favorite_white_24dp" : "ic_favorite_border_white_24dp";
+                RaisePropertyChanged(() => IsLiked);
             }
         }
 

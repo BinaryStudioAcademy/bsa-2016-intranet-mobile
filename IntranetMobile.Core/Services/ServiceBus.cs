@@ -14,7 +14,7 @@ namespace IntranetMobile.Core.Services
 
         private static IAlertService _alertService;
 
-        private static MvxMessengerHub _messengerHub;
+        private static IMvxMessenger _messengerHub;
 
         public static IStorageService StorageService
             => _storageService ?? (_storageService = Mvx.Resolve<IStorageService>());
@@ -28,7 +28,7 @@ namespace IntranetMobile.Core.Services
         public static IAlertService AlertService
             => _alertService ?? (_alertService = Mvx.Resolve<IAlertService>());
 
-        public static MvxMessengerHub MessengerHub
-            => _messengerHub ?? (_messengerHub = new MvxMessengerHub());
+        public static IMvxMessenger MessengerHub
+            => _messengerHub ?? (_messengerHub = Mvx.Resolve<IMvxMessenger>());
     }
 }
