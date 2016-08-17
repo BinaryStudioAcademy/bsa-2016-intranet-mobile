@@ -10,6 +10,8 @@ namespace IntranetMobile.Core
         public string Body { get; set; }
 
         public int Countlikes { get; set; }
+
+        public string LikeImageViewUrl { get; set; }
     }
 }
 

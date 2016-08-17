@@ -1,45 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using IntranetMobile.Core.Models.Dtos;
-using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels;
 
 namespace IntranetMobile.Core
 {
     public class CommentsViewModel : BaseViewModel
     {
-        private ObservableCollection<Comment> _comments = new ObservableCollection<Comment>
-        {
-            new Comment {Name = "name1", Body = "some text bla bla bla, more and more. I write comment!", Date = 140716},
-            new Comment {Name = "name2", Body = "some text bla bla bla, more and more. I write comment!", Date = 140716},
-            new Comment {Name = "name3", Body = "some text bla bla bla, more and more. I write comment!", Date = 140716}
-        };
+        private ObservableCollection<CommentsItemViewModel> _comments;
 
-        public CommentsViewModel()
+        public CommentsViewModel(List<CommentDto> comments)
         {
-            //_comments = GetListOfComments(compNewsDto);
+            _comments = GetListOfComments(comments);
         }
 
-     /*   public ObservableCollection<Comment> GetListOfComments(CompNewsDto compNewsDto)
+        public ObservableCollection<CommentsItemViewModel> GetListOfComments(List<CommentDto> comments)
         {
-            var listOfComments = new ObservableCollection<Comment>();
+            var listOfComments = new ObservableCollection<CommentsItemViewModel>();
 
-            foreach (var p in compNewsDto.comments)
+            foreach (var p in comments)
             {
-                var comment = new Comment();
-
-                //TODO: Find Author Name
-                comment.Body = p.body;
-                comment.Date = p.date;
-                comment.Countlikes = p.likes.Count;
+                var comment = new CommentsItemViewModel(p.authorId, p.date, p.body, p.likes.Count);
 
                 listOfComments.Add(comment);
             }
 
             return listOfComments;
-        }*/
+        }
 
-        public ObservableCollection<Comment> Comments
+        public ObservableCollection<CommentsItemViewModel> Comments
         {
             get { return _comments; }
             set
