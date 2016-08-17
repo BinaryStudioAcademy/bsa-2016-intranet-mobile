@@ -4,9 +4,9 @@
     {
         public AllNewsViewModel()
         {
-            Recycler = new CompanyViewModel();
+            Recycler = new CompanyNewsViewModel();
         }
 
-        public CompanyViewModel Recycler { get; private set; }
+        public CompanyNewsViewModel Recycler { get; private set; }
     }
 }

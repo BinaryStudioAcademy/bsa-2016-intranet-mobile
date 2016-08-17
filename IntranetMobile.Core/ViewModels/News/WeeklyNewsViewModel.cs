@@ -9,20 +9,20 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class WeekliesViewModel : BaseNewsViewModel
+    public class WeeklyNewsViewModel : BaseNewsViewModel
     {
         private bool _isRefreshing;
-        private NewsPreviewViewModel _selectedItem;
+        private NewsViewModel _selectedItem;
 
-        public WeekliesViewModel()
+        public WeeklyNewsViewModel()
         {
             AsyncHelper.RunSync(ReloadData);
         }
 
-        public ObservableCollection<NewsPreviewViewModel> News { set; get; } =
-            new ObservableCollection<NewsPreviewViewModel>();
+        public ObservableCollection<NewsViewModel> News { set; get; } =
+            new ObservableCollection<NewsViewModel>();
 
-        public NewsPreviewViewModel SelectedItem
+        public NewsViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -37,7 +37,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ICommand SelectItem
         {
-            get { return new MvxCommand<NewsPreviewViewModel>(item => { SelectedItem = item; }); }
+            get { return new MvxCommand<NewsViewModel>(item => { SelectedItem = item; }); }
         }
 
         public virtual bool IsRefreshing
@@ -71,9 +71,9 @@ namespace IntranetMobile.Core.ViewModels.News
             News.Clear();
             var parser = new HtmlParser();
             var weeklies = await ServiceBus.NewsService.Weeklies(0, 10);
-            foreach (var list in weeklies)
+            foreach (var newsBundle in weeklies)
             {
-                foreach (var news in list.fullNews)
+                foreach (var news in newsBundle.fullNews)
                 {
                     var parseObj = parser.Parse(news.body);
                     var previewImageUrl = string.Empty;
@@ -82,7 +82,7 @@ namespace IntranetMobile.Core.ViewModels.News
                         previewImageUrl = parseObj.Images[0].Source;
                     }
 
-                    News.Add(new NewsPreviewViewModel
+                    News.Add(new NewsViewModel
                     {
                         PreviewImageUri = previewImageUrl,
                         NewsId = news.newsId

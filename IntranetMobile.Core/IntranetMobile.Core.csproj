@@ -76,10 +76,10 @@
     <Compile Include="ViewModels\News\BaseNewsViewModel.cs" />
     <Compile Include="ViewModels\News\INewsContainer.cs" />
     <Compile Include="ViewModels\News\NewsDetailsViewModel.cs" />
-    <Compile Include="ViewModels\News\CompanyViewModel.cs" />
+    <Compile Include="ViewModels\News\CompanyNewsViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="ViewModels\News\NewsPreviewViewModel.cs" />
-    <Compile Include="ViewModels\News\WeekliesViewModel.cs" />
+    <Compile Include="ViewModels\News\NewsViewModel.cs" />
+    <Compile Include="ViewModels\News\WeeklyNewsViewModel.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="ViewModels\News\CommentsViewModel.cs" />
     <Compile Include="ViewModels\News\CommentsItemViewModel.cs" />

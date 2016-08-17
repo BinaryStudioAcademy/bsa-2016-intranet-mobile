@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using IntranetMobile.Core.Models.Dtos;
-using IntranetMobile.Core.Services;
-using System.Windows.Input;
-using IntranetMobile.Core.ViewModels;
+﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core
+namespace IntranetMobile.Core.ViewModels.News
 {
     public class CommentsItemViewModel : BaseViewModel
     {

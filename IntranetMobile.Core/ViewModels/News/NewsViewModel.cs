@@ -4,7 +4,7 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class NewsPreviewViewModel : BaseViewModel
+    public class NewsViewModel : BaseViewModel
     {
         private string _previewImageUri;
         private bool _isLiked;
@@ -14,7 +14,7 @@ namespace IntranetMobile.Core.ViewModels.News
         private string _newsUrl;
         private string _newsId;
 
-        public NewsPreviewViewModel()
+        public NewsViewModel()
         {
             ClickCommentCommand = new MvxCommand(ClickCommentCommandExecute);
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);

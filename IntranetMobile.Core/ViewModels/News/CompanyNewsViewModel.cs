@@ -9,20 +9,20 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class CompanyViewModel : BaseNewsViewModel
+    public class CompanyNewsViewModel : BaseNewsViewModel
     {
         private bool _isRefreshing;
-        private NewsPreviewViewModel _selectedItem;
+        private NewsViewModel _selectedItem;
 
-        public CompanyViewModel()
+        public CompanyNewsViewModel()
         {
             AsyncHelper.RunSync(ReloadData);
         }
 
-        public ObservableCollection<NewsPreviewViewModel> News { set; get; } =
-            new ObservableCollection<NewsPreviewViewModel>();
+        public ObservableCollection<NewsViewModel> News { set; get; } =
+            new ObservableCollection<NewsViewModel>();
 
-        public NewsPreviewViewModel SelectedItem
+        public NewsViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -37,7 +37,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ICommand SelectItem
         {
-            get { return new MvxCommand<NewsPreviewViewModel>(item => { SelectedItem = item; }); }
+            get { return new MvxCommand<NewsViewModel>(item => { SelectedItem = item; }); }
         }
 
         public virtual bool IsRefreshing
@@ -70,22 +70,20 @@ namespace IntranetMobile.Core.ViewModels.News
             //TODO: Normalize news pull
             News.Clear();
             var parser = new HtmlParser();
-            var news = await ServiceBus.NewsService.CompanyNews(0, 10);
-            foreach (var newsDto in news)
+            var allNews = await ServiceBus.NewsService.CompanyNews(0, 10);
+            foreach (var news in allNews)
             {
-                var parseObj = parser.Parse(newsDto.body);
+                var parseObj = parser.Parse(news.body);
                 var image = string.Empty;
                 if (parseObj.Images.Length > 0)
                 {
                     image = parseObj.Images[0].Source;
                 }
-                var title = newsDto.title;
-                var author = newsDto.authorId;
-                News.Add(new NewsPreviewViewModel
+
+                News.Add(new NewsViewModel
                 {
                     PreviewImageUri = image,
-                    Title = title,
-                    Subtitle = author
+                    NewsId = news.newsId
                 });
             }
         }

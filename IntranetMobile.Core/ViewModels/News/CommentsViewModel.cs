@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.ViewModels;
+using IntranetMobile.Core.ViewModels.News;
 
 namespace IntranetMobile.Core
 {
