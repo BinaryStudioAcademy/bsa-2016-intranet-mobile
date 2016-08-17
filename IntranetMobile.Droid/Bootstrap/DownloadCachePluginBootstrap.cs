@@ -1,10 +1,9 @@
 using MvvmCross.Platform.Plugins;
-using MvvmCross.Plugins.DownloadCache;
 
 namespace IntranetMobile.Droid.Bootstrap
 {
     public class DownloadCachePluginBootstrap
-        : MvxPluginBootstrapAction<PluginLoader>
+        : MvxPluginBootstrapAction<MvvmCross.Plugins.DownloadCache.PluginLoader>
     {
         protected override void Load(IMvxPluginManager manager)
         {

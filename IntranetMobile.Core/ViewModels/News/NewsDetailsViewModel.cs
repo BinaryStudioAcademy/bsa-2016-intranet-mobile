@@ -1,11 +1,15 @@
-﻿using IntranetMobile.Core.Services;
+﻿using System;
+using IntranetMobile.Core.Services;
+using IntranetMobile.Core.ViewModels.Messages;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Messenger;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
     public class NewsDetailsViewModel : BaseViewModel
     {
         private const string Tag = "NewsDetailsViewModel";
+        private readonly MvxSubscriptionToken _token;
         private int _commentsCount;
         private string _content;
         private bool _isLiked;
@@ -13,10 +17,16 @@ namespace IntranetMobile.Core.ViewModels.News
         private string _subtitile;
         private string _title;
 
-        public NewsDetailsViewModel()
+        public NewsDetailsViewModel(IMvxMessenger messenger)
         {
+            _token = messenger.Subscribe<NewsViewModelMessage>(DeliveryAction);
             LikeCommand = new MvxCommand(Like);
             CommentCommand = new MvxCommand(Comment);
+        }
+
+        private void DeliveryAction(NewsViewModelMessage newsViewModelMessage)
+        {
+            Title = newsViewModelMessage.ViewModel.Title;
         }
 
         public MvxCommand LikeCommand { get; private set; }
@@ -93,10 +103,6 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             // TODO: Call CommentsViewModel here
             ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
-        }
-
-        public void Init(string newsId)
-        {
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using IntranetMobile.Core.Interfaces;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 
 namespace IntranetMobile.Core.Services
 {
@@ -13,6 +14,8 @@ namespace IntranetMobile.Core.Services
 
         private static IAlertService _alertService;
 
+        private static MvxMessengerHub _messengerHub;
+
         public static IStorageService StorageService
             => _storageService ?? (_storageService = Mvx.Resolve<IStorageService>());
 
@@ -24,5 +27,8 @@ namespace IntranetMobile.Core.Services
 
         public static IAlertService AlertService
             => _alertService ?? (_alertService = Mvx.Resolve<IAlertService>());
+
+        public static MvxMessengerHub MessengerHub
+            => _messengerHub ?? (_messengerHub = new MvxMessengerHub());
     }
 }

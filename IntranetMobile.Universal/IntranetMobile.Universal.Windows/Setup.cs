@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
+using IntranetMobile.Core;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.WindowsCommon.Platform;
 
@@ -18,7 +14,7 @@ namespace IntranetMobile.Universal
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.Application();
+            return new Application();
         }
     }
 }

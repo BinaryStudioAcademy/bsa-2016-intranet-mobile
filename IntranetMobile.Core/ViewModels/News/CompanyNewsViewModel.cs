@@ -4,6 +4,7 @@ using System.Windows.Input;
 using AngleSharp.Parser.Html;
 using IntranetMobile.Core.Helpers;
 using IntranetMobile.Core.Services;
+using IntranetMobile.Core.ViewModels.Messages;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
@@ -28,7 +29,10 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                ShowViewModel<NewsDetailsViewModel>(new {id = _selectedItem.NewsId});
+                ShowViewModel<NewsDetailsViewModel>();
+
+                var message = new NewsViewModelMessage(this, _selectedItem);
+                ServiceBus.MessengerHub.Publish(message);
 
                 RaisePropertyChanged(() => SelectedItem);
             }
