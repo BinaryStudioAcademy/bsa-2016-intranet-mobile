@@ -10,7 +10,7 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
-    [Activity(Label = "Intranet Mobile", Theme = "@style/BSTheme")]
+    [Activity(Label = "   ", Theme = "@style/BSTheme")]
     public class NewsDetailsActivity : MvxAppCompatActivity<NewsDetailsViewModel>
     {
         private LikeActionsWrapper _likeActionsWrapper;
