@@ -13,6 +13,7 @@ using MvvmCross.Plugins.DownloadCache;
 
 namespace IntranetMobile.Droid.Views.Controls
 {
+    [Obsolete("Use propriate MvxDynamicCompressedBitmapHelper instead", true)]
     public class CompressedMvxAppCompatImageView : MvxAppCompatImageView
     {
         private readonly object _mutex = new object();

@@ -213,7 +213,7 @@
     <Compile Include="Views\Activities\LoginActivity.cs" />
     <Compile Include="Views\Activities\MainActivity.cs" />
     <Compile Include="Views\Activities\NewsDetailsActivity.cs" />
-    <Compile Include="Views\Controls\BindableWebView.cs" />
+    <Compile Include="Views\Controls\NewsDetailsWebView.cs" />
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\Controls\CompressedMvxAppCompatImageView.cs" />
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />

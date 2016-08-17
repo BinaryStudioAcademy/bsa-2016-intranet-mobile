@@ -13,6 +13,7 @@ namespace IntranetMobile.Droid.Views.Util
     public class MvxDynamicCompressedBitmapHelper
         : IMvxImageHelper<Bitmap>
     {
+        // TODO: Dynamically bind dat
         const int MaxSize = 400;
 
         #region ImageState enum

@@ -28,7 +28,7 @@ namespace IntranetMobile.Droid.Views.Activities
             SetSupportActionBar(_toolbar);
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
-            var webWiew = FindViewById<BindableWebView>(Resource.Id.activity_news_details_webview);
+            var webWiew = FindViewById<NewsDetailsWebView>(Resource.Id.activity_news_details_webview);
             webWiew.Settings.SetLayoutAlgorithm(WebSettings.LayoutAlgorithm.SingleColumn);
         }
 
