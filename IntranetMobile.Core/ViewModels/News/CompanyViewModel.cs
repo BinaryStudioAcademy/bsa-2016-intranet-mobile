@@ -1,11 +1,14 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AngleSharp.Parser.Html;
 using IntranetMobile.Core.Helpers;
+using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
@@ -65,7 +68,7 @@ namespace IntranetMobile.Core.ViewModels.News
                 });
             }
         }
-
+        
         public virtual async Task ReloadData()
         {
             //TODO: Normalize news pull
@@ -81,12 +84,12 @@ namespace IntranetMobile.Core.ViewModels.News
                     image = parseObj.Images[0].Source;
                 }
                 var title = newsDto.title;
-                var author = newsDto.authorId;
+                var author = ServiceBus.ListUsers.FirstOrDefault(user => user.ServerUserId == newsDto.authorId);
                 ListNews.Add(new NewsPreviewViewModel<NewsDto>
                 {
                     ImageUri = image,
                     Title = title,
-                    Subtitle = author,
+                    Subtitle = $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(newsDto.date)}",
                     Dto = newsDto
                 });
             }
