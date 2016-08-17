@@ -99,7 +99,7 @@ namespace IntranetMobile.Core
         private void ClickLikeCommandExecute()
         {
             IsLiked = !_isLiked;
-            _countLikes = IsLiked ? _countLikes + 1 : _countLikes - 1;
+            CountLikes = IsLiked ? _countLikes + 1 : _countLikes - 1;
         }
     }
 }
