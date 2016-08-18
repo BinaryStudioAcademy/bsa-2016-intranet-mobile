@@ -64,13 +64,11 @@ namespace IntranetMobile.Core.ViewModels.News
                     RaisePropertyChanged(() => LikesCount);
                 }
             }
-            ServiceBus.AlertService.ShowMessage(Tag, "Like clicked!");
         }
 
         private void Comment()
         {
             ShowViewModel<CommentsViewModel>();
-            ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
         }
 
         public class Parameters
