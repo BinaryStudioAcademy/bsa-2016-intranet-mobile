@@ -19,7 +19,7 @@ namespace IntranetMobile.Core.ViewModels.News
         public CompanyNewsViewModel(IMvxMessenger messenger)
         {
             _token = messenger.Subscribe<MvxSubscriberChangeMessage>(MvxSubscriberChangeMessageDeliveryAction);
-            AsyncHelper.RunSync(ReloadData);
+            Task.Run(ReloadData);
         }
 
         public ObservableCollection<NewsViewModel> News { set; get; } =

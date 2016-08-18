@@ -187,7 +187,7 @@ namespace IntranetMobile.Core.ViewModels.News
             var author =
                 (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
             NewsSubtitle =
-                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(news.date)}";
+                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestampMs(news.date)}";
         }
 
         public async Task MetadataReloadAsync()
@@ -199,7 +199,7 @@ namespace IntranetMobile.Core.ViewModels.News
             var author =
                 (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
             NewsSubtitle =
-                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(news.date)}";
+                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestampMs(news.date)}";
         }
     }
 }
