@@ -7,14 +7,10 @@ namespace IntranetMobile.Core.ViewModels.News
     {
         private const string Tag = "NewsDetailsViewModel";
 
-        private string _body;
         private Models.News _dataModel;
 
         public NewsDetailsViewModel()
         {
-            Title = "";
-            NewsViewModel = new NewsViewModel();
-
             LikeCommand = new MvxCommand(Like);
             CommentCommand = new MvxCommand(Comment);
         }
@@ -23,7 +19,13 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public MvxCommand CommentCommand { get; private set; }
 
-        public NewsViewModel NewsViewModel { get; private set; }
+        public string Body => _dataModel.Body;
+
+        public int LikesCount => _dataModel.Likes?.Count ?? 0;
+
+        public int CommentsCount => _dataModel.Comments?.Count ?? 0;
+
+        public bool IsLiked => false;
 
         public async void Init(Parameters arg)
         {
@@ -31,30 +33,8 @@ namespace IntranetMobile.Core.ViewModels.News
             _dataModel = news;
 
             Title = news.Title;
-            Body = news.Body;
-
             RaisePropertyChanged(() => LikesCount);
             RaisePropertyChanged(() => CommentsCount);
-        }
-
-        public string Body
-        {
-            get { return _body; }
-            set
-            {
-                _body = value;
-                RaisePropertyChanged(() => Body);
-            }
-        }
-
-        public int LikesCount
-        {
-            get { return _dataModel.Likes != null ? _dataModel.Likes.Count : 0; }
-        }
-
-        public int CommentsCount
-        {
-            get { return _dataModel.Comments != null ? _dataModel.Comments.Count : 0; }
         }
 
         private void Like()

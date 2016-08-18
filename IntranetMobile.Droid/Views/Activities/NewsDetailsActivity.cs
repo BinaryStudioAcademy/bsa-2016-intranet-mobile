@@ -50,7 +50,7 @@ namespace IntranetMobile.Droid.Views.Activities
             var likeActionsBindingSet = this.CreateBindingSet<NewsDetailsActivity, NewsDetailsViewModel>();
             likeActionsBindingSet.Bind(_likeActionsWrapper)
                 .For(l => l.IsLiked)
-                .To(viewModel => viewModel.NewsViewModel.IsLiked);
+                .To(viewModel => viewModel.IsLiked);
             likeActionsBindingSet.Bind(_likeActionsWrapper)
                 .For(l => l.LikesCount)
                 .To(viewModel => viewModel.LikesCount);
