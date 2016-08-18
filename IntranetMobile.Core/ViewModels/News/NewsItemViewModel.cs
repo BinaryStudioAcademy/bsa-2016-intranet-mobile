@@ -9,19 +9,17 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class NewsViewModel : BaseViewModel
+    public class NewsItemViewModel : BaseViewModel
     {
         private User _author;
         private string _authorId;
-        private string _body;
         private DateTime _date;
         private bool _isLiked;
         private string _previewImageUri;
-        private string _type;
 
         private Models.News _dataModel;
 
-        public NewsViewModel()
+        public NewsItemViewModel()
         {
             ClickCommentCommand = new MvxCommand(ClickCommentCommandExecute);
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
@@ -41,16 +39,6 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        public string Body
-        {
-            get { return _body; }
-            set
-            {
-                _body = value;
-                RaisePropertyChanged(() => Body);
-            }
-        }
-
         public DateTime Date
         {
             get { return _date; }
@@ -59,16 +47,6 @@ namespace IntranetMobile.Core.ViewModels.News
                 _date = value;
                 RaisePropertyChanged(() => Date);
                 RaisePropertyChanged(() => Subtitle);
-            }
-        }
-
-        public string Type
-        {
-            get { return _type; }
-            set
-            {
-                _type = value;
-                RaisePropertyChanged(() => Type);
             }
         }
 
@@ -133,17 +111,15 @@ namespace IntranetMobile.Core.ViewModels.News
             });
         }
 
-        public static NewsViewModel FromModel(Models.News news)
+        public static NewsItemViewModel FromModel(Models.News news)
         {
-            return new NewsViewModel
+            return new NewsItemViewModel
             {
-                Body = news.Body,
                 PreviewImageUri = news.Body.GetFirstImageUri(),
                 NewsId = news.NewsId,
                 Title = news.Title,
                 AuthorId = news.AuthorId,
                 Date = news.Date,
-                Type = news.Type,
                 _dataModel = news
             };
         }

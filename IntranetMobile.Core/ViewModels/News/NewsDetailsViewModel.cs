@@ -6,8 +6,6 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class NewsDetailsViewModel : BaseViewModel
     {
-        private const string Tag = "NewsDetailsViewModel";
-
         private Models.News _dataModel;
 
         public NewsDetailsViewModel()
@@ -30,10 +28,9 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public async void Init(Parameters arg)
         {
-            var news = await ServiceBus.NewsService.GetCompanyNewsById(arg.NewsId);
-            _dataModel = news;
+            _dataModel = await ServiceBus.NewsService.GetCompanyNewsById(arg.NewsId);
 
-            Title = news.Title;
+            Title = _dataModel.Title;
             RaisePropertyChanged(() => LikesCount);
             RaisePropertyChanged(() => CommentsCount);
         }

@@ -236,6 +236,7 @@
     <Compile Include="Views\Util\LikeActionsWrapper.cs" />
     <Compile Include="Views\Util\MvxDynamicCompressedImageHelper.cs" />
     <Compile Include="Views\Activities\CommentsActivity.cs" />
+    <Compile Include="Views\Fragments\News\WeekliesRecyclerViewFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -298,6 +299,12 @@
     <AndroidResource Include="Resources\layout\activity_comments.axml" />
     <AndroidResource Include="Resources\layout\listview_comments.axml" />
     <AndroidResource Include="Resources\drawable-nodpi\news_default.png" />
+    <AndroidResource Include="Resources\layout\recycle_view_weekly.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\card_view_weekly.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">

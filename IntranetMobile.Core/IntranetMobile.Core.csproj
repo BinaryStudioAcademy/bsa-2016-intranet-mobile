@@ -76,18 +76,20 @@
     <Compile Include="ViewModels\Login\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginLoadingViewModel.cs" />
     <Compile Include="ViewModels\Login\UserCredentialsViewModel.cs" />
-    <Compile Include="ViewModels\Messages\NewsViewModelMessage.cs" />
     <Compile Include="ViewModels\News\AllNewsViewModel.cs" />
     <Compile Include="ViewModels\News\NewsDetailsViewModel.cs" />
     <Compile Include="ViewModels\News\CompanyNewsViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="ViewModels\News\NewsViewModel.cs" />
+    <Compile Include="ViewModels\News\NewsItemViewModel.cs" />
     <Compile Include="ViewModels\News\WeeklyNewsViewModel.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="ViewModels\News\CommentsViewModel.cs" />
     <Compile Include="ViewModels\News\CommentsItemViewModel.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="Models\WeeklyNews.cs" />
+    <Compile Include="ViewModels\News\WeeklyItemViewModel.cs" />
+    <Compile Include="ViewModels\News\WeeklyDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">

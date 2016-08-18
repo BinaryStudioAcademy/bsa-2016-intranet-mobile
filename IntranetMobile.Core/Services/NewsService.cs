@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Extensions;
@@ -19,7 +20,7 @@ namespace IntranetMobile.Core.Services
         private readonly RestClient _restClient;
 
         private List<News> _companyNewsCache;
-        private List<News> _weeklyNewsCache;
+        private List<WeeklyNews> _weeklyNewsCache;
 
         public NewsService(RestClient client)
         {
@@ -42,7 +43,7 @@ namespace IntranetMobile.Core.Services
             return _companyNewsCache;
         }
 
-        public Task<List<WeekNewsDto>> GetWeeklyNews(int skip, int limit)
+        public async Task<List<WeeklyNews>> GetWeeklyNews(int skip, int limit)
         {
             var weekNewsReqParams = new WeekNewsReqParams
             {
@@ -51,7 +52,10 @@ namespace IntranetMobile.Core.Services
                 published = Published
             };
 
-            return _restClient.GetAsync<List<WeekNewsDto>>("api/packs", weekNewsReqParams);
+            var news = await _restClient.GetAsync<List<WeekNewsDto>>("api/packs", weekNewsReqParams);
+
+            _weeklyNewsCache = news.OrderByDescending(n => n.date).Select(GetWeeklyNewsFromDto).ToList();
+            return _weeklyNewsCache;
         }
 
         public async Task<News> GetCompanyNewsById(string newsId)
@@ -69,6 +73,20 @@ namespace IntranetMobile.Core.Services
             result = GetCompanyNewsFromDto(dto);
 
             return result;
+        }
+
+        public WeeklyNews GetWeeklyNewsById(string newsId)
+        {
+            WeeklyNews result;
+
+            if (_weeklyNewsCache != null && _weeklyNewsCache.Count > 0)
+            {
+                result = _weeklyNewsCache.FirstOrDefault(n => n.WeeklyId.Equals(newsId));
+                if (result != null)
+                    return result;
+            }
+
+            return null;
         }
 
         public Task<bool> LikeComment(string newsId, string commentId)
@@ -130,6 +148,26 @@ namespace IntranetMobile.Core.Services
                     Date = c.date.UnixTimestampToDateTime(),
                     Likes = c.likes
                 }).ToList()
+            };
+        }
+
+        private WeeklyNews GetWeeklyNewsFromDto(WeekNewsDto dto)
+        {
+            if (dto == null)
+            {
+                return null;
+            }
+
+            return new WeeklyNews
+            {
+                WeeklyId = dto.weekliesId,
+                Title = dto.title,
+                AuthorId = dto.authorId,
+                Date = dto.date.UnixTimestampToDateTime(),
+                SubNewsIdList = dto.news,
+                FullNews = dto.fullNews != null
+                              ? dto.fullNews.Select(GetCompanyNewsFromDto).ToList()
+                              : null
             };
         }
     }

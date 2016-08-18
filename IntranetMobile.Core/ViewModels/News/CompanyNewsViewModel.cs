@@ -9,19 +9,19 @@ namespace IntranetMobile.Core.ViewModels.News
     public class CompanyNewsViewModel : BaseViewModel
     {
         private bool _isRefreshing;
-        private NewsViewModel _selectedItem;
+        private NewsItemViewModel _selectedItem;
 
         public CompanyNewsViewModel()
         {
             Title = "Company";
-            SelectItem = new MvxCommand<NewsViewModel>(item => { SelectedItem = item; });
+            SelectItem = new MvxCommand<NewsItemViewModel>(item => { SelectedItem = item; });
             Task.Run(ReloadData);
         }
 
-        public ObservableCollection<NewsViewModel> News { set; get; } =
-            new ObservableCollection<NewsViewModel>();
+        public ObservableCollection<NewsItemViewModel> News { set; get; } =
+            new ObservableCollection<NewsItemViewModel>();
 
-        public NewsViewModel SelectedItem
+        public NewsItemViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -69,7 +69,7 @@ namespace IntranetMobile.Core.ViewModels.News
             InvokeOnMainThread(News.Clear);
             foreach (var news in allNews)
             {
-                InvokeOnMainThread(() => { News.Add(NewsViewModel.FromModel(news)); });
+                InvokeOnMainThread(() => { News.Add(NewsItemViewModel.FromModel(news)); });
             }
         }
     }

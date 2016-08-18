@@ -9,19 +9,19 @@ namespace IntranetMobile.Core.ViewModels.News
     public class WeeklyNewsViewModel : BaseViewModel
     {
         private bool _isRefreshing;
-        private NewsViewModel _selectedItem;
+        private NewsItemViewModel _selectedItem;
 
         public WeeklyNewsViewModel()
         {
             Title = "Weeklies";
-            SelectItem = new MvxCommand<NewsViewModel>(item => { SelectedItem = item; });
+            SelectItem = new MvxCommand<NewsItemViewModel>(item => { SelectedItem = item; });
             Task.Run(ReloadData);
         }
 
-        public ObservableCollection<NewsViewModel> News { set; get; } =
-            new ObservableCollection<NewsViewModel>();
+        public ObservableCollection<WeeklyItemViewModel> News { set; get; } =
+            new ObservableCollection<WeeklyItemViewModel>();
 
-        public NewsViewModel SelectedItem
+        public NewsItemViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -63,13 +63,12 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public virtual async Task ReloadData()
         {
-            // TODO: Normalize news pull
-            var allNews = await ServiceBus.NewsService.GetCompanyNews(0, 10);
+            var allNews = await ServiceBus.NewsService.GetWeeklyNews(0, 10);
 
             InvokeOnMainThread(News.Clear);
-            foreach (var news in allNews)
+            foreach (var item in allNews)
             {
-                InvokeOnMainThread(() => { News.Add(NewsViewModel.FromModel(news)); });
+                InvokeOnMainThread(() => { News.Add(WeeklyItemViewModel.FromModel(item)); });
             }
         }
     }

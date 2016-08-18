@@ -31,7 +31,7 @@ namespace IntranetMobile.Droid.Views.Fragments.News
                         typeof(NewsRecyclerViewFragment),
                         typeof(CompanyNewsViewModel)),
                     new MvxCachingFragmentStatePagerAdapter.FragmentInfo("WEEKLIES",
-                        typeof(NewsRecyclerViewFragment),
+                        typeof(WeekliesRecyclerViewFragment),
                         typeof(WeeklyNewsViewModel))
                 };
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(Activity, ChildFragmentManager, fragments);
