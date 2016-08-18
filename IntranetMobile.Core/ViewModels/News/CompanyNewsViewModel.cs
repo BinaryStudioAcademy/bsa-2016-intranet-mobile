@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -21,7 +20,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ObservableCollection<NewsViewModel> News { set; get; } =
             new ObservableCollection<NewsViewModel>();
-        
+
         public NewsViewModel SelectedItem
         {
             get { return _selectedItem; }
@@ -29,7 +28,7 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters { NewsId = _selectedItem.NewsId });
+                ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters {NewsId = _selectedItem.NewsId});
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -70,10 +69,7 @@ namespace IntranetMobile.Core.ViewModels.News
             InvokeOnMainThread(News.Clear);
             foreach (var news in allNews)
             {
-                InvokeOnMainThread(() =>
-                {
-                    News.Add(NewsViewModel.FromModel(news));
-                });
+                InvokeOnMainThread(() => { News.Add(NewsViewModel.FromModel(news)); });
             }
         }
     }

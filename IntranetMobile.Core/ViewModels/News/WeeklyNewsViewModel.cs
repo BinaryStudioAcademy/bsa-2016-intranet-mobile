@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using AngleSharp.Parser.Html;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -15,6 +14,7 @@ namespace IntranetMobile.Core.ViewModels.News
         public WeeklyNewsViewModel()
         {
             Title = "Weeklies";
+            SelectItem = new MvxCommand<NewsViewModel>(item => { SelectedItem = item; });
             Task.Run(ReloadData);
         }
 
@@ -28,16 +28,13 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                // TODO: Logics here
+                ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters {NewsId = _selectedItem.NewsId});
 
                 RaisePropertyChanged(() => SelectedItem);
             }
         }
 
-        public ICommand SelectItem
-        {
-            get { return new MvxCommand<NewsViewModel>(item => { SelectedItem = item; }); }
-        }
+        public ICommand SelectItem { get; private set; }
 
         public virtual bool IsRefreshing
         {
@@ -66,30 +63,14 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public virtual async Task ReloadData()
         {
-            //TODO: Normalize news pull
-            //News.Clear(); // Zero size check is already inlined
+            // TODO: Normalize news pull
+            var allNews = await ServiceBus.NewsService.GetCompanyNews(0, 10);
 
-            //var parser = new HtmlParser();
-            //var weeklies = await ServiceBus.NewsService.GetWeeklyNews(0, 10);
-
-            //foreach (var newsBundle in weeklies)
-            //{
-            //    foreach (var news in newsBundle.fullNews)
-            //    {
-            //        var parseObj = parser.Parse(news.body);
-            //        var previewImageUrl = string.Empty;
-            //        if (parseObj.Images.Length > 0)
-            //        {
-            //            previewImageUrl = parseObj.Images[0].Source;
-            //        }
-
-            //        News.Add(new NewsViewModel
-            //        {
-            //            PreviewImageUri = previewImageUrl,
-            //            NewsId = news.newsId
-            //        });
-            //    }
-            //}
+            InvokeOnMainThread(News.Clear);
+            foreach (var news in allNews)
+            {
+                InvokeOnMainThread(() => { News.Add(NewsViewModel.FromModel(news)); });
+            }
         }
     }
 }
