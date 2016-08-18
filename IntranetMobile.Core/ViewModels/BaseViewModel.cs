@@ -4,11 +4,6 @@ namespace IntranetMobile.Core.ViewModels
 {
     public class BaseViewModel : MvxViewModel
     {
-        public BaseViewModel()
-        {
-            Title = "";
-        }
-        
-        public string Title { get; protected set; }
+        public virtual string Title { get; } = string.Empty;
     }
 }

@@ -14,9 +14,10 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public WeeklyNewsViewModel()
         {
-            Title = "Weeklies";
             Task.Run(ReloadData);
         }
+
+        public override string Title { get; } = "Weeklies";
 
         public ObservableCollection<NewsViewModel> News { set; get; } =
             new ObservableCollection<NewsViewModel>();

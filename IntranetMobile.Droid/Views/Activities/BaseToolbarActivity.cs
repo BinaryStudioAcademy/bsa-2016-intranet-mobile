@@ -9,14 +9,16 @@ namespace IntranetMobile.Droid.Views.Activities
         where TViewModel : BaseViewModel
     {
         private Toolbar _toolbar;
+        public abstract int ActivityLayout { get; }
+        public virtual int ToolbarLayout { get; } = Resource.Id.mvx_toolbar;
 
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
 
-            SetContentView(Resource.Layout.activity_news_details);
+            SetContentView(ActivityLayout);
 
-            _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            _toolbar = FindViewById<Toolbar>(ToolbarLayout);
 
             SetSupportActionBar(_toolbar);
             SupportActionBar.Title = ViewModel.Title;

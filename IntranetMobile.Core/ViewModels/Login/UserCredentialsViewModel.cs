@@ -14,10 +14,11 @@ namespace IntranetMobile.Core.ViewModels.Login
 
         public UserCredentialsViewModel()
         {
-            Title = "Login";
             ForgotPasswordCommand = new MvxCommand(ShowForgotPasswordVm);
             LoginCommand = new MvxCommand(Login, CanExecuteLogin);
         }
+
+        public override string Title { get; } = "Login";
 
         public string Email
         {

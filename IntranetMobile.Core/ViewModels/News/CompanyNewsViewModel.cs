@@ -25,6 +25,8 @@ namespace IntranetMobile.Core.ViewModels.News
         public ObservableCollection<NewsViewModel> News { set; get; } =
             new ObservableCollection<NewsViewModel>();
 
+        public override string Title { get; } = "Company";
+
         public NewsViewModel SelectedItem
         {
             get { return _selectedItem; }
