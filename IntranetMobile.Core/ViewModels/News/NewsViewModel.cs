@@ -15,8 +15,8 @@ namespace IntranetMobile.Core.ViewModels.News
         private string _likeImageViewUrl;
         private int _likesCount;
         private string _newsId;
-        private string _previewImageUri;
         private string _newsTitle;
+        private string _previewImageUri;
         private string _type;
 
         public NewsViewModel()
@@ -31,16 +31,11 @@ namespace IntranetMobile.Core.ViewModels.News
             set
             {
                 _newsId = value;
+
                 Task.Factory.StartNew(async delegate
                 {
-                    var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
-                    NewsTitle = news.title;
-                    AuthorId = news.authorId;
-                    Body = news.body;
-                    Date = news.date;
-                    Type = news.type;
-                    LikesCount = news.likes.Count;
-                    CommentsCount = news.comments.Count;
+                    //await Task.Delay(1000); //TODO: Remove, experimantal
+                    await FullReloadAsync();
                 });
             }
         }
@@ -164,6 +159,26 @@ namespace IntranetMobile.Core.ViewModels.News
         private void ClickCommentCommandExecute()
         {
             //TODO: Show Comments Window
+        }
+
+        public async Task FullReloadAsync()
+        {
+            var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
+            NewsTitle = news.title;
+            AuthorId = news.authorId;
+            Body = news.body;
+            Date = news.date;
+            Type = news.type;
+            LikesCount = news.likes.Count;
+            CommentsCount = news.comments.Count;
+        }
+
+        public async Task MetadataReloadAsync()
+        {
+            var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
+            NewsTitle = news.title;
+            LikesCount = news.likes.Count;
+            CommentsCount = news.comments.Count;
         }
     }
 }

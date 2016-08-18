@@ -297,7 +297,7 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_comments.axml" />
     <AndroidResource Include="Resources\layout\listview_comments.axml" />
-    <AndroidResource Include="Resources\drawable\news_default.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\news_default.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
@@ -306,9 +306,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />

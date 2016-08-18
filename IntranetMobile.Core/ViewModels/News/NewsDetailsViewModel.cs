@@ -9,6 +9,7 @@ namespace IntranetMobile.Core.ViewModels.News
     {
         private const string Tag = "NewsDetailsViewModel";
         private readonly MvxSubscriptionToken _token;
+        private string _title;
 
         public NewsDetailsViewModel(IMvxMessenger messenger)
         {
@@ -17,7 +18,15 @@ namespace IntranetMobile.Core.ViewModels.News
             CommentCommand = new MvxCommand(Comment);
         }
 
-        public override string Title => NewsViewModel.NewsTitle;
+        public override string Title
+        {
+            get { return _title; }
+            protected set
+            {
+                _title = value;
+                RaisePropertyChanged(() => Title);
+            }
+        }
 
         public MvxCommand LikeCommand { get; private set; }
 
@@ -25,9 +34,11 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public NewsViewModel NewsViewModel { get; private set; }
 
-        private void DeliveryAction(NewsViewModelMessage newsViewModelMessage)
+        private async void DeliveryAction(NewsViewModelMessage newsViewModelMessage)
         {
             NewsViewModel = newsViewModelMessage.ViewModel;
+            await NewsViewModel.MetadataReloadAsync();
+            Title = NewsViewModel.NewsTitle;
         }
 
         private void Like()

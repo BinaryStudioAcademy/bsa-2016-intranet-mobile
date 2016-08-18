@@ -24,7 +24,7 @@
           android:layout_height="match_parent"
           android:layout_gravity="center"
           android:scaleType="centerCrop"
-          app:MvxBind="ImageUrl PreviewImageUri; DefaultImagePath 'res:logo_black_1'" />
+          app:MvxBind="ImageUrl PreviewImageUri; DefaultImagePath 'res:news_default'" />
         <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

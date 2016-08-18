@@ -1,9 +1,10 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using System;
+using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
 {
     public class BaseViewModel : MvxViewModel
     {
-        public virtual string Title { get; } = string.Empty;
+        public virtual string Title { get; protected set; } = string.Empty;
     }
 }

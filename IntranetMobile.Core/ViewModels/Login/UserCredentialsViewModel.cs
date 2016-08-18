@@ -18,7 +18,7 @@ namespace IntranetMobile.Core.ViewModels.Login
             LoginCommand = new MvxCommand(Login, CanExecuteLogin);
         }
 
-        public override string Title { get; } = "Login";
+        public override string Title { get; protected set; } = "Login";
 
         public string Email
         {
