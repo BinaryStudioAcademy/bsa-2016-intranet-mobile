@@ -11,10 +11,12 @@ namespace IntranetMobile.Core.ViewModels.News
         public CommentsViewModel()
         {
             // _comments = GetListOfComments(comments);
-            _comments = new ObservableCollection<CommentsItemViewModel>();
-            _comments.Add(new CommentsItemViewModel("Name1", 17082016, "some body of comments", 2));
-            _comments.Add(new CommentsItemViewModel("Name2", 17082016, "some body of comments", 2));
-            _comments.Add(new CommentsItemViewModel("Name3", 17082016, "some body of comments", 2));
+            _comments = new ObservableCollection<CommentsItemViewModel>
+            {
+                new CommentsItemViewModel("Name1", 17082016, "some body of comments", 2),
+                new CommentsItemViewModel("Name2", 17082016, "some body of comments", 2),
+                new CommentsItemViewModel("Name3", 17082016, "some body of comments", 2)
+            };
         }
 
         public ObservableCollection<CommentsItemViewModel> Comments

@@ -17,8 +17,6 @@ namespace IntranetMobile.Droid.Views.Fragments.News
     {
         public override int ToolbarLayout { get; protected set; } = Resource.Id.tabbed_toolbar;
         public override int FragmentLayout { get; protected set; } = Resource.Layout.fragment_news;
-        public override string ToolbarTitle { get; protected set; } = "Binary studio";
-        public override string ToolbarSubtitle { get; protected set; } = "News";
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -29,9 +27,11 @@ namespace IntranetMobile.Droid.Views.Fragments.News
             {
                 var fragments = new List<MvxCachingFragmentStatePagerAdapter.FragmentInfo>
                 {
-                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("COMPANY NEWS", typeof(NewsRecyclerViewFragment),
+                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("COMPANY",
+                        typeof(NewsRecyclerViewFragment),
                         typeof(CompanyNewsViewModel)),
-                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("WEEKLIES", typeof(NewsRecyclerViewFragment),
+                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("WEEKLIES",
+                        typeof(NewsRecyclerViewFragment),
                         typeof(WeeklyNewsViewModel))
                 };
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(Activity, ChildFragmentManager, fragments);

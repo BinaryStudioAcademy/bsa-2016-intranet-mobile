@@ -1,6 +1,4 @@
-﻿using MvvmCross.Platform;
-
-namespace IntranetMobile.Core.ViewModels.News
+﻿namespace IntranetMobile.Core.ViewModels.News
 {
     public class AllNewsViewModel : BaseViewModel
     {

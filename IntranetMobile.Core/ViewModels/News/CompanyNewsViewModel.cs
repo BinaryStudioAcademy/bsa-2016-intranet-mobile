@@ -10,25 +10,16 @@ using MvvmCross.Plugins.Messenger;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class CompanyNewsViewModel : BaseNewsViewModel
+    public class CompanyNewsViewModel : BaseViewModel
     {
+        private readonly MvxSubscriptionToken _token;
         private bool _isRefreshing;
         private NewsViewModel _selectedItem;
-        private readonly MvxSubscriptionToken _token;
 
         public CompanyNewsViewModel(IMvxMessenger messenger)
         {
             _token = messenger.Subscribe<MvxSubscriberChangeMessage>(MvxSubscriberChangeMessageDeliveryAction);
             AsyncHelper.RunSync(ReloadData);
-        }
-
-        private void MvxSubscriberChangeMessageDeliveryAction(MvxSubscriberChangeMessage subscriberChangeMessage)
-        {
-            if (subscriberChangeMessage.MessageType == typeof(NewsViewModelMessage))
-            {
-                var message = new NewsViewModelMessage(this, _selectedItem);
-                ServiceBus.MessengerHub.Publish(message);
-            }
         }
 
         public ObservableCollection<NewsViewModel> News { set; get; } =
@@ -42,7 +33,7 @@ namespace IntranetMobile.Core.ViewModels.News
                 _selectedItem = value;
 
                 ShowViewModel<NewsDetailsViewModel>();
-                
+
                 RaisePropertyChanged(() => SelectedItem);
             }
         }
@@ -77,12 +68,23 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
+        private void MvxSubscriberChangeMessageDeliveryAction(MvxSubscriberChangeMessage subscriberChangeMessage)
+        {
+            if (subscriberChangeMessage.MessageType == typeof(NewsViewModelMessage))
+            {
+                var message = new NewsViewModelMessage(this, _selectedItem);
+                ServiceBus.MessengerHub.Publish(message);
+            }
+        }
+
         public virtual async Task ReloadData()
         {
-            //TODO: Normalize news pull
-            News.Clear();
+            // TODO: Normalize news pull
+            News.Clear(); // Zero size check is already inlined
+
             var parser = new HtmlParser();
             var allNews = await ServiceBus.NewsService.CompanyNews(0, 10);
+
             foreach (var news in allNews)
             {
                 var parseObj = parser.Parse(news.body);

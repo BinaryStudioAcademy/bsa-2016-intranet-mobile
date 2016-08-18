@@ -1,12 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Platform.Core;
@@ -16,7 +7,7 @@ namespace IntranetMobile.Droid.Views.Util
     public class CommentActionsWrapper
     {
         private readonly IMenu _optionsMenu;
-        
+
         private int _commentsCount;
 
         public CommentActionsWrapper(IMenu optionsMenu)
@@ -43,7 +34,8 @@ namespace IntranetMobile.Droid.Views.Util
                 return;
             }
             var refreshItem = _optionsMenu.FindItem(Resource.Id.menu_news_details_comments_text);
-            refreshItem.ActionView.FindViewById<TextView>(Resource.Id.menu_news_details_textview).Text = commentsCount.ToString();
+            refreshItem.ActionView.FindViewById<TextView>(Resource.Id.menu_news_details_textview).Text =
+                commentsCount.ToString();
         }
     }
 }

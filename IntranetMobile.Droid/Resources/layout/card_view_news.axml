@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v7.widget.CardView
   xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,8 +38,8 @@
             android:textSize="@dimen/text_size_small"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:text="Text Title"
-            app:MvxBind="Text Title" />
+            android:text="Text NewsTitle"
+            app:MvxBind="Text NewsTitle" />
           <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using IntranetMobile.Core.Helpers;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models.Dtos;
@@ -11,14 +10,11 @@ namespace IntranetMobile.Core.Services
     public class ServiceBus
     {
         private static IStorageService _storageService;
-
         private static IAuthService _authService;
-
         private static INewsService _newsService;
-
         private static IAlertService _alertService;
         private static IUserService _userService;
-        private static List<UserDto> _listUsers;   
+        private static List<UserDto> _listUsers;
 
         private static IMvxMessenger _messengerHub;
 
@@ -33,7 +29,8 @@ namespace IntranetMobile.Core.Services
 
         public static IAlertService AlertService
             => _alertService ?? (_alertService = Mvx.Resolve<IAlertService>());
-        public static IUserService UserService 
+
+        public static IUserService UserService
             => _userService ?? (_userService = Mvx.Resolve<IUserService>());
 
         public static List<UserDto> ListUsers

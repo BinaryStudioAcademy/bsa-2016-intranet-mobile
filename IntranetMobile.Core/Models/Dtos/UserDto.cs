@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace IntranetMobile.Core.Models.Dtos
 {
@@ -32,9 +28,8 @@ namespace IntranetMobile.Core.Models.Dtos
         public string UpdatedAt { get; set; }
         public string CurrentProject { get; set; }
         public string Id { get; set; }
-
-        
     }
+
     public class UserCv
     {
         public List<object> Projects { get; set; }

@@ -2,13 +2,12 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AngleSharp.Parser.Html;
-using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class WeekliesViewModel : BaseViewModel
+    public class WeeklyNewsViewModel : BaseViewModel
     {
         private bool _isRefreshing;
         private NewsViewModel _selectedItem;
@@ -29,8 +28,7 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                Task.Run(() => ServiceBus.StorageService.AddItem(_selectedItem.Dto))
-                    .ContinueWith(t => ShowViewModel<NewsDetailsViewModel>(new { id = _selectedItem.Dto.Id }));
+                // TODO: Logics here
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -69,12 +67,12 @@ namespace IntranetMobile.Core.ViewModels.News
         public virtual async Task ReloadData()
         {
             //TODO: Normalize news pull
+            News.Clear(); // Zero size check is already inlined
+
             var parser = new HtmlParser();
             var weeklies = await ServiceBus.NewsService.Weeklies(0, 10);
-            if (ListNews.Count > 0)
-                ListNews.Clear();
-            
-            foreach (var list in weeklies)
+
+            foreach (var newsBundle in weeklies)
             {
                 foreach (var news in newsBundle.fullNews)
                 {

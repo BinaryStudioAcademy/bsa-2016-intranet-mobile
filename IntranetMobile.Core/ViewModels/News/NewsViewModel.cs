@@ -16,7 +16,7 @@ namespace IntranetMobile.Core.ViewModels.News
         private int _likesCount;
         private string _newsId;
         private string _previewImageUri;
-        private string _title;
+        private string _newsTitle;
         private string _type;
 
         public NewsViewModel()
@@ -34,7 +34,7 @@ namespace IntranetMobile.Core.ViewModels.News
                 Task.Factory.StartNew(async delegate
                 {
                     var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
-                    Title = news.title;
+                    NewsTitle = news.title;
                     AuthorId = news.authorId;
                     Body = news.body;
                     Date = news.date;
@@ -45,13 +45,13 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        public string Title
+        public string NewsTitle
         {
-            get { return _title; }
+            get { return _newsTitle; }
             set
             {
-                _title = value;
-                RaisePropertyChanged(() => Title);
+                _newsTitle = value;
+                RaisePropertyChanged(() => NewsTitle);
             }
         }
 

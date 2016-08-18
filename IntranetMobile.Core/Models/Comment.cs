@@ -1,5 +1,4 @@
-﻿using System;
-namespace IntranetMobile.Core
+﻿namespace IntranetMobile.Core.Models
 {
     public class Comment
     {
@@ -14,4 +13,3 @@ namespace IntranetMobile.Core
         public string LikeImageViewUrl { get; set; }
     }
 }
-

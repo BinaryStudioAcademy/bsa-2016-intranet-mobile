@@ -1,17 +1,13 @@
-using System;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Widget;
 using IntranetMobile.Core.ViewModels;
-using IntranetMobile.Core.ViewModels.News;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Support.V7.RecyclerView;
-using MvvmCross.Platform.WeakSubscription;
 
 namespace IntranetMobile.Droid.Views.Fragments.News
 {
@@ -21,7 +17,7 @@ namespace IntranetMobile.Droid.Views.Fragments.News
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-           base.OnCreateView(inflater, container, savedInstanceState);
+            base.OnCreateView(inflater, container, savedInstanceState);
 
             var view = this.BindingInflate(Resource.Layout.recycle_view_news, null);
 
@@ -32,7 +28,7 @@ namespace IntranetMobile.Droid.Views.Fragments.News
                 var layoutManager = new LinearLayoutManager(Activity);
                 recyclerView.SetLayoutManager(layoutManager);
             }
-            
+
             var swipeToRefresh = view.FindViewById<MvxSwipeRefreshLayout>(Resource.Id.refresher);
             var appBar = Activity.FindViewById<AppBarLayout>(Resource.Id.appbar);
             if (appBar != null)
