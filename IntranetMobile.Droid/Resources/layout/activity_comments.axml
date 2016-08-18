@@ -8,6 +8,25 @@
         android:id="@+id/commentListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         app:MvxItemTemplate="@layout/listview_comments"
         app:MvxBind="ItemsSource Comments" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:inputType="textMultiLine"
+            android:hint="Write a comment..."
+            app:MvxBind="Text CommentBody" />
+        <Button
+            android:text="Send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:MvxBind="Click ClickSaveCommentCommand" />
+    </LinearLayout>
 </LinearLayout>
