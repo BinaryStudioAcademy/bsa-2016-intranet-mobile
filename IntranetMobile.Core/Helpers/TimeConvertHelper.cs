@@ -8,10 +8,12 @@ namespace IntranetMobile.Core.Helpers
 {
     public class TimeConvertHelper
     {
-        public static DateTime ConvertFromUnixTimestamp(double timestampMs)
+        public static DateTime ConvertFromUnixTimestamp(double timestamp)
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            return origin.AddMilliseconds(timestampMs);
+            // Unix timestamp is seconds past epoch
+            var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dateTime = dateTime.AddSeconds(timestamp).ToLocalTime();
+            return dateTime;
         }
     }
 }
