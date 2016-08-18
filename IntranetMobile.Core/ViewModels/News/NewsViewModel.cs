@@ -16,8 +16,6 @@ namespace IntranetMobile.Core.ViewModels.News
         private string _body;
         private DateTime _date;
         private bool _isLiked;
-        private string _likeImageViewUrl;
-        private string _newsId;
         private string _previewImageUri;
         private string _type;
 
@@ -29,19 +27,9 @@ namespace IntranetMobile.Core.ViewModels.News
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
         }
 
-        public string NewsId
-        {
-            get { return _newsId; }
-            set
-            {
-                _newsId = value;
-            }
-        }
+        public string NewsId { get; set; }
 
-        public string Subtitle
-        {
-            get { return $"{_author.FirstName} {_author.LastName}     {Date.ToString("dd-MM-yyyy HH:mm")}"; }
-        }
+        public string Subtitle => $"{_author.FirstName} {_author.LastName}     {Date.ToString("dd-MM-yyyy HH:mm")}";
 
         public string AuthorId
         {
@@ -86,12 +74,12 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public int LikesCount
         {
-            get { return _dataModel.Likes != null ? _dataModel.Likes.Count : 0; }
+            get { return _dataModel.Likes?.Count ?? 0; }
         }
 
         public int CommentsCount
         {
-            get { return _dataModel.Comments != null ? _dataModel.Comments.Count : 0; }
+            get { return _dataModel.Comments?.Count ?? 0; }
         }
 
         public string PreviewImageUri
@@ -113,25 +101,7 @@ namespace IntranetMobile.Core.ViewModels.News
             set
             {
                 _isLiked = value;
-                LikeImageViewUrl = _isLiked ? "ic_favorite_white_24dp" : "ic_favorite_border_white_24dp";
                 RaisePropertyChanged(() => IsLiked);
-            }
-        }
-
-        public string LikeImageViewUrl
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_likeImageViewUrl))
-                {
-                    _likeImageViewUrl = "ic_favorite_border_white_24dp";
-                }
-                return _likeImageViewUrl;
-            }
-            set
-            {
-                _likeImageViewUrl = value;
-                RaisePropertyChanged(() => LikeImageViewUrl);
             }
         }
 
@@ -157,10 +127,7 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             Task.Run(async () => 
             {
-                _author = await ServiceBus.UserService.GetUserById(AuthorId);
-
-                if (_author == null)
-                    _author = new User();
+                _author = await ServiceBus.UserService.GetUserById(AuthorId) ?? new User();
 
                 InvokeOnMainThread(() => RaisePropertyChanged(() => Subtitle));
             });
