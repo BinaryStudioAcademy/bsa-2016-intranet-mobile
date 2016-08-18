@@ -78,6 +78,12 @@ namespace IntranetMobile.Droid
             return mvxFragmentsPresenter;
         }
 
+        protected override void FillValueConverters(MvvmCross.Platform.Converters.IMvxValueConverterRegistry registry)
+        {
+            base.FillValueConverters(registry);
+            registry.AddOrOverwrite("BoolToLikeIconConverter", new BoolToLikeIconConverter());
+        }
+
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
