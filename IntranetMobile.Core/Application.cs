@@ -2,7 +2,6 @@
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Plugins.Messenger;
 
 namespace IntranetMobile.Core
 {
@@ -12,10 +11,10 @@ namespace IntranetMobile.Core
         {
             base.Initialize();
             Mvx.RegisterSingleton(new RestClient());
+            Mvx.RegisterSingleton<IUserService>(new UserService(Mvx.Resolve<RestClient>()));
             Mvx.RegisterType<IStorageService, StorageService>();
             Mvx.RegisterType<IAuthService, AuthService>();
             Mvx.RegisterType<INewsService, NewsService>();
-            Mvx.RegisterType<IUserService, UserService>(); 
         }
     }
 }

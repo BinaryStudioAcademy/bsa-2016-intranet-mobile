@@ -177,8 +177,6 @@ namespace IntranetMobile.Core.ViewModels.News
         public async Task FullReloadAsync()
         {
             var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
-            var author =
-                (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
             NewsTitle = news.title;
             AuthorId = news.authorId;
             Body = news.body;
@@ -186,6 +184,8 @@ namespace IntranetMobile.Core.ViewModels.News
             Type = news.type;
             LikesCount = news.likes.Count;
             CommentsCount = news.comments.Count;
+            var author =
+                (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
             NewsSubtitle =
                 $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(news.date)}";
         }
@@ -193,13 +193,13 @@ namespace IntranetMobile.Core.ViewModels.News
         public async Task MetadataReloadAsync()
         {
             var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
-            var author =
-                (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
             NewsTitle = news.title;
-            NewsSubtitle =
-                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(news.date)}";
             LikesCount = news.likes.Count;
             CommentsCount = news.comments.Count;
+            var author =
+                (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
+            NewsSubtitle =
+                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(news.date)}";
         }
     }
 }
