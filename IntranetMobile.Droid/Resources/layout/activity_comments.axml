@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <EditText
-        android:gravity="bottom"
+    <Mvx.MvxListView
+        android:id="@+id/commentListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:MvxItemTemplate="@layout/listview_comments"
+        app:MvxBind="ItemsSource Comments" />
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Mvx.MvxListView
-            android:id="@+id/commentListView"
-            android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7">
+        <EditText
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:MvxItemTemplate="@layout/listview_comments"
-            app:MvxBind="ItemsSource Comments" />
+            android:layout_weight="8"
+            android:inputType="textMultiLine"
+            android:hint="Write a comment..."
+            app:MvxBind="Text CommentBody" />
+        <Button
+            android:text="Send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:MvxBind="Click ClickSaveCommentCommand" />
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>
