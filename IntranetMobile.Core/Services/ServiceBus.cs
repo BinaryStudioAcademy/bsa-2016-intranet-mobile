@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using IntranetMobile.Core.Helpers;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models.Dtos;
 using MvvmCross.Platform;

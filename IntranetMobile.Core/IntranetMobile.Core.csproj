@@ -40,8 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="Helpers\AsyncHelper.cs" />
-    <Compile Include="Helpers\TimeConvertHelper.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Interfaces\IAlertService.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IDataBaseService.cs" />
@@ -86,6 +85,8 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="ViewModels\News\CommentsViewModel.cs" />
     <Compile Include="ViewModels\News\CommentsItemViewModel.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">

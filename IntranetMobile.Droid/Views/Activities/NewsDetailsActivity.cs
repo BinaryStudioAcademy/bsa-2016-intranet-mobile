@@ -49,19 +49,19 @@ namespace IntranetMobile.Droid.Views.Activities
             _likeActionsWrapper = new LikeActionsWrapper(menu);
             var likeActionsBindingSet = this.CreateBindingSet<NewsDetailsActivity, NewsDetailsViewModel>();
             likeActionsBindingSet.Bind(_likeActionsWrapper)
-                .For("IsLiked")
+                .For(l => l.IsLiked)
                 .To(viewModel => viewModel.NewsViewModel.IsLiked);
             likeActionsBindingSet.Bind(_likeActionsWrapper)
-                .For("LikesCount")
-                .To(viewModel => viewModel.NewsViewModel.LikesCount);
+                .For(l => l.LikesCount)
+                .To(viewModel => viewModel.LikesCount);
             likeActionsBindingSet.Apply();
 
 
             _commentActionsWrapper = new CommentActionsWrapper(menu);
             var commentActionsBindingSet = this.CreateBindingSet<NewsDetailsActivity, NewsDetailsViewModel>();
             commentActionsBindingSet.Bind(_commentActionsWrapper)
-                .For("CommentsCount")
-                .To(viewModel => viewModel.NewsViewModel.CommentsCount);
+                .For(c => c.CommentsCount)
+                .To(viewModel => viewModel.CommentsCount);
             commentActionsBindingSet.Apply();
 
             return base.OnCreateOptionsMenu(menu);

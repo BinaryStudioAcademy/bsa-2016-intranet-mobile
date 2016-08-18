@@ -2,6 +2,9 @@
 {
     public class AllNewsViewModel : BaseViewModel
     {
-        public override string Title { get; protected set; } = "News";
+        public AllNewsViewModel()
+        {
+            Title = "News";
+        }
     }
 }

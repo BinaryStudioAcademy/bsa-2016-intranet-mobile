@@ -1,14 +1,17 @@
-﻿namespace IntranetMobile.Core.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace IntranetMobile.Core.Models
 {
     public class Comment
     {
-        public string Name { get; set; }
+        public string AuthorId { get; set; }
 
-        public long Date { get; set; }
+        public DateTime Date { get; set; }
 
         public string Body { get; set; }
 
-        public int Countlikes { get; set; }
+        public List<string> Likes { get; set; }
 
         public string LikeImageViewUrl { get; set; }
     }

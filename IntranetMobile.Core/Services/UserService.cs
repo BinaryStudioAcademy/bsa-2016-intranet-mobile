@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
+using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Models.Dtos;
 
 namespace IntranetMobile.Core.Services
@@ -9,17 +13,55 @@ namespace IntranetMobile.Core.Services
     {
         private const string ApiUrl = "profile/api/users";
         private readonly RestClient _restClient;
-        private List<UserDto> _cachedUsers;
+
+        private SemaphoreSlim _semaphoreAllUser;
+        private List<User> _cachedUsers;
 
         public UserService(RestClient client)
         {
+            _semaphoreAllUser = new SemaphoreSlim(1);
             _restClient = client;
         }
 
-        // TODO: GET BY ID METHOD ADD!!!!!!!!!!!!!!!!!
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
-            return _cachedUsers ?? (_cachedUsers = await _restClient.GetAsync<List<UserDto>>(ApiUrl));
+            await _semaphoreAllUser.WaitAsync().ConfigureAwait(false);
+
+            if (_cachedUsers != null && _cachedUsers.Count > 0)
+            {
+                _semaphoreAllUser.Release();
+                return _cachedUsers;
+            }
+
+            var users = await _restClient.GetAsync<List<UserDto>>(ApiUrl).ConfigureAwait(false);
+
+            _cachedUsers = users.Select(u => new User
+            {
+                Email = u.Email,
+                UserId = u.ServerUserId,
+                FirstName = u.Name,
+                LastName = u.Surname,
+                Birthday = DateTime.Parse(u.Birthday)
+            }).ToList();
+
+            _semaphoreAllUser.Release();
+            return _cachedUsers;
+        }
+
+        public async Task<User> GetUserById(string id)
+        {
+            User result;
+
+            if (_cachedUsers != null && _cachedUsers.Count > 0)
+            {
+                result = _cachedUsers.FirstOrDefault(u => u.UserId.Equals(id));
+                return result;
+            }
+
+            _cachedUsers = await GetAllUsers();
+            result = _cachedUsers.FirstOrDefault(u => u.UserId.Equals(id));
+
+            return result;
         }
     }
 }

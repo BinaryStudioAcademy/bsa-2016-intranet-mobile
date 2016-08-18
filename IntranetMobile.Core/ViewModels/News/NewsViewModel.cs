@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using IntranetMobile.Core.Helpers;
+using IntranetMobile.Core.Extensions;
+using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -9,18 +11,17 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class NewsViewModel : BaseViewModel
     {
+        private User _author;
         private string _authorId;
         private string _body;
-        private int _commentsCount;
-        private long _date;
+        private DateTime _date;
         private bool _isLiked;
         private string _likeImageViewUrl;
-        private int _likesCount;
         private string _newsId;
-        private string _newsSubtitle;
-        private string _newsTitle;
         private string _previewImageUri;
         private string _type;
+
+        private Models.News _dataModel;
 
         public NewsViewModel()
         {
@@ -34,33 +35,12 @@ namespace IntranetMobile.Core.ViewModels.News
             set
             {
                 _newsId = value;
-
-                Task.Factory.StartNew(async delegate
-                {
-                    //await Task.Delay(1000); //TODO: Remove, experimantal
-                    await FullReloadAsync();
-                });
             }
         }
 
-        public string NewsTitle
+        public string Subtitle
         {
-            get { return _newsTitle; }
-            set
-            {
-                _newsTitle = value;
-                RaisePropertyChanged(() => NewsTitle);
-            }
-        }
-
-        public string NewsSubtitle
-        {
-            get { return _newsSubtitle; }
-            set
-            {
-                _newsSubtitle = value;
-                RaisePropertyChanged(() => NewsSubtitle);
-            }
+            get { return $"{_author.FirstName} {_author.LastName}     {Date.ToString("dd-MM-yyyy HH:mm")}"; }
         }
 
         public string AuthorId
@@ -69,7 +49,7 @@ namespace IntranetMobile.Core.ViewModels.News
             set
             {
                 _authorId = value;
-                RaisePropertyChanged(() => AuthorId);
+                GetAuthor();
             }
         }
 
@@ -83,13 +63,14 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        public long Date
+        public DateTime Date
         {
             get { return _date; }
             set
             {
                 _date = value;
                 RaisePropertyChanged(() => Date);
+                RaisePropertyChanged(() => Subtitle);
             }
         }
 
@@ -105,22 +86,12 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public int LikesCount
         {
-            get { return _likesCount; }
-            set
-            {
-                _likesCount = value;
-                RaisePropertyChanged(() => LikesCount);
-            }
+            get { return _dataModel.Likes != null ? _dataModel.Likes.Count : 0; }
         }
 
         public int CommentsCount
         {
-            get { return _commentsCount; }
-            set
-            {
-                _commentsCount = value;
-                RaisePropertyChanged(() => CommentsCount);
-            }
+            get { return _dataModel.Comments != null ? _dataModel.Comments.Count : 0; }
         }
 
         public string PreviewImageUri
@@ -164,6 +135,14 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
+        public override void Start()
+        {
+            base.Start();
+
+            RaisePropertyChanged(() => LikesCount);
+            RaisePropertyChanged(() => CommentsCount);
+        }
+
         private void ClickLikeCommandExecute()
         {
             IsLiked = !_isLiked;
@@ -174,32 +153,32 @@ namespace IntranetMobile.Core.ViewModels.News
             //TODO: Show Comments Window
         }
 
-        public async Task FullReloadAsync()
+        private void GetAuthor()
         {
-            var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
-            NewsTitle = news.title;
-            AuthorId = news.authorId;
-            Body = news.body;
-            Date = news.date;
-            Type = news.type;
-            LikesCount = news.likes.Count;
-            CommentsCount = news.comments.Count;
-            var author =
-                (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
-            NewsSubtitle =
-                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(news.date)}";
+            Task.Run(async () => 
+            {
+                _author = await ServiceBus.UserService.GetUserById(AuthorId);
+
+                if (_author == null)
+                    _author = new User();
+
+                InvokeOnMainThread(() => RaisePropertyChanged(() => Subtitle));
+            });
         }
 
-        public async Task MetadataReloadAsync()
+        public static NewsViewModel FromModel(Models.News news)
         {
-            var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
-            NewsTitle = news.title;
-            LikesCount = news.likes.Count;
-            CommentsCount = news.comments.Count;
-            var author =
-                (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
-            NewsSubtitle =
-                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(news.date)}";
+            return new NewsViewModel
+            {
+                Body = news.Body,
+                PreviewImageUri = news.Body.GetFirstImageUri(),
+                NewsId = news.NewsId,
+                Title = news.Title,
+                AuthorId = news.AuthorId,
+                Date = news.Date,
+                Type = news.Type,
+                _dataModel = news
+            };
         }
     }
 }

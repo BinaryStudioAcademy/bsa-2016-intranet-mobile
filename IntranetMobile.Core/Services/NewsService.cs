@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Interfaces;
+using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Models.Dtos;
 
 namespace IntranetMobile.Core.Services
@@ -13,6 +17,9 @@ namespace IntranetMobile.Core.Services
         private const string LikeUnlikeNews = "api/news/{0}/likes";
         private const string NewsByIdPath = "api/news/{0}/";
 
+        private List<News> _companyNewsCache;
+        private List<News> _weeklyNewsCache;
+
         private readonly RestClient _restClient;
 
         public NewsService(RestClient client)
@@ -20,7 +27,7 @@ namespace IntranetMobile.Core.Services
             _restClient = client;
         }
 
-        public Task<List<NewsDto>> CompanyNews(int skip, int limit)
+        public async Task<List<News>> GetCompanyNews(int skip, int limit)
         {
             var compNewsReqParams = new NewsReqParams
             {
@@ -29,7 +36,41 @@ namespace IntranetMobile.Core.Services
                 skip = skip
             };
 
-            return _restClient.GetAsync<List<NewsDto>>("api/news", compNewsReqParams);
+            var news = await _restClient.GetAsync<List<NewsDto>>("api/news", compNewsReqParams).ConfigureAwait(false);
+
+            _companyNewsCache = news.Select(n => GetCompanyNewsFromDto(n))
+                                    .ToList();
+
+            return _companyNewsCache;
+        }
+
+        public Task<List<WeekNewsDto>> GetWeeklyNews(int skip, int limit)
+        {
+            var weekNewsReqParams = new WeekNewsReqParams
+            {
+                skip = skip,
+                limit = limit,
+                published = Published
+            };
+
+            return _restClient.GetAsync<List<WeekNewsDto>>("api/packs", weekNewsReqParams);
+        }
+
+        public async Task<News> GetCompanyNewsById(string newsId)
+        {
+            News result;
+
+            if (_companyNewsCache != null && _companyNewsCache.Count > 0)
+            {
+                result = _companyNewsCache.FirstOrDefault(n => n.NewsId.Equals(newsId));
+                if (result != null)
+                    return result;
+            }
+
+            var dto = await _restClient.GetAsync<NewsDto>(string.Format(NewsByIdPath, newsId));
+            result = GetCompanyNewsFromDto(dto);
+
+            return result;
         }
 
         public Task<bool> LikeComment(string newsId, string commentId)
@@ -68,21 +109,28 @@ namespace IntranetMobile.Core.Services
             return _restClient.DeleteAsync(resource);
         }
 
-        public Task<List<WeekNewsDto>> Weeklies(int skip, int limit)
+        private News GetCompanyNewsFromDto(NewsDto dto)
         {
-            var weekNewsReqParams = new WeekNewsReqParams
+            if (dto == null)
+                return null;
+            
+            return new News
             {
-                skip = skip,
-                limit = limit,
-                published = Published
+                NewsId = dto.newsId,
+                Title = dto.title,
+                AuthorId = dto.authorId,
+                Body = dto.body,
+                Date = dto.date.UnixTimestampToDateTime(),
+                Type = dto.type,
+                Likes = dto.likes,
+                Comments = dto.comments?.Select(c => new Comment
+                {
+                    AuthorId = c.authorId,
+                    Body = c.body,
+                    Date = c.date.UnixTimestampToDateTime(),
+                    Likes = c.likes
+                }).ToList()
             };
-
-            return _restClient.GetAsync<List<WeekNewsDto>>("api/packs", weekNewsReqParams);
-        }
-
-        public Task<NewsDto> GetNewsByIdAsync(string newsId)
-        {
-            return _restClient.GetAsync<NewsDto>(string.Format(NewsByIdPath, newsId));
         }
     }
 }

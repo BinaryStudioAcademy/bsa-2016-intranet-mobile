@@ -19,7 +19,7 @@ namespace IntranetMobile.Core.Services
             _restClient = Mvx.Resolve<RestClient>();
         }
 
-        public Task<AuthDto> Login(string email, string paswword)
+        public async Task<AuthDto> Login(string email, string paswword)
         {
             var user = new UserCredentialsDto
             {
@@ -27,7 +27,10 @@ namespace IntranetMobile.Core.Services
                 password = paswword
             };
 
-            var authDto = _restClient.PostAsync<AuthDto>(LoginPath, user);
+            var authDto = await _restClient.PostAsync<AuthDto>(LoginPath, user);
+
+            if (authDto.success)
+                ServiceBus.UserService.GetAllUsers();
 
             return authDto;
         }

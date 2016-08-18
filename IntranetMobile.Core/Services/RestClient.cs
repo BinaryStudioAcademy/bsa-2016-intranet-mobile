@@ -66,7 +66,7 @@ namespace IntranetMobile.Core.Services
         private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method,
             string contentType = ContentType) where T : new()
         {
-            var responseMessage = await GetResponse(resource, requestObject, method, contentType);
+            var responseMessage = await GetResponse(resource, requestObject, method, contentType).ConfigureAwait(false);
             try
             {
                 responseMessage.EnsureSuccessStatusCode();
@@ -84,7 +84,7 @@ namespace IntranetMobile.Core.Services
         {
             try
             {
-                var responseMessage = await GetResponse(resource, requestObject, method, contentType);
+                var responseMessage = await GetResponse(resource, requestObject, method, contentType).ConfigureAwait(false);
                 responseMessage.EnsureSuccessStatusCode();
             }
             catch

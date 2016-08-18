@@ -14,10 +14,9 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public WeeklyNewsViewModel()
         {
+            Title = "Weeklies";
             Task.Run(ReloadData);
         }
-
-        public override string Title { get; protected set; } = "Weeklies";
 
         public ObservableCollection<NewsViewModel> News { set; get; } =
             new ObservableCollection<NewsViewModel>();
@@ -68,29 +67,29 @@ namespace IntranetMobile.Core.ViewModels.News
         public virtual async Task ReloadData()
         {
             //TODO: Normalize news pull
-            News.Clear(); // Zero size check is already inlined
+            //News.Clear(); // Zero size check is already inlined
 
-            var parser = new HtmlParser();
-            var weeklies = await ServiceBus.NewsService.Weeklies(0, 10);
+            //var parser = new HtmlParser();
+            //var weeklies = await ServiceBus.NewsService.GetWeeklyNews(0, 10);
 
-            foreach (var newsBundle in weeklies)
-            {
-                foreach (var news in newsBundle.fullNews)
-                {
-                    var parseObj = parser.Parse(news.body);
-                    var previewImageUrl = string.Empty;
-                    if (parseObj.Images.Length > 0)
-                    {
-                        previewImageUrl = parseObj.Images[0].Source;
-                    }
+            //foreach (var newsBundle in weeklies)
+            //{
+            //    foreach (var news in newsBundle.fullNews)
+            //    {
+            //        var parseObj = parser.Parse(news.body);
+            //        var previewImageUrl = string.Empty;
+            //        if (parseObj.Images.Length > 0)
+            //        {
+            //            previewImageUrl = parseObj.Images[0].Source;
+            //        }
 
-                    News.Add(new NewsViewModel
-                    {
-                        PreviewImageUri = previewImageUrl,
-                        NewsId = news.newsId
-                    });
-                }
-            }
+            //        News.Add(new NewsViewModel
+            //        {
+            //            PreviewImageUri = previewImageUrl,
+            //            NewsId = news.newsId
+            //        });
+            //    }
+            //}
         }
     }
 }

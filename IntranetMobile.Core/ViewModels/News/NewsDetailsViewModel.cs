@@ -1,31 +1,22 @@
 ﻿using IntranetMobile.Core.Services;
-using IntranetMobile.Core.ViewModels.Messages;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Plugins.Messenger;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
     public class NewsDetailsViewModel : BaseViewModel
     {
         private const string Tag = "NewsDetailsViewModel";
-        private readonly MvxSubscriptionToken _token;
-        private string _title;
 
-        public NewsDetailsViewModel(IMvxMessenger messenger)
+        private string _body;
+        private Models.News _dataModel;
+
+        public NewsDetailsViewModel()
         {
-            _token = messenger.Subscribe<NewsViewModelMessage>(DeliveryAction);
+            Title = "";
+            NewsViewModel = new NewsViewModel();
+
             LikeCommand = new MvxCommand(Like);
             CommentCommand = new MvxCommand(Comment);
-        }
-
-        public override string Title
-        {
-            get { return _title; }
-            protected set
-            {
-                _title = value;
-                RaisePropertyChanged(() => Title);
-            }
         }
 
         public MvxCommand LikeCommand { get; private set; }
@@ -34,11 +25,36 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public NewsViewModel NewsViewModel { get; private set; }
 
-        private async void DeliveryAction(NewsViewModelMessage newsViewModelMessage)
+        public async void Init(Parameters arg)
         {
-            NewsViewModel = newsViewModelMessage.ViewModel;
-            await NewsViewModel.MetadataReloadAsync();
-            Title = NewsViewModel.NewsTitle;
+            var news = await ServiceBus.NewsService.GetCompanyNewsById(arg.NewsId);
+            _dataModel = news;
+
+            Title = news.Title;
+            Body = news.Body;
+
+            RaisePropertyChanged(() => LikesCount);
+            RaisePropertyChanged(() => CommentsCount);
+        }
+
+        public string Body
+        {
+            get { return _body; }
+            set
+            {
+                _body = value;
+                RaisePropertyChanged(() => Body);
+            }
+        }
+
+        public int LikesCount
+        {
+            get { return _dataModel.Likes != null ? _dataModel.Likes.Count : 0; }
+        }
+
+        public int CommentsCount
+        {
+            get { return _dataModel.Comments != null ? _dataModel.Comments.Count : 0; }
         }
 
         private void Like()
@@ -50,6 +66,11 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             // TODO: Call CommentsViewModel here
             ServiceBus.AlertService.ShowMessage(Tag, "Comment clicked!");
+        }
+
+        public class Parameters
+        {
+            public string NewsId { get; set; }
         }
     }
 }
