@@ -27,7 +27,6 @@ namespace IntranetMobile.Core.ViewModels.Login
                 }
                 else
                 {
-                    ServiceBus.AlertService.ShowMessage(Tag, result.message);
                     await ServiceBus.StorageService.RemoveItem(user);
                     ShowViewModel<UserCredentialsViewModel>();
                 }

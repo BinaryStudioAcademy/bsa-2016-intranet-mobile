@@ -18,12 +18,12 @@ namespace IntranetMobile.Droid.Services
             _handler = new Handler(_applicationContext.MainLooper);
         }
 
-        public void ShowMessage(string title, string text)
+        public void ShowMessage(string text)
         {
             _handler.Post(() => Toast.MakeText(_applicationContext, text, ToastLength.Short).Show());
         }
 
-        public void ShowDialogBox(string title,
+        public void ShowDialogBox(
             string text,
             string okButtonCaption,
             string cancelButtonCaption,

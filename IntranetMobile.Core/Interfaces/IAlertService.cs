@@ -4,9 +4,9 @@ namespace IntranetMobile.Core.Interfaces
 {
     public interface IAlertService
     {
-        void ShowMessage(string title, string text);
+        void ShowMessage(string text);
 
-        void ShowDialogBox(string title,
+        void ShowDialogBox(
             string text,
             string okButtonCaption,
             string cancelButtonCaption,
