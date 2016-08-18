@@ -6,6 +6,8 @@ namespace IntranetMobile.Core.Interfaces
 {
     public interface IUserService
     {
+        User CurrentUser { get; }
+
         Task<List<User>> GetAllUsers();
 
         Task<User> GetUserById(string id);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Extensions;
@@ -17,10 +16,10 @@ namespace IntranetMobile.Core.Services
         private const string LikeUnlikeNews = "api/news/{0}/likes";
         private const string NewsByIdPath = "api/news/{0}/";
 
+        private readonly RestClient _restClient;
+
         private List<News> _companyNewsCache;
         private List<News> _weeklyNewsCache;
-
-        private readonly RestClient _restClient;
 
         public NewsService(RestClient client)
         {
@@ -38,8 +37,7 @@ namespace IntranetMobile.Core.Services
 
             var news = await _restClient.GetAsync<List<NewsDto>>("api/news", compNewsReqParams).ConfigureAwait(false);
 
-            _companyNewsCache = news.Select(n => GetCompanyNewsFromDto(n))
-                                    .ToList();
+            _companyNewsCache = news.Select(GetCompanyNewsFromDto).ToList();
 
             return _companyNewsCache;
         }
@@ -112,8 +110,10 @@ namespace IntranetMobile.Core.Services
         private News GetCompanyNewsFromDto(NewsDto dto)
         {
             if (dto == null)
+            {
                 return null;
-            
+            }
+
             return new News
             {
                 NewsId = dto.newsId,

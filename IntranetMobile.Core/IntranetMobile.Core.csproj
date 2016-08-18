@@ -49,6 +49,7 @@
     <Compile Include="Interfaces\IStorageService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\Dtos\AuthDto.cs" />
+    <Compile Include="Models\Dtos\MyUser.cs" />
     <Compile Include="Models\Dtos\UserDto.cs" />
     <Compile Include="Models\Persist.cs" />
     <Compile Include="Models\User.cs" />

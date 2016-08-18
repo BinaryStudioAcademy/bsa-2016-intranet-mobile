@@ -1,4 +1,5 @@
-﻿using IntranetMobile.Core.Services;
+﻿using System.Collections.Generic;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
@@ -25,7 +26,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public int CommentsCount => _dataModel.Comments?.Count ?? 0;
 
-        public bool IsLiked => false;
+        public bool IsLiked => _dataModel.Likes?.Contains(ServiceBus.UserService.CurrentUser.UserId) ?? false;
 
         public async void Init(Parameters arg)
         {
@@ -37,8 +38,32 @@ namespace IntranetMobile.Core.ViewModels.News
             RaisePropertyChanged(() => CommentsCount);
         }
 
-        private void Like()
+        private async void Like()
         {
+            if (!IsLiked)
+            {
+                var result = await ServiceBus.NewsService.LikeNews(_dataModel.NewsId);
+                if (result)
+                {
+                    if (_dataModel.Likes == null)
+                    {
+                        _dataModel.Likes = new List<string>();
+                    }
+                    _dataModel.Likes.Add(ServiceBus.UserService.CurrentUser.UserId);
+                    RaisePropertyChanged(() => IsLiked);
+                    RaisePropertyChanged(() => LikesCount);
+                }
+            }
+            else
+            {
+                var result = await ServiceBus.NewsService.UnLikeNews(_dataModel.NewsId);
+                if (result)
+                {
+                    _dataModel.Likes.Remove(ServiceBus.UserService.CurrentUser.UserId);
+                    RaisePropertyChanged(() => IsLiked);
+                    RaisePropertyChanged(() => LikesCount);
+                }
+            }
             ServiceBus.AlertService.ShowMessage(Tag, "Like clicked!");
         }
 
