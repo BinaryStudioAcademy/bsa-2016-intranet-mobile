@@ -14,7 +14,6 @@ namespace IntranetMobile.Core.Services
         private static INewsService _newsService;
         private static IAlertService _alertService;
         private static IUserService _userService;
-        private static List<UserDto> _listUsers;
 
         private static IMvxMessenger _messengerHub;
 
@@ -32,9 +31,6 @@ namespace IntranetMobile.Core.Services
 
         public static IUserService UserService
             => _userService ?? (_userService = Mvx.Resolve<IUserService>());
-
-        public static List<UserDto> ListUsers
-            => _listUsers ?? (_listUsers = AsyncHelper.RunSync(UserService.GetAllUsers));
 
         public static IMvxMessenger MessengerHub
             => _messengerHub ?? (_messengerHub = Mvx.Resolve<IMvxMessenger>());

@@ -38,15 +38,13 @@
             android:textSize="@dimen/text_size_small"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:text="Text NewsTitle"
             app:MvxBind="Text NewsTitle" />
           <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_very_small"
             android:textColor="#FFFFFF"
-            android:text="Text Subtitle"
-            app:MvxBind="Text Subtitle" />
+            app:MvxBind="Text NewsSubtitle" />
           <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

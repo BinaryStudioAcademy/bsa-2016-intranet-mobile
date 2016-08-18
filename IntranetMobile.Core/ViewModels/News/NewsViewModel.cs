@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using IntranetMobile.Core.Helpers;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -15,6 +17,7 @@ namespace IntranetMobile.Core.ViewModels.News
         private string _likeImageViewUrl;
         private int _likesCount;
         private string _newsId;
+        private string _newsSubtitle;
         private string _newsTitle;
         private string _previewImageUri;
         private string _type;
@@ -47,6 +50,16 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _newsTitle = value;
                 RaisePropertyChanged(() => NewsTitle);
+            }
+        }
+
+        public string NewsSubtitle
+        {
+            get { return _newsSubtitle; }
+            set
+            {
+                _newsSubtitle = value;
+                RaisePropertyChanged(() => NewsSubtitle);
             }
         }
 
@@ -164,6 +177,8 @@ namespace IntranetMobile.Core.ViewModels.News
         public async Task FullReloadAsync()
         {
             var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
+            var author =
+                (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
             NewsTitle = news.title;
             AuthorId = news.authorId;
             Body = news.body;
@@ -171,12 +186,18 @@ namespace IntranetMobile.Core.ViewModels.News
             Type = news.type;
             LikesCount = news.likes.Count;
             CommentsCount = news.comments.Count;
+            NewsSubtitle =
+                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(news.date)}";
         }
 
         public async Task MetadataReloadAsync()
         {
             var news = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
+            var author =
+                (await ServiceBus.UserService.GetAllUsers()).FirstOrDefault(user => user.ServerUserId == news.authorId);
             NewsTitle = news.title;
+            NewsSubtitle =
+                $"{author.Name} {author.Surname} on {TimeConvertHelper.ConvertFromUnixTimestamp(news.date)}";
             LikesCount = news.likes.Count;
             CommentsCount = news.comments.Count;
         }
