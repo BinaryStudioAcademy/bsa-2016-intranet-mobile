@@ -237,6 +237,7 @@
     <Compile Include="Views\Util\MvxDynamicCompressedImageHelper.cs" />
     <Compile Include="Views\Activities\CommentsActivity.cs" />
     <Compile Include="Views\Fragments\News\WeekliesRecyclerViewFragment.cs" />
+    <Compile Include="Converters\BoolToLikeIconConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -347,6 +348,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />
