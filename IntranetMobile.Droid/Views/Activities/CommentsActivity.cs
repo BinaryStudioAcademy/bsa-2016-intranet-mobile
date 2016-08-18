@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using IntranetMobile.Core;
 using IntranetMobile.Core.ViewModels.News;
 using MvvmCross.Droid.Support.V7.AppCompat;
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models.Dtos;
@@ -83,6 +84,25 @@ namespace IntranetMobile.Core.Services
         public Task<NewsDto> GetNewsByIdAsync(string newsId)
         {
             return _restClient.GetAsync<NewsDto>(string.Format(NewsByIdPath, newsId));
+        }
+
+        public Task<List<CommentDto>> GetListOfComments(string newsId)
+        {
+            var resource = string.Format(NewsByIdPath, newsId) + "comments";
+
+            return _restClient.GetAsync<List<CommentDto>>(resource);
+        }
+
+        public Task<bool> AddNewCommentRequest(string author, string body, string newsId)
+        {
+            var resource = string.Format(NewsByIdPath, newsId) + "comments";
+            var comment = new CommentRequestDto();
+
+            comment.Push.authorId = author;
+            comment.Push.body = body;
+            comment.Push.date = DateTime.Now.Millisecond;
+
+            return _restClient.PostAsync<bool>(resource, comment);
         }
     }
 }
