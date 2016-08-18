@@ -83,12 +83,7 @@ namespace IntranetMobile.Core.ViewModels.Login
                 ErrorText = "Login failed";
                 Password = string.Empty;
                 ShowViewModel<UserCredentialsViewModel>();
-                ServiceBus.AlertService.ShowDialogBox(
-                    auth.message,
-                    "Ok",
-                    null,
-                    null
-                    );
+                ServiceBus.AlertService.ShowMessageBox(Title, auth.message);
             }
         }
 

@@ -40,12 +40,8 @@ namespace IntranetMobile.Core.ViewModels.Login
             {
                 message = "Password reset failed";
             }
-            ServiceBus.AlertService.ShowDialogBox(
-                message,
-                "Ok",
-                null,
-                null
-                );
+
+            ServiceBus.AlertService.ShowMessageBox("Password reset", message);
         }
 
         private bool CanExecuteSend()

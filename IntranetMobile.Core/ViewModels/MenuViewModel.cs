@@ -26,15 +26,20 @@ namespace IntranetMobile.Core.ViewModels
 
         public async void Logout()
         {
-            var logoutResult = await ServiceBus.AuthService.Logout();
-            if (!logoutResult)
+            ServiceBus.AlertService.ShowDialogBox("Are you sure?",
+                    "You will be logged out and your stored credentials will be removed",
+                    "Yes", "No", async () =>
             {
-                // return;
-                // TODO: Log dat?
-            }
-            var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
-            await ServiceBus.StorageService.RemoveItem(user);
-            ShowViewModel<LoginViewModel>();
+                var logoutResult = await ServiceBus.AuthService.Logout();
+                if (!logoutResult)
+                {
+                    // return;
+                    // TODO: Log dat?
+                }
+                var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
+                await ServiceBus.StorageService.RemoveItem(user);
+                ShowViewModel<LoginViewModel>();
+            });
         }
 
         public override async void Start()

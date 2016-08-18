@@ -18,6 +18,7 @@ using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.Sqlite;
 
@@ -50,7 +51,7 @@ namespace IntranetMobile.Droid
             base.Initialize();
 
             Mvx.RegisterSingleton<ILogger>(new AndroidLogger());
-            Mvx.RegisterSingleton<IAlertService>(new AlertService(ApplicationContext));
+            Mvx.RegisterSingleton<IAlertService>(new AlertService(Mvx.Resolve<IMvxAndroidCurrentTopActivity>()));
             Mvx.RegisterSingleton<IDataBaseService>(new DataBaseService(
                 ApplicationContext.FilesDir.Path,
                 Mvx.Resolve<IMvxSqliteConnectionFactory>(),
