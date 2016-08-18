@@ -27,7 +27,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public string NewsId { get; set; }
 
-        public string Subtitle => $"{_author.FirstName} {_author.LastName}     {Date.ToString("dd-MM-yyyy HH:mm")}";
+        public string NewsSubtitle => $"{_author.FirstName} {_author.LastName} {Date.ToString("dd-MM-yyyy HH:mm")}";
 
         public string AuthorId
         {
@@ -46,7 +46,7 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _date = value;
                 RaisePropertyChanged(() => Date);
-                RaisePropertyChanged(() => Subtitle);
+                RaisePropertyChanged(() => NewsSubtitle);
             }
         }
 
@@ -107,7 +107,7 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _author = await ServiceBus.UserService.GetUserById(AuthorId) ?? new User();
 
-                InvokeOnMainThread(() => RaisePropertyChanged(() => Subtitle));
+                InvokeOnMainThread(() => RaisePropertyChanged(() => NewsSubtitle));
             });
         }
 

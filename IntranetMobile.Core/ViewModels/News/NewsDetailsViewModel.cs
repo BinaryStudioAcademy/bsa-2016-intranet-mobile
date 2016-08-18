@@ -31,6 +31,7 @@ namespace IntranetMobile.Core.ViewModels.News
             _dataModel = await ServiceBus.NewsService.GetCompanyNewsById(arg.NewsId);
 
             Title = _dataModel.Title;
+            Subtitle = _dataModel.Date.ToString("dd-MM-yyyy HH:mm");
             RaisePropertyChanged(() => LikesCount);
             RaisePropertyChanged(() => CommentsCount);
         }
