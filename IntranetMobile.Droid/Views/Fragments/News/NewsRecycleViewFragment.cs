@@ -20,7 +20,7 @@ namespace IntranetMobile.Droid.Views.Fragments.News
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.news_recycle_view, null);
+            var view = this.BindingInflate(Resource.Layout.recycle_view_news, null);
 
             var recyclerView = view.FindViewById<MvxRecyclerView>(Resource.Id.recycler_view);
             if (recyclerView != null)

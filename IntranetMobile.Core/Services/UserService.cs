@@ -18,8 +18,6 @@ namespace IntranetMobile.Core.Services
         private readonly SemaphoreSlim _semaphoreAllUser;
         private List<User> _cachedUsers;
 
-        private readonly SemaphoreSlim _semaphoreAllUser;
-
         public UserService(RestClient client)
         {
             _semaphoreAllUser = new SemaphoreSlim(1);

@@ -257,7 +257,7 @@
     <AndroidResource Include="Resources\layout\drawer_header.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\news_card_view.axml">
+    <AndroidResource Include="Resources\layout\card_view_news.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_login.axml">
@@ -284,7 +284,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\values\integers.xml" />
-    <AndroidResource Include="Resources\layout\news_recycle_view.axml">
+    <AndroidResource Include="Resources\layout\recycle_view_news.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\tabbed_toolbar.axml">
