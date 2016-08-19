@@ -12,7 +12,7 @@ using MvvmCross.Droid.Support.V4;
 
 namespace IntranetMobile.Droid.Views.Fragments
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.menu_frame)]
+    [MvxFragment(typeof (MainViewModel), Resource.Id.menu_frame)]
     [Register("intranetmobile.droid.views.fragments.MenuFragment")]
     public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
@@ -73,6 +73,11 @@ namespace IntranetMobile.Droid.Views.Fragments
                 case Resource.Id.nav_settings:
                 {
                     ViewModel.ShowNews();
+                    break;
+                }
+                case Resource.Id.nav_users:
+                {
+                    ViewModel.ShowUsers();
                     break;
                 }
                 case Resource.Id.nav_logout:

@@ -13,9 +13,9 @@ namespace IntranetMobile.Core.Services
     {
         private const string ApiUrl = "profile/api/users";
         private readonly RestClient _restClient;
-
-        private SemaphoreSlim _semaphoreAllUser;
         private List<User> _cachedUsers;
+
+        private readonly SemaphoreSlim _semaphoreAllUser;
 
         public UserService(RestClient client)
         {
@@ -41,7 +41,9 @@ namespace IntranetMobile.Core.Services
                 UserId = u.ServerUserId,
                 FirstName = u.Name,
                 LastName = u.Surname,
-                Birthday = DateTime.Parse(u.Birthday)
+                Birthday = DateTime.Parse(u.Birthday),
+                AvatarUri = u.Avatar.ThumbnailUrlAva,
+                Position = u.Position
             }).ToList();
 
             _semaphoreAllUser.Release();

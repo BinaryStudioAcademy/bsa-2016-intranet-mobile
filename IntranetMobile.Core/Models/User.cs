@@ -19,5 +19,7 @@ namespace IntranetMobile.Core.Models
         public string Password { get; set; }
 
         public DateTime Birthday { get; set; }
+        public string AvatarUri { get; set; }
+        public string Position { get; set; }
     }
 }

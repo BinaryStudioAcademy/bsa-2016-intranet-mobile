@@ -230,6 +230,7 @@
     <Compile Include="Views\Fragments\MenuFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Fragments\Users\UsersFragment.cs" />
     <Compile Include="Views\Util\CommentActionsWrapper.cs" />
     <Compile Include="Views\Util\FromHtmlValueConverter.cs" />
     <Compile Include="Views\Util\ImageGetter.cs" />
@@ -253,7 +254,7 @@
     <AndroidResource Include="Resources\layout\drawer_header.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\card_view_news.axml">
+    <AndroidResource Include="Resources\layout\news_card_view.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_login.axml">
@@ -280,7 +281,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\values\integers.xml" />
-    <AndroidResource Include="Resources\layout\recycle_view_news.axml">
+    <AndroidResource Include="Resources\layout\news_recycle_view.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\tabbed_toolbar.axml">
@@ -298,6 +299,12 @@
     <AndroidResource Include="Resources\layout\activity_comments.axml" />
     <AndroidResource Include="Resources\layout\listview_comments.axml" />
     <AndroidResource Include="Resources\drawable-nodpi\news_default.png" />
+    <AndroidResource Include="Resources\layout\users_card_view.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_users.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
@@ -580,9 +587,10 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_favorite_white_24dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\menu\menu_news_details.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\menu\menu_news_details.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-nodpi\user_default.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

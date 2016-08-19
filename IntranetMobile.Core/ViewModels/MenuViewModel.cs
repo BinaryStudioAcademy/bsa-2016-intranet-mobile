@@ -2,6 +2,7 @@
 using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Login;
 using IntranetMobile.Core.ViewModels.News;
+using IntranetMobile.Core.ViewModels.Users;
 
 namespace IntranetMobile.Core.ViewModels
 {
@@ -22,6 +23,11 @@ namespace IntranetMobile.Core.ViewModels
         public void ShowNews()
         {
             ShowViewModel<AllNewsViewModel>();
+        }
+
+        public void ShowUsers()
+        {
+            ShowViewModel<UsersViewModel>();
         }
 
         public async void Logout()
