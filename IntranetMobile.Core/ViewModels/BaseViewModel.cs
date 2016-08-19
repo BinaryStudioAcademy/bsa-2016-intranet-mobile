@@ -26,5 +26,12 @@ namespace IntranetMobile.Core.ViewModels
                 RaisePropertyChanged(() => Subtitle);
             }
         }
+
+        /// <summary>
+        /// Resume this instance. Called when you come back from another ViewModel
+        /// </summary>
+        public virtual void Resume()
+        {
+        }
     }
 }
