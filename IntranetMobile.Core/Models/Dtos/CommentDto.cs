@@ -17,6 +17,8 @@ namespace IntranetMobile.Core.Models.Dtos
         [JsonProperty("_id")]
         public string commentId { get; set; }
 
+        public long edited_at { get; set; }
+
         public List<string> likes { get; set; }
     }
 }

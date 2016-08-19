@@ -8,6 +8,8 @@ namespace IntranetMobile.Core.ViewModels.News
     {
         private Models.News _dataModel;
 
+        private string _newsId;
+
         public NewsDetailsViewModel()
         {
             LikeCommand = new MvxCommand(Like);
@@ -34,6 +36,8 @@ namespace IntranetMobile.Core.ViewModels.News
             Subtitle = _dataModel.Date.ToString("dd-MM-yyyy HH:mm");
             RaisePropertyChanged(() => LikesCount);
             RaisePropertyChanged(() => CommentsCount);
+
+            _newsId = arg.NewsId;
         }
 
         private async void Like()
@@ -66,7 +70,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void Comment()
         {
-            ShowViewModel<CommentsViewModel>();
+            ShowViewModel<CommentsViewModel>(new CommentsViewModel.Parameters { NewsId = _newsId});
         }
 
         public class Parameters

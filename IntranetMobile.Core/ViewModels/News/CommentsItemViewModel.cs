@@ -1,4 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
+using IntranetMobile.Core.Extensions;
+using IntranetMobile.Core.Models.Dtos;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
@@ -7,19 +11,32 @@ namespace IntranetMobile.Core.ViewModels.News
     {
         private string _body;
         private int _countLikes;
-        private long _date;
+        private string _date;
         private bool _isLiked;
         private string _likeImageViewUrl;
         private string _name;
+        private string _commentId;
 
-        public CommentsItemViewModel(string name, long date, string body, int countLikes)
+        string _newsId;
+
+        public CommentsItemViewModel(CommentDto comment, string newsId)
         {
-            _name = name;
-            _date = date;
-            _body = body;
-            _countLikes = countLikes;
+            _newsId = newsId;
+
+            _name = GetAuthor(comment.authorId).Result;
+            _date = DateTimeExtensions.UnixTimestampToDateTime(comment.date).ToString("dd-MM-yyyy HH:mm");
+            _body = comment.body;
+            _countLikes = comment.likes.Count;
+            _isLiked = comment.likes.Contains(comment.authorId);
+            _commentId = comment.commentId;
 
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
+        }
+
+        private async Task<string> GetAuthor(string authorId)
+        {
+            var author = await ServiceBus.UserService.GetUserById(authorId);
+            return author.FirstName + " " + author.LastName;
         }
 
         public ICommand ClickLikeCommand { get; private set; }
@@ -34,7 +51,7 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        public long Date
+        public string Date
         {
             get { return _date; }
             set
@@ -94,7 +111,16 @@ namespace IntranetMobile.Core.ViewModels.News
         private void ClickLikeCommandExecute()
         {
             IsLiked = !_isLiked;
-            CountLikes = IsLiked ? _countLikes + 1 : _countLikes - 1;
+            if (IsLiked)
+            {
+                CountLikes = _countLikes + 1;
+                //var result = ServiceBus.NewsService.LikeComment(_newsId, _commentId).Result;
+            }
+            else
+            {
+                CountLikes = _countLikes - 1;
+                //var result = ServiceBus.NewsService.UnlikeComment(_newsId, _commentId).Result;
+            }
         }
     }
 }

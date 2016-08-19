@@ -151,6 +151,27 @@ namespace IntranetMobile.Core.Services
             };
         }
 
+        public async Task<CommentsResponseDto> GetListOfComments(string newsId)
+        {
+            var resource = string.Format(NewsByIdPath, newsId) + "comments";
+
+
+
+            return await _restClient.GetAsync<CommentsResponseDto>(resource);
+        }
+
+        public Task<bool> AddNewCommentRequest(string author, string body, string newsId)
+        {
+            var resource = string.Format(NewsByIdPath, newsId) + "comments";
+            var comment = new CommentRequestDto();
+
+            comment.Push.authorId = author;
+            comment.Push.body = body;
+            comment.Push.date = DateTime.Now.Millisecond;
+
+            return _restClient.PostAsync<bool>(resource, comment);
+        }
+
         private WeeklyNews GetWeeklyNewsFromDto(WeekNewsDto dto)
         {
             if (dto == null)
