@@ -15,5 +15,5 @@
     android:background="?attr/colorPrimary"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:MvxBind="Title Title" />
+    app:MvxBind="Title Title; Subtitle Subtitle" />
 </android.support.design.widget.AppBarLayout>

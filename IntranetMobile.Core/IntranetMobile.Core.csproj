@@ -49,6 +49,7 @@
     <Compile Include="Interfaces\IStorageService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\Dtos\AuthDto.cs" />
+    <Compile Include="Models\Dtos\MyUser.cs" />
     <Compile Include="Models\Dtos\UserDto.cs" />
     <Compile Include="Models\Persist.cs" />
     <Compile Include="Models\User.cs" />
@@ -75,12 +76,11 @@
     <Compile Include="ViewModels\Login\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginLoadingViewModel.cs" />
     <Compile Include="ViewModels\Login\UserCredentialsViewModel.cs" />
-    <Compile Include="ViewModels\Messages\NewsViewModelMessage.cs" />
     <Compile Include="ViewModels\News\AllNewsViewModel.cs" />
     <Compile Include="ViewModels\News\NewsDetailsViewModel.cs" />
     <Compile Include="ViewModels\News\CompanyNewsViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="ViewModels\News\NewsViewModel.cs" />
+    <Compile Include="ViewModels\News\NewsItemViewModel.cs" />
     <Compile Include="ViewModels\News\WeeklyNewsViewModel.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="ViewModels\News\CommentsViewModel.cs" />
@@ -89,6 +89,10 @@
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="ViewModels\Users\UsersViewModel.cs" />
     <Compile Include="ViewModels\Users\UserViewModel.cs" />
+    <Compile Include="Models\WeeklyNews.cs" />
+    <Compile Include="ViewModels\News\WeeklyItemViewModel.cs" />
+    <Compile Include="ViewModels\News\WeeklyDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">

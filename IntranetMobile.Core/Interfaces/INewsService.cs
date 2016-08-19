@@ -9,9 +9,11 @@ namespace IntranetMobile.Core.Interfaces
     {
         Task<List<News>> GetCompanyNews(int skip, int limit);
 
-        Task<List<WeekNewsDto>> GetWeeklyNews(int skip, int limit);
+        Task<List<WeeklyNews>> GetWeeklyNews(int skip, int limit);
 
         Task<News> GetCompanyNewsById(string newsId);
+
+        WeeklyNews GetWeeklyNewsById(string newsId);
 
         Task<bool> LikeNews(string newsId);
 

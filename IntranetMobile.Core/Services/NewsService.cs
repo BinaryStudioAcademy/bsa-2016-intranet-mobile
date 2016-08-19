@@ -17,10 +17,10 @@ namespace IntranetMobile.Core.Services
         private const string LikeUnlikeNews = "api/news/{0}/likes";
         private const string NewsByIdPath = "api/news/{0}/";
 
-        private List<News> _companyNewsCache;
-        private List<News> _weeklyNewsCache;
-
         private readonly RestClient _restClient;
+
+        private List<News> _companyNewsCache;
+        private List<WeeklyNews> _weeklyNewsCache;
 
         public NewsService(RestClient client)
         {
@@ -38,13 +38,12 @@ namespace IntranetMobile.Core.Services
 
             var news = await _restClient.GetAsync<List<NewsDto>>("api/news", compNewsReqParams).ConfigureAwait(false);
 
-            _companyNewsCache = news.Select(n => GetCompanyNewsFromDto(n))
-                                    .ToList();
+            _companyNewsCache = news.Select(GetCompanyNewsFromDto).ToList();
 
             return _companyNewsCache;
         }
 
-        public Task<List<WeekNewsDto>> GetWeeklyNews(int skip, int limit)
+        public async Task<List<WeeklyNews>> GetWeeklyNews(int skip, int limit)
         {
             var weekNewsReqParams = new WeekNewsReqParams
             {
@@ -53,7 +52,10 @@ namespace IntranetMobile.Core.Services
                 published = Published
             };
 
-            return _restClient.GetAsync<List<WeekNewsDto>>("api/packs", weekNewsReqParams);
+            var news = await _restClient.GetAsync<List<WeekNewsDto>>("api/packs", weekNewsReqParams);
+
+            _weeklyNewsCache = news.OrderByDescending(n => n.date).Select(GetWeeklyNewsFromDto).ToList();
+            return _weeklyNewsCache;
         }
 
         public async Task<News> GetCompanyNewsById(string newsId)
@@ -71,6 +73,20 @@ namespace IntranetMobile.Core.Services
             result = GetCompanyNewsFromDto(dto);
 
             return result;
+        }
+
+        public WeeklyNews GetWeeklyNewsById(string newsId)
+        {
+            WeeklyNews result;
+
+            if (_weeklyNewsCache != null && _weeklyNewsCache.Count > 0)
+            {
+                result = _weeklyNewsCache.FirstOrDefault(n => n.WeeklyId.Equals(newsId));
+                if (result != null)
+                    return result;
+            }
+
+            return null;
         }
 
         public Task<bool> LikeComment(string newsId, string commentId)
@@ -112,8 +128,10 @@ namespace IntranetMobile.Core.Services
         private News GetCompanyNewsFromDto(NewsDto dto)
         {
             if (dto == null)
+            {
                 return null;
-            
+            }
+
             return new News
             {
                 NewsId = dto.newsId,
@@ -130,6 +148,26 @@ namespace IntranetMobile.Core.Services
                     Date = c.date.UnixTimestampToDateTime(),
                     Likes = c.likes
                 }).ToList()
+            };
+        }
+
+        private WeeklyNews GetWeeklyNewsFromDto(WeekNewsDto dto)
+        {
+            if (dto == null)
+            {
+                return null;
+            }
+
+            return new WeeklyNews
+            {
+                WeeklyId = dto.weekliesId,
+                Title = dto.title,
+                AuthorId = dto.authorId,
+                Date = dto.date.UnixTimestampToDateTime(),
+                SubNewsIdList = dto.news,
+                FullNews = dto.fullNews != null
+                              ? dto.fullNews.Select(GetCompanyNewsFromDto).ToList()
+                              : null
             };
         }
     }

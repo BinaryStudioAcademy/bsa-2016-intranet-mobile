@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -10,26 +9,26 @@ namespace IntranetMobile.Core.ViewModels.News
     public class CompanyNewsViewModel : BaseViewModel
     {
         private bool _isRefreshing;
-        private NewsViewModel _selectedItem;
+        private NewsItemViewModel _selectedItem;
 
         public CompanyNewsViewModel()
         {
             Title = "Company";
-            SelectItem = new MvxCommand<NewsViewModel>(item => { SelectedItem = item; });
+            SelectItem = new MvxCommand<NewsItemViewModel>(item => { SelectedItem = item; });
             Task.Run(ReloadData);
         }
 
-        public ObservableCollection<NewsViewModel> News { set; get; } =
-            new ObservableCollection<NewsViewModel>();
-        
-        public NewsViewModel SelectedItem
+        public ObservableCollection<NewsItemViewModel> News { set; get; } =
+            new ObservableCollection<NewsItemViewModel>();
+
+        public NewsItemViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
             {
                 _selectedItem = value;
 
-                ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters { NewsId = _selectedItem.NewsId });
+                ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters {NewsId = _selectedItem.NewsId});
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -70,10 +69,7 @@ namespace IntranetMobile.Core.ViewModels.News
             InvokeOnMainThread(News.Clear);
             foreach (var news in allNews)
             {
-                InvokeOnMainThread(() =>
-                {
-                    News.Add(NewsViewModel.FromModel(news));
-                });
+                InvokeOnMainThread(() => { News.Add(NewsItemViewModel.FromModel(news)); });
             }
         }
     }

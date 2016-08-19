@@ -3,6 +3,7 @@ using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Login;
 using IntranetMobile.Core.ViewModels.News;
 using IntranetMobile.Core.ViewModels.Users;
+using IntranetMobile.Core.ViewModels.Profile;
 
 namespace IntranetMobile.Core.ViewModels
 {
@@ -25,6 +26,11 @@ namespace IntranetMobile.Core.ViewModels
             ShowViewModel<AllNewsViewModel>();
         }
 
+        public void ShowProfile()
+        {
+            ShowViewModel<ProfileViewModel>();
+        }
+
         public void ShowUsers()
         {
             ShowViewModel<UsersViewModel>();
@@ -32,6 +38,10 @@ namespace IntranetMobile.Core.ViewModels
 
         public async void Logout()
         {
+            ServiceBus.AlertService.ShowDialogBox("Are you sure?",
+                "You will be logged out and your stored credentials will be removed",
+                "Yes", "No", async () =>
+                {
             var logoutResult = await ServiceBus.AuthService.Logout();
             if (!logoutResult)
             {
@@ -41,6 +51,7 @@ namespace IntranetMobile.Core.ViewModels
             var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
             await ServiceBus.StorageService.RemoveItem(user);
             ShowViewModel<LoginViewModel>();
+                });
         }
 
         public override async void Start()

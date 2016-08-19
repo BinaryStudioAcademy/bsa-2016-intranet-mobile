@@ -79,11 +79,11 @@ namespace IntranetMobile.Core.ViewModels.Login
             }
             else
             {
-                ServiceBus.AlertService.ShowMessage(Tag, auth.message);
                 HasErrors = true;
                 ErrorText = "Login failed";
                 Password = string.Empty;
                 ShowViewModel<UserCredentialsViewModel>();
+                ServiceBus.AlertService.ShowMessageBox(Title, auth.message);
             }
         }
 

@@ -18,6 +18,7 @@ using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.Sqlite;
 
@@ -50,7 +51,7 @@ namespace IntranetMobile.Droid
             base.Initialize();
 
             Mvx.RegisterSingleton<ILogger>(new AndroidLogger());
-            Mvx.RegisterSingleton<IAlertService>(new AlertService(ApplicationContext));
+            Mvx.RegisterSingleton<IAlertService>(new AlertService(Mvx.Resolve<IMvxAndroidCurrentTopActivity>()));
             Mvx.RegisterSingleton<IDataBaseService>(new DataBaseService(
                 ApplicationContext.FilesDir.Path,
                 Mvx.Resolve<IMvxSqliteConnectionFactory>(),
@@ -75,6 +76,12 @@ namespace IntranetMobile.Droid
             var mvxFragmentsPresenter = new MvxFragmentsPresenter(AndroidViewAssemblies);
             Mvx.RegisterSingleton<IMvxAndroidViewPresenter>(mvxFragmentsPresenter);
             return mvxFragmentsPresenter;
+        }
+
+        protected override void FillValueConverters(MvvmCross.Platform.Converters.IMvxValueConverterRegistry registry)
+        {
+            base.FillValueConverters(registry);
+            registry.AddOrOverwrite("BoolToLikeIconConverter", new BoolToLikeIconConverter());
         }
 
         protected override IMvxTrace CreateDebugTrace()

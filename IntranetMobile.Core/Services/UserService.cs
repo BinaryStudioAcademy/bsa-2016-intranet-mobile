@@ -11,8 +11,11 @@ namespace IntranetMobile.Core.Services
 {
     public class UserService : IUserService
     {
-        private const string ApiUrl = "profile/api/users";
+        private const string AllUsersPath = "profile/api/users";
+        private const string CurrentUserPath = "/api/me";
         private readonly RestClient _restClient;
+
+        private readonly SemaphoreSlim _semaphoreAllUser;
         private List<User> _cachedUsers;
 
         private readonly SemaphoreSlim _semaphoreAllUser;
@@ -33,7 +36,8 @@ namespace IntranetMobile.Core.Services
                 return _cachedUsers;
             }
 
-            var users = await _restClient.GetAsync<List<UserDto>>(ApiUrl).ConfigureAwait(false);
+            var users = await _restClient.GetAsync<List<UserDto>>(AllUsersPath).ConfigureAwait(false);
+            var currentUserDto = await _restClient.GetAsync<MyUser>(CurrentUserPath).ConfigureAwait(false);
 
             _cachedUsers = users.Select(u => new User
             {
@@ -45,6 +49,8 @@ namespace IntranetMobile.Core.Services
                 AvatarUri = u.Avatar.ThumbnailUrlAva,
                 Position = u.Position
             }).ToList();
+
+            CurrentUser = _cachedUsers.FirstOrDefault(u => u.UserId == currentUserDto.Id);
 
             _semaphoreAllUser.Release();
             return _cachedUsers;
@@ -65,5 +71,7 @@ namespace IntranetMobile.Core.Services
 
             return result;
         }
+
+        public User CurrentUser { get; private set; }
     }
 }

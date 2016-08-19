@@ -12,17 +12,18 @@ using MvvmCross.Droid.Support.V7.RecyclerView;
 
 namespace IntranetMobile.Droid.Views.Fragments.News
 {
-    [MvxFragment(typeof (MainViewModel), Resource.Id.content_frame, true)]
-    [Register("intranetmobile.droid.views.fragments.news.NewsRecyclerViewFragment")]
-    public class NewsRecyclerViewFragment : MvxFragment<CompanyNewsViewModel>
+
+    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
+    [Register("intranetmobile.droid.views.fragments.news.WeekliesRecyclerViewFragment")]
+    public class WeekliesRecyclerViewFragment : MvxFragment<WeeklyNewsViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.news_recycle_view, null);
+            var view = this.BindingInflate(Resource.Layout.recycle_view_weekly, null);
 
-            var recyclerView = view.FindViewById<MvxRecyclerView>(Resource.Id.recycler_view);
+            var recyclerView = view.FindViewById<MvxRecyclerView>(Resource.Id.my_recycler_view);
             if (recyclerView != null)
             {
                 recyclerView.HasFixedSize = true;

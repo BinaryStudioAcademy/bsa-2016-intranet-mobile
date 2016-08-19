@@ -230,6 +230,7 @@
     <Compile Include="Views\Fragments\MenuFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Fragments\Profile\ProfileFragment.cs" />
     <Compile Include="Views\Fragments\Users\UsersFragment.cs" />
     <Compile Include="Views\Util\CommentActionsWrapper.cs" />
     <Compile Include="Views\Util\FromHtmlValueConverter.cs" />
@@ -237,6 +238,8 @@
     <Compile Include="Views\Util\LikeActionsWrapper.cs" />
     <Compile Include="Views\Util\MvxDynamicCompressedImageHelper.cs" />
     <Compile Include="Views\Activities\CommentsActivity.cs" />
+    <Compile Include="Views\Fragments\News\WeekliesRecyclerViewFragment.cs" />
+    <Compile Include="Converters\BoolToLikeIconConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -303,6 +306,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_users.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\recycle_view_weekly.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\card_view_weekly.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_profile.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

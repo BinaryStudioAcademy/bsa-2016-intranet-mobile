@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using AngleSharp.Parser.Html;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -10,34 +9,32 @@ namespace IntranetMobile.Core.ViewModels.News
     public class WeeklyNewsViewModel : BaseViewModel
     {
         private bool _isRefreshing;
-        private NewsViewModel _selectedItem;
+        private NewsItemViewModel _selectedItem;
 
         public WeeklyNewsViewModel()
         {
             Title = "Weeklies";
+            SelectItem = new MvxCommand<NewsItemViewModel>(item => { SelectedItem = item; });
             Task.Run(ReloadData);
         }
 
-        public ObservableCollection<NewsViewModel> News { set; get; } =
-            new ObservableCollection<NewsViewModel>();
+        public ObservableCollection<WeeklyItemViewModel> News { set; get; } =
+            new ObservableCollection<WeeklyItemViewModel>();
 
-        public NewsViewModel SelectedItem
+        public NewsItemViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
             {
                 _selectedItem = value;
 
-                // TODO: Logics here
+                ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters {NewsId = _selectedItem.NewsId});
 
                 RaisePropertyChanged(() => SelectedItem);
             }
         }
 
-        public ICommand SelectItem
-        {
-            get { return new MvxCommand<NewsViewModel>(item => { SelectedItem = item; }); }
-        }
+        public ICommand SelectItem { get; private set; }
 
         public virtual bool IsRefreshing
         {
@@ -66,30 +63,13 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public virtual async Task ReloadData()
         {
-            //TODO: Normalize news pull
-            //News.Clear(); // Zero size check is already inlined
+            var allNews = await ServiceBus.NewsService.GetWeeklyNews(0, 10);
 
-            //var parser = new HtmlParser();
-            //var weeklies = await ServiceBus.NewsService.GetWeeklyNews(0, 10);
-
-            //foreach (var newsBundle in weeklies)
-            //{
-            //    foreach (var news in newsBundle.fullNews)
-            //    {
-            //        var parseObj = parser.Parse(news.body);
-            //        var previewImageUrl = string.Empty;
-            //        if (parseObj.Images.Length > 0)
-            //        {
-            //            previewImageUrl = parseObj.Images[0].Source;
-            //        }
-
-            //        News.Add(new NewsViewModel
-            //        {
-            //            PreviewImageUri = previewImageUrl,
-            //            NewsId = news.newsId
-            //        });
-            //    }
-            //}
+            InvokeOnMainThread(News.Clear);
+            foreach (var item in allNews)
+            {
+                InvokeOnMainThread(() => { News.Add(WeeklyItemViewModel.FromModel(item)); });
+            }
         }
     }
 }
