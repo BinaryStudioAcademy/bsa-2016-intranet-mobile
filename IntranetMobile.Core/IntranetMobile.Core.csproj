@@ -90,6 +90,7 @@
     <Compile Include="Models\WeeklyNews.cs" />
     <Compile Include="ViewModels\News\WeeklyItemViewModel.cs" />
     <Compile Include="ViewModels\News\WeeklyDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">

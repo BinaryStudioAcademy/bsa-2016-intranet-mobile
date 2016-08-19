@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IntranetMobile.Core.Extensions;
@@ -13,11 +12,11 @@ namespace IntranetMobile.Core.ViewModels.News
     {
         private User _author;
         private string _authorId;
+
+        private Models.News _dataModel;
         private DateTime _date;
         private bool _isLiked;
         private string _previewImageUri;
-
-        private Models.News _dataModel;
 
         public NewsItemViewModel()
         {
@@ -103,7 +102,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void GetAuthor()
         {
-            Task.Run(async () => 
+            Task.Run(async () =>
             {
                 _author = await ServiceBus.UserService.GetUserById(AuthorId) ?? new User();
 
