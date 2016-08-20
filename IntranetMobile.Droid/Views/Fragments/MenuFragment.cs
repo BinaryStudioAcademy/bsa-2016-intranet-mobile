@@ -14,7 +14,7 @@ namespace IntranetMobile.Droid.Views.Fragments
 {
     [MvxFragment(typeof (MainViewModel), Resource.Id.menu_frame)]
     [Register("intranetmobile.droid.views.fragments.MenuFragment")]
-    public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
+    public class MenuFragment : BaseFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
         private NavigationView _navigationView;
 

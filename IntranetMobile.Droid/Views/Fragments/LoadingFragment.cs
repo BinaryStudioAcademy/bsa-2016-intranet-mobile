@@ -10,7 +10,7 @@ namespace IntranetMobile.Droid.Views.Fragments
 {
     [MvxFragment(typeof(LoginViewModel), Resource.Id.login_fragment_container)]
     [Register("intranetmobile.droid.views.fragments.LoadingFragment")]
-    public class LoadingFragment : MvxFragment<LoginLoadingViewModel>
+    public class LoadingFragment : BaseFragment<LoginLoadingViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

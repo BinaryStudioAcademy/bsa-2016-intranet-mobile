@@ -15,7 +15,7 @@ namespace IntranetMobile.Droid.Views.Fragments.News
 
     [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
     [Register("intranetmobile.droid.views.fragments.news.WeekliesRecyclerViewFragment")]
-    public class WeekliesRecyclerViewFragment : MvxFragment<WeeklyNewsViewModel>
+    public class WeekliesRecyclerViewFragment : BaseFragment<WeeklyNewsViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

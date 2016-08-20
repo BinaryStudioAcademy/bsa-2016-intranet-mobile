@@ -240,6 +240,8 @@
     <Compile Include="Views\Activities\CommentsActivity.cs" />
     <Compile Include="Views\Fragments\News\WeekliesRecyclerViewFragment.cs" />
     <Compile Include="Converters\BoolToLikeIconConverter.cs" />
+    <Compile Include="Views\Activities\BaseCachingFragmentActivity.cs" />
+    <Compile Include="Views\Fragments\BaseFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

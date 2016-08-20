@@ -12,6 +12,13 @@ namespace IntranetMobile.Droid.Views.Activities
         public abstract int ActivityLayout { get; }
         public virtual int ToolbarLayout { get; } = Resource.Id.mvx_toolbar;
 
+        protected override void OnCreate(Android.OS.Bundle bundle)
+        {
+            base.OnCreate(bundle);
+
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+        }
+
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
@@ -21,8 +28,20 @@ namespace IntranetMobile.Droid.Views.Activities
             _toolbar = FindViewById<Toolbar>(ToolbarLayout);
 
             SetSupportActionBar(_toolbar);
-            SupportActionBar.Title = ViewModel.Title;
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
+            if (SupportActionBar != null)
+            {
+                SupportActionBar.Title = ViewModel.Title;
+                SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            }
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            if (ViewModel != null)
+                ViewModel.Resume();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
