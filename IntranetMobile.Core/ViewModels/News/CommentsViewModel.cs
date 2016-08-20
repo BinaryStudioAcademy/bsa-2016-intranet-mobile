@@ -92,7 +92,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
             c.body = CommentBody;
             c.authorId = ServiceBus.UserService.CurrentUser.UserId;
-            c.date = DateTime.Now.Millisecond;
+            c.date = (long) DateTime.Now.ToUniversalTime().Subtract(new DateTime(1970,1,1,0,0,0, DateTimeKind.Utc)).TotalMilliseconds;
             c.commentId = "someId";
             c.likes = new List<string>();
 
