@@ -18,9 +18,12 @@ namespace IntranetMobile.Droid.Views.Fragments
     {
         private CircleImageView _avatarImageView;
         private NavigationView _navigationView;
+        private IMenuItem _selectedMenuItem;
 
         public bool OnNavigationItemSelected(IMenuItem menuItem)
         {
+            _selectedMenuItem = menuItem;
+
             menuItem.SetCheckable(true);
             menuItem.SetChecked(true);
 
@@ -37,13 +40,15 @@ namespace IntranetMobile.Droid.Views.Fragments
 
             _navigationView = view.FindViewById<NavigationView>(Resource.Id.nav_view);
             _navigationView.SetNavigationItemSelectedListener(this);
-            _navigationView.Menu.FindItem(Resource.Id.nav_news).SetChecked(true);
+            _selectedMenuItem = _navigationView.Menu.FindItem(Resource.Id.nav_news);
+            _selectedMenuItem.SetChecked(true);
 
             _avatarImageView =
                 _navigationView.GetHeaderView(0)
                     .FindViewById<CircleImageView>(Resource.Id.drawer_header_avatar_imageview);
             _avatarImageView.Click += async (sender, args) =>
             {
+                _selectedMenuItem?.SetChecked(false);
                 ((MainActivity) Activity).DrawerLayout.CloseDrawers();
                 await Task.Delay(250);
                 ViewModel.ShowProfile();
