@@ -1,8 +1,7 @@
-﻿using System;
-using IntranetMobile.Core.ViewModels;
+﻿using IntranetMobile.Core.ViewModels;
 using MvvmCross.Droid.Support.V4;
 
-namespace IntranetMobile.Droid
+namespace IntranetMobile.Droid.Views.Fragments
 {
     public class BaseFragment<TViewModel> : MvxFragment<TViewModel>
         where TViewModel : BaseViewModel
@@ -11,9 +10,7 @@ namespace IntranetMobile.Droid
         {
             base.OnResume();
 
-            if (ViewModel != null)
-                ViewModel.Resume();
+            ViewModel?.Resume();
         }
     }
 }
-
