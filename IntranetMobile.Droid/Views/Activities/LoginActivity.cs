@@ -8,11 +8,13 @@ namespace IntranetMobile.Droid.Views.Activities
 {
     [Activity(Label = "Intranet Mobile", MainLauncher = true, Icon = "@drawable/ic_launcher", Theme = "@style/BSTheme",
         NoHistory = true)]
-    public class LoginActivity : MvxCachingFragmentCompatActivity<LoginViewModel>
+    public class LoginActivity : BaseCachingFragmentActivity<LoginViewModel>
     {
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
+
+            Window.AddFlags(Android.Views.WindowManagerFlags.DrawsSystemBarBackgrounds);
 
             SetContentView(Resource.Layout.activity_login);
         }
