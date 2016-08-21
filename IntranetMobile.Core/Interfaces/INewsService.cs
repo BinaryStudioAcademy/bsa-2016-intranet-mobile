@@ -24,7 +24,9 @@ namespace IntranetMobile.Core.Interfaces
         Task<bool> UnlikeComment(string newsId, string commentId);
 
         Task<CommentsResponseDto> LoadListOfComments(string newsId);
- 
+
         Task<bool> AddNewCommentRequest(string author, string body, string newsId);
+
+        Task<NewsDto> LoadNewsByIdAsync(string newsId);
     }
 }

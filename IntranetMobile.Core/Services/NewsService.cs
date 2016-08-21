@@ -235,7 +235,7 @@ namespace IntranetMobile.Core.Services
             return result;
         }
 
-        private async Task<NewsDto> LoadNewsByIdAsync(string newsId)
+        public async Task<NewsDto> LoadNewsByIdAsync(string newsId)
         {
             return await _restClient.GetAsync<NewsDto>(string.Format(NewsByIdPath, newsId));
         }
