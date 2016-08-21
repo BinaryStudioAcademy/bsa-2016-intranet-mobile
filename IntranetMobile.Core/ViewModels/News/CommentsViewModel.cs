@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
@@ -17,8 +15,6 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public CommentsViewModel()
         {
-            
-
             ClickSaveCommentCommand = new MvxCommand(SaveCommentExecute);
         }
 
@@ -27,13 +23,11 @@ namespace IntranetMobile.Core.ViewModels.News
             _newsId = arg.NewsId;
 
             GetComments();
-            comments =  await ServiceBus.NewsService.LoadListOfCommentsAsync(arg.NewsId);
-            GetListOfComments(comments, arg.NewsId);
         }
 
         public async void GetComments()
         {
-            var comments = await ServiceBus.NewsService.GetListOfComments(_newsId);
+            var comments = await ServiceBus.NewsService.LoadListOfCommentsAsync(_newsId);
             GetListOfComments(comments, _newsId);
 
             RaisePropertyChanged(() => Comments);
@@ -78,7 +72,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void SaveCommentExecute()
         {
-            var b = ServiceBus.NewsService.AddNewCommentRequest(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
+            var b = ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
 
             GetComments();
 

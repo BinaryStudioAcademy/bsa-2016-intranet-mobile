@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Models.Dtos;
-using Newtonsoft.Json;
 
 namespace IntranetMobile.Core.Services
 {
@@ -139,7 +138,7 @@ namespace IntranetMobile.Core.Services
         {
             var resource = string.Format(LikeUnlikeNewsPath, newsId);
 
-            var requestObject = new NewsLikeDto {id = newsId};
+            var requestObject = new NewsLikeDto { id = newsId };
 
             var result = await _restClient.PostAsync(resource, requestObject);
 
@@ -215,28 +214,7 @@ namespace IntranetMobile.Core.Services
             return result;
         }
 
-        public async Task<bool> AddCommentAsync(string author, string body, string newsId)
-        {
-            var resource = string.Format(NewsByIdPath, newsId) + "comments";
-            var commentRequestDto = new CommentRequestDto
-            {
-                Push =
-                {
-                    authorId = author,
-                    body = body,
-                    date = DateTime.Now.Millisecond
-                }
-            };
-        }
-
-        public async Task<CommentsResponseDto> GetListOfComments(string newsId)
-        {
-            var resource = string.Format(NewsByIdPath, newsId) + "comments";
-
-            return await _restClient.GetAsync<CommentsResponseDto>(resource);
-        }
-
-        public Task<bool> AddNewCommentRequest(string authorId, string body, string newsId)
+        public async Task<bool> AddCommentAsync(string authorId, string body, string newsId)
         {
             var resource = string.Format(NewsByIdPath, newsId) + "comments";
             var comment = new CommentRequestDto.CommentRequest.Comment();
@@ -254,29 +232,37 @@ namespace IntranetMobile.Core.Services
             var commentRequestDto = new CommentRequestDto();
             commentRequestDto.Push = commentRequest;
 
-            string s = JsonConvert.SerializeObject(commentRequestDto);
+            var result = await _restClient.PostAsync<bool>(resource, commentRequestDto);
 
-            return _restClient.PostAsync<bool>(resource, commentRequestDto);
-        }
-
-        private WeeklyNews GetWeeklyNewsFromDto(WeekNewsDto dto)
-        {
-            if (dto == null)
+            if (result)
             {
-                return null;
+                // Null check is not used, it's desired that news will exist in cache already
+                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
+                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
+                // It is also possible to add like by hands, but it is better to update whole news.
+
+                // TODO: Update comment cache model too
             }
 
-            return new WeeklyNews
-            {
-                WeeklyId = dto.weekliesId,
-                Title = dto.title,
-                AuthorId = dto.authorId,
-                Date = dto.date.UnixTimestampToDateTime(),
-                SubNewsIdList = dto.news,
-                FullNews = dto.fullNews != null
-                              ? dto.fullNews.Select(GetCompanyNewsFromDto).ToList()
-                              : null
-            };
+            return result;
+        }
+
+        public async Task<NewsDto> LoadNewsByIdAsync(string newsId)
+        {
+            return await _restClient.GetAsync<NewsDto>(string.Format(NewsByIdPath, newsId));
+        }
+
+        public async Task<CommentsResponseDto> LoadListOfCommentsAsync(string newsId)
+        {
+            var resource = string.Format(NewsByIdPath, newsId) + "comments";
+
+            return await _restClient.GetAsync<CommentsResponseDto>(resource);
+        }
+
+        private void SortNewsCache()
+        {
+            // OrderBy is dropped due to collection recreating
+            _newsCache.Sort((n1, n2) => n2.Date.CompareTo(n1.Date));
         }
     }
 }
