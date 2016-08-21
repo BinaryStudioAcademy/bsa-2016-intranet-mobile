@@ -7,15 +7,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Intranet.WindowsUWP.Views.Controls"
-    mc:Ignorable="d">
-    <local:BasePage.DataContext>
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
+    <!--<local:BasePage.DataContext>
         <vm:MainViewModel></vm:MainViewModel>
-    </local:BasePage.DataContext>
+    </local:BasePage.DataContext>-->
     <SplitView x:Name="MainSplitView"
                DisplayMode="CompactOverlay" 
                IsPaneOpen="False" 
                CompactPaneLength="48"
-               OpenPaneLength="200">
+               OpenPaneLength="218">
         <SplitView.Pane>
             <StackPanel Background="#F5F5F5">
                 <Button x:Name="HamburgerButton"
@@ -92,13 +93,7 @@
                     </NavigationThemeTransition>
                 </TransitionCollection>
             </Frame.ContentTransitions>
-
-            <!--
-					You might want to add some initial content here, or in the `Init` of the HomeViewModel invoke another `ShowViewModel<T>();`
-					That would replace the empty frame with the contents of the corresponding view
-				-->
-            <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
+            <TextBlock Text="LOADING..." VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Frame>
     </SplitView>
 </local:BasePage>

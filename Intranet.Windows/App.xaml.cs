@@ -86,6 +86,10 @@ namespace Intranet.WindowsUWP
                     start.Start();
 
                 }
+
+                // Set min window size
+                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(580, 480));
+
                 // Ensure the current window is active
                 Window.Current.Activate();
             }

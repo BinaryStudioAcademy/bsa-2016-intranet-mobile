@@ -41,15 +41,15 @@ namespace IntranetMobile.Core.ViewModels
                 "You will be logged out and your stored credentials will be removed",
                 "Yes", "No", async () =>
                 {
-            var logoutResult = await ServiceBus.AuthService.Logout();
-            if (!logoutResult)
-            {
-                // return;
-                // TODO: Log dat?
-            }
-            var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
-            await ServiceBus.StorageService.RemoveItem(user);
-            ShowViewModel<LoginViewModel>();
+                    var logoutResult = await ServiceBus.AuthService.Logout();
+                    if (!logoutResult)
+                    {
+                        // return;
+                        // TODO: Log dat?
+                    }
+                    var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
+                    await ServiceBus.StorageService.RemoveItem(user);
+                    ShowViewModel<LoginViewModel>();
                 });
         }
 

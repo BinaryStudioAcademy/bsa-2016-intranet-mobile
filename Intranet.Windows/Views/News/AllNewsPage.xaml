@@ -7,15 +7,50 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:news="using:IntranetMobile.Core.ViewModels.News"
-    mc:Ignorable="d">
-    <views:BasePage.DataContext>
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
+    <!--<views:BasePage.DataContext>
         <news:AllNewsViewModel></news:AllNewsViewModel>
-    </views:BasePage.DataContext>
+    </views:BasePage.DataContext>-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot Title="{Binding Title}" HorizontalAlignment="Center">
             <PivotItem Header="Company">
-                <!--Pivot content goes here-->
-                <TextBlock Text="Content of pivot item 1."/>
+                <Grid DataContext="{Binding CompanyNews}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="296"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView Grid.Column="0" ItemsSource="{Binding News}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                            <Grid Height="134">
+                                <Image Source="../../Images/news_default.png" Stretch="UniformToFill"/>
+                                <Image Source="{Binding PreviewImageUri}" Stretch="UniformToFill"/>
+                                <StackPanel Padding="8,8,0,8" Background="{StaticResource SolidAlphaBrushGray1}" VerticalAlignment="Bottom">
+                                    <TextBlock Text="{Binding Title}"
+                                               Foreground="White"
+                                               MaxLines="1"
+                                               FontSize="17"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding NewsSubtitle}" Foreground="White" FontSize="14"/>
+                                </StackPanel>
+                            </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Frame Grid.Column="1" x:Name="CompanyNewsContent" Margin="6,0,0,0">
+                        <Frame.ContentTransitions>
+                            <TransitionCollection>
+                                <NavigationThemeTransition>
+                                    <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                        <EntranceNavigationTransitionInfo/>
+                                    </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                </NavigationThemeTransition>
+                            </TransitionCollection>
+                        </Frame.ContentTransitions>
+                        <TextBlock Text=" " VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Frame>
+                </Grid>
             </PivotItem>
             <PivotItem Header="Weeklies">
                 <!--Pivot content goes here-->
