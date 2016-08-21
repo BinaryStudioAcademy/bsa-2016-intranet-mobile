@@ -13,7 +13,7 @@ namespace IntranetMobile.Core.Services
         private const string Type = "company";
         private const string Published = "yes";
         private const string LikeUnlikeCommentPath = "api/news/{0}/comments/{1}/likes";
-        private const string LikeUnlikeNews = "api/news/{0}/likes";
+        private const string LikeUnlikeNewsPath = "api/news/{0}/likes";
         private const string NewsByIdPath = "api/news/{0}/";
 
         private readonly List<News> _newsCache = new List<News>();
@@ -136,7 +136,7 @@ namespace IntranetMobile.Core.Services
 
         public async Task<bool> LikeNewsAsync(string newsId)
         {
-            var resource = string.Format(LikeUnlikeNews, newsId);
+            var resource = string.Format(LikeUnlikeNewsPath, newsId);
 
             var requestObject = new NewsLikeDto {id = newsId};
 
@@ -155,7 +155,7 @@ namespace IntranetMobile.Core.Services
 
         public async Task<bool> UnLikeNewsAsync(string newsId)
         {
-            var resource = string.Format(LikeUnlikeNews, newsId);
+            var resource = string.Format(LikeUnlikeNewsPath, newsId);
 
             var result = await _restClient.DeleteAsync(resource);
 
