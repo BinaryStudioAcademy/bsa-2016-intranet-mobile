@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using IntranetMobile.Core.Models.Dtos;
+﻿using System.Collections.Generic;
 
-namespace IntranetMobile.Core
+// ReSharper disable InconsistentNaming
+
+namespace IntranetMobile.Core.Models.Dtos
 {
     public class CommentsResponseDto
     {
-        public List<CommentDto> comments { get; set;}
+        public List<CommentDto> comments { get; set; }
     }
 }
-

@@ -6,6 +6,6 @@ namespace IntranetMobile.Core.Models
     public abstract class Persist
     {
         [PrimaryKey, AutoIncrement, JsonIgnore]
-        public int Id { get; set; }
+        public int LocalId { get; set; }
     }
 }

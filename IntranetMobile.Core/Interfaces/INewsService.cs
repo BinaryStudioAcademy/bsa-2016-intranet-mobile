@@ -7,11 +7,11 @@ namespace IntranetMobile.Core.Interfaces
 {
     public interface INewsService
     {
-        Task<List<News>> GetCompanyNews(int skip, int limit);
+        Task<List<News>> GetNews(int skip, int limit);
 
         Task<List<WeeklyNews>> GetWeeklyNews(int skip, int limit);
 
-        Task<News> GetCompanyNewsById(string newsId);
+        Task<News> GetNewsById(string newsId);
 
         WeeklyNews GetWeeklyNewsById(string newsId);
 
@@ -23,8 +23,10 @@ namespace IntranetMobile.Core.Interfaces
 
         Task<bool> UnlikeComment(string newsId, string commentId);
 
-        Task<CommentsResponseDto> GetListOfComments(string newsId);
- 
+        Task<CommentsResponseDto> LoadListOfComments(string newsId);
+
         Task<bool> AddNewCommentRequest(string author, string body, string newsId);
+
+        Task<NewsDto> LoadNewsByIdAsync(string newsId);
     }
 }

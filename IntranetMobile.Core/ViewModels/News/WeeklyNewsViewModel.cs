@@ -68,7 +68,7 @@ namespace IntranetMobile.Core.ViewModels.News
             InvokeOnMainThread(News.Clear);
             foreach (var item in allNews)
             {
-                InvokeOnMainThread(() => { News.Add(WeeklyItemViewModel.FromModel(item)); });
+                InvokeOnMainThread(async () => { News.Add(await WeeklyItemViewModel.FromModel(item)); });
             }
         }
     }

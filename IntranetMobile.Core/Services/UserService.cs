@@ -24,6 +24,15 @@ namespace IntranetMobile.Core.Services
             _restClient = client;
         }
 
+        public async Task<User> GetCurrentUserAsync()
+        {
+            if (CurrentUser == null)
+            {
+                await GetAllUsers();
+            }
+            return CurrentUser;
+        }
+
         public async Task<List<User>> GetAllUsers()
         {
             await _semaphoreAllUser.WaitAsync().ConfigureAwait(false);

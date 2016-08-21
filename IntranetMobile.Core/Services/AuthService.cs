@@ -30,7 +30,9 @@ namespace IntranetMobile.Core.Services
             var authDto = await _restClient.PostAsync<AuthDto>(LoginPath, user);
 
             if (authDto.success)
+            {
                 ServiceBus.UserService.GetAllUsers();
+            }
 
             return authDto;
         }
