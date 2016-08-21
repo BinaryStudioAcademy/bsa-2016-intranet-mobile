@@ -1,4 +1,5 @@
-﻿using IntranetMobile.Core.Services;
+﻿using System.Threading.Tasks;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
@@ -6,6 +7,7 @@ namespace IntranetMobile.Core.ViewModels.News
     public class NewsDetailsViewModel : BaseViewModel
     {
         private Models.News _dataModel;
+        private bool _isLiked;
 
         private string _newsId;
 
@@ -21,11 +23,28 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public string Body => _dataModel.Body;
 
-        public int LikesCount => _dataModel.Likes?.Count ?? 0;
+        public int LikesCount => _dataModel.Likes.Count;
 
-        public int CommentsCount => _dataModel.Comments?.Count ?? 0;
+        public int CommentsCount => _dataModel.Comments.Count;
 
-        public bool IsLiked => _dataModel.Likes?.Contains(ServiceBus.UserService.CurrentUser.UserId) ?? false;
+        public bool IsLiked
+        {
+            get
+            {
+                Task.Run(async () =>
+                {
+                    var user = await ServiceBus.UserService.GetCurrentUserAsync();
+                    IsLiked = _dataModel.Likes.Contains(user.UserId);
+                });
+
+                return _isLiked;
+            }
+            set
+            {
+                _isLiked = value;
+                RaisePropertyChanged(() => IsLiked);
+            }
+        }
 
         public async void Init(Parameters arg)
         {
@@ -35,6 +54,7 @@ namespace IntranetMobile.Core.ViewModels.News
             Subtitle = _dataModel.Date.ToString("dd-MM-yyyy HH:mm");
             RaisePropertyChanged(() => LikesCount);
             RaisePropertyChanged(() => CommentsCount);
+            RaisePropertyChanged(() => IsLiked);
 
             _newsId = arg.NewsId;
         }

@@ -8,6 +8,8 @@ namespace IntranetMobile.Core.Interfaces
     {
         User CurrentUser { get; }
 
+        Task<User> GetCurrentUserAsync();
+
         Task<List<User>> GetAllUsers();
 
         Task<User> GetUserById(string id);
