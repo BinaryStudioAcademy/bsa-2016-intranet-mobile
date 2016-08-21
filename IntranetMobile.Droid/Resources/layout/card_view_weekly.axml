@@ -42,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_size_very_small"
                         android:textColor="#FFFFFF"
-                        app:MvxBind="Text NewsSubtitle" />
+                        app:MvxBind="Text Subtitle" />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>
