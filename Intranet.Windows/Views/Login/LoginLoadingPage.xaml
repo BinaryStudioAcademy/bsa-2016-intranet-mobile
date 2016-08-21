@@ -10,7 +10,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Image Source="../../Images/logo_black_1.png" Width="160" Margin="0,0,0,56" HorizontalAlignment="Center"/>
+            <Image Source="../../Images/logo_black_1.png" Width="160" Margin="0,0,0,64" HorizontalAlignment="Center"/>
             <ProgressRing
                 Width="36"
                 Height="36"

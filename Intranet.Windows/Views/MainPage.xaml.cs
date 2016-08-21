@@ -33,5 +33,25 @@ namespace Intranet.WindowsUWP
         {
             MainSplitView.IsPaneOpen = !MainSplitView.IsPaneOpen;
         }
+
+        private void MainMenu_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var vm = ViewModel as MainViewModel;
+            if (vm == null)
+                return;
+
+            switch (MenuItemList.SelectedIndex)
+            {
+                case 0: 
+                    vm.Menu.ShowNews();
+                    break;
+                case 1:
+                    vm.Menu.ShowUsers();
+                    break;
+                case 6:
+                    vm.Menu.Logout();
+                    break;
+            }
+        }
     }
 }
