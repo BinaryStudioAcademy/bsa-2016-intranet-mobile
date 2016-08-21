@@ -26,7 +26,7 @@ namespace IntranetMobile.Core.Services
             _restClient = client;
         }
 
-        public async Task<List<News>> GetNewsAsync(int skip, int limit)
+        public async Task<List<News>> GetAllNewsAsync(int skip, int limit)
         {
             var compNewsReqParams = new NewsReqParams
             {
@@ -57,7 +57,13 @@ namespace IntranetMobile.Core.Services
                 SortNewsCache();
             }
 
-            return _newsCache;
+            return new List<News>(_newsCache);
+        }
+
+        public async Task<List<News>> GetCompanyNewsAsync(int skip, int limit)
+        {
+            var allNews = await GetAllNewsAsync(skip, limit);
+            return allNews.Where(news => news.Type.Equals("company")).ToList();
         }
 
         public async Task<News> GetNewsByIdAsync(string newsId)
@@ -115,7 +121,7 @@ namespace IntranetMobile.Core.Services
                 _weeklyNewsCache.Sort((n1, n2) => n2.Date.CompareTo(n1.Date));
             }
 
-            return _weeklyNewsCache;
+            return new List<WeeklyNews>(_weeklyNewsCache);
         }
 
         public WeeklyNews GetWeeklyNewsByIdAsync(string newsId)
@@ -138,7 +144,7 @@ namespace IntranetMobile.Core.Services
         {
             var resource = string.Format(LikeUnlikeNewsPath, newsId);
 
-            var requestObject = new NewsLikeDto { id = newsId };
+            var requestObject = new NewsLikeDto {id = newsId};
 
             var result = await _restClient.PostAsync(resource, requestObject);
 
@@ -217,20 +223,20 @@ namespace IntranetMobile.Core.Services
         public async Task<bool> AddCommentAsync(string authorId, string body, string newsId)
         {
             var resource = string.Format(NewsByIdPath, newsId) + "comments";
-            var comment = new CommentRequestDto.CommentRequest.Comment();
+            var comment = new CommentRequestDto.CommentRequest.Comment
+            {
+                author = authorId,
+                body = body,
+                likes = new List<string>(),
+                date = (long) DateTime.Now.ToUniversalTime()
+                    .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
+                    .TotalMilliseconds
+            };
 
-            comment.author = authorId;
-            comment.body = body;
-            comment.likes = new List<string>();
-            comment.date = (long)DateTime.Now.ToUniversalTime()
-                                .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
-                                .TotalMilliseconds;
 
-            var commentRequest = new CommentRequestDto.CommentRequest();
-            commentRequest.comments = comment;
+            var commentRequest = new CommentRequestDto.CommentRequest {comments = comment};
 
-            var commentRequestDto = new CommentRequestDto();
-            commentRequestDto.Push = commentRequest;
+            var commentRequestDto = new CommentRequestDto {Push = commentRequest};
 
             var result = await _restClient.PostAsync<bool>(resource, commentRequestDto);
 
