@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using IntranetMobile.Core.ViewModels.Login;
 using MvvmCross.WindowsUWP.Views;
@@ -22,7 +23,7 @@ namespace Intranet.WindowsUWP.Views.Login
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class UserCredentialsPage : MvxWindowsPage
+    public sealed partial class UserCredentialsPage : BasePage
     {
         public UserCredentialsPage()
         {

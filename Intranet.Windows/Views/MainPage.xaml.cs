@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -12,6 +13,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Intranet.WindowsUWP.Views;
+using Intranet.WindowsUWP.Views.News;
 using IntranetMobile.Core.ViewModels;
 using MvvmCross.WindowsUWP.Views;
 
@@ -22,11 +25,25 @@ namespace Intranet.WindowsUWP
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : MvxWindowsPage
+    public sealed partial class MainPage : BasePage
     {
+        private int _prevSelectedMenuItem;
+        private bool _initialized;
+
         public MainPage()
         {
             this.InitializeComponent();
+            _prevSelectedMenuItem = -1;
+
+            DataContextChanged += (sender, args) =>
+            {
+                var vm = ViewModel as MainViewModel;
+                if (vm == null || _initialized)
+                    return;
+
+                vm.Menu.ShowNews();
+                _initialized = true;
+            };
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
@@ -37,21 +54,24 @@ namespace Intranet.WindowsUWP
         private void MainMenu_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var vm = ViewModel as MainViewModel;
-            if (vm == null)
+            if (vm == null || MenuItemList.SelectedIndex == _prevSelectedMenuItem)
                 return;
-
+            
             switch (MenuItemList.SelectedIndex)
             {
-                case 0: 
+                case 1:
                     vm.Menu.ShowNews();
                     break;
-                case 1:
+                case 3:
                     vm.Menu.ShowUsers();
                     break;
                 case 6:
+                    MenuItemList.SelectedIndex = _prevSelectedMenuItem;
                     vm.Menu.Logout();
                     break;
             }
+
+            _prevSelectedMenuItem = MenuItemList.SelectedIndex;
         }
     }
 }

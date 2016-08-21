@@ -30,21 +30,21 @@ namespace Intranet.WindowsUWP.Views.Controls
             get { return (string)GetValue(IconUriProperty); }
             set { SetValue(IconUriProperty, value); }
         }
-
+        
         /// <summary>
         /// Identified the Label dependency property
         /// </summary>
         public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register("Label", typeof(string),
+            DependencyProperty.Register(nameof(Label), typeof(string),
               typeof(MenuItemControl), new PropertyMetadata(""));
 
         /// <summary>
         /// Identified the IconUri dependency property
         /// </summary>
         public static readonly DependencyProperty IconUriProperty =
-            DependencyProperty.Register("IconUri", typeof(string),
+            DependencyProperty.Register(nameof(IconUri), typeof(string),
               typeof(MenuItemControl), new PropertyMetadata(""));
-
+        
         public MenuItemControl()
         {
             this.InitializeComponent();

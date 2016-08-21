@@ -48,5 +48,10 @@ namespace Intranet.WindowsUWP
 
             return app;
         }
+
+        protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
+        {
+            return new MvxWindowsMultiRegionViewPresenter(rootFrame);
+        }
     }
 }

@@ -7,6 +7,9 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -85,6 +88,20 @@ namespace Intranet.WindowsUWP
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+            }
+
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+            {
+                var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                if (titleBar != null)
+                {
+                    var lightGrayColor = Color.FromArgb(255, 249, 249, 249);
+
+                    titleBar.ButtonBackgroundColor = Colors.White;
+                    titleBar.ButtonForegroundColor = Colors.Black;
+                    titleBar.BackgroundColor = Colors.White;
+                    titleBar.ForegroundColor = Colors.Black;
+                }
             }
         }
 

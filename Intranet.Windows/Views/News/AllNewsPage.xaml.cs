@@ -11,18 +11,20 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using IntranetMobile.Core.ViewModels.Login;
 using MvvmCross.WindowsUWP.Views;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Intranet.WindowsUWP.Views.Login
+namespace Intranet.WindowsUWP.Views.News
 {
-    public sealed partial class LoginPage : BasePage
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    [MvxRegion("MainContent")]
+    public sealed partial class AllNewsPage : BasePage
     {
-        public LoginPage()
+        public AllNewsPage()
         {
             this.InitializeComponent();
         }

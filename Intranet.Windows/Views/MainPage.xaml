@@ -1,4 +1,4 @@
-﻿<views:MvxWindowsPage
+﻿<local:BasePage
     x:Class="Intranet.WindowsUWP.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,46 +6,50 @@
     xmlns:vm="using:IntranetMobile.Core.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:MvvmCross.WindowsUWP.Views"
     xmlns:controls="using:Intranet.WindowsUWP.Views.Controls"
     mc:Ignorable="d">
-    <views:MvxWindowsPage.DataContext>
+    <local:BasePage.DataContext>
         <vm:MainViewModel></vm:MainViewModel>
-    </views:MvxWindowsPage.DataContext>
+    </local:BasePage.DataContext>
     <SplitView x:Name="MainSplitView"
                DisplayMode="CompactOverlay" 
                IsPaneOpen="False" 
-               CompactPaneLength="50"
-               OpenPaneLength="190">
+               CompactPaneLength="48"
+               OpenPaneLength="200">
         <SplitView.Pane>
             <StackPanel Background="#F5F5F5">
-                <Button x:Name="HamburgerButton" Foreground="#303338" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
-                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
+                <Button x:Name="HamburgerButton"
+                        FontFamily="Segoe MDL2 Assets"
+                        Content="&#xE700;"
+                        Width="48"
+                        Height="48"
+                        Style="{StaticResource MenuButton}"
+                        Click="HamburgerButton_Click"/>
                 <ListView
                     x:Name="MenuItemList"
                     IsMultiSelectCheckBoxEnabled="False"
                     SelectionChanged="MainMenu_OnSelectionChanged">
                     <ListViewItem>
                         <ListViewItem.Content>
-                            <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
+                            <StackPanel Orientation="Horizontal" Margin="-2,10,0,10">
                                 <Image
                                     VerticalAlignment="Center"
-                                    Width="36"
-                                    Height="36"
+                                    Width="27"
+                                    Height="27"
                                     Source="../../Images/avatar_circle_grey.png"
-                                    Margin="4,0,10,0"/>
+                                    Margin="0,0,14,0"/>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                                     <TextBlock
                                         Text="{Binding Menu.UserName}"
-                                        Foreground="#121212"/>
+                                        Foreground="{StaticResource SolidBrushGray3}"/>
                                     <TextBlock
                                         Text="Additional info"
-                                        Foreground="#676767"/>
+                                        Foreground="{StaticResource SolidBrushGray1}"/>
                                 </StackPanel>
                             </StackPanel>
                         </ListViewItem.Content>
                     </ListViewItem>
-                    <ListViewItem>
+                    <ListViewItem IsSelected="True">
                         <ListViewItem.Content>
                             <controls:MenuItemControl Label="News" IconUri="../../Images/home_black.png"/>
                         </ListViewItem.Content>
@@ -78,12 +82,24 @@
                 </ListView>
             </StackPanel>
         </SplitView.Pane>
-        <SplitView.Content>
-            <Grid>
-                <TextBlock Text="SplitView Basic" FontSize="54" Foreground="White"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
-        </SplitView.Content>
+        <Frame x:Name="MainContent">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition>
+                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                            <EntranceNavigationTransitionInfo/>
+                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    </NavigationThemeTransition>
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+
+            <!--
+					You might want to add some initial content here, or in the `Init` of the HomeViewModel invoke another `ShowViewModel<T>();`
+					That would replace the empty frame with the contents of the corresponding view
+				-->
+            <ProgressRing IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        </Frame>
     </SplitView>
-</views:MvxWindowsPage>
+</local:BasePage>
 

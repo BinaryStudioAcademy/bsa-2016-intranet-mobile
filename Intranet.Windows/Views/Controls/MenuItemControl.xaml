@@ -5,20 +5,21 @@
     xmlns:local="using:Intranet.WindowsUWP.Views.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Intranet.WindowsUWP.Views.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <StackPanel Orientation="Horizontal">
         <Image
             VerticalAlignment="Center"
-            Width="36"
-            Height="36"
-            Margin="-5,0,0,0"
+            Width="27"
+            Height="27"
+            Margin="-2,0,0,0"
             Source="{x:Bind IconUri}"/>
         <TextBlock
             VerticalAlignment="Center"
             Text="{x:Bind Label}"
-            Margin="15,0,0,0"
-            Foreground="#2b2b2b"/>
+            Margin="14,0,0,0"
+            Foreground="{StaticResource SolidBrushGray3}"/>
     </StackPanel>
 </UserControl>

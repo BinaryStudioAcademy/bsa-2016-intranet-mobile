@@ -1,4 +1,5 @@
-﻿using MvvmCross.Platform;
+﻿using IntranetMobile.Core.ViewModels.News;
+using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.ViewModels
 {
@@ -12,7 +13,6 @@ namespace IntranetMobile.Core.ViewModels
         public override void Start()
         {
             base.Start();
-            //ShowViewModel<MenuViewModel>();
             Menu.Start();
         }
 
