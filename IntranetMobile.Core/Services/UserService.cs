@@ -53,7 +53,7 @@ namespace IntranetMobile.Core.Services
                 FirstName = u.Name,
                 LastName = u.Surname,
                 Birthday = DateTime.Parse(u.Birthday),
-                AvatarUri = u.Avatar.ThumbnailUrlAva,
+                AvatarUri = u.Avatar.UrlAva,
                 Position = u.Position
             }).ToList();
 

@@ -66,7 +66,7 @@ namespace IntranetMobile.Droid.Views.Fragments
                 }
                 case Resource.Id.nav_profile:
                 {
-                    ViewModel.ShowProfile();
+                    ViewModel.ShowUsers();
                     break;
                 }
                 case Resource.Id.nav_asciit:
@@ -77,11 +77,6 @@ namespace IntranetMobile.Droid.Views.Fragments
                 case Resource.Id.nav_settings:
                 {
                     ViewModel.ShowNews();
-                    break;
-                }
-                case Resource.Id.nav_users:
-                {
-                    ViewModel.ShowUsers();
                     break;
                 }
                 case Resource.Id.nav_logout:

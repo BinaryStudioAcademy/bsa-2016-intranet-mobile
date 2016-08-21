@@ -1,3 +1,4 @@
+using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
 using IntranetMobile.Core.ViewModels;
@@ -12,7 +13,7 @@ namespace IntranetMobile.Droid.Views.Activities
         public abstract int ActivityLayout { get; }
         public virtual int ToolbarLayout { get; } = Resource.Id.mvx_toolbar;
 
-        protected override void OnCreate(Android.OS.Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -40,8 +41,7 @@ namespace IntranetMobile.Droid.Views.Activities
         {
             base.OnResume();
 
-            if (ViewModel != null)
-                ViewModel.Resume();
+            ViewModel?.Resume();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
