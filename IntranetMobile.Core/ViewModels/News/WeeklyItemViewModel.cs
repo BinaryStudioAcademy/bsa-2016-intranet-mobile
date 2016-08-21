@@ -66,6 +66,9 @@ namespace IntranetMobile.Core.ViewModels.News
         public static async Task<WeeklyItemViewModel> FromModel(WeeklyNews news)
         {
             var firstNews = await ServiceBus.NewsService.GetNewsById(news.FullNews[0]);
+
+            // TODO: Why do we pass values, not WeeklyNews reference with encapsulated properties?
+
             return new WeeklyItemViewModel
             {
                 PreviewImageUri = firstNews.Body.GetFirstImageUri(),
