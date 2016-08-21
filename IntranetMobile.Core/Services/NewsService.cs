@@ -157,7 +157,7 @@ namespace IntranetMobile.Core.Services
 
             if (result)
             {
-                // Null check is not used, it's desired that LikeNews news will exist in cache already
+                // Null check is not used, it's desired that news will exist in cache already
                 _newsCache.FirstOrDefault(news => news.NewsId == newsId)
                     .UpdateFromDto(await LoadNewsByIdAsync(newsId));
                 // It is also possible to add like by hands, but it is better to update whole news.
@@ -174,7 +174,7 @@ namespace IntranetMobile.Core.Services
 
             if (result)
             {
-                // Null check is not used, it's desired that LikeNews news will exist in cache already
+                // Null check is not used, it's desired that news will exist in cache already
                 _newsCache.FirstOrDefault(news => news.NewsId == newsId)
                     .UpdateFromDto(await LoadNewsByIdAsync(newsId));
                 // It is also possible to add like by hands, but it is better to update whole news.
@@ -193,7 +193,7 @@ namespace IntranetMobile.Core.Services
 
             if (result)
             {
-                // Null check is not used, it's desired that LikeNews news will exist in cache already
+                // Null check is not used, it's desired that news will exist in cache already
                 _newsCache.FirstOrDefault(news => news.NewsId == newsId)
                     .UpdateFromDto(await LoadNewsByIdAsync(newsId));
                 // It is also possible to add like by hands, but it is better to update whole news.
@@ -226,7 +226,7 @@ namespace IntranetMobile.Core.Services
 
             if (result)
             {
-                // Null check is not used, it's desired that LikeNews news will exist in cache already
+                // Null check is not used, it's desired that news will exist in cache already
                 _newsCache.FirstOrDefault(news => news.NewsId == newsId)
                     .UpdateFromDto(await LoadNewsByIdAsync(newsId));
                 // It is also possible to add like by hands, but it is better to update whole news.
