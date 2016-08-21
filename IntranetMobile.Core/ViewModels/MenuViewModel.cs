@@ -3,12 +3,20 @@ using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Login;
 using IntranetMobile.Core.ViewModels.News;
 using IntranetMobile.Core.ViewModels.Profile;
+using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
 {
     public class MenuViewModel : BaseViewModel
     {
         private string _userName;
+
+        public MenuViewModel()
+        {
+            ShowProfileCommand = new MvxCommand(ShowProfile);
+        }
+
+        public MvxCommand ShowProfileCommand { get; }
 
         public string UserName
         {

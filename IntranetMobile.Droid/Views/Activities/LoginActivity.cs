@@ -1,7 +1,7 @@
 using Android.App;
+using Android.Views;
 using IntranetMobile.Core.ViewModels.Login;
 using MvvmCross.Droid.Shared.Caching;
-using MvvmCross.Droid.Support.V7.AppCompat;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 
 namespace IntranetMobile.Droid.Views.Activities
@@ -14,7 +14,7 @@ namespace IntranetMobile.Droid.Views.Activities
         {
             base.OnViewModelSet();
 
-            Window.AddFlags(Android.Views.WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
             SetContentView(Resource.Layout.activity_login);
         }

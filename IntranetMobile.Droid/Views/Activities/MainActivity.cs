@@ -23,7 +23,7 @@ namespace IntranetMobile.Droid.Views.Activities
             var menuViewModelInstance = ViewModel.Menu;
             SupportFragmentManager
                 .BeginTransaction()
-                .Replace(Resource.Id.menu_frame, new MenuFragment { ViewModel = menuViewModelInstance }, "MenuFragment")
+                .Replace(Resource.Id.menu_frame, new MenuFragment {ViewModel = menuViewModelInstance})
                 .Commit();
         }
 

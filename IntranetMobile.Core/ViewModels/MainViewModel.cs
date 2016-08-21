@@ -16,6 +16,6 @@ namespace IntranetMobile.Core.ViewModels
             Menu.Start();
         }
 
-        public MenuViewModel Menu { get; private set; }
+        public MenuViewModel Menu { get; }
     }
 }

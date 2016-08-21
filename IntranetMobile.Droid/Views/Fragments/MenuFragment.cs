@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Android.OS;
 using Android.Runtime;
@@ -6,6 +5,7 @@ using Android.Support.Design.Widget;
 using Android.Views;
 using IntranetMobile.Core.ViewModels;
 using IntranetMobile.Droid.Views.Activities;
+using IntranetMobile.Droid.Views.Controls;
 using MvvmCross.Binding.Droid.BindingContext;
 
 namespace IntranetMobile.Droid.Views.Fragments
@@ -16,6 +16,7 @@ namespace IntranetMobile.Droid.Views.Fragments
     [Register("intranetmobile.droid.views.fragments.MenuFragment")]
     public class MenuFragment : BaseFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
+        private CircleImageView _avatarImageView;
         private NavigationView _navigationView;
 
         public bool OnNavigationItemSelected(IMenuItem menuItem)
@@ -38,6 +39,16 @@ namespace IntranetMobile.Droid.Views.Fragments
             _navigationView.SetNavigationItemSelectedListener(this);
             _navigationView.Menu.FindItem(Resource.Id.nav_news).SetChecked(true);
 
+            _avatarImageView =
+                _navigationView.GetHeaderView(0)
+                    .FindViewById<CircleImageView>(Resource.Id.drawer_header_avatar_imageview);
+            _avatarImageView.Click += async (sender, args) =>
+            {
+                ((MainActivity) Activity).DrawerLayout.CloseDrawers();
+                await Task.Delay(250);
+                ViewModel.ShowProfile();
+            };
+
             return view;
         }
 
@@ -50,7 +61,7 @@ namespace IntranetMobile.Droid.Views.Fragments
         private async void Navigate(int itemId)
         {
             ((MainActivity) Activity).DrawerLayout.CloseDrawers();
-            await Task.Delay(TimeSpan.FromMilliseconds(250));
+            await Task.Delay(250);
 
             switch (itemId)
             {
