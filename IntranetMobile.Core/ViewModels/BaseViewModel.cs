@@ -7,6 +7,12 @@ namespace IntranetMobile.Core.ViewModels
         private string _subtitle;
         private string _title;
 
+        public BaseViewModel()
+        {
+            Title = "";
+            Subtitle = "";
+        }
+
         public string Title
         {
             get { return _title; }

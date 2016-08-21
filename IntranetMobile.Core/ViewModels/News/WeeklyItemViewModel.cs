@@ -15,10 +15,7 @@ namespace IntranetMobile.Core.ViewModels.News
         private string _previewImageUri;
 
         public string WeeklyId { get; set; }
-
-        // TODO: Fix, override or assign on demand
-        public string Subtitle => $"{_author.FirstName} {_author.LastName}     {Date.ToString("dd-MM-yyyy HH:mm")}";
-
+        
         public string AuthorId
         {
             get { return _authorId; }
@@ -58,6 +55,7 @@ namespace IntranetMobile.Core.ViewModels.News
             Task.Run(async () =>
             {
                 _author = await ServiceBus.UserService.GetUserById(AuthorId) ?? new User();
+                Subtitle = $"{_author?.FirstName} {_author?.LastName}     {Date.ToString("dd-MM-yyyy HH:mm")}";
 
                 InvokeOnMainThread(() => RaisePropertyChanged(() => Subtitle));
             });

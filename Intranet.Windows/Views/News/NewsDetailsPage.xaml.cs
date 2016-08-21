@@ -21,26 +21,12 @@ namespace Intranet.WindowsUWP.Views.News
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    [MvxRegion("MainContent")]
-    public sealed partial class AllNewsPage : BasePage
+    [MvxRegion("CompanyNewsContent")]
+    public sealed partial class NewsDetailsPage : BasePage
     {
-        public AllNewsPage()
+        public NewsDetailsPage()
         {
             this.InitializeComponent();
-        }
-
-        private void Pivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (Tabs.SelectedIndex == 0)
-            {
-                RefreshCompanyNewsBtn.Visibility = Visibility.Visible;
-                RefreshWeekliesBtn.Visibility = Visibility.Collapsed;
-            }
-            else if (Tabs.SelectedIndex == 1)
-            {
-                RefreshCompanyNewsBtn.Visibility = Visibility.Collapsed;
-                RefreshWeekliesBtn.Visibility = Visibility.Visible;
-            }
         }
     }
 }
