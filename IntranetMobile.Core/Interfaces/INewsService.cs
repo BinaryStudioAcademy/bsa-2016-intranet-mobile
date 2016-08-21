@@ -7,7 +7,9 @@ namespace IntranetMobile.Core.Interfaces
 {
     public interface INewsService
     {
-        Task<List<News>> GetNewsAsync(int skip, int limit);
+        Task<List<News>> GetAllNewsAsync(int skip, int limit);
+
+        Task<List<News>> GetCompanyNewsAsync(int skip, int limit);
 
         Task<News> GetNewsByIdAsync(string newsId);
 
