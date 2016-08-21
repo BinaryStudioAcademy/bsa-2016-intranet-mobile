@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Models.Dtos;
+using Newtonsoft.Json;
 
 namespace IntranetMobile.Core.Services
 {
@@ -226,38 +227,56 @@ namespace IntranetMobile.Core.Services
                     date = DateTime.Now.Millisecond
                 }
             };
-
-            var result = await _restClient.PostAsync<bool>(resource, commentRequestDto);
-
-            if (result)
-            {
-                // Null check is not used, it's desired that news will exist in cache already
-                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
-                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
-                // It is also possible to add like by hands, but it is better to update whole news.
-
-                // TODO: Update comment cache model too
-            }
-
-            return result;
         }
 
-        public async Task<NewsDto> LoadNewsByIdAsync(string newsId)
-        {
-            return await _restClient.GetAsync<NewsDto>(string.Format(NewsByIdPath, newsId));
-        }
-
-        public async Task<CommentsResponseDto> LoadListOfCommentsAsync(string newsId)
+        public async Task<CommentsResponseDto> GetListOfComments(string newsId)
         {
             var resource = string.Format(NewsByIdPath, newsId) + "comments";
 
             return await _restClient.GetAsync<CommentsResponseDto>(resource);
         }
 
-        private void SortNewsCache()
+        public Task<bool> AddNewCommentRequest(string authorId, string body, string newsId)
         {
-            // OrderBy is dropped due to collection recreating
-            _newsCache.Sort((n1, n2) => n2.Date.CompareTo(n1.Date));
+            var resource = string.Format(NewsByIdPath, newsId) + "comments";
+            var comment = new CommentRequestDto.CommentRequest.Comment();
+
+            comment.author = authorId;
+            comment.body = body;
+            comment.likes = new List<string>();
+            comment.date = (long)DateTime.Now.ToUniversalTime()
+                                .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
+                                .TotalMilliseconds;
+
+            var commentRequest = new CommentRequestDto.CommentRequest();
+            commentRequest.comments = comment;
+
+            var commentRequestDto = new CommentRequestDto();
+            commentRequestDto.Push = commentRequest;
+
+            string s = JsonConvert.SerializeObject(commentRequestDto);
+
+            return _restClient.PostAsync<bool>(resource, commentRequestDto);
+        }
+
+        private WeeklyNews GetWeeklyNewsFromDto(WeekNewsDto dto)
+        {
+            if (dto == null)
+            {
+                return null;
+            }
+
+            return new WeeklyNews
+            {
+                WeeklyId = dto.weekliesId,
+                Title = dto.title,
+                AuthorId = dto.authorId,
+                Date = dto.date.UnixTimestampToDateTime(),
+                SubNewsIdList = dto.news,
+                FullNews = dto.fullNews != null
+                              ? dto.fullNews.Select(GetCompanyNewsFromDto).ToList()
+                              : null
+            };
         }
     }
 }

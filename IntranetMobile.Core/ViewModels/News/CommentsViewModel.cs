@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
@@ -12,50 +11,41 @@ namespace IntranetMobile.Core.ViewModels.News
     public class CommentsViewModel : BaseViewModel
     {
         private ObservableCollection<CommentsItemViewModel> _comments; 
-        private string _commentBody;
-        private CommentsResponseDto comments;
 
+        private string _newComment;
         private string _newsId;
 
         public CommentsViewModel()
         {
+            
+
             ClickSaveCommentCommand = new MvxCommand(SaveCommentExecute);
         }
 
-        public async void Init(Parameters arg)
+        public void Init(Parameters arg)
         {
             _newsId = arg.NewsId;
 
+            GetComments();
             comments =  await ServiceBus.NewsService.LoadListOfCommentsAsync(arg.NewsId);
             GetListOfComments(comments, arg.NewsId);
-
-            RaisePropertyChanged(() => Comments);
-
-            /*comments = new CommentsResponseDto();
-
-               CommentDto c = new CommentDto();
-
-               c.authorId = "567abd6670a3a2541ae74c9a";
-               c.date = 1453457840283;
-               c.body = "<p>11</p>";
-               c.likes = new List<string>{};
-
-               _comments = new ObservableCollection<CommentsItemViewModel>
-           {
-                new CommentsItemViewModel(c, arg.NewsId),
-               new CommentsItemViewModel(c, arg.NewsId),
-               new CommentsItemViewModel(c, arg.NewsId),
-               new CommentsItemViewModel(c, arg.NewsId)
-           };*/
         }
 
-        public void GetListOfComments(CommentsResponseDto comments, string newsId)
+        public async void GetComments()
+        {
+            var comments = await ServiceBus.NewsService.GetListOfComments(_newsId);
+            GetListOfComments(comments, _newsId);
+
+            RaisePropertyChanged(() => Comments);
+        }
+
+        public void GetListOfComments(CommentsResponseDto listOfComments, string newsId)
         {
             _comments = new ObservableCollection<CommentsItemViewModel>();
 
-            if (comments == null) return;
+            if (listOfComments == null) return;
 
-            foreach (var c in comments.comments)
+            foreach (var c in listOfComments.comments)
             {
                 var comment = new CommentsItemViewModel(c, newsId);
 
@@ -66,13 +56,13 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ICommand ClickSaveCommentCommand { get; private set; }
 
-        public string CommentBody
+        public string NewComment
         {
-            get { return _commentBody;}
+            get { return _newComment;}
             set
             {
-                _commentBody = value;
-                RaisePropertyChanged(() => CommentBody);
+                _newComment = value;
+                RaisePropertyChanged(() => NewComment);
             }
         }
 
@@ -88,18 +78,11 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void SaveCommentExecute()
         {
-            CommentDto c = new CommentDto();
+            var b = ServiceBus.NewsService.AddNewCommentRequest(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
 
-            c.body = CommentBody;
-            c.authorId = ServiceBus.UserService.CurrentUser.UserId;
-            c.date = (long) DateTime.Now.ToUniversalTime().Subtract(new DateTime(1970,1,1,0,0,0, DateTimeKind.Utc)).TotalMilliseconds;
-            c.commentId = "someId";
-            c.likes = new List<string>();
+            GetComments();
 
-            _comments.Add(new CommentsItemViewModel(c, _newsId));
-            RaisePropertyChanged(() => Comments);
-
-            CommentBody = "";
+            NewComment = "";
         }
 
         public class Parameters

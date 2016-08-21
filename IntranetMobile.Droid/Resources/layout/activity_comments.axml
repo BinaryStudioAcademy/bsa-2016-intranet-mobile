@@ -25,7 +25,7 @@
             android:layout_weight="8"
             android:inputType="textMultiLine"
             android:hint="Write a comment..."
-            app:MvxBind="Text CommentBody" />
+            app:MvxBind="Text NewComment" />
         <Button
             android:text="Send"
             android:layout_width="wrap_content"
