@@ -36,7 +36,6 @@ namespace IntranetMobile.Core.ViewModels.Profile
             foreach (var user in users.Where(user => user.UserId != currentUser.UserId))
             {
                 InvokeOnMainThread(() => { Users.Add(UserViewModel.FromModel(user)); });
-                await Task.Delay(500);
             }
            
         }
