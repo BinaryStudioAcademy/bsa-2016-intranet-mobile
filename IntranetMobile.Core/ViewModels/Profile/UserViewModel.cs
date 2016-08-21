@@ -1,6 +1,6 @@
 ﻿using IntranetMobile.Core.Models;
 
-namespace IntranetMobile.Core.ViewModels.Users
+namespace IntranetMobile.Core.ViewModels.Profile
 {
     public class UserViewModel : BaseViewModel
     {
@@ -9,7 +9,7 @@ namespace IntranetMobile.Core.ViewModels.Users
         private string _lastName;
         private string _position;
         private string _previewImageUri;
-
+        private const string SiteUrl = "http://team.binary-studio.com";
         public string PreviewImageUri
         {
             get { return _previewImageUri; }
@@ -60,12 +60,14 @@ namespace IntranetMobile.Core.ViewModels.Users
             }
         }
 
+        public string Id { get; set; }
 
         public static UserViewModel FromModel(User user)
         {
             return new UserViewModel
             {
-                PreviewImageUri = user.AvatarUri,
+                Id = user.UserId,
+                PreviewImageUri = SiteUrl + user.AvatarUri,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 FullName = $"{user.FirstName} {user.LastName}",

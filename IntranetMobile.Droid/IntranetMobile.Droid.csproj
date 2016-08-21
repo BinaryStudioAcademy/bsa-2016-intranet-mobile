@@ -231,7 +231,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Fragments\Profile\ProfileFragment.cs" />
-    <Compile Include="Views\Fragments\Users\UsersFragment.cs" />
+    <Compile Include="Views\Fragments\Profile\UsersProfilesFragment.cs" />
     <Compile Include="Views\Util\CommentActionsWrapper.cs" />
     <Compile Include="Views\Util\FromHtmlValueConverter.cs" />
     <Compile Include="Views\Util\ImageGetter.cs" />
@@ -302,9 +302,6 @@
     <AndroidResource Include="Resources\layout\activity_comments.axml" />
     <AndroidResource Include="Resources\layout\listview_comments.axml" />
     <AndroidResource Include="Resources\drawable-nodpi\news_default.png" />
-    <AndroidResource Include="Resources\layout\users_card_view.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_users.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -315,6 +312,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_profile.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_user.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -602,7 +602,7 @@
     <AndroidResource Include="Resources\menu\menu_news_details.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-nodpi\user_default.png" />
+    <AndroidResource Include="Resources\drawable-nodpi\user_default_100.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

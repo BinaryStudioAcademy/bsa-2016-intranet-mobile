@@ -2,7 +2,6 @@
 using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Login;
 using IntranetMobile.Core.ViewModels.News;
-using IntranetMobile.Core.ViewModels.Users;
 using IntranetMobile.Core.ViewModels.Profile;
 
 namespace IntranetMobile.Core.ViewModels
