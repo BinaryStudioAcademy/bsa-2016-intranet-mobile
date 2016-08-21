@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IntranetMobile.Core.Services;
+﻿using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
@@ -30,7 +29,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public async void Init(Parameters arg)
         {
-            _dataModel = await ServiceBus.NewsService.GetCompanyNewsById(arg.NewsId);
+            _dataModel = await ServiceBus.NewsService.GetNewsById(arg.NewsId);
 
             Title = _dataModel.Title;
             Subtitle = _dataModel.Date.ToString("dd-MM-yyyy HH:mm");
@@ -47,11 +46,6 @@ namespace IntranetMobile.Core.ViewModels.News
                 var result = await ServiceBus.NewsService.LikeNews(_dataModel.NewsId);
                 if (result)
                 {
-                    if (_dataModel.Likes == null)
-                    {
-                        _dataModel.Likes = new List<string>();
-                    }
-                    _dataModel.Likes.Add(ServiceBus.UserService.CurrentUser.UserId);
                     RaisePropertyChanged(() => IsLiked);
                     RaisePropertyChanged(() => LikesCount);
                 }
@@ -61,7 +55,6 @@ namespace IntranetMobile.Core.ViewModels.News
                 var result = await ServiceBus.NewsService.UnLikeNews(_dataModel.NewsId);
                 if (result)
                 {
-                    _dataModel.Likes.Remove(ServiceBus.UserService.CurrentUser.UserId);
                     RaisePropertyChanged(() => IsLiked);
                     RaisePropertyChanged(() => LikesCount);
                 }
@@ -70,7 +63,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void Comment()
         {
-            ShowViewModel<CommentsViewModel>(new CommentsViewModel.Parameters { NewsId = _newsId});
+            ShowViewModel<CommentsViewModel>(new CommentsViewModel.Parameters {NewsId = _newsId});
         }
 
         public class Parameters

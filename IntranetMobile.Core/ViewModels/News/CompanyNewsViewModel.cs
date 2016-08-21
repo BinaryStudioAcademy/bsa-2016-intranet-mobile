@@ -64,7 +64,7 @@ namespace IntranetMobile.Core.ViewModels.News
         public virtual async Task ReloadData()
         {
             // TODO: Normalize news pull
-            var allNews = await ServiceBus.NewsService.GetCompanyNews(0, 10);
+            var allNews = await ServiceBus.NewsService.GetNews(0, 10);
 
             InvokeOnMainThread(News.Clear);
             foreach (var news in allNews)

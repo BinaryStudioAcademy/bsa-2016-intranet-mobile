@@ -5,6 +5,8 @@ namespace IntranetMobile.Core.Models
 {
     public class Comment
     {
+        public string CommentId { get; set; }
+
         public string AuthorId { get; set; }
 
         public DateTime Date { get; set; }

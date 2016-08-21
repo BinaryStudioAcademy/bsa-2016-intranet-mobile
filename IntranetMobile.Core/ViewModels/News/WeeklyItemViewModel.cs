@@ -1,11 +1,9 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
-using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
@@ -18,6 +16,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public string WeeklyId { get; set; }
 
+        // TODO: Fix, override or assign on demand
         public string Subtitle => $"{_author.FirstName} {_author.LastName}     {Date.ToString("dd-MM-yyyy HH:mm")}";
 
         public string AuthorId
@@ -64,13 +63,12 @@ namespace IntranetMobile.Core.ViewModels.News
             });
         }
 
-        public static WeeklyItemViewModel FromModel(Models.WeeklyNews news)
+        public static async Task<WeeklyItemViewModel> FromModel(WeeklyNews news)
         {
+            var firstNews = await ServiceBus.NewsService.GetNewsById(news.FullNews[0]);
             return new WeeklyItemViewModel
             {
-                PreviewImageUri = news.FullNews != null
-                                      ? news.FullNews[0].Body.GetFirstImageUri()
-                                      : "",
+                PreviewImageUri = firstNews.Body.GetFirstImageUri(),
                 WeeklyId = news.WeeklyId,
                 Title = news.Title,
                 AuthorId = news.AuthorId,
