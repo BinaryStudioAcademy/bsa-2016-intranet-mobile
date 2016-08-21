@@ -11,12 +11,14 @@
             <Color x:Key="bDarkOrange">#EB9800</Color>
             <Color x:Key="bLightGray">#F5F5F5</Color>
             <Color x:Key="bLightGray2">#D9D9D9</Color>
+            <Color x:Key="bAlphaGray1">#B7616161</Color>
             <Color x:Key="bGray1">#676767</Color>
             <Color x:Key="bGray2">#545861</Color>
             <Color x:Key="bGray3">#121212</Color>
 
             <!-- Styles for all controls -->
             <SolidColorBrush x:Key="SolidBrushGray1" Color="{StaticResource bGray1}" />
+            <SolidColorBrush x:Key="SolidAlphaBrushGray1" Color="{StaticResource bAlphaGray1}" />
             <SolidColorBrush x:Key="SolidBrushGray3" Color="{StaticResource bGray3}" />
             <SolidColorBrush x:Key="SolidBrushLightGray" Color="{StaticResource bLightGray}" />
             <SolidColorBrush x:Key="SolidBrushLightGray2" Color="{StaticResource bLightGray2}" />

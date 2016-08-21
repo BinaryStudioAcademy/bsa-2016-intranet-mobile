@@ -24,15 +24,26 @@ namespace Intranet.WindowsUWP.Views
             collection.Add(theme);
             this.Transitions = collection;
         }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedFrom(e);
+            base.OnNavigatedTo(e);
             
             if (DataContext != null)
             {
                 var vm = DataContext as BaseViewModel;
                 vm?.Resume();
+            }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            if (DataContext != null)
+            {
+                var vm = DataContext as BaseViewModel;
+                vm?.Pause();
             }
         }
     }

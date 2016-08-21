@@ -19,6 +19,7 @@ namespace IntranetMobile.Core.ViewModels.Login
             set
             {
                 _email = value;
+                RaisePropertyChanged(() => Email);
                 SendCommand.RaiseCanExecuteChanged();
             }
         }
@@ -51,6 +52,7 @@ namespace IntranetMobile.Core.ViewModels.Login
 
         private void BackToLogin()
         {
+            Email = "";
             ShowViewModel<UserCredentialsViewModel>();
         }
     }

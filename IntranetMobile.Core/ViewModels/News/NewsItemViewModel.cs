@@ -26,7 +26,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public string NewsId { get; set; }
 
-        public string NewsSubtitle => $"{_author.FirstName} {_author.LastName} {Date.ToString("dd-MM-yyyy HH:mm")}";
+        public string NewsSubtitle => $"{_author?.FirstName} {_author?.LastName}   {Date.ToString("dd-MM-yyyy HH:mm")}";
 
         public string AuthorId
         {

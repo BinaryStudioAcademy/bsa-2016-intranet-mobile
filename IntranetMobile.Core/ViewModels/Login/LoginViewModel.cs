@@ -12,9 +12,9 @@ namespace IntranetMobile.Core.ViewModels.Login
             Title = "Login";
         }
 
-        public override async void Start()
+        public override async void Resume()
         {
-            base.Start();
+            base.Resume();
 
             var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
             if (user != null)

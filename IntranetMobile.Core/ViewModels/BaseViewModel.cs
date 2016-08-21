@@ -33,5 +33,12 @@ namespace IntranetMobile.Core.ViewModels
         public virtual void Resume()
         {
         }
+
+        /// <summary>
+        /// Pause this instance. Called when you gonna show another ViewModel and this ViewModel will be moved to the background
+        /// </summary>
+        public virtual void Pause()
+        {
+        }
     }
 }
