@@ -114,12 +114,12 @@ namespace IntranetMobile.Core.ViewModels.News
             if (IsLiked)
             {
                 CountLikes = _countLikes + 1;
-                //var result = ServiceBus.NewsService.LikeComment(_newsId, _commentId).Result;
+                //var result = ServiceBus.NewsService.LikeCommentAsync(_newsId, _commentId).Result;
             }
             else
             {
                 CountLikes = _countLikes - 1;
-                //var result = ServiceBus.NewsService.UnlikeComment(_newsId, _commentId).Result;
+                //var result = ServiceBus.NewsService.UnlikeCommentAsync(_newsId, _commentId).Result;
             }
         }
     }

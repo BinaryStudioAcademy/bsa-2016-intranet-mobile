@@ -26,7 +26,7 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             _newsId = arg.NewsId;
 
-            comments =  await ServiceBus.NewsService.LoadListOfComments(arg.NewsId);
+            comments =  await ServiceBus.NewsService.LoadListOfCommentsAsync(arg.NewsId);
             GetListOfComments(comments, arg.NewsId);
 
             RaisePropertyChanged(() => Comments);

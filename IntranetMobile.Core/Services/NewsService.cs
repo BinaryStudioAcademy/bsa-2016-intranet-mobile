@@ -26,7 +26,7 @@ namespace IntranetMobile.Core.Services
             _restClient = client;
         }
 
-        public async Task<List<News>> GetNews(int skip, int limit)
+        public async Task<List<News>> GetNewsAsync(int skip, int limit)
         {
             var compNewsReqParams = new NewsReqParams
             {
@@ -54,14 +54,36 @@ namespace IntranetMobile.Core.Services
 
             if (newArrival)
             {
-                // OrderBy is dropped due to collection recreating
-                _newsCache.Sort((n1, n2) => n2.Date.CompareTo(n1.Date));
+                SortNewsCache();
             }
 
             return _newsCache;
         }
 
-        public async Task<List<WeeklyNews>> GetWeeklyNews(int skip, int limit)
+        public async Task<News> GetNewsByIdAsync(string newsId)
+        {
+            News result;
+
+            if (_newsCache.Count > 0)
+            {
+                result = _newsCache.FirstOrDefault(n => n.NewsId.Equals(newsId));
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            var dto = await LoadNewsByIdAsync(newsId);
+            result = new News().UpdateFromDto(dto);
+            _newsCache.Add(result);
+
+            // Possibly sort is not needed here
+            SortNewsCache();
+
+            return result;
+        }
+
+        public async Task<List<WeeklyNews>> GetWeeklyNewsAsync(int skip, int limit)
         {
             var weekNewsReqParams = new WeekNewsReqParams
             {
@@ -96,27 +118,7 @@ namespace IntranetMobile.Core.Services
             return _weeklyNewsCache;
         }
 
-        public async Task<News> GetNewsById(string newsId)
-        {
-            News result;
-
-            if (_newsCache.Count > 0)
-            {
-                result = _newsCache.FirstOrDefault(n => n.NewsId.Equals(newsId));
-                if (result != null)
-                {
-                    return result;
-                }
-            }
-
-            var dto = await LoadNewsByIdAsync(newsId);
-            result = new News().UpdateFromDto(dto);
-            _newsCache.Add(result);
-
-            return result;
-        }
-
-        public WeeklyNews GetWeeklyNewsById(string newsId)
+        public WeeklyNews GetWeeklyNewsByIdAsync(string newsId)
         {
             if (_weeklyNewsCache != null && _weeklyNewsCache.Count > 0)
             {
@@ -132,22 +134,7 @@ namespace IntranetMobile.Core.Services
             return null;
         }
 
-        public Task<bool> LikeComment(string newsId, string commentId)
-        {
-            var resource = string.Format(LikeUnlikeCommentPath, newsId, commentId);
-
-            var requestObject = new NewsCommentLikeDto
-            {
-                newsId = newsId,
-                commentId = commentId
-            };
-
-            // TODO: Update comment in cache
-
-            return _restClient.PostAsync(resource, requestObject);
-        }
-
-        public async Task<bool> LikeNews(string newsId)
+        public async Task<bool> LikeNewsAsync(string newsId)
         {
             var resource = string.Format(LikeUnlikeNews, newsId);
 
@@ -166,7 +153,49 @@ namespace IntranetMobile.Core.Services
             return result;
         }
 
-        public async Task<bool> UnlikeComment(string newsId, string commentId)
+        public async Task<bool> UnLikeNewsAsync(string newsId)
+        {
+            var resource = string.Format(LikeUnlikeNews, newsId);
+
+            var result = await _restClient.DeleteAsync(resource);
+
+            if (result)
+            {
+                // Null check is not used, it's desired that news will exist in cache already
+                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
+                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
+                // It is also possible to add like by hands, but it is better to update whole news.
+            }
+
+            return result;
+        }
+
+        public async Task<bool> LikeCommentAsync(string newsId, string commentId)
+        {
+            var resource = string.Format(LikeUnlikeCommentPath, newsId, commentId);
+
+            var requestObject = new NewsCommentLikeDto
+            {
+                newsId = newsId,
+                commentId = commentId
+            };
+
+            var result = await _restClient.PostAsync(resource, requestObject);
+
+            if (result)
+            {
+                // Null check is not used, it's desired that news will exist in cache already
+                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
+                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
+                // It is also possible to add like by hands, but it is better to update whole news.
+
+                // TODO: Update comment cache model too
+            }
+
+            return result;
+        }
+
+        public async Task<bool> UnlikeCommentAsync(string newsId, string commentId)
         {
             var resource = string.Format(LikeUnlikeCommentPath, newsId, commentId);
 
@@ -185,31 +214,7 @@ namespace IntranetMobile.Core.Services
             return result;
         }
 
-        public async Task<bool> UnLikeNews(string newsId)
-        {
-            var resource = string.Format(LikeUnlikeNews, newsId);
-
-            var result = await _restClient.DeleteAsync(resource);
-
-            if (result)
-            {
-                // Null check is not used, it's desired that news will exist in cache already
-                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
-                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
-                // It is also possible to add like by hands, but it is better to update whole news.
-            }
-
-            return result;
-        }
-
-        public async Task<CommentsResponseDto> LoadListOfComments(string newsId)
-        {
-            var resource = string.Format(NewsByIdPath, newsId) + "comments";
-
-            return await _restClient.GetAsync<CommentsResponseDto>(resource);
-        }
-
-        public async Task<bool> AddNewCommentRequest(string author, string body, string newsId)
+        public async Task<bool> AddCommentAsync(string author, string body, string newsId)
         {
             var resource = string.Format(NewsByIdPath, newsId) + "comments";
             var commentRequestDto = new CommentRequestDto
@@ -230,6 +235,8 @@ namespace IntranetMobile.Core.Services
                 _newsCache.FirstOrDefault(news => news.NewsId == newsId)
                     .UpdateFromDto(await LoadNewsByIdAsync(newsId));
                 // It is also possible to add like by hands, but it is better to update whole news.
+
+                // TODO: Update comment cache model too
             }
 
             return result;
@@ -238,6 +245,19 @@ namespace IntranetMobile.Core.Services
         public async Task<NewsDto> LoadNewsByIdAsync(string newsId)
         {
             return await _restClient.GetAsync<NewsDto>(string.Format(NewsByIdPath, newsId));
+        }
+
+        public async Task<CommentsResponseDto> LoadListOfCommentsAsync(string newsId)
+        {
+            var resource = string.Format(NewsByIdPath, newsId) + "comments";
+
+            return await _restClient.GetAsync<CommentsResponseDto>(resource);
+        }
+
+        private void SortNewsCache()
+        {
+            // OrderBy is dropped due to collection recreating
+            _newsCache.Sort((n1, n2) => n2.Date.CompareTo(n1.Date));
         }
     }
 }
