@@ -7,12 +7,12 @@ using Android.Views;
 using IntranetMobile.Core.ViewModels;
 using IntranetMobile.Droid.Views.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Shared.Attributes;
-using MvvmCross.Droid.Support.V4;
 
 namespace IntranetMobile.Droid.Views.Fragments
 {
-    [MvxFragment(typeof (MainViewModel), Resource.Id.menu_frame)]
+    // We don't need to use this attribute
+    // because of manual setting MenuFragment in MainActivity
+    //[MvxFragment(typeof (MainViewModel), Resource.Id.menu_frame)]
     [Register("intranetmobile.droid.views.fragments.MenuFragment")]
     public class MenuFragment : BaseFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
@@ -38,9 +38,13 @@ namespace IntranetMobile.Droid.Views.Fragments
             _navigationView.SetNavigationItemSelectedListener(this);
             _navigationView.Menu.FindItem(Resource.Id.nav_news).SetChecked(true);
 
-            ViewModel.ShowNews();
-
             return view;
+        }
+
+        public override void OnViewModelSet()
+        {
+            base.OnViewModelSet();
+            ViewModel.ShowNews();
         }
 
         private async void Navigate(int itemId)

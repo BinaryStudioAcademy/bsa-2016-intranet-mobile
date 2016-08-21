@@ -3,11 +3,11 @@ using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Views;
 using IntranetMobile.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using IntranetMobile.Droid.Views.Fragments;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
-    [Activity(Label = "Intranet Mobile", Theme = "@style/BSTheme")]
+    [Activity(Label = "Intranet", Theme = "@style/BSTheme")]
     public class MainActivity : BaseCachingFragmentActivity<MainViewModel>, IDrawerActivity
     {
         public DrawerLayout DrawerLayout { get; set; }
@@ -19,6 +19,12 @@ namespace IntranetMobile.Droid.Views.Activities
             SetContentView(Resource.Layout.activity_main);
 
             DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+
+            var menuViewModelInstance = ViewModel.Menu;
+            SupportFragmentManager
+                .BeginTransaction()
+                .Replace(Resource.Id.menu_frame, new MenuFragment { ViewModel = menuViewModelInstance }, "MenuFragment")
+                .Commit();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

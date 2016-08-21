@@ -51,6 +51,7 @@ namespace IntranetMobile.Droid
             base.Initialize();
 
             Mvx.RegisterSingleton<ILogger>(new AndroidLogger());
+            Mvx.RegisterSingleton<IDeviceInfo>(new AndroidDeviceInfo());
             Mvx.RegisterSingleton<IAlertService>(new AlertService(Mvx.Resolve<IMvxAndroidCurrentTopActivity>()));
             Mvx.RegisterSingleton<IDataBaseService>(new DataBaseService(
                 ApplicationContext.FilesDir.Path,

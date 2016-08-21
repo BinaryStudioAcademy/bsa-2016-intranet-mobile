@@ -13,8 +13,12 @@ namespace IntranetMobile.Core.Services
         private static INewsService _newsService;
         private static IAlertService _alertService;
         private static IUserService _userService;
+        private static IDeviceInfo _deviceInfo;
 
         private static IMvxMessenger _messengerHub;
+
+        public static IDeviceInfo DeviceInfo
+            => _deviceInfo ?? (_deviceInfo = Mvx.Resolve<IDeviceInfo>());
 
         public static IStorageService StorageService
             => _storageService ?? (_storageService = Mvx.Resolve<IStorageService>());
