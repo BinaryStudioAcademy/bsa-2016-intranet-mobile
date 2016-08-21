@@ -1,5 +1,5 @@
 ﻿using System;
-using IntranetMobile.Core.Models.Dtos;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace IntranetMobile.Core
@@ -7,7 +7,25 @@ namespace IntranetMobile.Core
     public class CommentRequestDto
     {
         [JsonProperty("$push")]
-        public CommentDto Push { get; set; }
+        public CommentRequest Push { get; set; }
+
+
+        public class CommentRequest
+        {
+            public Comment comments { get; set; }
+
+
+            public class Comment
+            {
+                public string author { get; set; }
+
+                public string body { get; set; }
+
+                public long date { get; set; }
+
+                public List<string> likes { get; set; }
+            }
+        }
     }
 }
 

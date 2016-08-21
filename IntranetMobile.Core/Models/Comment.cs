@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using IntranetMobile.Core.Extensions;
+using IntranetMobile.Core.Models.Dtos;
 
 namespace IntranetMobile.Core.Models
 {
@@ -13,8 +15,21 @@ namespace IntranetMobile.Core.Models
 
         public string Body { get; set; }
 
-        public List<string> Likes { get; set; }
+        public List<string> Likes { get; } = new List<string>();
 
-        public string LikeImageViewUrl { get; set; }
+        public Comment UpdateFromDto(CommentDto commentDto)
+        {
+            CommentId = commentDto.commentId;
+            AuthorId = commentDto.authorId;
+            Date = commentDto.date.UnixTimestampToDateTime();
+            Body = commentDto.body;
+
+            // Not recreating list in case of situation if somoene is holding list's reference during update
+            Likes.Clear();
+            Likes.AddRange(commentDto.likes);
+
+            // For fluent interface purposes
+            return this;
+        }
     }
 }

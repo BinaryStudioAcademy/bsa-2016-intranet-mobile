@@ -7,26 +7,26 @@ namespace IntranetMobile.Core.Interfaces
 {
     public interface INewsService
     {
-        Task<List<News>> GetNews(int skip, int limit);
+        Task<List<News>> GetNewsAsync(int skip, int limit);
 
-        Task<List<WeeklyNews>> GetWeeklyNews(int skip, int limit);
+        Task<News> GetNewsByIdAsync(string newsId);
 
-        Task<News> GetNewsById(string newsId);
+        Task<List<WeeklyNews>> GetWeeklyNewsAsync(int skip, int limit);
 
-        WeeklyNews GetWeeklyNewsById(string newsId);
+        WeeklyNews GetWeeklyNewsByIdAsync(string newsId);
 
-        Task<bool> LikeNews(string newsId);
+        Task<bool> LikeNewsAsync(string newsId);
 
-        Task<bool> UnLikeNews(string newsId);
+        Task<bool> UnLikeNewsAsync(string newsId);
 
-        Task<bool> LikeComment(string newsId, string commentId);
+        Task<bool> LikeCommentAsync(string newsId, string commentId);
 
-        Task<bool> UnlikeComment(string newsId, string commentId);
+        Task<bool> UnlikeCommentAsync(string newsId, string commentId);
 
-        Task<CommentsResponseDto> LoadListOfComments(string newsId);
-
-        Task<bool> AddNewCommentRequest(string author, string body, string newsId);
+        Task<bool> AddCommentAsync(string author, string body, string newsId);
 
         Task<NewsDto> LoadNewsByIdAsync(string newsId);
+
+        Task<CommentsResponseDto> LoadListOfCommentsAsync(string newsId);
     }
 }

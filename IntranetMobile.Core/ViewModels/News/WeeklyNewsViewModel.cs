@@ -63,7 +63,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public virtual async Task ReloadData()
         {
-            var allNews = await ServiceBus.NewsService.GetWeeklyNews(0, 10);
+            var allNews = await ServiceBus.NewsService.GetWeeklyNewsAsync(0, 10);
 
             InvokeOnMainThread(News.Clear);
             foreach (var item in allNews)

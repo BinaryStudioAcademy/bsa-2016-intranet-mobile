@@ -22,10 +22,21 @@ namespace IntranetMobile.Droid.Views.Fragments.Profile
         {
             var view = base.OnCreateView(inflater, container, savedInstanceState);
 
-            var viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager);
+            var viewPager = view.FindViewById<ViewPager>(Resource.Id.profile_viewpager);
             if (viewPager != null)
             {
-                var fragments = new List<MvxCachingFragmentStatePagerAdapter.FragmentInfo>();
+                var fragments = new List<MvxCachingFragmentStatePagerAdapter.FragmentInfo>
+                {
+                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("My Profile",
+                        typeof(MyProfileFragment),
+                        new MyProfileViewModel()),
+                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("My Experience",
+                        typeof(MyExperienceFragment),
+                        new MyExperienceViewModel()),
+                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("PDP Flow",
+                        typeof(PdpFlowFragment),
+                        new PdpFlowViewModel())
+                };
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(Activity, ChildFragmentManager, fragments);
             }
 

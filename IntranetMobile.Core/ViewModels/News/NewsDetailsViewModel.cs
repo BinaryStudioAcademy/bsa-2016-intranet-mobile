@@ -48,7 +48,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public async void Init(Parameters arg)
         {
-            _dataModel = await ServiceBus.NewsService.GetNewsById(arg.NewsId);
+            _dataModel = await ServiceBus.NewsService.GetNewsByIdAsync(arg.NewsId);
 
             Title = _dataModel.Title;
             Subtitle = _dataModel.Date.ToString("dd-MM-yyyy HH:mm");
@@ -63,7 +63,7 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             if (!IsLiked)
             {
-                var result = await ServiceBus.NewsService.LikeNews(_dataModel.NewsId);
+                var result = await ServiceBus.NewsService.LikeNewsAsync(_dataModel.NewsId);
                 if (result)
                 {
                     RaisePropertyChanged(() => IsLiked);
@@ -72,7 +72,7 @@ namespace IntranetMobile.Core.ViewModels.News
             }
             else
             {
-                var result = await ServiceBus.NewsService.UnLikeNews(_dataModel.NewsId);
+                var result = await ServiceBus.NewsService.UnLikeNewsAsync(_dataModel.NewsId);
                 if (result)
                 {
                     RaisePropertyChanged(() => IsLiked);

@@ -14,7 +14,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public async void Init(Parameters arg)
         {
-            _dataModel = ServiceBus.NewsService.GetWeeklyNewsById(arg.NewsId);
+            _dataModel = ServiceBus.NewsService.GetWeeklyNewsByIdAsync(arg.NewsId);
 
             Title = _dataModel.Title;
         }

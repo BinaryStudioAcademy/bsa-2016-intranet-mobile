@@ -231,6 +231,9 @@
     <Compile Include="Views\Fragments\MenuFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Fragments\Profile\MyExperienceFragment.cs" />
+    <Compile Include="Views\Fragments\Profile\MyProfileFragment.cs" />
+    <Compile Include="Views\Fragments\Profile\PdpFlowFragment.cs" />
     <Compile Include="Views\Fragments\Profile\ProfileFragment.cs" />
     <Compile Include="Views\Fragments\Users\UsersFragment.cs" />
     <Compile Include="Views\Util\CommentActionsWrapper.cs" />
@@ -318,6 +321,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_profile.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_my_profile.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_my_experience.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_pdp_flow.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
