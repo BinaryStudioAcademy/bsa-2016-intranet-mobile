@@ -211,6 +211,7 @@
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\AndroidLogger.cs" />
+    <Compile Include="Services\AndroidDeviceInfo.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Util\BitmapUtils.cs" />
     <Compile Include="Views\Activities\BaseToolbarActivity.cs" />

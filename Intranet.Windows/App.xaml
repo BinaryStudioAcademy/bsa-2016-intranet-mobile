@@ -4,5 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Intranet.WindowsUWP"
     RequestedTheme="Light">
-
+    <Application.Resources>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="#FFA500" />
+            <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="#000000" />
+            <SolidColorBrush x:Key="SystemControlBackgroundBaseLowBrush" Color="#FFA500" />
+            <SolidColorBrush x:Key="SystemControlForegroundTransparentBrush" Color="#FFA500" />
+            <Style TargetType="Button">
+                <Setter Property="Height" Value="34"></Setter>
+            </Style>
+            <Style TargetType="ProgressRing">
+                <Setter Property="Foreground" Value="#FFA500"></Setter>
+            </Style>
+            <Style TargetType="Button" x:Name="TransparentButton">
+                <Setter Property="Height" Value="34"></Setter>
+                <Setter Property="Background" Value="#00000000"></Setter>
+                <Setter Property="Foreground" Value="#545861"></Setter>
+                <Setter Property="BorderBrush" Value="#00000000"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

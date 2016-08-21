@@ -1,13 +1,54 @@
-﻿<Page
+﻿<views:MvxWindowsPage
     x:Class="Intranet.WindowsUWP.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Intranet.WindowsUWP"
+    xmlns:vm="using:IntranetMobile.Core.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:MvvmCross.WindowsUWP.Views"
     mc:Ignorable="d">
+    <views:MvxWindowsPage.DataContext>
+        <vm:MainViewModel></vm:MainViewModel>
+    </views:MvxWindowsPage.DataContext>
+    <SplitView x:Name="MainSplitView"
+               DisplayMode="CompactOverlay" 
+               IsPaneOpen="True" 
+               CompactPaneLength="50"
+               OpenPaneLength="180">
+        <SplitView.Pane>
+            
+            <StackPanel Background="#F5F5F5">
+                <Button x:Name="HamburgerButton" Foreground="#303338" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
+                <ListView>
+                    <ListViewItem>
+                        <ListViewItem.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE825;"
+                                    Width="180" Height="48" Foreground="#303338"/>
+                                <TextBlock Text="Button 1" Foreground="Black" FontSize="18" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListViewItem.Content>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <ListViewItem.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE10F;"
+                                    Width="180" Height="48" VerticalAlignment="Center" Foreground="#303338"/>
+                                <TextBlock Text="Button 21" Foreground="Black" FontSize="18" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListViewItem.Content>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid>
+                <TextBlock Text="SplitView Basic" FontSize="54" Foreground="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
+</views:MvxWindowsPage>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
-</Page>
