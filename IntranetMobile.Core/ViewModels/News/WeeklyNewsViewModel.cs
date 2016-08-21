@@ -15,6 +15,13 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             Title = "Weeklies";
             SelectItem = new MvxCommand<NewsItemViewModel>(item => { SelectedItem = item; });
+            ReloadCommand = new MvxCommand(async () =>
+            {
+                IsRefreshing = true;
+                await ReloadData();
+                IsRefreshing = false;
+            });
+
             Task.Run(ReloadData);
         }
 
@@ -28,7 +35,8 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 _selectedItem = value;
 
-                ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters {NewsId = _selectedItem.NewsId});
+                if (_selectedItem != null)
+                    ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters {NewsId = _selectedItem.NewsId});
 
                 RaisePropertyChanged(() => SelectedItem);
             }
@@ -46,20 +54,7 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        public ICommand ReloadCommand
-        {
-            get
-            {
-                return new MvxCommand(async () =>
-                {
-                    IsRefreshing = true;
-
-                    await ReloadData();
-
-                    IsRefreshing = false;
-                });
-            }
-        }
+        public ICommand ReloadCommand { get; private set; }
 
         public virtual async Task ReloadData()
         {

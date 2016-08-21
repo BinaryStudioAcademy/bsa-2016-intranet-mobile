@@ -9,18 +9,36 @@
     xmlns:news="using:IntranetMobile.Core.ViewModels.News"
     mc:Ignorable="d"
     NavigationCacheMode="Required">
-    <!--<views:BasePage.DataContext>
-        <news:AllNewsViewModel></news:AllNewsViewModel>
-    </views:BasePage.DataContext>-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Title="{Binding Title}" HorizontalAlignment="Center">
-            <PivotItem Header="Company">
+        <Pivot Title="{Binding Title}" HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged">
+            <PivotItem>
+                <PivotItem.Header>
+                    <Grid VerticalAlignment="Center" Margin="0, 0, -16, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="32"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Company" Grid.Column="0"/>
+                        <Button Width="32" Height="30"
+                                x:Name="RefreshCompanyNewsBtn"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Padding="0"
+                                Grid.Column="1"
+                                Command="{Binding CompanyNews.ReloadCommand}"
+                                Style="{StaticResource GlyphButton}">
+                            <Button.Content>
+                                <TextBlock Margin="0,0,0,-4"  VerticalAlignment="Bottom" Text="&#xE117;" FontFamily="Segoe MDL2 Assets"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </PivotItem.Header>
                 <Grid DataContext="{Binding CompanyNews}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="296"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ListView Grid.Column="0" ItemsSource="{Binding News}">
+                    <ListView Grid.Column="0" ItemsSource="{Binding News}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                             <Grid Height="134">
@@ -32,7 +50,7 @@
                                                MaxLines="1"
                                                FontSize="17"
                                                TextTrimming="CharacterEllipsis"/>
-                                    <TextBlock Text="{Binding NewsSubtitle}" Foreground="White" FontSize="14"/>
+                                    <TextBlock Text="{Binding Subtitle}" Foreground="White" FontSize="14"/>
                                 </StackPanel>
                             </Grid>
                             </DataTemplate>
@@ -52,9 +70,65 @@
                     </Frame>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="Weeklies">
+            <PivotItem>
+                <PivotItem.Header>
+                    <Grid VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="32"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Weeklies" Grid.Column="0" VerticalAlignment="Top"/>
+                        <Button Width="32" Height="30"
+                                x:Name="RefreshWeekliesBtn"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Padding="0"
+                                Grid.Column="1"
+                                Command="{Binding WeeklyNews.ReloadCommand}"
+                                Style="{StaticResource GlyphButton}">
+                            <Button.Content>
+                                <TextBlock Margin="0,0,0,-4" VerticalAlignment="Bottom" Text="&#xE117;" FontFamily="Segoe MDL2 Assets"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </PivotItem.Header>
                 <!--Pivot content goes here-->
-                <TextBlock Text="Content of pivot item 2."/>
+                <Grid DataContext="{Binding WeeklyNews}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="296"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView Grid.Column="0" ItemsSource="{Binding News}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="134">
+                                    <Image Source="../../Images/news_default.png" Stretch="UniformToFill"/>
+                                    <Image Source="{Binding PreviewImageUri}" Stretch="UniformToFill"/>
+                                    <StackPanel Padding="8,8,0,8" Background="{StaticResource SolidAlphaBrushGray1}" VerticalAlignment="Bottom">
+                                        <TextBlock Text="{Binding Title}"
+                                               Foreground="White"
+                                               MaxLines="1"
+                                               FontSize="17"
+                                               TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Text="{Binding Subtitle}" Foreground="White" FontSize="14"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Frame Grid.Column="1" x:Name="WeeklyNewsContent" Margin="6,0,0,0">
+                        <Frame.ContentTransitions>
+                            <TransitionCollection>
+                                <NavigationThemeTransition>
+                                    <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                        <EntranceNavigationTransitionInfo/>
+                                    </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                </NavigationThemeTransition>
+                            </TransitionCollection>
+                        </Frame.ContentTransitions>
+                        <TextBlock Text=" " VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Frame>
+                </Grid>
             </PivotItem>
         </Pivot>
         
