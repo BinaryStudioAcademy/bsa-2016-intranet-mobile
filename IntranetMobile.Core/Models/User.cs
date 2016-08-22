@@ -1,5 +1,4 @@
 ﻿using System;
-using SQLite.Net.Attributes;
 
 namespace IntranetMobile.Core.Models
 {
@@ -20,5 +19,13 @@ namespace IntranetMobile.Core.Models
         public string AvatarUri { get; set; }
 
         public string Position { get; set; }
+
+        public string Country { get; set; }
+
+        public string City { get; set; }
+
+        public string Gender { get; set; }
+
+        public DateTime HireDate { get; set; }
     }
 }

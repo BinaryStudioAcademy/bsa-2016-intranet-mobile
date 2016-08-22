@@ -45,16 +45,16 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string Surname => User?.LastName;
 
-        public DateTime Birthday => User.Birthday;
+        public DateTime Birthday => User?.Birthday ?? default(DateTime);
 
-        public string Gender => "WIP";
+        public string Gender => User?.Gender;
 
-        public string Country => "WIP";
+        public string Country => User?.Country;
 
-        public string City => "WIP";
+        public string City => User?.City;
 
-        public DateTime HireDate => default(DateTime);
+        public DateTime HireDate => User?.HireDate ?? default(DateTime);
 
-        public string Position => User.Position;
+        public string Position => User?.Position;
     }
 }

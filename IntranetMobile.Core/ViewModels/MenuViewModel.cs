@@ -35,7 +35,7 @@ namespace IntranetMobile.Core.ViewModels
 
         public async void ShowProfile()
         {
-            ShowViewModel<ProfileViewModel>(new { userId = (await ServiceBus.UserService.GetCurrentUserAsync()).UserId});
+            ShowViewModel<ProfileViewModel>(new {userId = (await ServiceBus.UserService.GetCurrentUserAsync()).UserId});
         }
 
         public void ShowUsers()

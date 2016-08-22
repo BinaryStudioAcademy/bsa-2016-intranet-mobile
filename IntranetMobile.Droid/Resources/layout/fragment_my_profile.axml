@@ -80,7 +80,7 @@
     <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Start working in Binary Studio"
+      android:text="Date hired in Binary Studio"
       style="?android:attr/listSeparatorTextViewStyle" />
     <TextView
       android:layout_width="match_parent"
