@@ -25,14 +25,25 @@ namespace IntranetMobile.Core.ViewModels.News
         }
 
         public string NewsId { get; set; }
-        
+
+        public User Author
+        {
+            get { return _author; }
+            set
+            {
+                _author = value;
+                RefreshSutitile();
+                RaisePropertyChanged(() => Author);
+            }
+        }
+
         public string AuthorId
         {
             get { return _authorId; }
             set
             {
                 _authorId = value;
-                GetAuthor();
+                Task.Run(async () => { Author = await ServiceBus.UserService.GetUserById(_authorId); });
             }
         }
 
@@ -42,20 +53,14 @@ namespace IntranetMobile.Core.ViewModels.News
             set
             {
                 _date = value;
+                RefreshSutitile();
                 RaisePropertyChanged(() => Date);
-                RaisePropertyChanged(() => Subtitle);
             }
         }
 
-        public int LikesCount
-        {
-            get { return _dataModel.Likes?.Count ?? 0; }
-        }
+        public int LikesCount => _dataModel.Likes?.Count ?? 0;
 
-        public int CommentsCount
-        {
-            get { return _dataModel.Comments?.Count ?? 0; }
-        }
+        public int CommentsCount => _dataModel.Comments?.Count ?? 0;
 
         public string PreviewImageUri
         {
@@ -98,15 +103,11 @@ namespace IntranetMobile.Core.ViewModels.News
             //TODO: Show Comments Window
         }
 
-        private void GetAuthor()
+        private void RefreshSutitile()
         {
-            Task.Run(async () =>
-            {
-                _author = await ServiceBus.UserService.GetUserById(AuthorId) ?? new User();
-                Subtitle = $"{_author?.FirstName} {_author?.LastName}   {Date.ToString("dd-MM-yyyy HH:mm")}";
-
-                InvokeOnMainThread(() => RaisePropertyChanged(() => Subtitle));
-            });
+            Subtitle = Author != null
+                ? $"{Author.FirstName} {Author.LastName} on {Date.ToString("dd-MM-yyyy HH:mm")}"
+                : $"{Date.ToString("dd-MM-yyyy HH:mm")}";
         }
 
         public static NewsItemViewModel FromModel(Models.News news)
