@@ -13,13 +13,6 @@ namespace IntranetMobile.Droid.Views.Activities
         public abstract int ActivityLayout { get; }
         public virtual int ToolbarLayout { get; } = Resource.Id.mvx_toolbar;
 
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-
-            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-        }
-
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();

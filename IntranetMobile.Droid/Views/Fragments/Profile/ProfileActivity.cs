@@ -10,6 +10,7 @@ using IntranetMobile.Core.ViewModels.Profile;
 using IntranetMobile.Droid.Views.Activities;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views.Fragments.Profile
 {
@@ -17,6 +18,8 @@ namespace IntranetMobile.Droid.Views.Fragments.Profile
     public class ProfileActivity : BaseToolbarActivity<ProfileViewModel>
     {
         public override int ActivityLayout { get; } = Resource.Layout.activity_profile;
+
+        public override int ToolbarLayout { get; } = Resource.Id.activity_profile_toolbar;
 
         protected override void OnViewModelSet()
         {
