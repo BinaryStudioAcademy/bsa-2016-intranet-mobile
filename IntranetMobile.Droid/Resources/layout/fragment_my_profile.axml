@@ -86,7 +86,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginLeft="8dp"
-      app:MvxBind="Text WorkDate" />
+      app:MvxBind="Text HireDate" />
 
     <TextView
       android:layout_width="match_parent"

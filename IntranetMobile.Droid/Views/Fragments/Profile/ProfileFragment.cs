@@ -29,13 +29,13 @@ namespace IntranetMobile.Droid.Views.Fragments.Profile
                 {
                     new MvxCachingFragmentStatePagerAdapter.FragmentInfo("My Profile",
                         typeof(MyProfileFragment),
-                        new MyProfileViewModel()),
+                        ViewModel.MyProfileViewModel),
                     new MvxCachingFragmentStatePagerAdapter.FragmentInfo("My Experience",
                         typeof(MyExperienceFragment),
-                        new MyExperienceViewModel()),
+                        ViewModel.MyExperienceViewModel),
                     new MvxCachingFragmentStatePagerAdapter.FragmentInfo("PDP Flow",
                         typeof(PdpFlowFragment),
-                        new PdpFlowViewModel())
+                        ViewModel.PdpFlowViewModel)
                 };
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(Activity, ChildFragmentManager, fragments);
             }

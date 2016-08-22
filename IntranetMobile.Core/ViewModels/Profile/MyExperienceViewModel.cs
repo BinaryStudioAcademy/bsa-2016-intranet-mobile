@@ -6,5 +6,7 @@
         {
             Title = "My Experience";
         }
+
+        public string UserId { get; set; }
     }
 }

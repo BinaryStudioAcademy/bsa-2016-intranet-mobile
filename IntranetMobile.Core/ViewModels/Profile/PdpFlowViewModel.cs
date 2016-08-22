@@ -6,5 +6,7 @@
         {
             Title = "PDP Flow";
         }
+
+        public string UserId { get; set; }
     }
 }
