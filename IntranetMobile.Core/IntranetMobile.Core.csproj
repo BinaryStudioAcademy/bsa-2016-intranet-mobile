@@ -51,9 +51,11 @@
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\Dtos\AuthDto.cs" />
     <Compile Include="Models\Dtos\MyUser.cs" />
+    <Compile Include="Models\Dtos\PositionDto.cs" />
     <Compile Include="Models\Dtos\UserDto.cs" />
     <Compile Include="Models\Persist.cs" />
     <Compile Include="Models\Platform.cs" />
+    <Compile Include="Models\Position.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DataBaseService.cs" />
@@ -94,7 +96,6 @@
     <Compile Include="ViewModels\Profile\MyExperienceViewModel.cs" />
     <Compile Include="ViewModels\Profile\MyProfileViewModel.cs" />
     <Compile Include="ViewModels\Profile\PdpFlowViewModel.cs" />
-
     <Compile Include="Models\WeeklyNews.cs" />
     <Compile Include="ViewModels\News\WeeklyItemViewModel.cs" />
     <Compile Include="ViewModels\News\WeeklyDetailsViewModel.cs" />

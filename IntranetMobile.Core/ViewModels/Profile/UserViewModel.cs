@@ -71,7 +71,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 FullName = $"{user.FirstName} {user.LastName}",
-                Position = user.Position
+                Position = user.Position != null ? user.Position.Name : "Null"
             };
         }
     }

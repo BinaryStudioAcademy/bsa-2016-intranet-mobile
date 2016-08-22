@@ -10,7 +10,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:gravity="fill" >
+     android:gravity="fill"
+   >
     <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView
       android:id ="@+id/avatar"
       android:layout_width="wrap_content"

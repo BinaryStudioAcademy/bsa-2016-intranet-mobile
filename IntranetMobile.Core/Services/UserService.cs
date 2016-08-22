@@ -13,9 +13,11 @@ namespace IntranetMobile.Core.Services
     {
         private const string AllUsersPath = "profile/api/users";
         private const string CurrentUserPath = "/api/me";
+        private const string PositionPath = "profile/api/positions";
         private readonly RestClient _restClient;
 
         private readonly SemaphoreSlim _semaphoreAllUser;
+        private List<Position> _cachedPositions;
         private List<User> _cachedUsers;
 
         public UserService(RestClient client)
@@ -45,6 +47,7 @@ namespace IntranetMobile.Core.Services
 
             var users = await _restClient.GetAsync<List<UserDto>>(AllUsersPath).ConfigureAwait(false);
             var currentUserDto = await _restClient.GetAsync<MyUser>(CurrentUserPath).ConfigureAwait(false);
+            await GetAllPositions();
 
             _cachedUsers = users.Select(u => new User
             {
@@ -54,13 +57,36 @@ namespace IntranetMobile.Core.Services
                 LastName = u.Surname,
                 Birthday = DateTime.Parse(u.Birthday),
                 AvatarUri = u.Avatar.UrlAva,
-                Position = u.Position
+                Position = GetPositionById(u.Position)
             }).ToList();
 
             CurrentUser = _cachedUsers.FirstOrDefault(u => u.UserId == currentUserDto.Id);
 
             _semaphoreAllUser.Release();
             return _cachedUsers;
+        }
+
+        public Position GetPositionById(string id)
+        {
+            //if(_cachedPositions !=null && _cachedPositions.Count > 0)
+            //{
+            //    return _cachedPositions.FirstOrDefault(pos => pos.Id == id);
+            //}
+            //_cachedPositions = await GetAllPositions();
+            return _cachedPositions.FirstOrDefault(pos => pos.Id == id);
+        }
+
+        private async Task<List<Position>> GetAllPositions()
+        {
+            var positionsDto = (await _restClient.GetAsync<List<PositionDto>>(PositionPath).ConfigureAwait(false))
+                                 .Where(pos=> !pos.IsDeleted);
+            _cachedPositions = positionsDto.Select(pos => new Position()
+            {
+                Name = pos.Name,
+                Id = pos.Id
+            }).ToList();
+                
+            return _cachedPositions;
         }
 
         public async Task<User> GetUserById(string id)
