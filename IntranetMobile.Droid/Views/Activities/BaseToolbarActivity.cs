@@ -6,7 +6,7 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
-    public abstract class BaseToolbarActivity<TViewModel> : MvxAppCompatActivity<TViewModel>
+    public abstract class BaseToolbarActivity<TViewModel> : MvxCachingFragmentCompatActivity<TViewModel>
         where TViewModel : BaseViewModel
     {
         private Toolbar _toolbar;

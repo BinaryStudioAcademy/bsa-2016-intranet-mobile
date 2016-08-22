@@ -46,11 +46,11 @@ namespace IntranetMobile.Droid.Views.Fragments
             _avatarImageView =
                 _navigationView.GetHeaderView(0)
                     .FindViewById<CircleImageView>(Resource.Id.drawer_header_avatar_imageview);
-            _avatarImageView.Click += async (sender, args) =>
+            _avatarImageView.Click += (sender, args) =>
             {
-                _selectedMenuItem?.SetChecked(false);
-                ((MainActivity) Activity).DrawerLayout.CloseDrawers();
-                await Task.Delay(250);
+                //_selectedMenuItem?.SetChecked(false);
+                //((MainActivity) Activity).DrawerLayout.CloseDrawers();
+                //await Task.Delay(250);
                 ViewModel.ShowProfile();
             };
 

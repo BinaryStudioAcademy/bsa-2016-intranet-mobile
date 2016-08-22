@@ -56,5 +56,10 @@ namespace IntranetMobile.Core.ViewModels.Profile
         public DateTime HireDate => User?.HireDate ?? default(DateTime);
 
         public string Position => User?.Position;
+
+        public void Init(string userId)
+        {
+            UserId = userId;
+        }
     }
 }

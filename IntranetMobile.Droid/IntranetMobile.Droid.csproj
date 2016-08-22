@@ -234,7 +234,7 @@
     <Compile Include="Views\Fragments\Profile\MyExperienceFragment.cs" />
     <Compile Include="Views\Fragments\Profile\MyProfileFragment.cs" />
     <Compile Include="Views\Fragments\Profile\PdpFlowFragment.cs" />
-    <Compile Include="Views\Fragments\Profile\ProfileFragment.cs" />
+    <Compile Include="Views\Fragments\Profile\ProfileActivity.cs" />
     <Compile Include="Views\Fragments\Profile\UsersProfilesFragment.cs" />
     <Compile Include="Views\Util\CommentActionsWrapper.cs" />
     <Compile Include="Views\Util\DisplayUtils.cs" />
@@ -318,7 +318,7 @@
     <AndroidResource Include="Resources\layout\card_view_weekly.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\fragment_profile.axml">
+    <AndroidResource Include="Resources\layout\activity_profile.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\item_user.axml">

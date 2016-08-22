@@ -1,14 +1,13 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using IntranetMobile.Core.ViewModels;
 using IntranetMobile.Core.ViewModels.Profile;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
 
 namespace IntranetMobile.Droid.Views.Fragments.Profile
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame)]
+    [MvxFragment(typeof(ProfileViewModel), Resource.Id.profile_my_profile_fragment_container)]
     [Register("intranetmobile.droid.views.fragments.profile.MyProfileFragment")]
     public class MyProfileFragment : BaseFragment<MyProfileViewModel>
     {
