@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -63,6 +64,12 @@ namespace IntranetMobile.Core.Services
             return Execute(resource, requestObject, HttpMethod.Post, contentType);
         }
 
+        public async Task<byte[]> DownloadContent(string url)
+        {
+            var responseMessage = await _httpClient.GetAsync(url);
+            return await responseMessage.Content.ReadAsByteArrayAsync();
+        }
+
         private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method,
             string contentType = ContentType) where T : new()
         {
@@ -84,7 +91,8 @@ namespace IntranetMobile.Core.Services
         {
             try
             {
-                var responseMessage = await GetResponse(resource, requestObject, method, contentType).ConfigureAwait(false);
+                var responseMessage =
+                    await GetResponse(resource, requestObject, method, contentType).ConfigureAwait(false);
                 responseMessage.EnsureSuccessStatusCode();
             }
             catch

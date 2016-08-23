@@ -2,6 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Graphics;
+using IntranetMobile.Core.Interfaces;
+using IntranetMobile.Core.Services;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
