@@ -57,7 +57,11 @@ namespace IntranetMobile.Core.Services
                 LastName = u.Surname,
                 Birthday = DateTime.Parse(u.Birthday),
                 AvatarUri = u.Avatar.UrlAva,
-                Position = GetPositionById(u.Position)
+                Position = u.Position,
+                Country = u.Country,
+                City = u.City,
+                Gender = u.Gender,
+                HireDate = DateTime.Parse(u.WorkDate)
             }).ToList();
 
             CurrentUser = _cachedUsers.FirstOrDefault(u => u.UserId == currentUserDto.Id);

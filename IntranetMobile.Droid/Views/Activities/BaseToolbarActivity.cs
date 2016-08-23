@@ -6,19 +6,12 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
-    public abstract class BaseToolbarActivity<TViewModel> : MvxAppCompatActivity<TViewModel>
+    public abstract class BaseToolbarActivity<TViewModel> : MvxCachingFragmentCompatActivity<TViewModel>
         where TViewModel : BaseViewModel
     {
         private Toolbar _toolbar;
         public abstract int ActivityLayout { get; }
         public virtual int ToolbarLayout { get; } = Resource.Id.mvx_toolbar;
-
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-
-            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-        }
 
         protected override void OnViewModelSet()
         {

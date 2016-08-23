@@ -33,9 +33,10 @@ namespace IntranetMobile.Core.ViewModels
             ShowViewModel<AllNewsViewModel>();
         }
 
-        public void ShowProfile()
+        public async void ShowProfile()
         {
-            ShowViewModel<ProfileViewModel>();
+            var user = await ServiceBus.UserService.GetCurrentUserAsync();
+            ShowViewModel<ProfileViewModel>(new {userId = user.UserId});
         }
 
         public void ShowUsers()

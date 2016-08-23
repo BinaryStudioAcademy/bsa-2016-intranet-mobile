@@ -1,13 +1,9 @@
 ﻿using System;
-using SQLite.Net.Attributes;
 
 namespace IntranetMobile.Core.Models
 {
-    public class User
+    public class User : Persist
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
         public string UserId { get; set; }
 
         public string FirstName { get; set; }
@@ -19,7 +15,17 @@ namespace IntranetMobile.Core.Models
         public string Password { get; set; }
 
         public DateTime Birthday { get; set; }
+
         public string AvatarUri { get; set; }
-        public Position Position { get; set; }
+
+        public string Position { get; set; }
+
+        public string Country { get; set; }
+
+        public string City { get; set; }
+
+        public string Gender { get; set; }
+
+        public DateTime HireDate { get; set; }
     }
 }

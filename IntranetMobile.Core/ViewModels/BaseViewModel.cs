@@ -4,14 +4,8 @@ namespace IntranetMobile.Core.ViewModels
 {
     public class BaseViewModel : MvxViewModel
     {
-        private string _subtitle;
-        private string _title;
-
-        public BaseViewModel()
-        {
-            Title = "";
-            Subtitle = "";
-        }
+        private string _subtitle = string.Empty;
+        private string _title = string.Empty;
 
         public string Title
         {
@@ -34,14 +28,15 @@ namespace IntranetMobile.Core.ViewModels
         }
 
         /// <summary>
-        /// Resume this instance. Called when you come back from another ViewModel
+        ///     Resume this instance. Called when you come back from another ViewModel
         /// </summary>
         public virtual void Resume()
         {
         }
 
         /// <summary>
-        /// Pause this instance. Called when you gonna show another ViewModel and this ViewModel will be moved to the background
+        ///     Pause this instance. Called when you gonna show another ViewModel and this ViewModel will be moved to the
+        ///     background
         /// </summary>
         public virtual void Pause()
         {

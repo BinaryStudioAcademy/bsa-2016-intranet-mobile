@@ -130,7 +130,7 @@ namespace IntranetMobile.Droid.Views.Util
                     }
 
                     if (string.IsNullOrEmpty(imageSource))
-                    {                    
+                    {
                         // Critical check
                         lock (_mutex)
                         {
@@ -184,33 +184,38 @@ namespace IntranetMobile.Droid.Views.Util
                                     }
                                 }
 
-                                int outWidth;
-                                int outHeight;
-                                var inWidth = image.Width;
-                                var inHeight = image.Height;
-                                if (inWidth > inHeight)
-                                {
-                                    outWidth = MaxSize;
-                                    outHeight = inHeight*MaxSize/inWidth;
-                                }
-                                else
-                                {
-                                    outHeight = MaxSize;
-                                    outWidth = inWidth*MaxSize/inHeight;
-                                }
+                                var resultingBitmap = image;
 
-                                // Performance-friendly check
-                                lock (_mutex)
+                                if (image.Width > MaxSize || image.Height > MaxSize)
                                 {
-                                    if (cancelToken.IsCancellationRequested)
+                                    int outWidth;
+                                    int outHeight;
+                                    var inWidth = image.Width;
+                                    var inHeight = image.Height;
+                                    if (inWidth > inHeight)
                                     {
-                                        return;
+                                        outWidth = MaxSize;
+                                        outHeight = inHeight*MaxSize/inWidth;
                                     }
-                                }
+                                    else
+                                    {
+                                        outHeight = MaxSize;
+                                        outWidth = inWidth*MaxSize/inHeight;
+                                    }
 
-                                var resizedBitmap = Bitmap.CreateScaledBitmap(image, outWidth,
-                                    outHeight,
-                                    false);
+                                    // Performance-friendly check
+                                    lock (_mutex)
+                                    {
+                                        if (cancelToken.IsCancellationRequested)
+                                        {
+                                            return;
+                                        }
+                                    }
+
+                                    resultingBitmap = Bitmap.CreateScaledBitmap(image, outWidth,
+                                        outHeight,
+                                        false);
+                                }
 
                                 // Critical check
                                 lock (_mutex)
@@ -219,7 +224,7 @@ namespace IntranetMobile.Droid.Views.Util
                                     {
                                         return;
                                     }
-                                    NewImageAvailable(resizedBitmap);
+                                    NewImageAvailable(resultingBitmap);
                                 }
                             }
                         }
