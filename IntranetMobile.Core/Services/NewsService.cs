@@ -57,6 +57,7 @@ namespace IntranetMobile.Core.Services
                 SortNewsCache();
             }
 
+            // Prevent user-defined code from cache modifying
             return new List<News>(_newsCache);
         }
 
@@ -121,6 +122,7 @@ namespace IntranetMobile.Core.Services
                 _weeklyNewsCache.Sort((n1, n2) => n2.Date.CompareTo(n1.Date));
             }
 
+            // Prevent user-defined code from cache modifying
             return new List<WeeklyNews>(_weeklyNewsCache);
         }
 

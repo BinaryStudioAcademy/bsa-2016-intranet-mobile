@@ -49,8 +49,9 @@ namespace IntranetMobile.Core.Services
             var currentUserDto = await _restClient.GetAsync<MyUser>(CurrentUserPath).ConfigureAwait(false);
             await GetAllPositions();
 
-            // For further runtime updates
-            _cachedUsers.Clear();
+            // TODO: For possible future runtime updates it is necessary to update existing users
+            // TODO: And create UpdateFromDto method for User
+
             _cachedUsers.AddRange(userDtos.Select(u => new User
             {
                 Email = u.Email,
@@ -69,6 +70,8 @@ namespace IntranetMobile.Core.Services
             CurrentUser = _cachedUsers.FirstOrDefault(u => u.UserId == currentUserDto.Id);
 
             _semaphoreAllUser.Release();
+
+            // Prevent user-defined code from cache modifying
             return new List<User>(_cachedUsers);
         }
 
@@ -101,16 +104,15 @@ namespace IntranetMobile.Core.Services
         {
             var positionsDto = (await _restClient.GetAsync<List<PositionDto>>(PositionPath).ConfigureAwait(false))
                 .Where(pos => !pos.IsDeleted);
-
-            // For the further runtime updates
-            _cachedPositions.Clear();
+            
             _cachedPositions.AddRange(positionsDto.Select(pos => new Position
             {
                 Name = pos.Name,
                 Id = pos.Id
             }));
 
-            return _cachedPositions;
+            // Prevent user-defined code from cache modifying
+            return new List<Position>(_cachedPositions);
         }
     }
 }

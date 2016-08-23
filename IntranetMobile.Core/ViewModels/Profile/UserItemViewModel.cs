@@ -66,6 +66,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public static UserItemViewModel FromModel(User user)
         {
+            var position = ServiceBus.UserService.GetPositionById(user.PositionId);
             return new UserItemViewModel
             {
                 Id = user.UserId,
@@ -73,7 +74,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 FullName = $"{user.FirstName} {user.LastName}",
-                PositionName = ServiceBus.UserService.GetPositionById(user.PositionId).Name
+                PositionName = position != null ? position.Name : "Null"
             };
         }
     }
