@@ -92,7 +92,7 @@
     <Compile Include="Models\News.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="ViewModels\Profile\UsersViewModel.cs" />
-    <Compile Include="ViewModels\Profile\UserViewModel.cs" />
+    <Compile Include="ViewModels\Profile\UserItemViewModel.cs" />
     <Compile Include="ViewModels\Profile\MyExperienceViewModel.cs" />
     <Compile Include="ViewModels\Profile\MyProfileViewModel.cs" />
     <Compile Include="ViewModels\Profile\PdpFlowViewModel.cs" />

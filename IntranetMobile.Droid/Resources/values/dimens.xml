@@ -7,4 +7,5 @@
   <dimen name="text_size_large">48sp</dimen>
   <dimen name="card_height">250dp</dimen>
   <dimen name="icon_padding">8dp</dimen>
+  <dimen name ="roboto_regular">16sp</dimen>
 </resources>

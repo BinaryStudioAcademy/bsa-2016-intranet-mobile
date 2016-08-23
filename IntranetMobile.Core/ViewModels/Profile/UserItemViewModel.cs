@@ -2,14 +2,15 @@
 
 namespace IntranetMobile.Core.ViewModels.Profile
 {
-    public class UserViewModel : BaseViewModel
+    public class UserItemViewModel : BaseViewModel
     {
+        private const string SiteUrl = "http://team.binary-studio.com";
         private string _firstName;
         private string _fullName;
         private string _lastName;
         private string _position;
         private string _previewImageUri;
-        private const string SiteUrl = "http://team.binary-studio.com";
+
         public string PreviewImageUri
         {
             get { return _previewImageUri; }
@@ -62,9 +63,9 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string Id { get; set; }
 
-        public static UserViewModel FromModel(User user)
+        public static UserItemViewModel FromModel(User user)
         {
-            return new UserViewModel
+            return new UserItemViewModel
             {
                 Id = user.UserId,
                 PreviewImageUri = SiteUrl + user.AvatarUri,
