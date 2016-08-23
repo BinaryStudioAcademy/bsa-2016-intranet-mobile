@@ -1,4 +1,5 @@
-﻿using IntranetMobile.Core.Models;
+﻿using System.Threading.Tasks;
+using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.ViewModels.Profile
@@ -64,9 +65,9 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string Id { get; set; }
 
-        public static UserItemViewModel FromModel(User user)
+        public static async Task<UserItemViewModel> FromModel(User user)
         {
-            var position = ServiceBus.UserService.GetPositionById(user.PositionId);
+            var position = await ServiceBus.UserService.GetPositionById(user.PositionId);
             return new UserItemViewModel
             {
                 Id = user.UserId,
