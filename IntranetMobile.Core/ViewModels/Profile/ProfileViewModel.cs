@@ -56,7 +56,13 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string Position => User?.Position;
 
-        public string AvatarUrl => User != null ? "http://team.binary-studio.com" + User.AvatarUri : null;
+        //public string AvatarUrl
+        //    =>
+        //        "https://material-design.storage.googleapis.com/publish/material_v_9/0Bx4BSt6jniD7RmdHSUxhbEFTR2s/style_imagery_introduction.png"
+        //    ;
+
+        public string AvatarUrl
+            => User != null ? "http://team.binary-studio.com" + User.AvatarUri : null;
 
         public void Init(string userId)
         {
