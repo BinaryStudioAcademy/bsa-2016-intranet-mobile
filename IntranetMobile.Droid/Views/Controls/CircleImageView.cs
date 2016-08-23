@@ -5,6 +5,7 @@ using Android.Net;
 using Android.Util;
 using Android.Widget;
 using Java.Lang;
+using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 using Exception = System.Exception;
 using Math = System.Math;
 
@@ -12,7 +13,7 @@ using Math = System.Math;
 
 namespace IntranetMobile.Droid.Views.Controls
 {
-    public class CircleImageView : ImageView
+    public class CircleImageView : MvxAppCompatImageView
     {
         private static readonly ScaleType SCALE_TYPE = ScaleType.CenterCrop;
 
@@ -60,7 +61,7 @@ namespace IntranetMobile.Droid.Views.Controls
         {
         }
 
-        public CircleImageView(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs, defStyle)
+        public CircleImageView(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs)
         {
             var a = context.ObtainStyledAttributes(attrs, Resource.Styleable.CircleImageView, defStyle, 0);
 
