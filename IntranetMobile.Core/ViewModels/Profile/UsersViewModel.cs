@@ -31,7 +31,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
                 if (_selectedItem != null)
                 {
-                    //TODO: Show ViewModel with user Profile
+                    ShowViewModel<ProfileViewModel>(new {userId = _selectedItem.Id});
                 }
 
                 RaisePropertyChanged(() => SelectedItem);

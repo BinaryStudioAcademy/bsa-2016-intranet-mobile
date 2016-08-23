@@ -12,6 +12,7 @@ using MvvmCross.Plugins.DownloadCache;
 
 namespace IntranetMobile.Droid.Views.Util
 {
+    // TODO: DefaultImagePath WORKING BADLY, FIX NEEDED
     public class MvxDynamicCompressedBitmapHelper
         : IMvxImageHelper<Bitmap>
     {
