@@ -91,10 +91,6 @@
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="ViewModels\Profile\UsersViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserViewModel.cs" />
-    <Compile Include="ViewModels\Profile\MyExperienceViewModel.cs" />
-    <Compile Include="ViewModels\Profile\MyProfileViewModel.cs" />
-    <Compile Include="ViewModels\Profile\PdpFlowViewModel.cs" />
-
     <Compile Include="Models\WeeklyNews.cs" />
     <Compile Include="ViewModels\News\WeeklyItemViewModel.cs" />
     <Compile Include="ViewModels\News\WeeklyDetailsViewModel.cs" />

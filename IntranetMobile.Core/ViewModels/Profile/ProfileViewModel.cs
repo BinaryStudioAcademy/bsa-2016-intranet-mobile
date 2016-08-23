@@ -16,13 +16,17 @@ namespace IntranetMobile.Core.ViewModels.Profile
             private set
             {
                 _user = value;
-                RaisePropertyChanged(() => Name);
-                RaisePropertyChanged(() => Surname);
-                RaisePropertyChanged(() => Birthday);
-                RaisePropertyChanged(() => Gender);
-                RaisePropertyChanged(() => Country);
-                RaisePropertyChanged(() => HireDate);
-                RaisePropertyChanged(() => Position);
+                InvokeOnMainThread(() =>
+                {
+                    RaisePropertyChanged(() => Name);
+                    RaisePropertyChanged(() => Surname);
+                    RaisePropertyChanged(() => Birthday);
+                    RaisePropertyChanged(() => Gender);
+                    RaisePropertyChanged(() => Country);
+                    RaisePropertyChanged(() => HireDate);
+                    RaisePropertyChanged(() => Position);
+                    RaisePropertyChanged(() => AvatarUrl);
+                });
             }
         }
 
@@ -51,6 +55,8 @@ namespace IntranetMobile.Core.ViewModels.Profile
         public DateTime HireDate => User?.HireDate ?? default(DateTime);
 
         public string Position => User?.Position;
+
+        public string AvatarUrl => User != null ? "http://team.binary-studio.com" + User.AvatarUri : null;
 
         public void Init(string userId)
         {

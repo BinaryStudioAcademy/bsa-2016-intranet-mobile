@@ -10,9 +10,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:gravity="fill" >
+    android:gravity="fill">
     <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView
-      android:id ="@+id/avatar"
+      android:id="@+id/avatar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:scaleType="centerCrop"
@@ -20,17 +20,17 @@
       android:gravity="left" />
     <LinearLayout
       android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     android:gravity="fill" >
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="fill">
       <TextView
-              android:id ="@+id/name"
-   android:layout_width="wrap_content"
-   android:layout_height="wrap_content"
-   app:MvxBind="Text FullName"
-   android:gravity="center" />
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:MvxBind="Text FullName"
+        android:gravity="center" />
       <TextView
-              android:id ="@+id/position"
+        android:id="@+id/position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:MvxBind="Text Position"

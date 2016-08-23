@@ -17,11 +17,13 @@
       android:layout_height="match_parent"
       app:contentScrim="?attr/colorPrimary"
       app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
-      <ImageView
+      <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:adjustViewBounds="true"
-        android:src="@drawable/avatar_circle_grey_512dp"
+        android:scaleType="centerCrop"
+        app:MvxBind="ImageUrl AvatarUrl; DefaultImagePath 'res:avatar_circle_grey_512dp'"
         app:layout_collapseMode="parallax"
         app:layout_collapseParallaxMultiplier="0.7" />
       <android.support.v7.widget.Toolbar

@@ -4390,67 +4390,67 @@ namespace IntranetMobile.Droid
 			public const int card_view_weekly = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int content_my_profile = 2130903072;
+			public const int content_my_experience = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public const int design_bottom_sheet_dialog = 2130903073;
+			public const int content_my_profile = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public const int design_layout_snackbar = 2130903074;
+			public const int content_pdp_flow = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public const int design_layout_snackbar_include = 2130903075;
+			public const int design_bottom_sheet_dialog = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public const int design_layout_tab_icon = 2130903076;
+			public const int design_layout_snackbar = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int design_layout_tab_text = 2130903077;
+			public const int design_layout_snackbar_include = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int design_menu_item_action_area = 2130903078;
+			public const int design_layout_tab_icon = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int design_navigation_item = 2130903079;
+			public const int design_layout_tab_text = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int design_navigation_item_header = 2130903080;
+			public const int design_menu_item_action_area = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int design_navigation_item_separator = 2130903081;
+			public const int design_navigation_item = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int design_navigation_item_subheader = 2130903082;
+			public const int design_navigation_item_header = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int design_navigation_menu = 2130903083;
+			public const int design_navigation_item_separator = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int design_navigation_menu_item = 2130903084;
+			public const int design_navigation_item_subheader = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int drawer_header = 2130903085;
+			public const int design_navigation_menu = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public const int fragment_forgot_password = 2130903086;
+			public const int design_navigation_menu_item = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public const int fragment_loading = 2130903087;
+			public const int drawer_header = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int fragment_login = 2130903088;
+			public const int fragment_forgot_password = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int fragment_menu = 2130903089;
+			public const int fragment_loading = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public const int fragment_my_experience = 2130903090;
+			public const int fragment_login = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public const int fragment_news = 2130903091;
+			public const int fragment_menu = 2130903091;
 			
 			// aapt resource value: 0x7f030034
-			public const int fragment_pdp_flow = 2130903092;
+			public const int fragment_news = 2130903092;
 			
 			// aapt resource value: 0x7f030035
 			public const int fragment_users = 2130903093;
