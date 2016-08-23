@@ -14,11 +14,11 @@ namespace IntranetMobile.Core.Services
         private const string AllUsersPath = "profile/api/users";
         private const string CurrentUserPath = "/api/me";
         private const string PositionPath = "profile/api/positions";
+        private readonly List<Position> _cachedPositions = new List<Position>();
+        private readonly List<User> _cachedUsers = new List<User>();
         private readonly RestClient _restClient;
 
         private readonly SemaphoreSlim _semaphoreAllUser;
-        private List<Position> _cachedPositions;
-        private List<User> _cachedUsers;
 
         public UserService(RestClient client)
         {
@@ -39,17 +39,19 @@ namespace IntranetMobile.Core.Services
         {
             await _semaphoreAllUser.WaitAsync().ConfigureAwait(false);
 
-            if (_cachedUsers != null && _cachedUsers.Count > 0)
+            if (_cachedUsers.Count > 0)
             {
                 _semaphoreAllUser.Release();
-                return _cachedUsers;
+                return new List<User>(_cachedUsers);
             }
 
-            var users = await _restClient.GetAsync<List<UserDto>>(AllUsersPath).ConfigureAwait(false);
+            var userDtos = await _restClient.GetAsync<List<UserDto>>(AllUsersPath).ConfigureAwait(false);
             var currentUserDto = await _restClient.GetAsync<MyUser>(CurrentUserPath).ConfigureAwait(false);
             await GetAllPositions();
 
-            _cachedUsers = users.Select(u => new User
+            // For further runtime updates
+            _cachedUsers.Clear();
+            _cachedUsers.AddRange(userDtos.Select(u => new User
             {
                 Email = u.Email,
                 UserId = u.ServerUserId,
@@ -57,21 +59,36 @@ namespace IntranetMobile.Core.Services
                 LastName = u.Surname,
                 Birthday = DateTime.Parse(u.Birthday),
                 AvatarUri = u.Avatar.UrlAva,
-                Position = u.Position,
+                PositionId = u.Position,
                 Country = u.Country,
                 City = u.City,
                 Gender = u.Gender,
                 HireDate = DateTime.Parse(u.WorkDate)
-            }).ToList();
+            }));
 
             CurrentUser = _cachedUsers.FirstOrDefault(u => u.UserId == currentUserDto.Id);
 
             _semaphoreAllUser.Release();
-            return _cachedUsers;
+            return new List<User>(_cachedUsers);
         }
+
+        public async Task<User> GetUserById(string id)
+        {
+            if (_cachedUsers.Count == 0)
+            {
+                await GetAllUsers();
+            }
+
+            var result = _cachedUsers.FirstOrDefault(u => u.UserId.Equals(id));
+
+            return result;
+        }
+
+        public User CurrentUser { get; private set; }
 
         public Position GetPositionById(string id)
         {
+            // Every time we try to get position we will already have all the positions.
             //if(_cachedPositions !=null && _cachedPositions.Count > 0)
             //{
             //    return _cachedPositions.FirstOrDefault(pos => pos.Id == id);
@@ -80,35 +97,20 @@ namespace IntranetMobile.Core.Services
             return _cachedPositions.FirstOrDefault(pos => pos.Id == id);
         }
 
-        private async Task<List<Position>> GetAllPositions()
+        public async Task<List<Position>> GetAllPositions()
         {
             var positionsDto = (await _restClient.GetAsync<List<PositionDto>>(PositionPath).ConfigureAwait(false))
-                                 .Where(pos=> !pos.IsDeleted);
-            _cachedPositions = positionsDto.Select(pos => new Position()
+                .Where(pos => !pos.IsDeleted);
+
+            // For the further runtime updates
+            _cachedPositions.Clear();
+            _cachedPositions.AddRange(positionsDto.Select(pos => new Position
             {
                 Name = pos.Name,
                 Id = pos.Id
-            }).ToList();
-                
+            }));
+
             return _cachedPositions;
         }
-
-        public async Task<User> GetUserById(string id)
-        {
-            User result;
-
-            if (_cachedUsers != null && _cachedUsers.Count > 0)
-            {
-                result = _cachedUsers.FirstOrDefault(u => u.UserId.Equals(id));
-                return result;
-            }
-
-            _cachedUsers = await GetAllUsers();
-            result = _cachedUsers.FirstOrDefault(u => u.UserId.Equals(id));
-
-            return result;
-        }
-
-        public User CurrentUser { get; private set; }
     }
 }

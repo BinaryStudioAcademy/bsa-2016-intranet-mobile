@@ -1,4 +1,5 @@
 ﻿using IntranetMobile.Core.Models;
+using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.ViewModels.Profile
 {
@@ -8,7 +9,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
         private string _firstName;
         private string _fullName;
         private string _lastName;
-        private string _position;
+        private string _positionName;
         private string _previewImageUri;
 
         public string PreviewImageUri
@@ -51,13 +52,13 @@ namespace IntranetMobile.Core.ViewModels.Profile
             }
         }
 
-        public string Position
+        public string PositionName
         {
-            get { return _position; }
+            get { return _positionName; }
             set
             {
-                _position = value;
-                RaisePropertyChanged(() => Position);
+                _positionName = value;
+                RaisePropertyChanged(() => PositionName);
             }
         }
 
@@ -72,7 +73,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 FullName = $"{user.FirstName} {user.LastName}",
-                Position = user.Position != null ? user.Position.Name : "Null"
+                PositionName = ServiceBus.UserService.GetPositionById(user.PositionId).Name
             };
         }
     }
