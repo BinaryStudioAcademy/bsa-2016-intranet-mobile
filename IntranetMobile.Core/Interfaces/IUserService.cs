@@ -14,7 +14,7 @@ namespace IntranetMobile.Core.Interfaces
 
         Task<User> GetUserById(string id);
 
-        Position GetPositionById(string id);
+        Task<Position> GetPositionById(string id);
 
         Task<List<Position>> GetAllPositions();
     }

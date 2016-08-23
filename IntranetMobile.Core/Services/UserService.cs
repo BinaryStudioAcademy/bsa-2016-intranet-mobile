@@ -81,22 +81,18 @@ namespace IntranetMobile.Core.Services
             {
                 await GetAllUsers();
             }
-
-            var result = _cachedUsers.FirstOrDefault(u => u.UserId.Equals(id));
-
-            return result;
+            return _cachedUsers.FirstOrDefault(u => u.UserId.Equals(id));
         }
 
         public User CurrentUser { get; private set; }
 
-        public Position GetPositionById(string id)
+        public async Task<Position> GetPositionById(string id)
         {
-            // Every time we try to get position we will already have all the positions.
-            //if(_cachedPositions !=null && _cachedPositions.Count > 0)
-            //{
-            //    return _cachedPositions.FirstOrDefault(pos => pos.Id == id);
-            //}
-            //_cachedPositions = await GetAllPositions();
+            // For now every time we try to get position we will already have all the positions.
+            if (_cachedPositions.Count == 0)
+            {
+                await GetAllPositions();
+            }
             return _cachedPositions.FirstOrDefault(pos => pos.Id == id);
         }
 
@@ -104,7 +100,15 @@ namespace IntranetMobile.Core.Services
         {
             var positionsDto = (await _restClient.GetAsync<List<PositionDto>>(PositionPath).ConfigureAwait(false))
                 .Where(pos => !pos.IsDeleted);
-            
+
+            if (_cachedPositions.Count > 0)
+            {
+                return new List<Position>(_cachedPositions);
+            }
+
+            // TODO: For possible future runtime updates it is necessary to update existing users
+            // TODO: And create UpdateFromDto method for User
+
             _cachedPositions.AddRange(positionsDto.Select(pos => new Position
             {
                 Name = pos.Name,
