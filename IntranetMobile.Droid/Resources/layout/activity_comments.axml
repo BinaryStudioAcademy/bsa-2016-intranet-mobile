@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:paddingTop="20dp"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    android:paddingBottom="5dp">
     <Mvx.MvxListView
         android:id="@+id/commentListView"
         android:layout_width="match_parent"
@@ -28,8 +29,10 @@
             app:MvxBind="Text NewComment" />
         <Button
             android:text="Send"
+            android:background="@drawable/commentsendbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             app:MvxBind="Click ClickSaveCommentCommand" />
     </LinearLayout>
 </LinearLayout>

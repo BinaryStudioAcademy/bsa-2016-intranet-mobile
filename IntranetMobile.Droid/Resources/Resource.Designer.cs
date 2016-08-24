@@ -3640,67 +3640,70 @@ namespace IntranetMobile.Droid
 			public const int avatar_circle_grey_512dp = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public const int design_fab_background = 2130837580;
+			public const int commentSendButton = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int design_snackbar_background = 2130837581;
+			public const int design_fab_background = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int ic_accessibility_black_24dp = 2130837582;
+			public const int design_snackbar_background = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int ic_bug_report_black_24dp = 2130837583;
+			public const int ic_accessibility_black_24dp = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int ic_comment_black_24dp = 2130837584;
+			public const int ic_bug_report_black_24dp = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int ic_comment_white_24dp = 2130837585;
+			public const int ic_comment_black_24dp = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public const int ic_done_all_black_24dp = 2130837586;
+			public const int ic_comment_white_24dp = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int ic_done_all_white_24dp = 2130837587;
+			public const int ic_done_all_black_24dp = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int ic_exit_to_app_black_24dp = 2130837588;
+			public const int ic_done_all_white_24dp = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int ic_favorite_border_black_24dp = 2130837589;
+			public const int ic_exit_to_app_black_24dp = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int ic_favorite_border_white_24dp = 2130837590;
+			public const int ic_favorite_border_black_24dp = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int ic_favorite_white_24dp = 2130837591;
+			public const int ic_favorite_border_white_24dp = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int ic_group_black_24dp = 2130837592;
+			public const int ic_favorite_white_24dp = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int ic_home_black_24dp = 2130837593;
+			public const int ic_group_black_24dp = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int ic_launcher = 2130837594;
+			public const int ic_home_black_24dp = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int ic_menu_white_24dp = 2130837595;
+			public const int ic_launcher = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int ic_settings_black_24dp = 2130837596;
+			public const int ic_menu_white_24dp = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int logo_black_1 = 2130837597;
+			public const int ic_settings_black_24dp = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int news_default = 2130837598;
-			
-			// aapt resource value: 0x7f020060
-			public const int notification_template_icon_bg = 2130837600;
+			public const int logo_black_1 = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int user_default_100 = 2130837599;
+			public const int news_default = 2130837599;
+			
+			// aapt resource value: 0x7f020061
+			public const int notification_template_icon_bg = 2130837601;
+			
+			// aapt resource value: 0x7f020060
+			public const int user_default_100 = 2130837600;
 			
 			static Drawable()
 			{

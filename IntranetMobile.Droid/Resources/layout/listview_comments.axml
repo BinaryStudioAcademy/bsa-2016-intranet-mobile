@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -22,7 +23,7 @@
             android:gravity="right"
             app:MvxBind="Text Date" />
     </LinearLayout>
-    <TextView
+    <NewsDetailsWebView
         android:text="Some body comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,6 +41,6 @@
         <Mvx.MvxImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:MvxBind="DrawableName LikeImageViewUrl; Click ClickLikeCommand" />
+            app:MvxBind="DrawableName BoolToLikeIconConverter(IsLiked); Click ClickLikeCommand" />
     </LinearLayout>
 </LinearLayout>
