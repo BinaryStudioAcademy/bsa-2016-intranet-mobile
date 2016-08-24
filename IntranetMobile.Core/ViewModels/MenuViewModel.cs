@@ -79,7 +79,7 @@ namespace IntranetMobile.Core.ViewModels
 
             var user = await ServiceBus.UserService.GetCurrentUserAsync();
             UserName = user.Email;
-            AvatarUrl = "http://team.binary-studio.com" + user.AvatarUri;
+            AvatarUrl = Constants.BaseUrl + user.AvatarUri;
         }
     }
 }
