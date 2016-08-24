@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Interfaces\IAlertService.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Interfaces\IRestClient.cs" />
     <Compile Include="Interfaces\IStorageService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Models\Credentials.cs" />
     <Compile Include="Models\Dtos\AuthDto.cs" />
     <Compile Include="Models\Dtos\MyUser.cs" />
     <Compile Include="Models\Dtos\PositionDto.cs" />

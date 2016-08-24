@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -15,7 +14,7 @@ namespace IntranetMobile.Core.Services
     {
         private const string UserAgent = "Fiddler";
         private const string ContentType = "application/json";
-        private const string BaseUrl = "http://team.binary-studio.com/";
+        private static readonly string BaseUrl = Constants.BaseUrl;
         private readonly Uri _baseUri;
         private readonly CookieContainer _cookieContainer;
         private readonly HttpClient _httpClient;

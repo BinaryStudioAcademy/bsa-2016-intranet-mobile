@@ -16,7 +16,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
             private set
             {
                 _user = value;
-                Dispatcher.RequestMainThreadAction(() =>
+                InvokeOnMainThread(() =>
                 {
                     RaisePropertyChanged(() => Name);
                     RaisePropertyChanged(() => Surname);
@@ -57,7 +57,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
         public string Position => User?.PositionId;
 
         public string AvatarUrl => User != null
-            ? "http://team.binary-studio.com" + User.AvatarUri
+            ? Constants.BaseUrl + User.AvatarUri
             : null;
 
         public void Init(string userId)

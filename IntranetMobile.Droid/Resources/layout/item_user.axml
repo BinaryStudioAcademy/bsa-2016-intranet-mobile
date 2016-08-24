@@ -21,7 +21,6 @@
       android:maxHeight="40dp"
       android:layout_marginBottom="8dp"
       android:layout_marginRight="24dp"
-      android:gravity="center"
       app:MvxBind="ImageUrl PreviewImageUri" />
     <LinearLayout
       android:orientation="vertical"

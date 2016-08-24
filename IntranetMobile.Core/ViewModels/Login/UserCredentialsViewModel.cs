@@ -74,7 +74,7 @@ namespace IntranetMobile.Core.ViewModels.Login
             var auth = await ServiceBus.AuthService.Login(Email, Password);
             if (auth.success)
             {
-                await ServiceBus.StorageService.AddItem(new User {Email = Email, Password = Password});
+                await ServiceBus.StorageService.AddItem(new Credentials {Email = Email, Password = Password});
                 ShowViewModel<MainViewModel>();
             }
             else
