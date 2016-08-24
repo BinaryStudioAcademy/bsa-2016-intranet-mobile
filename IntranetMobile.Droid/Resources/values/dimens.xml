@@ -12,6 +12,7 @@
   <dimen name="fab_margin">16dp</dimen>
   <dimen name="app_bar_height">250dp</dimen>
   <dimen name="text_margin">16dp</dimen>
-  <dimen name ="roboto_regular">16sp</dimen>
+  <dimen name="roboto_regular">16sp</dimen>
+  <dimen name="roboto_regular_small">14sp</dimen>
   <dimen name="statusBarSize">0dp</dimen>
 </resources>

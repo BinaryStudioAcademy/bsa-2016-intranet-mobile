@@ -3384,7 +3384,10 @@ namespace IntranetMobile.Droid
 			public const int roboto_regular = 2131165306;
 			
 			// aapt resource value: 0x7f07007b
-			public const int statusBarSize = 2131165307;
+			public const int roboto_regular_small = 2131165307;
+			
+			// aapt resource value: 0x7f07007c
+			public const int statusBarSize = 2131165308;
 			
 			// aapt resource value: 0x7f070079
 			public const int text_margin = 2131165305;
