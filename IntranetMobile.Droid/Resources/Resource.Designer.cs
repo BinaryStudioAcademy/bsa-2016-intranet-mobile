@@ -6468,24 +6468,6 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 11
 			public const int CardView_contentPaddingTop = 11;
 			
-			public static int[] CircleImageView = new int[] {
-					2130772283,
-					2130772284,
-					2130772285,
-					2130772286};
-			
-			// aapt resource value: 1
-			public const int CircleImageView_civ_border_color = 1;
-			
-			// aapt resource value: 2
-			public const int CircleImageView_civ_border_overlay = 2;
-			
-			// aapt resource value: 0
-			public const int CircleImageView_civ_border_width = 0;
-			
-			// aapt resource value: 3
-			public const int CircleImageView_civ_fill_color = 3;
-			
 			public static int[] CollapsingAppBarLayout_LayoutParams = new int[] {
 					2130772211,
 					2130772212};
@@ -6979,6 +6961,24 @@ namespace IntranetMobile.Droid
 			
 			// aapt resource value: 7
 			public const int MenuView_preserveIconSpacing = 7;
+			
+			public static int[] MvxAppCompatCircleImageView = new int[] {
+					2130772283,
+					2130772284,
+					2130772285,
+					2130772286};
+			
+			// aapt resource value: 1
+			public const int MvxAppCompatCircleImageView_civ_border_color = 1;
+			
+			// aapt resource value: 2
+			public const int MvxAppCompatCircleImageView_civ_border_overlay = 2;
+			
+			// aapt resource value: 0
+			public const int MvxAppCompatCircleImageView_civ_border_width = 0;
+			
+			// aapt resource value: 3
+			public const int MvxAppCompatCircleImageView_civ_fill_color = 3;
 			
 			public static int[] MvxBinding = new int[] {
 					2130772276,

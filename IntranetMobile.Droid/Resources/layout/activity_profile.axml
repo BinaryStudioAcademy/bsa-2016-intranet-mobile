@@ -20,6 +20,8 @@
       <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:maxWidth="400dp"
+        android:maxHeight="400dp"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"

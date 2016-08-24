@@ -3,7 +3,6 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Net;
 using Android.Util;
-using Android.Widget;
 using Java.Lang;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
 using Exception = System.Exception;
@@ -13,7 +12,7 @@ using Math = System.Math;
 
 namespace IntranetMobile.Droid.Views.Controls
 {
-    public class CircleImageView : MvxAppCompatImageView
+    public class MvxAppCompatCircleImageView : MvxAppCompatImageView
     {
         private static readonly ScaleType SCALE_TYPE = ScaleType.CenterCrop;
 
@@ -52,24 +51,24 @@ namespace IntranetMobile.Droid.Views.Controls
         private bool mReady;
         private bool mSetupPending;
 
-        public CircleImageView(Context context) : base(context)
+        public MvxAppCompatCircleImageView(Context context) : base(context)
         {
             init();
         }
 
-        public CircleImageView(Context context, IAttributeSet attrs) : this(context, attrs, 0)
+        public MvxAppCompatCircleImageView(Context context, IAttributeSet attrs) : this(context, attrs, 0)
         {
         }
 
-        public CircleImageView(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs)
+        public MvxAppCompatCircleImageView(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs)
         {
-            var a = context.ObtainStyledAttributes(attrs, Resource.Styleable.CircleImageView, defStyle, 0);
+            var a = context.ObtainStyledAttributes(attrs, Resource.Styleable.MvxAppCompatCircleImageView, defStyle, 0);
 
-            mBorderWidth = a.GetDimensionPixelSize(Resource.Styleable.CircleImageView_civ_border_width,
+            mBorderWidth = a.GetDimensionPixelSize(Resource.Styleable.MvxAppCompatCircleImageView_civ_border_width,
                 DEFAULT_BORDER_WIDTH);
-            mBorderColor = a.GetColor(Resource.Styleable.CircleImageView_civ_border_color, DEFAULT_BORDER_COLOR);
-            mBorderOverlay = a.GetBoolean(Resource.Styleable.CircleImageView_civ_border_overlay, DEFAULT_BORDER_OVERLAY);
-            mFillColor = a.GetColor(Resource.Styleable.CircleImageView_civ_fill_color, DEFAULT_FILL_COLOR);
+            mBorderColor = a.GetColor(Resource.Styleable.MvxAppCompatCircleImageView_civ_border_color, DEFAULT_BORDER_COLOR);
+            mBorderOverlay = a.GetBoolean(Resource.Styleable.MvxAppCompatCircleImageView_civ_border_overlay, DEFAULT_BORDER_OVERLAY);
+            mFillColor = a.GetColor(Resource.Styleable.MvxAppCompatCircleImageView_civ_fill_color, DEFAULT_FILL_COLOR);
 
             a.Recycle();
 

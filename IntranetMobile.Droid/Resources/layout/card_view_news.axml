@@ -22,6 +22,8 @@
         <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:maxWidth="@dimen/card_height"
+          android:maxHeight="@dimen/card_height"
           android:layout_gravity="center"
           android:scaleType="centerCrop"
           app:MvxBind="ImageUrl PreviewImageUri; DefaultImagePath 'res:news_default'" />

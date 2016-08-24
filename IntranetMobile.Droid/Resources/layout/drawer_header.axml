@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,10 +12,12 @@
     android:orientation="vertical"
     android:layout_alignParentBottom="true"
     android:paddingLeft="16dp">
-    <CircleImageView
+    <MvxAppCompatCircleImageView
       android:id="@+id/drawer_header_avatar_imageview"
       android:layout_width="72dp"
       android:layout_height="72dp"
+      android:maxWidth ="72dp"
+      android:maxHeight ="72dp"
       android:src="@drawable/avatar_circle_grey_512dp"
       android:layout_marginBottom="10dp"
       app:civ_border_width="2dp"

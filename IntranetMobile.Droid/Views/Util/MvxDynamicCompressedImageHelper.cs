@@ -2,8 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Graphics;
-using IntranetMobile.Core.Interfaces;
-using IntranetMobile.Core.Services;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
@@ -27,8 +25,6 @@ namespace IntranetMobile.Droid.Views.Util
 
         #endregion ImageState enum
 
-        // TODO: Dynamically bind dat
-        private const int MaxSize = 800;
         private readonly object _mutex = new object();
 
         private CancellationTokenSource _cancellationSource;
@@ -106,6 +102,7 @@ namespace IntranetMobile.Droid.Views.Util
             handler?.Invoke(this, new MvxValueEventArgs<Bitmap>(image));
         }
 
+        // TODO: Rework with ConfigureAwait
         private void RequestImage(string imageSource)
         {
             lock (_mutex)
@@ -189,30 +186,22 @@ namespace IntranetMobile.Droid.Views.Util
 
                                 var resultingBitmap = image;
 
-                                if (image.Width > MaxSize || image.Height > MaxSize)
+                                if (image.Width > MaxWidth || image.Height > MaxHeight)
                                 {
                                     int outWidth;
                                     int outHeight;
                                     var inWidth = image.Width;
                                     var inHeight = image.Height;
+
                                     if (inWidth > inHeight)
                                     {
-                                        outWidth = MaxSize;
-                                        outHeight = inHeight*MaxSize/inWidth;
+                                        outWidth = MaxWidth;
+                                        outHeight = inHeight*MaxWidth/inWidth;
                                     }
                                     else
                                     {
-                                        outHeight = MaxSize;
-                                        outWidth = inWidth*MaxSize/inHeight;
-                                    }
-
-                                    // Performance-friendly check
-                                    lock (_mutex)
-                                    {
-                                        if (cancelToken.IsCancellationRequested)
-                                        {
-                                            return;
-                                        }
+                                        outHeight = MaxHeight;
+                                        outWidth = inWidth*MaxHeight/inHeight;
                                     }
 
                                     resultingBitmap = Bitmap.CreateScaledBitmap(image, outWidth,

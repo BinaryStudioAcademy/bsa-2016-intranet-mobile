@@ -13,10 +13,12 @@
     android:gravity="fill"
     android:paddingTop="8dp"
     android:paddingLeft="16dp">
-    <CircleImageView
+    <MvxAppCompatCircleImageView
       android:id="@+id/drawer_header_avatar_imageview"
       android:layout_width="40dp"
       android:layout_height="40dp"
+      android:maxWidth="40dp"
+      android:maxHeight="40dp"
       android:layout_marginBottom="8dp"
       android:layout_marginRight="24dp"
       android:gravity="center"
