@@ -9,6 +9,7 @@ namespace IntranetMobile.Core.ViewModels
 {
     public class MenuViewModel : BaseViewModel
     {
+        private string _avatarUrl;
         private string _userName;
 
         public MenuViewModel()
@@ -25,6 +26,16 @@ namespace IntranetMobile.Core.ViewModels
             {
                 _userName = value;
                 RaisePropertyChanged(() => UserName);
+            }
+        }
+
+        public string AvatarUrl
+        {
+            get { return _avatarUrl; }
+            set
+            {
+                _avatarUrl = value;
+                RaisePropertyChanged(() => AvatarUrl);
             }
         }
 
@@ -56,8 +67,8 @@ namespace IntranetMobile.Core.ViewModels
                         // return;
                         // TODO: Log dat?
                     }
-                    var user = await ServiceBus.StorageService.GetFirstOrDefault<User>();
-                    await ServiceBus.StorageService.RemoveItem(user);
+                    var credentials = await ServiceBus.StorageService.GetFirstOrDefault<Credentials>();
+                    await ServiceBus.StorageService.RemoveItem(credentials);
                     ShowViewModel<LoginViewModel>();
                 });
         }
@@ -66,11 +77,9 @@ namespace IntranetMobile.Core.ViewModels
         {
             base.Start();
 
-            var currentUser = await ServiceBus.StorageService.GetFirstOrDefault<User>();
-            if (currentUser != null)
-            {
-                UserName = currentUser.Email;
-            }
+            var user = await ServiceBus.UserService.GetCurrentUserAsync();
+            UserName = user.Email;
+            AvatarUrl = "http://team.binary-studio.com" + user.AvatarUri;
         }
     }
 }
