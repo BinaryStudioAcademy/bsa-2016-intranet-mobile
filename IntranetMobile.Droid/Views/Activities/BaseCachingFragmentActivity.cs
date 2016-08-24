@@ -1,4 +1,5 @@
-﻿using IntranetMobile.Core.ViewModels;
+﻿using Android.Views;
+using IntranetMobile.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views.Activities
@@ -11,6 +12,13 @@ namespace IntranetMobile.Droid.Views.Activities
             base.OnResume();
 
             ViewModel?.Resume();
+        }
+
+        protected override void OnViewModelSet()
+        {
+            base.OnViewModelSet();
+
+            //Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
         }
     }
 }
