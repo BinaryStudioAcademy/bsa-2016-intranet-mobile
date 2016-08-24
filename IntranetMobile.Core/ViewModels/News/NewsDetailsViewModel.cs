@@ -48,15 +48,15 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public async void Init(Parameters arg)
         {
-            _dataModel = await ServiceBus.NewsService.GetNewsByIdAsync(arg.NewsId);
+            _newsId = arg.NewsId;
+            _dataModel = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
 
             Title = _dataModel.Title;
             Subtitle = _dataModel.Date.ToString("dd-MM-yyyy HH:mm");
             RaisePropertyChanged(() => LikesCount);
             RaisePropertyChanged(() => CommentsCount);
             RaisePropertyChanged(() => IsLiked);
-
-            _newsId = arg.NewsId;
+            RaisePropertyChanged(() => Body);
         }
 
         private async void Like()
