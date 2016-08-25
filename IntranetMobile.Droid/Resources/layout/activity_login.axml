@@ -16,6 +16,7 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
         <ImageView
+            android:paddingTop="@dimen/statusBarSize"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/logo_black_1"
             android:layout_width="184dp"

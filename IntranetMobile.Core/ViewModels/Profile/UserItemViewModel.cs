@@ -6,7 +6,6 @@ namespace IntranetMobile.Core.ViewModels.Profile
 {
     public class UserItemViewModel : BaseViewModel
     {
-        private const string SiteUrl = "http://team.binary-studio.com";
         private string _firstName;
         private string _fullName;
         private string _lastName;
@@ -71,11 +70,11 @@ namespace IntranetMobile.Core.ViewModels.Profile
             return new UserItemViewModel
             {
                 Id = user.UserId,
-                PreviewImageUri = SiteUrl + user.AvatarUri,
+                PreviewImageUri = Constants.BaseUrl + user.AvatarUri,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 FullName = $"{user.FirstName} {user.LastName}",
-                PositionName = position != null ? position.Name : "Null"
+                PositionName = position != null ? position.Name : ""
             };
         }
     }

@@ -221,7 +221,7 @@
     <Compile Include="Views\Activities\NewsDetailsActivity.cs" />
     <Compile Include="Views\Activities\WeekliesDetailsActivity.cs" />
     <Compile Include="Views\Controls\NewsDetailsWebView.cs" />
-    <Compile Include="Views\Controls\CircleImageView.cs" />
+    <Compile Include="Views\Controls\MvxAppCompatCircleImageView.cs" />
     <Compile Include="Views\Controls\CompressedMvxAppCompatImageView.cs" />
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />
     <Compile Include="Views\Fragments\News\NewsFragment.cs" />
@@ -239,6 +239,8 @@
     <Compile Include="Views\Util\FromHtmlValueConverter.cs" />
     <Compile Include="Views\Util\ImageGetter.cs" />
     <Compile Include="Views\Util\LikeActionsWrapper.cs" />
+    <Compile Include="Views\Util\MvxAuthorizedFileDownloadRequest.cs" />
+    <Compile Include="Views\Util\MvxAuthorizedHttpFileDownloader.cs" />
     <Compile Include="Views\Util\MvxDynamicCompressedImageHelper.cs" />
     <Compile Include="Views\Activities\CommentsActivity.cs" />
     <Compile Include="Views\Fragments\News\WeekliesRecyclerViewFragment.cs" />
@@ -340,6 +342,7 @@
     <AndroidResource Include="Resources\layout\recycle_view_weekly.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable\commentSendButton.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">

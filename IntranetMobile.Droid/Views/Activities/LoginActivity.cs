@@ -13,9 +13,6 @@ namespace IntranetMobile.Droid.Views.Activities
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
-
-            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-
             SetContentView(Resource.Layout.activity_login);
         }
 

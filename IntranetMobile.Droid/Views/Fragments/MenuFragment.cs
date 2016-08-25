@@ -16,7 +16,7 @@ namespace IntranetMobile.Droid.Views.Fragments
     [Register("intranetmobile.droid.views.fragments.MenuFragment")]
     public class MenuFragment : BaseFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
-        private CircleImageView _avatarImageView;
+        private MvxAppCompatCircleImageView _avatarImageView;
         private NavigationView _navigationView;
         private IMenuItem _selectedMenuItem;
 
@@ -45,7 +45,7 @@ namespace IntranetMobile.Droid.Views.Fragments
 
             _avatarImageView =
                 _navigationView.GetHeaderView(0)
-                    .FindViewById<CircleImageView>(Resource.Id.drawer_header_avatar_imageview);
+                    .FindViewById<MvxAppCompatCircleImageView>(Resource.Id.drawer_header_avatar_imageview);
             _avatarImageView.Click += (sender, args) =>
             {
                 //_selectedMenuItem?.SetChecked(false);

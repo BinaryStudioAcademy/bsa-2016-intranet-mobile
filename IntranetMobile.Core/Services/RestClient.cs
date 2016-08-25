@@ -14,7 +14,7 @@ namespace IntranetMobile.Core.Services
     {
         private const string UserAgent = "Fiddler";
         private const string ContentType = "application/json";
-        private const string BaseUrl = "http://team.binary-studio.com/";
+        private static readonly string BaseUrl = Constants.BaseUrl;
         private readonly Uri _baseUri;
         private readonly CookieContainer _cookieContainer;
         private readonly HttpClient _httpClient;
@@ -63,6 +63,12 @@ namespace IntranetMobile.Core.Services
             return Execute(resource, requestObject, HttpMethod.Post, contentType);
         }
 
+        public async Task<byte[]> DownloadContent(string url)
+        {
+            var responseMessage = await _httpClient.GetAsync(url);
+            return await responseMessage.Content.ReadAsByteArrayAsync();
+        }
+
         private async Task<T> Execute<T>(string resource, object requestObject, HttpMethod method,
             string contentType = ContentType) where T : new()
         {
@@ -84,7 +90,8 @@ namespace IntranetMobile.Core.Services
         {
             try
             {
-                var responseMessage = await GetResponse(resource, requestObject, method, contentType).ConfigureAwait(false);
+                var responseMessage =
+                    await GetResponse(resource, requestObject, method, contentType).ConfigureAwait(false);
                 responseMessage.EnsureSuccessStatusCode();
             }
             catch

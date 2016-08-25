@@ -13,7 +13,6 @@ namespace IntranetMobile.Core.ViewModels.News
         private int _countLikes;
         private string _date;
         private bool _isLiked;
-        private string _likeImageViewUrl;
         private string _name;
         private string _commentId;
 
@@ -81,30 +80,13 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        public string LikeImageViewUrl
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_likeImageViewUrl))
-                {
-                    _likeImageViewUrl = "ic_favorite_border_white_24dp";
-                }
-                return _likeImageViewUrl;
-            }
-            set
-            {
-                _likeImageViewUrl = value;
-                RaisePropertyChanged(() => LikeImageViewUrl);
-            }
-        }
-
         public bool IsLiked
         {
             get { return _isLiked; }
             set
             {
                 _isLiked = value;
-                LikeImageViewUrl = _isLiked ? "ic_favorite_white_24dp" : "ic_favorite_border_white_24dp";
+                RaisePropertyChanged(() => IsLiked);
             }
         }
 

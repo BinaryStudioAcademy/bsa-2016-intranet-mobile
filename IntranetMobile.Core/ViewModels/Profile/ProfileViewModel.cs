@@ -33,10 +33,10 @@ namespace IntranetMobile.Core.ViewModels.Profile
         public string UserId
         {
             get { return _userId; }
-            set
+            private set
             {
                 _userId = value;
-                Task.Run(async () => User = await ServiceBus.UserService.GetUserById(_userId));
+                Task.Run(async () => User = await ServiceBus.UserService.GetUserById(UserId));
             }
         }
 
@@ -56,13 +56,9 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string Position => User?.PositionId;
 
-        //public string AvatarUrl
-        //    =>
-        //        "https://material-design.storage.googleapis.com/publish/material_v_9/0Bx4BSt6jniD7RmdHSUxhbEFTR2s/style_imagery_introduction.png"
-        //    ;
-
-        public string AvatarUrl
-            => User != null ? "http://team.binary-studio.com" + User.AvatarUri : null;
+        public string AvatarUrl => User != null
+            ? Constants.BaseUrl + User.AvatarUri
+            : null;
 
         public void Init(string userId)
         {

@@ -20,6 +20,7 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Plugins.DownloadCache;
 using MvvmCross.Plugins.Sqlite;
 
 namespace IntranetMobile.Droid
@@ -57,6 +58,7 @@ namespace IntranetMobile.Droid
                 ApplicationContext.FilesDir.Path,
                 Mvx.Resolve<IMvxSqliteConnectionFactory>(),
                 Mvx.Resolve<ILogger>()));
+            Mvx.RegisterType<IMvxHttpFileDownloader, MvxAuthorizedHttpFileDownloader>();
             Mvx.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicCompressedBitmapHelper>();
         }
 
