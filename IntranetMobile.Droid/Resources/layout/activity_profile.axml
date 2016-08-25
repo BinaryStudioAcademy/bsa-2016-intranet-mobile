@@ -15,14 +15,14 @@
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
-            <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView
+            <PercentageCropMvxAppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxWidth="400dp"
                 android:maxHeight="400dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
+                android:scaleType="matrix"
                 app:MvxBind="ImageUrl AvatarUrl"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7" />

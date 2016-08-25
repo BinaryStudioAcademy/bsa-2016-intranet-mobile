@@ -222,6 +222,8 @@
     <Compile Include="Views\Controls\NewsDetailsWebView.cs" />
     <Compile Include="Views\Controls\MvxAppCompatCircleImageView.cs" />
     <Compile Include="Views\Controls\CompressedMvxAppCompatImageView.cs" />
+    <Compile Include="Views\Controls\PercentageCropMvxAppCompatImageView.cs" />
+    <Compile Include="Views\Controls\TopCropMvxAppCompatImageView.cs" />
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />
     <Compile Include="Views\Fragments\News\NewsFragment.cs" />
     <Compile Include="Views\Fragments\News\NewsRecycleViewFragment.cs" />
