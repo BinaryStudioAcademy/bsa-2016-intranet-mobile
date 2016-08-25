@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<android.support.design.widget.CoordinatorLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/activity_profile_app_bar"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/activity_profile_app_bar"
+    android:layout_height="wrap_content">
+    <android.support.design.widget.CollapsingToolbarLayout
+      android:id="@+id/activity_profile_toolbar_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:contentScrim="?attr/colorPrimary"
+      app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+      <android.support.percent.PercentFrameLayout
+        android:id="@+id/activity_profile_percent_relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="218dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/activity_profile_toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
-            <PercentageCropMvxAppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxWidth="400dp"
-                android:maxHeight="400dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:scaleType="matrix"
-                app:MvxBind="ImageUrl AvatarUrl"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.7" />
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/activity_profile_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed" />
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
-    <include
-        layout="@layout/content_my_profile" />
+        android:layout_height="wrap_content">
+        <PercentageCropMvxAppCompatImageView
+          app:layout_widthPercent="100%"
+          app:layout_aspectRatio="133%"
+          android:maxWidth="800dp"
+          android:maxHeight="800dp"
+          android:layout_gravity="center"
+          android:adjustViewBounds="true"
+          android:scaleType="matrix"
+          app:MvxBind="ImageUrl AvatarUrl"
+          app:layout_collapseMode="parallax"
+          app:layout_collapseParallaxMultiplier="0.7" />
+        <android.support.v7.widget.Toolbar
+          android:id="@+id/activity_profile_toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize"
+          android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+          app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+          app:layout_collapseMode="pin"
+          app:layout_scrollFlags="scroll|exitUntilCollapsed" />
+      </android.support.percent.PercentFrameLayout>
+    </android.support.design.widget.CollapsingToolbarLayout>
+  </android.support.design.widget.AppBarLayout>
+
+  <include layout="@layout/content_my_profile" />
 </android.support.design.widget.CoordinatorLayout>
