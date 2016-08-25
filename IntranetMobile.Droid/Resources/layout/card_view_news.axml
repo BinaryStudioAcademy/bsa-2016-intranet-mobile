@@ -62,7 +62,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/icon_padding"
-                            app:MvxBind="DrawableName BoolToLikeIconConverter(IsLiked); Click ClickLikeCommand" />
+                            app:MvxBind="DrawableName BoolToWhiteLikeIconConverter(IsLiked); Click ClickLikeCommand" />
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
