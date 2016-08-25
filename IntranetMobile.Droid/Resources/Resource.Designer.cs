@@ -3347,6 +3347,9 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f05004b
 			public const int disabled_alpha_material_light = 2131034187;
 			
+			// aapt resource value: 0x7f05007b
+			public const int expansion_pane_label = 2131034235;
+			
 			// aapt resource value: 0x7f050077
 			public const int fab_margin = 2131034231;
 			
@@ -3383,11 +3386,11 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f05007a
 			public const int roboto_regular = 2131034234;
 			
-			// aapt resource value: 0x7f05007b
-			public const int roboto_regular_small = 2131034235;
-			
 			// aapt resource value: 0x7f05007c
-			public const int statusBarSize = 2131034236;
+			public const int roboto_regular_small = 2131034236;
+			
+			// aapt resource value: 0x7f05007d
+			public const int statusBarSize = 2131034237;
 			
 			// aapt resource value: 0x7f050079
 			public const int text_margin = 2131034233;
