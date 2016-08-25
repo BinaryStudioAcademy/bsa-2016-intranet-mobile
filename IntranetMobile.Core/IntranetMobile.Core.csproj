@@ -95,7 +95,7 @@
     <Compile Include="ViewModels\Profile\UserItemViewModel.cs" />
     <Compile Include="Models\WeeklyNews.cs" />
     <Compile Include="ViewModels\News\WeeklyItemViewModel.cs" />
-    <Compile Include="ViewModels\News\WeeklyDetailsViewModel.cs" />
+    <Compile Include="ViewModels\News\WeekliesDetailsViewModel.cs" />
     <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
     <Compile Include="Models\Dtos\CommentRequestDto.cs" />
     <Compile Include="Models\Dtos\CommentsResponseDto.cs" />

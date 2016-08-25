@@ -126,20 +126,17 @@ namespace IntranetMobile.Core.Services
             return new List<WeeklyNews>(_weeklyNewsCache);
         }
 
-        public WeeklyNews GetWeeklyNewsByIdAsync(string newsId)
+        public async Task<WeeklyNews> GetWeeklyNewsByIdAsync(string newsId)
         {
-            if (_weeklyNewsCache != null && _weeklyNewsCache.Count > 0)
+            WeeklyNews result;
+            if (_weeklyNewsCache.Count == 0)
             {
-                var result = _weeklyNewsCache.FirstOrDefault(n => n.WeeklyId.Equals(newsId));
-                if (result != null)
-                {
-                    return result;
-                }
+                await GetWeeklyNewsAsync(0, 10);
             }
-
             // TODO: Update weekly cache from server
+            result = _weeklyNewsCache.FirstOrDefault(n => n.WeeklyId.Equals(newsId));
 
-            return null;
+            return result;
         }
 
         public async Task<bool> LikeNewsAsync(string newsId)

@@ -219,6 +219,7 @@
     <Compile Include="Views\Activities\LoginActivity.cs" />
     <Compile Include="Views\Activities\MainActivity.cs" />
     <Compile Include="Views\Activities\NewsDetailsActivity.cs" />
+    <Compile Include="Views\Activities\WeekliesDetailsActivity.cs" />
     <Compile Include="Views\Controls\NewsDetailsWebView.cs" />
     <Compile Include="Views\Controls\CircleImageView.cs" />
     <Compile Include="Views\Controls\CompressedMvxAppCompatImageView.cs" />
@@ -309,9 +310,6 @@
     <AndroidResource Include="Resources\layout\fragment_users.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\recycle_view_weekly.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\card_view_weekly.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -331,6 +329,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\current_user.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_weeklies_details.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_weeklies_details_view.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\recycle_view_weekly.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
