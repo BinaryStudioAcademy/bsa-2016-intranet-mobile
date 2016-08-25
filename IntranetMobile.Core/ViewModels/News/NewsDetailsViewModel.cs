@@ -10,13 +10,16 @@ namespace IntranetMobile.Core.ViewModels.News
         private bool _isLiked;
 
         private string _newsId;
+        private bool _visibility;
 
         public NewsDetailsViewModel()
         {
             LikeCommand = new MvxCommand(Like);
             CommentCommand = new MvxCommand(Comment);
+            ChangeVisibilityCommand = new MvxCommand(ChangeVisibilityCommandExecute);
         }
 
+        public MvxCommand ChangeVisibilityCommand { get; private set; }
         public MvxCommand LikeCommand { get; private set; }
 
         public MvxCommand CommentCommand { get; private set; }
@@ -45,6 +48,22 @@ namespace IntranetMobile.Core.ViewModels.News
                 RaisePropertyChanged(() => IsLiked);
             }
         }
+
+        public bool Visibility
+        {
+            get { return _visibility; }
+            set
+            {
+                _visibility = value;
+                RaisePropertyChanged(() => Visibility);
+            }
+        }
+
+        private void ChangeVisibilityCommandExecute()
+        {
+            Visibility = !_visibility;
+        }
+
 
         public async void Init(Parameters arg)
         {

@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:local="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  <LinearLayout
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-  <TextView
+    <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       local:MvxBind="Text Title"
-      android:layout_gravity="center"/>
-  <NewsDetailsWebView
-    android:id="@+id/weeklies_details_webview"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    local:MvxBind="Text Body" />
-  <LinearLayout
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:gravity="center|right"
-  android:orientation="horizontal">
+      android:layout_weight="1" />
     <Mvx.MvxImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:padding="@dimen/icon_padding"
-      local:MvxBind="DrawableName BoolToLikeIconConverter(IsLiked); Click ClickLikeCommand" />
+      android:layout_weight="0"
+      android:layout_gravity="right"
+      local:MvxBind="DrawableName BoolToArrowIconConverter(Visibility); Click ChangeVisibilityCommand" />
+  </LinearLayout>
+  <NewsDetailsWebView
+    android:id="@+id/weeklies_details_webview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    local:MvxBind="Text Body; ItemVisibility Visibility" />
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center|right"
+    android:orientation="horizontal">
+    <Mvx.MvxImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/icon_padding"
+      local:MvxBind="DrawableName BoolToBlackLikeIconConverter(IsLiked); Click LikeCommand" />
     <ImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:padding="@dimen/icon_padding"
       android:src="@drawable/ic_comment_black_24dp"
-      local:MvxBind="Click ClickCommentCommand" />
+      local:MvxBind="Click CommentCommand" />
   </LinearLayout>
 </LinearLayout>
