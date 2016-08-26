@@ -42,7 +42,7 @@
                     android:shadowRadius="1"
                     android:shadowDy="1"
                     android:shadowDx="1"
-                    android:shadowColor="@color/colorPrimary"
+                    android:shadowColor="@color/colorPrimaryDark"
                     app:MvxBind="Text FullName" />
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/activity_profile_toolbar"
