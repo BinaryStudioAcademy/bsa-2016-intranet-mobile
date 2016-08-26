@@ -14,7 +14,7 @@ namespace IntranetMobile.Core.ViewModels.News
         public CommentsViewModel()
         {
             Comments = new ObservableCollection<CommentsItemViewModel>();
-            ClickSaveCommentCommand = new MvxCommand(SaveCommentExecute);
+            ClickSendCommentCommand = new MvxCommand(SendCommentExecute);
             Title = "Comments";
         }
 
@@ -39,7 +39,7 @@ namespace IntranetMobile.Core.ViewModels.News
             IsBusy = false;
         }
 
-        public ICommand ClickSaveCommentCommand { get; private set; }
+        public ICommand ClickSendCommentCommand { get; private set; }
 
         public string NewComment
         {
@@ -53,9 +53,12 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ObservableCollection<CommentsItemViewModel> Comments { get; private set; }
 
-        private void SaveCommentExecute()
+        private async void SendCommentExecute()
         {
-            var b = ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
+            if (string.IsNullOrWhiteSpace(NewComment))
+                return;
+            
+            await ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
             NewComment = "";
 
             GetComments();
