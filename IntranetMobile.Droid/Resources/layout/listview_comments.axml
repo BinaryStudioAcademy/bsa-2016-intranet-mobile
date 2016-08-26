@@ -1,47 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:background="@android:color/white"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-  <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-      android:text="FirstName LastName"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      app:MvxBind="Text Name" />
-    <TextView
-      android:text="DatePublication"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:gravity="right"
-      app:MvxBind="Text Date" />
-  </LinearLayout>
-  <NewsDetailsWebView
-    android:text="Some body comments"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:MvxBind="Text Body" />
-  <LinearLayout
-    android:orientation="horizontal"
-    android:gravity="center|right"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <TextView
-      android:text="count likes"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:MvxBind="Text CountLikes" />
-    <Mvx.MvxImageView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:MvxBind="DrawableName BoolToWhiteLikeIconConverter(IsLiked); Click ClickLikeCommand" />
-  </LinearLayout>
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <MvxAppCompatCircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/user_default_100" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingRight="10dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="FirstName LastName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:MvxBind="Text Name" />
+            <TextView
+                android:text="DatePublication"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right"
+                app:MvxBind="Text Date" />
+        </LinearLayout>
+        <NewsDetailsWebView
+            android:text="Some body comments"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:MvxBind="Text Body" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="count likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:MvxBind="Text CountLikes" />
+            <Mvx.MvxImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:MvxBind="DrawableName BoolToWhiteLikeIconConverter(IsLiked); Click ClickLikeCommand" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
