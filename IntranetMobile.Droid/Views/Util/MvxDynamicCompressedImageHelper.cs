@@ -10,7 +10,6 @@ using MvvmCross.Plugins.DownloadCache;
 
 namespace IntranetMobile.Droid.Views.Util
 {
-    // TODO: DefaultImagePath WORKING BADLY, FIX NEEDED
     public class MvxDynamicCompressedBitmapHelper
         : IMvxImageHelper<Bitmap>
     {
@@ -24,8 +23,6 @@ namespace IntranetMobile.Droid.Views.Util
         }
 
         #endregion ImageState enum
-
-        private readonly object _mutex = new object();
 
         private CancellationTokenSource _cancellationSource;
 
@@ -72,7 +69,7 @@ namespace IntranetMobile.Droid.Views.Util
                 if (_imageUrl == value)
                     return;
                 _imageUrl = value;
-                RequestImage(_imageUrl);
+                RequestImageAsync(_imageUrl).ConfigureAwait(false);
             }
         }
 
@@ -102,180 +99,103 @@ namespace IntranetMobile.Droid.Views.Util
             handler?.Invoke(this, new MvxValueEventArgs<Bitmap>(image));
         }
 
-        // TODO: Rework with ConfigureAwait
-        private void RequestImage(string imageSource)
+        private async Task RequestImageAsync(string imageSource)
         {
-            lock (_mutex)
+            if (_cancellationSource != null)
             {
-                if (_cancellationSource != null)
+                _cancellationSource.Cancel();
+                _cancellationSource = null;
+            }
+
+            var cancelTokenSource = new CancellationTokenSource();
+            var cancelToken = cancelTokenSource.Token;
+            _cancellationSource = cancelTokenSource;
+
+            FireImageChanged(null);
+
+            if (string.IsNullOrEmpty(imageSource))
+            {
+                await ShowDefaultImage().ConfigureAwait(false);
+                return;
+            }
+
+            if (imageSource.ToUpper().StartsWith("HTTP"))
+            {
+                await NewHttpImageRequestedAsync().ConfigureAwait(false);
+
+                var error = false;
+                try
                 {
-                    _cancellationSource.Cancel();
-                    _cancellationSource = null;
-                }
+                    var cache = Mvx.Resolve<IMvxImageCache<Bitmap>>();
+                    var image = await cache.RequestImage(imageSource).ConfigureAwait(false);
 
-                var cancelTokenSource = new CancellationTokenSource();
-                var cancelToken = cancelTokenSource.Token;
-                _cancellationSource = cancelTokenSource;
-
-                Task.Factory.StartNew(async delegate
-                {
-                    // Critical check
-                    lock (_mutex)
+                    if (cancelToken.IsCancellationRequested)
                     {
-                        if (cancelToken.IsCancellationRequested)
-                        {
-                            return;
-                        }
-                        FireImageChanged(null);
-                    }
-
-                    if (string.IsNullOrEmpty(imageSource))
-                    {
-                        // Critical check
-                        lock (_mutex)
-                        {
-                            if (cancelToken.IsCancellationRequested)
-                            {
-                                return;
-                            }
-                            ShowDefaultImage().Wait(cancelToken);
-                        }
                         return;
                     }
 
-                    if (imageSource.ToUpper().StartsWith("HTTP"))
+                    if (image == null)
                     {
-                        // Critical check
-                        lock (_mutex)
-                        {
-                            if (cancelToken.IsCancellationRequested)
-                            {
-                                return;
-                            }
-                            NewHttpImageRequestedAsync().Wait(cancelToken);
-                        }
-
-                        var error = false;
-                        try
-                        {
-                            var cache = Mvx.Resolve<IMvxImageCache<Bitmap>>();
-                            var image = await cache.RequestImage(imageSource).ConfigureAwait(false);
-
-                            if (image == null)
-                            {
-                                // Critical check
-                                lock (_mutex)
-                                {
-                                    if (cancelToken.IsCancellationRequested)
-                                    {
-                                        return;
-                                    }
-                                    ShowErrorImage().Wait(cancelToken);
-                                }
-                            }
-                            else
-                            {
-                                // Performance-friendly check
-                                lock (_mutex)
-                                {
-                                    if (cancelToken.IsCancellationRequested)
-                                    {
-                                        return;
-                                    }
-                                }
-
-                                var resultingBitmap = image;
-
-                                if (image.Width > MaxWidth || image.Height > MaxHeight)
-                                {
-                                    int outWidth;
-                                    int outHeight;
-                                    var inWidth = image.Width;
-                                    var inHeight = image.Height;
-
-                                    if (inWidth > inHeight)
-                                    {
-                                        outWidth = MaxWidth;
-                                        outHeight = inHeight*MaxWidth/inWidth;
-                                    }
-                                    else
-                                    {
-                                        outHeight = MaxHeight;
-                                        outWidth = inWidth*MaxHeight/inHeight;
-                                    }
-
-                                    resultingBitmap = Bitmap.CreateScaledBitmap(image, outWidth,
-                                        outHeight,
-                                        false);
-                                }
-
-                                // Critical check
-                                lock (_mutex)
-                                {
-                                    if (cancelToken.IsCancellationRequested)
-                                    {
-                                        return;
-                                    }
-                                    NewImageAvailable(resultingBitmap);
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Mvx.Trace("failed to download image {0} : {1}", imageSource, ex.ToLongString());
-                            error = true;
-                        }
-
-                        if (error)
-                        {
-                            // Critical check
-                            lock (_mutex)
-                            {
-                                if (cancelToken.IsCancellationRequested)
-                                {
-                                    return;
-                                }
-                                HttpImageErrorSeenAsync().Wait(cancelToken);
-                            }
-                        }
+                        await ShowErrorImage().ConfigureAwait(false);
                     }
                     else
                     {
-                        try
-                        {
-                            var image = await ImageFromLocalFileAsync(imageSource).ConfigureAwait(false);
+                        var resultingBitmap = image;
 
-                            if (image == null)
+                        if (image.Width > MaxWidth || image.Height > MaxHeight)
+                        {
+                            int outWidth;
+                            int outHeight;
+                            var inWidth = image.Width;
+                            var inHeight = image.Height;
+
+                            if (inWidth > inHeight)
                             {
-                                // Critical check
-                                lock (_mutex)
-                                {
-                                    if (cancelToken.IsCancellationRequested)
-                                    {
-                                        return;
-                                    }
-                                    ShowErrorImage().Wait(cancelToken);
-                                }
+                                outWidth = MaxWidth;
+                                outHeight = inHeight*MaxWidth/inWidth;
                             }
                             else
                             {
-                                // Critical check
-                                lock (_mutex)
-                                {
-                                    if (cancelToken.IsCancellationRequested)
-                                    {
-                                        return;
-                                    }
-                                    NewImageAvailable(image);
-                                }
+                                outHeight = MaxHeight;
+                                outWidth = inWidth*MaxHeight/inHeight;
                             }
+
+                            resultingBitmap = Bitmap.CreateScaledBitmap(image, outWidth,
+                                outHeight,
+                                false);
                         }
-                        catch (Exception ex)
-                        {
-                            Mvx.Error(ex.Message);
-                        }
+                        NewImageAvailable(resultingBitmap);
                     }
-                }, cancelToken);
+                }
+                catch (Exception ex)
+                {
+                    Mvx.Trace("failed to download image {0} : {1}", imageSource, ex.ToLongString());
+                    error = true;
+                }
+
+                if (error)
+                    await HttpImageErrorSeenAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                try
+                {
+                    var image = await ImageFromLocalFileAsync(imageSource).ConfigureAwait(false);
+
+                    if (cancelToken.IsCancellationRequested)
+                    {
+                        return;
+                    }
+
+                    if (image == null)
+                        await ShowErrorImage().ConfigureAwait(false);
+                    else
+                        NewImageAvailable(image);
+                }
+                catch (Exception ex)
+                {
+                    Mvx.Error(ex.Message);
+                }
             }
         }
 

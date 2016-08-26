@@ -23,7 +23,7 @@
             android:maxHeight="40dp"
             android:layout_marginBottom="12dp"
             android:layout_marginRight="24dp"
-            app:MvxBind="ImageUrl PreviewImageUri" />
+            app:MvxBind="ImageUrl PreviewImageUri; DefaultImagePath 'res:user_default_100'" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

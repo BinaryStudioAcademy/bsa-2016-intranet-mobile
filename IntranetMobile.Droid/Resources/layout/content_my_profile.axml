@@ -14,92 +14,204 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Name"
-      style="?android:attr/listSeparatorTextViewStyle" />
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="8dp"
-      app:MvxBind="Text Name" />
 
-    <TextView
+    <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Surname"
-      style="?android:attr/listSeparatorTextViewStyle" />
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="8dp"
-      app:MvxBind="Text Surname" />
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin">
+      <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/activity_profile_name_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_accessibility_black_24dp"
+        android:tint="@color/colorAccent"/>
+      <TextView
+        android:id="@+id/activity_profile_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_name_imageview"
+        android:layout_toRightOf="@id/activity_profile_name_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        app:MvxBind="Text FullName" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_profile_name_textview"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/activity_profile_name_imageview"
+        android:layout_toRightOf="@id/activity_profile_name_imageview"
+        android:text="Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorSecondaryText" />
+    </RelativeLayout>
 
-    <TextView
+    <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Birthday"
-      style="?android:attr/listSeparatorTextViewStyle" />
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="8dp"
-      app:MvxBind="Text Birthday" />
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin">
+      <ImageView
+        android:id="@+id/activity_profile_position_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_grade_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_position_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_position_imageview"
+        android:layout_toRightOf="@id/activity_profile_position_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        app:MvxBind="Text Position" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_profile_position_textview"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/activity_profile_position_imageview"
+        android:layout_toRightOf="@id/activity_profile_position_imageview"
+        android:text="Position"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorSecondaryText" />
+    </RelativeLayout>
 
-    <TextView
+    <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Gender"
-      style="?android:attr/listSeparatorTextViewStyle" />
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="8dp"
-      app:MvxBind="Text Gender" />
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin">
+      <ImageView
+        android:id="@+id/activity_profile_birthday_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_event_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_birthday_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_birthday_imageview"
+        android:layout_toRightOf="@id/activity_profile_birthday_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        app:MvxBind="Text Birthday" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_profile_birthday_textview"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/activity_profile_birthday_imageview"
+        android:layout_toRightOf="@id/activity_profile_birthday_imageview"
+        android:text="Birthday"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorSecondaryText" />
+    </RelativeLayout>
 
-    <TextView
+    <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Country"
-      style="?android:attr/listSeparatorTextViewStyle" />
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="8dp"
-      app:MvxBind="Text Country" />
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin">
+      <ImageView
+        android:id="@+id/activity_profile_location_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_my_location_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_location_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_location_imageview"
+        android:layout_toRightOf="@id/activity_profile_location_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        app:MvxBind="Text Country" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_profile_location_textview"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/activity_profile_location_imageview"
+        android:layout_toRightOf="@id/activity_profile_location_imageview"
+        android:text="Location"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorSecondaryText" />
+    </RelativeLayout>
 
-    <TextView
+    <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="City"
-      style="?android:attr/listSeparatorTextViewStyle" />
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="8dp"
-      app:MvxBind="Text City" />
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin">
+      <ImageView
+        android:id="@+id/activity_profile_hire_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_schedule_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_hire_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_hire_imageview"
+        android:layout_toRightOf="@id/activity_profile_hire_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        app:MvxBind="Text HireDate" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_profile_hire_textview"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/activity_profile_hire_imageview"
+        android:layout_toRightOf="@id/activity_profile_hire_imageview"
+        android:text="Date hired in Binary Studio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorSecondaryText" />
+    </RelativeLayout>
 
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Date hired in Binary Studio"
-      style="?android:attr/listSeparatorTextViewStyle" />
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="8dp"
-      app:MvxBind="Text HireDate" />
+    <include layout="@layout/item_divider" />
 
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Position in company"
-      style="?android:attr/listSeparatorTextViewStyle" />
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="8dp"
-      app:MvxBind="Text Position" />
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -11,4 +11,6 @@
          colorControlHighlight and colorSwitchThumbNormal. -->
   <color name="colorPrimaryLight">#F5F5F5</color>
   <color name="colorButtonNormal">#FFA500</color>
+  <color name="colorSecondaryText">#757575</color>
+  <color name="colorText">#212121</color>
 </resources>
