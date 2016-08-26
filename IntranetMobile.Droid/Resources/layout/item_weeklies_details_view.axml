@@ -56,11 +56,27 @@
       android:layout_height="wrap_content"
       android:gravity="center|right"
       android:orientation="horizontal">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/colorText"
+        android:textStyle="bold"
+        local:MvxBind="Text LikesCount"
+        android:layout_gravity="center_vertical" />
       <Mvx.MvxImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/icon_padding"
         local:MvxBind="DrawableName BoolToBlackLikeIconConverter(IsLiked); Click LikeCommand" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textStyle="bold"
+        local:MvxBind="Text LikesCount"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/colorText" />
       <Mvx.MvxImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
