@@ -6,7 +6,7 @@ using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
-    [Activity(Label = "Intranet Mobile", MainLauncher = true, Icon = "@drawable/ic_launcher", Theme = "@style/BSTheme",
+    [Activity(Label = "Intranet", MainLauncher = true, Icon = "@drawable/ic_launcher", Theme = "@style/BSTheme",
         NoHistory = true)]
     public class LoginActivity : BaseCachingFragmentActivity<LoginViewModel>
     {

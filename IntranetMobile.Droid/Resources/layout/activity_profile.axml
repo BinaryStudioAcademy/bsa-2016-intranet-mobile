@@ -16,11 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
+            android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <android.support.percent.PercentFrameLayout
                 android:id="@+id/activity_profile_percent_relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
                 app:layout_collapseMode="parallax">
                 <PercentageCropMvxAppCompatImageView
                     android:maxWidth="800dp"
@@ -28,6 +30,7 @@
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
                     android:scaleType="matrix"
+                    android:fitsSystemWindows="true"
                     app:layout_widthPercent="100%"
                     app:layout_aspectRatio="133%"
                     app:MvxBind="ImageUrl AvatarUrl" />
