@@ -21,7 +21,6 @@ namespace IntranetMobile.Core.ViewModels.News
         public void Init(Parameters arg)
         {
             _newsId = arg.NewsId;
-
             GetComments();
         }
 
