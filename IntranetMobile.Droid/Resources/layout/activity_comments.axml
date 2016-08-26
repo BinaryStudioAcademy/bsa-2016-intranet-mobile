@@ -24,7 +24,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:alpha="0.2"
+        android:alpha="0.04"
         android:background="@color/colorSecondaryText" />
     <LinearLayout
         android:orientation="horizontal"
