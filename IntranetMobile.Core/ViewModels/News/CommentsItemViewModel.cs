@@ -15,18 +15,19 @@ namespace IntranetMobile.Core.ViewModels.News
         private bool _isLiked;
         private string _name;
         private string _commentId;
+        private string _previewImageUri;
 
-        string _newsId;
+        private string _newsId;
 
         public CommentsItemViewModel(CommentDto comment, string newsId)
         {
             _newsId = newsId;
 
-            _name = GetAuthor(comment.authorId).Result;
-            _date = DateTimeExtensions.UnixTimestampToDateTime(comment.date).ToString("dd-MM-yyyy HH:mm");
-            _body = comment.body;
-            _countLikes = comment.likes.Count;
-            _isLiked = comment.likes.Contains(ServiceBus.UserService.CurrentUser.UserId);
+            Name = GetAuthor(comment.authorId).Result;
+            Date = DateTimeExtensions.UnixTimestampToDateTime(comment.date).ToString("dd-MM-yyyy HH:mm");
+            Body = comment.body.RemoveHTMLTags();
+            CountLikes = comment.likes.Count;
+            IsLiked = comment.likes.Contains(ServiceBus.UserService.CurrentUser.UserId);
             _commentId = comment.commentId;
 
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
@@ -35,10 +36,21 @@ namespace IntranetMobile.Core.ViewModels.News
         private async Task<string> GetAuthor(string authorId)
         {
             var author = await ServiceBus.UserService.GetUserById(authorId);
+            PreviewImageUri = Constants.BaseUrl + author.AvatarUri;
             return author.FirstName + " " + author.LastName;
         }
 
         public ICommand ClickLikeCommand { get; private set; }
+
+        public string PreviewImageUri
+        {
+            get { return _previewImageUri; }
+            set
+            {
+                _previewImageUri = value;
+                RaisePropertyChanged(() => PreviewImageUri);
+            }
+        }
 
         public string Name
         {

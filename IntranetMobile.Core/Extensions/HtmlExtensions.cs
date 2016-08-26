@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using AngleSharp.Parser.Html;
 
 namespace IntranetMobile.Core.Extensions
@@ -17,6 +18,11 @@ namespace IntranetMobile.Core.Extensions
             }
 
             return imageUri;
+        }
+
+        public static string RemoveHTMLTags(this string input)
+        {
+            return Regex.Replace(input, "<.*?>", string.Empty);
         }
     }
 }
