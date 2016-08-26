@@ -26,7 +26,7 @@ namespace IntranetMobile.Core.ViewModels.News
             _date = DateTimeExtensions.UnixTimestampToDateTime(comment.date).ToString("dd-MM-yyyy HH:mm");
             _body = comment.body;
             _countLikes = comment.likes.Count;
-            _isLiked = comment.likes.Contains(comment.authorId);
+            _isLiked = comment.likes.Contains(ServiceBus.UserService.CurrentUser.UserId);
             _commentId = comment.commentId;
 
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
@@ -96,12 +96,12 @@ namespace IntranetMobile.Core.ViewModels.News
             if (IsLiked)
             {
                 CountLikes = _countLikes + 1;
-                //var result = ServiceBus.NewsService.LikeCommentAsync(_newsId, _commentId).Result;
+                ServiceBus.NewsService.LikeCommentAsync(_newsId, _commentId);
             }
             else
             {
                 CountLikes = _countLikes - 1;
-                //var result = ServiceBus.NewsService.UnlikeCommentAsync(_newsId, _commentId).Result;
+                ServiceBus.NewsService.UnlikeCommentAsync(_newsId, _commentId);
             }
         }
     }
