@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -10,13 +11,16 @@ namespace IntranetMobile.Core.ViewModels.News
         private bool _isLiked;
 
         private string _newsId;
+        private bool _visibility;
 
         public NewsDetailsViewModel()
         {
             LikeCommand = new MvxCommand(Like);
             CommentCommand = new MvxCommand(Comment);
+            ChangeVisibilityCommand = new MvxCommand(ChangeVisibilityCommandExecute);
         }
 
+        public MvxCommand ChangeVisibilityCommand { get; private set; }
         public MvxCommand LikeCommand { get; private set; }
 
         public MvxCommand CommentCommand { get; private set; }
@@ -46,13 +50,31 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
+        public bool Visibility
+        {
+            get { return _visibility; }
+            set
+            {
+                _visibility = value;
+                RaisePropertyChanged(() => Visibility);
+            }
+        }
+
+        private void ChangeVisibilityCommandExecute()
+        {
+            Visibility = !_visibility;
+        }
+
+        public User Author { get; set; }
+
         public async void Init(Parameters arg)
         {
             _newsId = arg.NewsId;
             _dataModel = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
 
             Title = _dataModel.Title;
-            Subtitle = _dataModel.Date.ToString("dd-MM-yyyy HH:mm");
+            Author = await ServiceBus.UserService.GetUserById(_dataModel.AuthorId);
+            Subtitle = $" {Author.FullName} {_dataModel.Date.ToString("dd-MM-yyyy HH:mm")}";
             RaisePropertyChanged(() => LikesCount);
             RaisePropertyChanged(() => CommentsCount);
             RaisePropertyChanged(() => IsLiked);

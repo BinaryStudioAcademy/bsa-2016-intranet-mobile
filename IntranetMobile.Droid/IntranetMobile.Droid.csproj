@@ -208,6 +208,9 @@
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
     <Compile Include="Bootstrap\SqlitePluginBootstrap.cs" />
+    <Compile Include="Converters\BoolToArrowIconConverter.cs" />
+    <Compile Include="Converters\BoolToBlackLikeIconConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\AndroidLogger.cs" />
@@ -219,6 +222,7 @@
     <Compile Include="Views\Activities\LoginActivity.cs" />
     <Compile Include="Views\Activities\MainActivity.cs" />
     <Compile Include="Views\Activities\NewsDetailsActivity.cs" />
+    <Compile Include="Views\Activities\WeekliesDetailsActivity.cs" />
     <Compile Include="Views\Controls\NewsDetailsWebView.cs" />
     <Compile Include="Views\Controls\MvxAppCompatCircleImageView.cs" />
     <Compile Include="Views\Controls\CompressedMvxAppCompatImageView.cs" />
@@ -243,7 +247,7 @@
     <Compile Include="Views\Util\MvxDynamicCompressedImageHelper.cs" />
     <Compile Include="Views\Activities\CommentsActivity.cs" />
     <Compile Include="Views\Fragments\News\WeekliesRecyclerViewFragment.cs" />
-    <Compile Include="Converters\BoolToLikeIconConverter.cs" />
+    <Compile Include="Converters\BoolToWhiteLikeIconConverter.cs" />
     <Compile Include="Views\Activities\BaseCachingFragmentActivity.cs" />
     <Compile Include="Views\Fragments\BaseFragment.cs" />
   </ItemGroup>
@@ -311,9 +315,6 @@
     <AndroidResource Include="Resources\layout\fragment_users.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\recycle_view_weekly.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\card_view_weekly.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -335,7 +336,21 @@
     <AndroidResource Include="Resources\layout\current_user.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_weeklies_details.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_weeklies_details_view.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\recycle_view_weekly.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\commentSendButton.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_send_grey600_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_send_grey600_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_send_grey600_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_send_grey600_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_send_grey600_24dp.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
@@ -622,6 +637,51 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-nodpi\user_default_100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_keyboard_arrow_down_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_keyboard_arrow_down_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_keyboard_arrow_down_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_keyboard_arrow_down_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_keyboard_arrow_down_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_keyboard_arrow_up_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_keyboard_arrow_up_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_keyboard_arrow_up_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_keyboard_arrow_up_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_keyboard_arrow_up_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_favorite_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_favorite_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_favorite_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_favorite_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_favorite_black_24dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

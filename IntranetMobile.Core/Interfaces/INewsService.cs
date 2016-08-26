@@ -15,7 +15,7 @@ namespace IntranetMobile.Core.Interfaces
 
         Task<List<WeeklyNews>> GetWeeklyNewsAsync(int skip, int limit);
 
-        WeeklyNews GetWeeklyNewsByIdAsync(string newsId);
+        Task<WeeklyNews> GetWeeklyNewsByIdAsync(string newsId);
 
         Task<bool> LikeNewsAsync(string newsId);
 

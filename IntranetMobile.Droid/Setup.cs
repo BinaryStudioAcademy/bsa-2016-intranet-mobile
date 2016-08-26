@@ -9,6 +9,7 @@ using Android.Support.V7.Widget;
 using IntranetMobile.Core;
 using IntranetMobile.Core.Interfaces;
 using IntranetMobile.Core.Services;
+using IntranetMobile.Droid.Converters;
 using IntranetMobile.Droid.Services;
 using IntranetMobile.Droid.Views.Util;
 using MvvmCross.Binding.Bindings.Target.Construction;
@@ -84,7 +85,10 @@ namespace IntranetMobile.Droid
         protected override void FillValueConverters(MvvmCross.Platform.Converters.IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
-            registry.AddOrOverwrite("BoolToLikeIconConverter", new BoolToLikeIconConverter());
+            registry.AddOrOverwrite("BoolToWhiteLikeIconConverter", new BoolToWhiteLikeIconConverter());
+            registry.AddOrOverwrite("BoolToBlackLikeIconConverter", new BoolToBlackLikeIconConverter());
+            registry.AddOrOverwrite("BoolToArrowIconConverter", new BoolToArrowIconConverter());
+            registry.AddOrOverwrite("BoolToVisibilityConverter",new BoolToVisibilityConverter());
         }
 
         protected override IMvxTrace CreateDebugTrace()

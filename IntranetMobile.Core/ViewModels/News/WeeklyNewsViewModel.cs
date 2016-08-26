@@ -9,12 +9,12 @@ namespace IntranetMobile.Core.ViewModels.News
     public class WeeklyNewsViewModel : BaseViewModel
     {
         private bool _isRefreshing;
-        private NewsItemViewModel _selectedItem;
+        private WeeklyItemViewModel _selectedItem;
 
         public WeeklyNewsViewModel()
         {
             Title = "Weeklies";
-            SelectItem = new MvxCommand<NewsItemViewModel>(item => { SelectedItem = item; });
+            SelectItem = new MvxCommand<WeeklyItemViewModel>(item => { SelectedItem = item; });
             ReloadCommand = new MvxCommand(async () =>
             {
                 IsRefreshing = true;
@@ -28,7 +28,7 @@ namespace IntranetMobile.Core.ViewModels.News
         public ObservableCollection<WeeklyItemViewModel> News { set; get; } =
             new ObservableCollection<WeeklyItemViewModel>();
 
-        public NewsItemViewModel SelectedItem
+        public WeeklyItemViewModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -36,7 +36,7 @@ namespace IntranetMobile.Core.ViewModels.News
                 _selectedItem = value;
 
                 if (_selectedItem != null)
-                    ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters {NewsId = _selectedItem.NewsId});
+                    ShowViewModel<WeekliesDetailsViewModel>(new WeekliesDetailsViewModel.Parameters { WeekliesId = _selectedItem.WeeklyId});
 
                 RaisePropertyChanged(() => SelectedItem);
             }

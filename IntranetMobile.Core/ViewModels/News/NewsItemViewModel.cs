@@ -77,7 +77,16 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public bool IsLiked
         {
-            get { return _isLiked; }
+            get
+            {
+                Task.Run(async () =>
+                {
+                    var user = await ServiceBus.UserService.GetCurrentUserAsync();
+                    IsLiked = _dataModel.Likes.Contains(user.UserId);
+                });
+
+                return _isLiked;
+            }
             set
             {
                 _isLiked = value;
@@ -93,9 +102,26 @@ namespace IntranetMobile.Core.ViewModels.News
             RaisePropertyChanged(() => CommentsCount);
         }
 
-        private void ClickLikeCommandExecute()
+        private async void ClickLikeCommandExecute()
         {
-            IsLiked = !_isLiked;
+            if (!IsLiked)
+            {
+                var result = await ServiceBus.NewsService.LikeNewsAsync(_dataModel.NewsId);
+                if (result)
+                {
+                    RaisePropertyChanged(() => IsLiked);
+                    RaisePropertyChanged(() => LikesCount);
+                }
+            }
+            else
+            {
+                var result = await ServiceBus.NewsService.UnLikeNewsAsync(_dataModel.NewsId);
+                if (result)
+                {
+                    RaisePropertyChanged(() => IsLiked);
+                    RaisePropertyChanged(() => LikesCount);
+                }
+            }
         }
 
         private void ClickCommentCommandExecute()
