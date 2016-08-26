@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -64,6 +65,7 @@ namespace IntranetMobile.Core.ViewModels.News
             Visibility = !_visibility;
         }
 
+        public User Author { get; set; }
 
         public async void Init(Parameters arg)
         {
@@ -71,7 +73,8 @@ namespace IntranetMobile.Core.ViewModels.News
             _dataModel = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
 
             Title = _dataModel.Title;
-            Subtitle = _dataModel.Date.ToString("dd-MM-yyyy HH:mm");
+            Author = await ServiceBus.UserService.GetUserById(_dataModel.AuthorId);
+            Subtitle = $" {Author.FullName} {_dataModel.Date.ToString("dd-MM-yyyy HH:mm")}";
             RaisePropertyChanged(() => LikesCount);
             RaisePropertyChanged(() => CommentsCount);
             RaisePropertyChanged(() => IsLiked);

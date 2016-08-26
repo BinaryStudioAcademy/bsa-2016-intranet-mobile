@@ -27,5 +27,6 @@ namespace IntranetMobile.Core.Models
         public string Gender { get; set; }
 
         public DateTime HireDate { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

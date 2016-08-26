@@ -210,6 +210,7 @@
     <Compile Include="Bootstrap\SqlitePluginBootstrap.cs" />
     <Compile Include="Converters\BoolToArrowIconConverter.cs" />
     <Compile Include="Converters\BoolToBlackLikeIconConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\AndroidLogger.cs" />
