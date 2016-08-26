@@ -101,6 +101,10 @@
     <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
     <Compile Include="Models\Dtos\CommentRequestDto.cs" />
     <Compile Include="Models\Dtos\CommentsResponseDto.cs" />
+    <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Interfaces\ISettingsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -182,6 +186,9 @@
     </None>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Settings\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

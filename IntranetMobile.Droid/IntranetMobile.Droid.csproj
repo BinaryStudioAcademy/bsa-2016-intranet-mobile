@@ -205,6 +205,15 @@
       <HintPath>..\packages\Xamarin.Android.Support.v7.CardView.23.4.0.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.Preference">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.Preference.23.4.0.1\lib\MonoAndroid41\Xamarin.Android.Support.v7.Preference.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v14.Preference">
+      <HintPath>..\packages\Xamarin.Android.Support.v14.Preference.23.4.0.1\lib\MonoAndroid41\Xamarin.Android.Support.v14.Preference.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Droid.Support.V7.Preference">
+      <HintPath>..\packages\MvvmCross.Droid.Support.V7.Preference.4.2.3\lib\MonoAndroid403\MvvmCross.Droid.Support.V7.Preference.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
@@ -256,6 +265,7 @@
     <Compile Include="Converters\BoolToWhiteLikeIconConverter.cs" />
     <Compile Include="Views\Activities\BaseCachingFragmentActivity.cs" />
     <Compile Include="Views\Fragments\BaseFragment.cs" />
+    <Compile Include="Views\Fragments\SettingsFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -365,6 +375,8 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_send_white_24dp.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_send_white_24dp.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_send_white_24dp.png" />
+    <AndroidResource Include="Resources\xml\preferences.xml" />
+    <AndroidResource Include="Resources\layout\fragment_settings.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
@@ -411,6 +423,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Resources\xml\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />

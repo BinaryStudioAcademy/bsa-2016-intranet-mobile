@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<android.support.v7.preference.PreferenceCategory
+			android:title="Notifications">
+        <android.support.v7.preference.SwitchPreferenceCompat
+        			  android:title="Vibration"
+                      android:key="pref_vibration"
+                      android:summary="Vibrate when notification is received"/>
+		<android.support.v7.preference.SwitchPreferenceCompat
+        			  android:title="News"
+                      android:key="pref_news"
+                      android:summary="Notify about company news"/>
+		<android.support.v7.preference.SwitchPreferenceCompat
+        			  android:title="Reviewer"
+                      android:key="pref_reviewer"
+                      android:summary="Notify about new Reviewer tickets"/>
+    </android.support.v7.preference.PreferenceCategory>
+	
+</android.support.v7.preference.PreferenceScreen>

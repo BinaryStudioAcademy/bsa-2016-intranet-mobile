@@ -3,6 +3,7 @@ using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Login;
 using IntranetMobile.Core.ViewModels.News;
 using IntranetMobile.Core.ViewModels.Profile;
+using IntranetMobile.Core.ViewModels.Settings;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels
@@ -42,6 +43,11 @@ namespace IntranetMobile.Core.ViewModels
         public void ShowNews()
         {
             ShowViewModel<AllNewsViewModel>();
+        }
+
+        public void ShowSettings()
+        {
+            ShowViewModel<SettingsViewModel>();
         }
 
         public async void ShowProfile()

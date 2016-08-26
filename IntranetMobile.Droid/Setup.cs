@@ -17,6 +17,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Droid.Support.V7.Preference;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
@@ -72,6 +73,7 @@ namespace IntranetMobile.Droid
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             MvxAppCompatSetupHelper.FillTargetFactories(registry);
+            MvxPreferenceSetupHelper.FillTargetFactories(registry);
             base.FillTargetFactories(registry);
         }
 

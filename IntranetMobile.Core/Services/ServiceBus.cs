@@ -14,6 +14,7 @@ namespace IntranetMobile.Core.Services
         private static IAlertService _alertService;
         private static IUserService _userService;
         private static IDeviceInfo _deviceInfo;
+        private static ISettingsService _settingsService;
 
         private static IMvxMessenger _messengerHub;
 
@@ -37,5 +38,8 @@ namespace IntranetMobile.Core.Services
 
         public static IMvxMessenger MessengerHub
             => _messengerHub ?? (_messengerHub = Mvx.Resolve<IMvxMessenger>());
+
+        public static ISettingsService SettingsService
+            => _settingsService ?? (_settingsService = Mvx.Resolve<ISettingsService>());
     }
 }

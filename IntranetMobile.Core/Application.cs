@@ -15,6 +15,7 @@ namespace IntranetMobile.Core
             Mvx.RegisterType<IStorageService, StorageService>();
             Mvx.RegisterType<IAuthService, AuthService>();
             Mvx.RegisterType<INewsService, NewsService>();
+            Mvx.RegisterType<ISettingsService, SettingsService>();
         }
     }
 }

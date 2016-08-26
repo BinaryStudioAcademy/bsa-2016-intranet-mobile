@@ -92,7 +92,7 @@ namespace IntranetMobile.Droid.Views.Fragments
                 }
                 case Resource.Id.nav_settings:
                 {
-                    ViewModel.ShowNews();
+                    ViewModel.ShowSettings();
                     break;
                 }
                 case Resource.Id.nav_logout:

@@ -18,6 +18,7 @@
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="colorButtonNormal">@color/colorButtonNormal</item>
+	<item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
   </style>
   <style name="bsButton" parent="Base.Widget.AppCompat.Button.Colored">
     <item name="android:layout_width">0dp</item>
@@ -31,5 +32,17 @@
     <item name="layout_rowWeight">1</item>
     <item name="layout_columnWeight">1</item>
     <item name="layout_gravity">fill</item>
+  </style>
+  <style name="PreferenceThemeOverlay">
+    <item name="preferenceScreenStyle">@style/Preference.PreferenceScreen</item>
+    <item name="preferenceFragmentStyle">@style/PreferenceFragment</item>
+    <item name="preferenceCategoryStyle">@style/Preference.Category</item>
+    <item name="preferenceStyle">@style/Preference</item>
+    <item name="preferenceInformationStyle">@style/Preference.Information</item>
+    <item name="checkBoxPreferenceStyle">@style/Preference.CheckBoxPreference</item>
+    <item name="switchPreferenceCompatStyle">@style/Preference.SwitchPreferenceCompat</item>
+    <item name="dialogPreferenceStyle">@style/Preference.DialogPreference</item>
+    <item name="editTextPreferenceStyle">@style/Preference.DialogPreference.EditTextPreference</item>
+    <item name="preferenceFragmentListStyle">@style/PreferenceFragmentList</item>
   </style>
 </resources>
