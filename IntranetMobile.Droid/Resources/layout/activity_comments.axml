@@ -14,18 +14,22 @@
         android:layout_weight="1">
         <Mvx.MvxListView
             android:id="@+id/commentListView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:stackFromBottom="true"
             android:transcriptMode="alwaysScroll"
             app:MvxItemTemplate="@layout/listview_comments"
             app:MvxBind="ItemsSource Comments" />
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.2"
+        android:background="@color/colorSecondaryText" />
     <LinearLayout
         android:orientation="horizontal"
+        android:background="#FEFEFE"
         android:padding="6dp"
-        android:background="#FDFDFD"
-        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
@@ -35,13 +39,12 @@
             android:layout_margin="4dp"
             android:inputType="textMultiLine"
             android:hint="Write a comment"
-            android:textColorHint="#D1D1D1"
+            android:textColorHint="#D3D3D3"
             app:MvxBind="Text NewComment" />
         <ImageButton
             android:background="@drawable/commentsendbutton"
             android:src="@drawable/ic_send_white_24dp"
-            android:gravity="center"
-            android:layout_margin="3dp"
+            android:layout_margin="4dp"
             android:layout_width="38dp"
             android:layout_height="38dp"
             app:MvxBind="Click ClickSaveCommentCommand" />
