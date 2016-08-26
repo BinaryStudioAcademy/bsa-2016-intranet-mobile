@@ -144,25 +144,28 @@ namespace IntranetMobile.Droid.Views.Util
 
                         if (image.Width > MaxWidth || image.Height > MaxHeight)
                         {
-                            int outWidth;
-                            int outHeight;
-                            var inWidth = image.Width;
-                            var inHeight = image.Height;
-
-                            if (inWidth > inHeight)
+                            resultingBitmap = await Task.Run(() =>
                             {
-                                outWidth = MaxWidth;
-                                outHeight = inHeight*MaxWidth/inWidth;
-                            }
-                            else
-                            {
-                                outHeight = MaxHeight;
-                                outWidth = inWidth*MaxHeight/inHeight;
-                            }
+                                int outWidth;
+                                int outHeight;
+                                var inWidth = image.Width;
+                                var inHeight = image.Height;
 
-                            resultingBitmap = Bitmap.CreateScaledBitmap(image, outWidth,
-                                outHeight,
-                                false);
+                                if (inWidth > inHeight)
+                                {
+                                    outWidth = MaxWidth;
+                                    outHeight = inHeight*MaxWidth/inWidth;
+                                }
+                                else
+                                {
+                                    outHeight = MaxHeight;
+                                    outWidth = inWidth*MaxHeight/inHeight;
+                                }
+
+                                return Bitmap.CreateScaledBitmap(image, outWidth,
+                                    outHeight,
+                                    false);
+                            }, cancelToken).ConfigureAwait(false);
                         }
                         NewImageAvailable(resultingBitmap);
                     }
