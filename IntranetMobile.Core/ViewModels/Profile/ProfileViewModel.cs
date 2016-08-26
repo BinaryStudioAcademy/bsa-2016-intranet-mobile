@@ -46,7 +46,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
             }
         }
 
-        public string FullName => User?.FirstName;
+        public string FullName => User?.FullName;
 
         public string Name => User?.FirstName;
 
