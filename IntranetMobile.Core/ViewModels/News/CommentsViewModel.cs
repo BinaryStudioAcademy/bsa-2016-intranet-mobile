@@ -8,14 +8,14 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class CommentsViewModel : BaseViewModel
     {
-        private ObservableCollection<CommentsItemViewModel> _comments; 
-
         private string _newComment;
         private string _newsId;
 
         public CommentsViewModel()
         {
+            Comments = new ObservableCollection<CommentsItemViewModel>();
             ClickSaveCommentCommand = new MvxCommand(SaveCommentExecute);
+            Title = "Comments";
         }
 
         public void Init(Parameters arg)
@@ -27,25 +27,17 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public async void GetComments()
         {
-            var comments = await ServiceBus.NewsService.LoadListOfCommentsAsync(_newsId);
-            GetListOfComments(comments, _newsId);
+            IsBusy = true;
+            var data = await ServiceBus.NewsService.LoadListOfCommentsAsync(_newsId);
+            if (data == null) return;
 
-            RaisePropertyChanged(() => Comments);
-        }
-
-        public void GetListOfComments(CommentsResponseDto listOfComments, string newsId)
-        {
-            _comments = new ObservableCollection<CommentsItemViewModel>();
-
-            if (listOfComments == null) return;
-
-            foreach (var c in listOfComments.comments)
+            Comments.Clear();
+            foreach (var c in data.comments)
             {
-                var comment = new CommentsItemViewModel(c, newsId);
-
-                _comments.Add(comment);
+                var comment = new CommentsItemViewModel(c, _newsId);
+                Comments.Add(comment);
             }
-
+            IsBusy = false;
         }
 
         public ICommand ClickSaveCommentCommand { get; private set; }
@@ -60,23 +52,14 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        public ObservableCollection<CommentsItemViewModel> Comments
-        {
-            get { return _comments; }
-            set
-            {
-                _comments = value;
-                RaisePropertyChanged(() => Comments);
-            }
-        }
+        public ObservableCollection<CommentsItemViewModel> Comments { get; private set; }
 
         private void SaveCommentExecute()
         {
             var b = ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
+            NewComment = "";
 
             GetComments();
-
-            NewComment = "";
         }
 
         public class Parameters

@@ -88,7 +88,7 @@ namespace IntranetMobile.Droid
             registry.AddOrOverwrite("BoolToWhiteLikeIconConverter", new BoolToWhiteLikeIconConverter());
             registry.AddOrOverwrite("BoolToBlackLikeIconConverter", new BoolToBlackLikeIconConverter());
             registry.AddOrOverwrite("BoolToArrowIconConverter", new BoolToArrowIconConverter());
-            registry.AddOrOverwrite("BoolToVisibilityConverter",new BoolToVisibilityConverter());
+            registry.AddOrOverwrite("BoolToVisibilityConverter", new BoolToVisibilityConverter());
         }
 
         protected override IMvxTrace CreateDebugTrace()

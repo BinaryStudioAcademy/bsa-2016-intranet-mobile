@@ -6,6 +6,7 @@ namespace IntranetMobile.Core.ViewModels
     {
         private string _subtitle = string.Empty;
         private string _title = string.Empty;
+        private bool _isBusy;
 
         public string Title
         {
@@ -24,6 +25,16 @@ namespace IntranetMobile.Core.ViewModels
             {
                 _subtitle = value;
                 RaisePropertyChanged(() => Subtitle);
+            }
+        }
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                RaisePropertyChanged(() => IsBusy);
             }
         }
 

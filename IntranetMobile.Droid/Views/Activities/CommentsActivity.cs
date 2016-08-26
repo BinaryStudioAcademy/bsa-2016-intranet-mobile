@@ -1,8 +1,5 @@
-﻿using System;
-using Android.App;
-using IntranetMobile.Core;
+﻿using Android.App;
 using IntranetMobile.Core.ViewModels.News;
-using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
