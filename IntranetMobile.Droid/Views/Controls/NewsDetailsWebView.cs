@@ -51,17 +51,6 @@ namespace IntranetMobile.Droid.Views.Controls
             }
         }
 
-        //public bool ItemVisibility
-        //{
-        //    get { return _itemVisibility; }
-        //    set
-        //    {
-        //        _itemVisibility = value;
-        //        //TODO: Animate visibility change
-        //        Visibility = _itemVisibility ? ViewStates.Visible : ViewStates.Gone;
-        //    }
-        //}
-
         public event EventHandler HtmlContentChanged;
 
         private void UpdatedHtmlContent()
