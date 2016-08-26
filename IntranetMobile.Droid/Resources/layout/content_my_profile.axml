@@ -6,7 +6,6 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:layout_marginTop="@dimen/activity_horizontal_margin"
   android:padding="@dimen/activity_horizontal_margin"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
   tools:showIn="@layout/activity_profile">
@@ -14,46 +13,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="?attr/selectableItemBackground"
-      android:clickable="true"
-      android:padding="@dimen/activity_horizontal_margin">
-      <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/activity_profile_name_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_accessibility_black_24dp"
-        android:tint="@color/colorAccent"/>
-      <TextView
-        android:id="@+id/activity_profile_name_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_toEndOf="@id/activity_profile_name_imageview"
-        android:layout_toRightOf="@id/activity_profile_name_imageview"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorText"
-        app:MvxBind="Text FullName" />
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_profile_name_textview"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@id/activity_profile_name_imageview"
-        android:layout_toRightOf="@id/activity_profile_name_imageview"
-        android:text="Name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@color/colorSecondaryText" />
-    </RelativeLayout>
 
     <RelativeLayout
       android:layout_width="match_parent"
