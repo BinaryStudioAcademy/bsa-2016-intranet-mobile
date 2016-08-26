@@ -1,17 +1,7 @@
-using System.Collections.Generic;
 using Android.App;
-using Android.Graphics;
-using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Support.V4.View;
-using Android.Views;
-using IntranetMobile.Core.ViewModels;
 using IntranetMobile.Core.ViewModels.Profile;
 using IntranetMobile.Droid.Views.Activities;
-using MvvmCross.Droid.Shared.Attributes;
-using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Binding.BindingContext;
 
 namespace IntranetMobile.Droid.Views.Fragments.Profile
 {
@@ -25,6 +15,12 @@ namespace IntranetMobile.Droid.Views.Fragments.Profile
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
+
+            var bindingSet = this.CreateBindingSet<ProfileActivity, ProfileViewModel>();
+            bindingSet.Bind(SupportActionBar)
+                      .For(bar => bar.Title)
+                      .To(vm => vm.FullName);
+            bindingSet.Apply();
         }
     }
 }
