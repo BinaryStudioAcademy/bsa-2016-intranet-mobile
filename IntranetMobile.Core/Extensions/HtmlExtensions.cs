@@ -22,7 +22,9 @@ namespace IntranetMobile.Core.Extensions
 
         public static string RemoveHTMLTags(this string input)
         {
-            return Regex.Replace(input.Replace("&nbsp;", " "), "<.*?>", string.Empty);
+            return input != null
+                ? Regex.Replace(input.Replace("&nbsp;", " "), "<.*?>", string.Empty)
+                : "";
         }
     }
 }
