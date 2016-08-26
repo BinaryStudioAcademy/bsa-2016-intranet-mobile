@@ -3760,19 +3760,22 @@ namespace IntranetMobile.Droid
 			public const int ic_send_grey600_24dp = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int ic_settings_black_24dp = 2130837605;
+			public const int ic_send_white_24dp = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int logo_black_1 = 2130837606;
+			public const int ic_settings_black_24dp = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int news_default = 2130837607;
-			
-			// aapt resource value: 0x7f020069
-			public const int notification_template_icon_bg = 2130837609;
+			public const int logo_black_1 = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int user_default_100 = 2130837608;
+			public const int news_default = 2130837608;
+			
+			// aapt resource value: 0x7f02006a
+			public const int notification_template_icon_bg = 2130837610;
+			
+			// aapt resource value: 0x7f020069
+			public const int user_default_100 = 2130837609;
 			
 			static Drawable()
 			{
