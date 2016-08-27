@@ -54,10 +54,12 @@
     <Compile Include="Models\Dtos\AuthDto.cs" />
     <Compile Include="Models\Dtos\MyUser.cs" />
     <Compile Include="Models\Dtos\PositionDto.cs" />
+    <Compile Include="Models\Dtos\TechnologyRootDto.cs" />
     <Compile Include="Models\Dtos\UserDto.cs" />
     <Compile Include="Models\Persist.cs" />
     <Compile Include="Models\Platform.cs" />
     <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\Technology.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DataBaseService.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="ViewModels\News\CommentsItemViewModel.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="ViewModels\Profile\UserTechnologyViewModel.cs" />
     <Compile Include="ViewModels\Profile\UsersViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserItemViewModel.cs" />
     <Compile Include="Models\WeeklyNews.cs" />
@@ -185,9 +188,7 @@
     </None>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="ViewModels\Settings\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

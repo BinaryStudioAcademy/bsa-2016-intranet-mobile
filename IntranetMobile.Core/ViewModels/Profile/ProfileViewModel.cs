@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
@@ -17,6 +18,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
             private set
             {
                 _user = value;
+
                 InvokeOnMainThread(() =>
                 {
                     RaisePropertyChanged(() => Name);
@@ -25,9 +27,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
                     RaisePropertyChanged(() => Gender);
                     RaisePropertyChanged(() => Country);
                     RaisePropertyChanged(() => HireDate);
-                    RaisePropertyChanged(() => Position);
                     RaisePropertyChanged(() => AvatarUrl);
-                    RaisePropertyChanged(() => Position);
                 });
             }
         }
@@ -42,6 +42,16 @@ namespace IntranetMobile.Core.ViewModels.Profile
                 {
                     User = await ServiceBus.UserService.GetUserById(UserId);
                     Position = (await ServiceBus.UserService.GetPositionById(User.PositionId))?.Name ?? "?";
+
+                    UserTechnologyViewModels.Clear();
+                    foreach (var userTechnology in _user.Cv.UserTechnologies)
+                    {
+                        var userTechnologyViewModel = new UserTechnologyViewModel();
+                        userTechnologyViewModel.Init(userTechnology.TechnologyId, userTechnology.Stars.ToString());
+                        UserTechnologyViewModels.Add(userTechnologyViewModel);
+                    }
+
+                    InvokeOnMainThread(() => RaisePropertyChanged(() => TechnologiesVisibility));
                 });
             }
         }
@@ -61,6 +71,11 @@ namespace IntranetMobile.Core.ViewModels.Profile
         public string City => User?.City;
 
         public string HireDate => (User?.HireDate ?? default(DateTime)).ToString("dd MM yyyy");
+
+        public bool TechnologiesVisibility => UserTechnologyViewModels.Count != 0;
+
+        public ObservableCollection<UserTechnologyViewModel> UserTechnologyViewModels { get; set; } =
+            new ObservableCollection<UserTechnologyViewModel>();
 
         public string Position
         {

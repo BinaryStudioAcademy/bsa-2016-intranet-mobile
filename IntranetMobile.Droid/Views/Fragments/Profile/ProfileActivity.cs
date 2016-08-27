@@ -2,6 +2,7 @@ using Android.App;
 using IntranetMobile.Core.ViewModels.Profile;
 using IntranetMobile.Droid.Views.Activities;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Droid.Support.V7.RecyclerView;
 
 namespace IntranetMobile.Droid.Views.Fragments.Profile
 {
@@ -15,6 +16,10 @@ namespace IntranetMobile.Droid.Views.Fragments.Profile
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
+
+            var technologiesRecyclerView =
+                FindViewById<MvxRecyclerView>(Resource.Id.content_profile_technologies_recycler_view);
+            technologiesRecyclerView.NestedScrollingEnabled = false;
 
             var bindingSet = this.CreateBindingSet<ProfileActivity, ProfileViewModel>();
             bindingSet.Bind(SupportActionBar)
