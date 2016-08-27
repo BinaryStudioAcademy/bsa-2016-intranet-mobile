@@ -10,7 +10,37 @@
     mc:Ignorable="d"
     NavigationCacheMode="Required">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Title="{Binding Title}" HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Normal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="FrameTitle.Margin" Value="10,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Compact">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="FrameTitle.Margin" Value="54,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="{Binding Title}"
+                   x:Name="FrameTitle"
+                   Style="{StaticResource PageTitle}"
+                   Grid.Row="0"/>
+        <Pivot HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged" Grid.Row="1">
             <PivotItem>
                 <PivotItem.Header>
                     <Grid VerticalAlignment="Center" Margin="0, 0, -16, 0">
@@ -41,18 +71,18 @@
                     <ListView Grid.Column="0" ItemsSource="{Binding News}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                            <Grid Height="134">
-                                <Image Source="../../Images/news_default.png" Stretch="UniformToFill"/>
-                                <Image Source="{Binding PreviewImageUri}" Stretch="UniformToFill"/>
-                                <StackPanel Padding="8,8,0,8" Background="{StaticResource SolidAlphaBrushGray1}" VerticalAlignment="Bottom">
-                                    <TextBlock Text="{Binding Title}"
+                                <Grid Height="134">
+                                    <Image Source="../../Images/news_default.png" Stretch="UniformToFill"/>
+                                    <Image Source="{Binding PreviewImageUri}" Stretch="UniformToFill"/>
+                                    <StackPanel Padding="8,8,0,8" Background="{StaticResource SolidAlphaBrushGray1}" VerticalAlignment="Bottom">
+                                        <TextBlock Text="{Binding Title}"
                                                Foreground="White"
                                                MaxLines="1"
                                                FontSize="17"
                                                TextTrimming="CharacterEllipsis"/>
-                                    <TextBlock Text="{Binding Subtitle}" Foreground="White" FontSize="14"/>
-                                </StackPanel>
-                            </Grid>
+                                        <TextBlock Text="{Binding Subtitle}" Foreground="White" FontSize="14"/>
+                                    </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -131,6 +161,5 @@
                 </Grid>
             </PivotItem>
         </Pivot>
-        
     </Grid>
 </views:BasePage>

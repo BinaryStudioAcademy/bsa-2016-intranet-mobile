@@ -37,6 +37,7 @@ namespace Intranet.WindowsUWP
 
             Mvx.RegisterSingleton<ILogger>(new WindowsLogger());
             Mvx.RegisterSingleton<IAlertService>(new AlertService());
+            Mvx.RegisterSingleton<ISettingsService>(new SettingsService());
             Mvx.RegisterType<IMvxSqliteConnectionFactory, WindowsSqliteConnectionFactory>();
             Mvx.RegisterSingleton<IDataBaseService>(new DataBaseService(
                 Windows.Storage.ApplicationData.Current.LocalFolder.Path,

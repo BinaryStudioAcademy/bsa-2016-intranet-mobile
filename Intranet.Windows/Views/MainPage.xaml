@@ -12,89 +12,122 @@
     <!--<local:BasePage.DataContext>
         <vm:MainViewModel></vm:MainViewModel>
     </local:BasePage.DataContext>-->
-    <SplitView x:Name="MainSplitView"
-               DisplayMode="CompactOverlay" 
-               IsPaneOpen="False" 
-               CompactPaneLength="48"
-               OpenPaneLength="218">
-        <SplitView.Pane>
-            <StackPanel Background="#F5F5F5">
-                <Button x:Name="HamburgerButton"
-                        FontFamily="Segoe MDL2 Assets"
-                        Content="&#xE700;"
-                        Width="48"
-                        Height="48"
-                        Style="{StaticResource MenuButton}"
-                        Click="HamburgerButton_Click"/>
-                <ListView
-                    x:Name="MenuItemList"
-                    IsMultiSelectCheckBoxEnabled="False"
-                    SelectionChanged="MainMenu_OnSelectionChanged">
-                    <ListViewItem>
-                        <ListViewItem.Content>
-                            <StackPanel Orientation="Horizontal" Margin="-2,10,0,10">
-                                <Image
-                                    VerticalAlignment="Center"
-                                    Width="27"
-                                    Height="27"
-                                    Source="../../Images/avatar_circle_grey.png"
-                                    Margin="0,0,14,0"/>
-                                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                                    <TextBlock
-                                        Text="{Binding Menu.UserName}"
-                                        Foreground="{StaticResource SolidBrushGray3}"/>
-                                    <TextBlock
-                                        Text="Additional info"
-                                        Foreground="{StaticResource SolidBrushGray1}"/>
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="FullSize">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.DisplayMode" Value="CompactInline" />
+                        <Setter Target="MainSplitView.IsPaneOpen" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Normal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.DisplayMode" Value="CompactOverlay" />
+                        <Setter Target="MainSplitView.IsPaneOpen" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Compact">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.DisplayMode" Value="Overlay" />
+                        <Setter Target="MainSplitView.IsPaneOpen" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <SplitView x:Name="MainSplitView"
+            DisplayMode="Inline" 
+            CompactPaneLength="48"
+            OpenPaneLength="266">
+            <SplitView.Pane>
+                <StackPanel Background="#F5F5F5" Margin="0, 48, 0, 0">
+                    <ListView
+                        x:Name="MenuItemList"
+                        IsMultiSelectCheckBoxEnabled="False"
+                        SelectionChanged="MainMenu_OnSelectionChanged">
+                        <ListViewItem>
+                            <ListViewItem.Content>
+                                <StackPanel Orientation="Horizontal" Margin="-2,10,0,10">
+                                    <Image
+                                VerticalAlignment="Center"
+                                Width="27"
+                                Height="27"
+                                Source="../../Images/avatar_circle_grey.png"
+                                Margin="0,0,14,0"/>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                        <TextBlock
+                                    Text="{Binding Menu.UserName}"
+                                    Foreground="{StaticResource SolidBrushGray3}"/>
+                                        <TextBlock
+                                    Text="Additional info"
+                                    Foreground="{StaticResource SolidBrushGray1}"/>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                    <ListViewItem IsSelected="True">
-                        <ListViewItem.Content>
-                            <controls:MenuItemControl Label="News" IconUri="../../Images/home_black.png"/>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <ListViewItem.Content>
-                            <controls:MenuItemControl Label="Reviewer" IconUri="../../Images/group_black.png"/>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <ListViewItem.Content>
-                            <controls:MenuItemControl Label="Profile" IconUri="../../Images/accessibility_black.png"/>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <ListViewItem.Content>
-                            <controls:MenuItemControl Label="Asciit" IconUri="../../Images/bug_report_black.png"/>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <ListViewItem.Content>
-                            <controls:MenuItemControl Label="Settings" IconUri="../../Images/settings_black.png"/>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <ListViewItem.Content>
-                            <controls:MenuItemControl Label="Log out" IconUri="../../Images/exit_to_app_black.png"/>
-                        </ListViewItem.Content>
-                    </ListViewItem>
-                </ListView>
-            </StackPanel>
-        </SplitView.Pane>
-        <Frame x:Name="MainContent">
-            <Frame.ContentTransitions>
-                <TransitionCollection>
-                    <NavigationThemeTransition>
-                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                            <EntranceNavigationTransitionInfo/>
-                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    </NavigationThemeTransition>
-                </TransitionCollection>
-            </Frame.ContentTransitions>
-            <TextBlock Text="LOADING..." VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        </Frame>
-    </SplitView>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem IsSelected="True">
+                            <ListViewItem.Content>
+                                <controls:MenuItemControl Label="News" IconUri="../../Images/home_black.png"/>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <ListViewItem.Content>
+                                <controls:MenuItemControl Label="Reviewer" IconUri="../../Images/group_black.png"/>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <ListViewItem.Content>
+                                <controls:MenuItemControl Label="Profile" IconUri="../../Images/accessibility_black.png"/>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <ListViewItem.Content>
+                                <controls:MenuItemControl Label="Asciit" IconUri="../../Images/bug_report_black.png"/>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <ListViewItem.Content>
+                                <controls:MenuItemControl Label="Settings" IconUri="../../Images/settings_black.png"/>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <ListViewItem.Content>
+                                <controls:MenuItemControl Label="Log out" IconUri="../../Images/exit_to_app_black.png"/>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                    </ListView>
+                </StackPanel>
+            </SplitView.Pane>
+            <Frame x:Name="MainContent">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <EntranceNavigationTransitionInfo/>
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+                <TextBlock Text="LOADING..." VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Frame>
+        </SplitView>
+        <Button x:Name="HamburgerButton"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE700;"
+                Width="48"
+                Height="48"
+                VerticalAlignment="Top"
+                Style="{StaticResource MenuButton}"
+                Click="HamburgerButton_Click"/>
+    </Grid>
 </local:BasePage>
 

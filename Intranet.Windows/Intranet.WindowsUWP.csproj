@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Helpers\HtmlProperties.cs" />
     <Compile Include="Services\AlertService.cs" />
+    <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\WindowsDeviceInfo.cs" />
     <Compile Include="Services\WindowsLogger.cs" />
     <Compile Include="Views\BasePage.cs" />

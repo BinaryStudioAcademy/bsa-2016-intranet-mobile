@@ -38,6 +38,11 @@
             <Style TargetType="ProgressRing">
                 <Setter Property="Foreground" Value="{StaticResource bDarkOrange}"></Setter>
             </Style>
+            <Style TargetType="TextBlock" x:Name="PageTitle">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="Foreground" Value="Black"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </Style>
             <Style TargetType="Button" x:Name="TransparentButton">
                 <Setter Property="Height" Value="34"></Setter>
                 <Setter Property="Background" Value="#00000000"></Setter>
