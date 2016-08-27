@@ -340,13 +340,7 @@
     <AndroidResource Include="Resources\layout\item_user.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\content_my_profile.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\content_my_experience.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\content_pdp_flow.axml">
+    <AndroidResource Include="Resources\layout\content_profile.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\current_user.axml">
@@ -377,6 +371,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_send_white_24dp.png" />
     <AndroidResource Include="Resources\xml\preferences.xml" />
     <AndroidResource Include="Resources\layout\fragment_settings.axml" />
+    <AndroidResource Include="Resources\layout\item_technology.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
@@ -423,7 +420,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Resources\xml\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />

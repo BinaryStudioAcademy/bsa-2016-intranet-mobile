@@ -172,5 +172,48 @@
 
     <include layout="@layout/item_divider" />
 
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin"
+      app:MvxBind="Visibility BoolToVisibilityConverter(TechnologiesVisibility)">
+      <ImageView
+        android:id="@+id/activity_profile_technologies_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_settings_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_technologies_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_technologies_imageview"
+        android:layout_toRightOf="@id/activity_profile_technologies_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        android:text="Technologies" />
+    </RelativeLayout>
+
+    <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+      android:id="@+id/content_profile_technologies_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/activity_horizontal_margin"
+      app:MvxItemTemplate="@layout/item_technology"
+      app:MvxBind="ItemsSource UserTechnologyViewModels; Visibility BoolToVisibilityConverter(TechnologiesVisibility)" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:MvxBind="Visibility BoolToVisibilityConverter(TechnologiesVisibility)">
+      <include layout="@layout/item_divider" />
+    </LinearLayout>
+
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

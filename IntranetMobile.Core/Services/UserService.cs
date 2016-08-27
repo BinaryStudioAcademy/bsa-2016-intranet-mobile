@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,8 +12,10 @@ namespace IntranetMobile.Core.Services
     {
         private const string AllUsersPath = "profile/api/users";
         private const string CurrentUserPath = "/api/me";
-        private const string PositionPath = "profile/api/positions";
+        private const string PositionsPath = "profile/api/positions";
+        private const string TechnologiesPath = "profile/api/technologies";
         private readonly List<Position> _cachedPositions = new List<Position>();
+        private readonly List<Technology> _cachedTechnologies = new List<Technology>();
         private readonly List<User> _cachedUsers = new List<User>();
         private readonly RestClient _restClient;
 
@@ -48,24 +49,12 @@ namespace IntranetMobile.Core.Services
             var userDtos = await _restClient.GetAsync<List<UserDto>>(AllUsersPath).ConfigureAwait(false);
             var currentUserDto = await _restClient.GetAsync<MyUser>(CurrentUserPath).ConfigureAwait(false);
             await GetAllPositions();
+            await GetAllTechnologies();
 
             // TODO: For possible future runtime updates it is necessary to update existing users
             // TODO: And create UpdateFromDto method for User
 
-            _cachedUsers.AddRange(userDtos.Select(u => new User
-            {
-                Email = u.Email,
-                UserId = u.ServerUserId,
-                FirstName = u.Name,
-                LastName = u.Surname,
-                Birthday = DateTime.Parse(u.Birthday),
-                AvatarUri = u.Avatar.UrlAva,
-                PositionId = u.Position,
-                Country = u.Country,
-                City = u.City,
-                Gender = u.Gender,
-                HireDate = DateTime.Parse(u.WorkDate)
-            }));
+            _cachedUsers.AddRange(userDtos.Select(userDto => new User().UpdateFromDto(userDto)));
 
             CurrentUser = _cachedUsers.FirstOrDefault(u => u.UserId == currentUserDto.Id);
 
@@ -98,7 +87,7 @@ namespace IntranetMobile.Core.Services
 
         public async Task<List<Position>> GetAllPositions()
         {
-            var positionsDto = (await _restClient.GetAsync<List<PositionDto>>(PositionPath).ConfigureAwait(false))
+            var positionsDto = (await _restClient.GetAsync<List<PositionDto>>(PositionsPath).ConfigureAwait(false))
                 .Where(pos => !pos.IsDeleted);
 
             if (_cachedPositions.Count > 0)
@@ -117,6 +106,36 @@ namespace IntranetMobile.Core.Services
 
             // Prevent user-defined code from cache modifying
             return new List<Position>(_cachedPositions);
+        }
+
+        public async Task<Technology> GetTechnologyById(string id)
+        {
+            // For now every time we try to get position we will already have all the positions.
+            if (_cachedTechnologies.Count == 0)
+            {
+                await GetAllTechnologies();
+            }
+            return _cachedTechnologies.FirstOrDefault(technology => technology.Id == id);
+        }
+
+        public async Task<List<Technology>> GetAllTechnologies()
+        {
+            var technologiesDto =
+                (await _restClient.GetAsync<List<TechnologyRootDto>>(TechnologiesPath).ConfigureAwait(false)).Where(
+                    technology => !technology.IsDeleted);
+
+            if (_cachedTechnologies.Count > 0)
+            {
+                return new List<Technology>(_cachedTechnologies);
+            }
+
+            // TODO: For possible future runtime updates it is necessary to update existing users
+            // TODO: And create UpdateFromDto method for User
+
+            _cachedTechnologies.AddRange(technologiesDto.Select(technologyDto => new Technology().UpdateFromDto(technologyDto)));
+
+            // Prevent user-defined code from cache modifying
+            return new List<Technology>(_cachedTechnologies);
         }
     }
 }

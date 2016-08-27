@@ -2,7 +2,8 @@
 
 namespace IntranetMobile.Core.Models.Dtos
 {
-    public class Technology
+    // TODO: Merge FULLY identical calsses
+    public class TechnologyDto
     {
         [JsonProperty("userTech")]
         public string UserTech { get; set; }
@@ -11,7 +12,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public object Stars { get; set; }
     }
 
-    public class UserCv
+    public class UserCvDto
     {
         [JsonProperty("projects")]
         public object[] Projects { get; set; }
@@ -20,7 +21,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public bool IsDeleted { get; set; }
 
         [JsonProperty("technologies")]
-        public Technology[] Technologies { get; set; }
+        public TechnologyDto[] Technologies { get; set; }
 
         [JsonProperty("createdAt")]
         public string CreatedAt { get; set; }
@@ -32,7 +33,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class Category
+    public class CategoryDto
     {
         [JsonProperty("achievements")]
         public object[] Achievements { get; set; }
@@ -53,7 +54,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class Achievement
+    public class AchievementDto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -65,10 +66,10 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Src { get; set; }
 
         [JsonProperty("category")]
-        public Category Category { get; set; }
+        public CategoryDto Category { get; set; }
     }
 
-    public class Certification
+    public class CertificationDto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -80,7 +81,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Name { get; set; }
     }
 
-    public class Category2
+    public class Category2Dto
     {
         [JsonProperty("certifications")]
         public object[] Certifications { get; set; }
@@ -101,7 +102,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class CompletedCertification
+    public class CompletedCertificationDto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -113,10 +114,10 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Src { get; set; }
 
         [JsonProperty("category")]
-        public Category2 Category { get; set; }
+        public Category2Dto Category { get; set; }
     }
 
-    public class Task
+    public class TaskDto
     {
         [JsonProperty("completed")]
         public bool Completed { get; set; }
@@ -125,7 +126,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Name { get; set; }
     }
 
-    public class Technology2
+    public class Technology2Dto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -137,7 +138,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Name { get; set; }
     }
 
-    public class UserPdp
+    public class UserPdpDto
     {
         [JsonProperty("position")]
         public string Position { get; set; }
@@ -146,22 +147,22 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Direction { get; set; }
 
         [JsonProperty("achievements")]
-        public Achievement[] Achievements { get; set; }
+        public AchievementDto[] Achievements { get; set; }
 
         [JsonProperty("certifications")]
-        public Certification[] Certifications { get; set; }
+        public CertificationDto[] Certifications { get; set; }
 
         [JsonProperty("completedCertifications")]
-        public CompletedCertification[] CompletedCertifications { get; set; }
+        public CompletedCertificationDto[] CompletedCertifications { get; set; }
 
         [JsonProperty("tasks")]
-        public Task[] Tasks { get; set; }
+        public TaskDto[] Tasks { get; set; }
 
         [JsonProperty("tests")]
         public object[] Tests { get; set; }
 
         [JsonProperty("technologies")]
-        public Technology2[] Technologies { get; set; }
+        public Technology2Dto[] Technologies { get; set; }
 
         [JsonProperty("isDeleted")]
         public bool IsDeleted { get; set; }
@@ -176,7 +177,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class Avatar
+    public class AvatarDto
     {
         [JsonProperty("urlAva")]
         public string UrlAva { get; set; }
@@ -185,7 +186,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string ThumbnailUrlAva { get; set; }
     }
 
-    public class Avatar2
+    public class Avatar2Dto
     {
         [JsonProperty("urlAva")]
         public string UrlAva { get; set; }
@@ -194,10 +195,10 @@ namespace IntranetMobile.Core.Models.Dtos
         public string ThumbnailUrlAva { get; set; }
     }
 
-    public class PreModeration
+    public class PreModerationDto
     {
         [JsonProperty("avatar")]
-        public Avatar2 Avatar { get; set; }
+        public Avatar2Dto Avatar { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -221,7 +222,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Gender { get; set; }
     }
 
-    public class Category3
+    public class Category3Dto
     {
         [JsonProperty("achievements")]
         public object[] Achievements { get; set; }
@@ -242,7 +243,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class Achievement2
+    public class Achievement2Dto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -254,10 +255,10 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Src { get; set; }
 
         [JsonProperty("category")]
-        public Category3 Category { get; set; }
+        public Category3Dto Category { get; set; }
     }
 
-    public class Certification2
+    public class Certification2Dto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -269,7 +270,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Name { get; set; }
     }
 
-    public class Category4
+    public class Category4Dto
     {
         [JsonProperty("certifications")]
         public object[] Certifications { get; set; }
@@ -290,7 +291,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class CompletedCertification2
+    public class CompletedCertification2Dto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -302,10 +303,10 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Src { get; set; }
 
         [JsonProperty("category")]
-        public Category4 Category { get; set; }
+        public Category4Dto Category { get; set; }
     }
 
-    public class Task2
+    public class Task2Dto
     {
         [JsonProperty("completed")]
         public bool Completed { get; set; }
@@ -314,7 +315,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Name { get; set; }
     }
 
-    public class Technology3
+    public class Technology3Dto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -326,7 +327,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Name { get; set; }
     }
 
-    public class Pdp
+    public class PdpDto
     {
         [JsonProperty("position")]
         public string Position { get; set; }
@@ -335,22 +336,22 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Direction { get; set; }
 
         [JsonProperty("achievements")]
-        public Achievement2[] Achievements { get; set; }
+        public Achievement2Dto[] Achievements { get; set; }
 
         [JsonProperty("certifications")]
-        public Certification2[] Certifications { get; set; }
+        public Certification2Dto[] Certifications { get; set; }
 
         [JsonProperty("completedCertifications")]
-        public CompletedCertification2[] CompletedCertifications { get; set; }
+        public CompletedCertification2Dto[] CompletedCertifications { get; set; }
 
         [JsonProperty("tasks")]
-        public Task2[] Tasks { get; set; }
+        public Task2Dto[] Tasks { get; set; }
 
         [JsonProperty("tests")]
         public object[] Tests { get; set; }
 
         [JsonProperty("technologies")]
-        public Technology3[] Technologies { get; set; }
+        public Technology3Dto[] Technologies { get; set; }
 
         [JsonProperty("isDeleted")]
         public bool IsDeleted { get; set; }
@@ -365,10 +366,10 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class AllPosition
+    public class AllPositionDto
     {
         [JsonProperty("pdps")]
-        public Pdp[] Pdps { get; set; }
+        public PdpDto[] Pdps { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -386,7 +387,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class Category5
+    public class Category5Dto
     {
         [JsonProperty("achievements")]
         public object[] Achievements { get; set; }
@@ -407,7 +408,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class Achievement3
+    public class Achievement3Dto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -419,10 +420,10 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Src { get; set; }
 
         [JsonProperty("category")]
-        public Category5 Category { get; set; }
+        public Category5Dto Category { get; set; }
     }
 
-    public class Certification3
+    public class Certification3Dto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -434,7 +435,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Name { get; set; }
     }
 
-    public class Category6
+    public class Category6Dto
     {
         [JsonProperty("certifications")]
         public object[] Certifications { get; set; }
@@ -455,7 +456,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class CompletedCertification3
+    public class CompletedCertification3Dto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -467,10 +468,10 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Src { get; set; }
 
         [JsonProperty("category")]
-        public Category6 Category { get; set; }
+        public Category6Dto Category { get; set; }
     }
 
-    public class Task3
+    public class Task3Dto
     {
         [JsonProperty("completed")]
         public bool Completed { get; set; }
@@ -479,7 +480,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Name { get; set; }
     }
 
-    public class Technology4
+    public class Technology4Dto
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -491,7 +492,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Name { get; set; }
     }
 
-    public class Pdp2
+    public class Pdp2Dto
     {
         [JsonProperty("position")]
         public string Position { get; set; }
@@ -500,22 +501,22 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Direction { get; set; }
 
         [JsonProperty("achievements")]
-        public Achievement3[] Achievements { get; set; }
+        public Achievement3Dto[] Achievements { get; set; }
 
         [JsonProperty("certifications")]
-        public Certification3[] Certifications { get; set; }
+        public Certification3Dto[] Certifications { get; set; }
 
         [JsonProperty("completedCertifications")]
-        public CompletedCertification3[] CompletedCertifications { get; set; }
+        public CompletedCertification3Dto[] CompletedCertifications { get; set; }
 
         [JsonProperty("tasks")]
-        public Task3[] Tasks { get; set; }
+        public Task3Dto[] Tasks { get; set; }
 
         [JsonProperty("tests")]
         public object[] Tests { get; set; }
 
         [JsonProperty("technologies")]
-        public Technology4[] Technologies { get; set; }
+        public Technology4Dto[] Technologies { get; set; }
 
         [JsonProperty("isDeleted")]
         public bool IsDeleted { get; set; }
@@ -530,10 +531,10 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Id { get; set; }
     }
 
-    public class AllDirection
+    public class AllDirectionDto
     {
         [JsonProperty("pdps")]
-        public Pdp2[] Pdps { get; set; }
+        public Pdp2Dto[] Pdps { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -554,10 +555,10 @@ namespace IntranetMobile.Core.Models.Dtos
     public class UserDto
     {
         [JsonProperty("userCV")]
-        public UserCv UserCv { get; set; }
+        public UserCvDto UserCv { get; set; }
 
         [JsonProperty("userPDP")]
-        public UserPdp UserPdp { get; set; }
+        public UserPdpDto UserPdp { get; set; }
 
         [JsonProperty("email")]
         public string Email { get; set; }
@@ -587,7 +588,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string Birthday { get; set; }
 
         [JsonProperty("avatar")]
-        public Avatar Avatar { get; set; }
+        public AvatarDto Avatar { get; set; }
 
         [JsonProperty("workDate")]
         public string WorkDate { get; set; }
@@ -599,13 +600,13 @@ namespace IntranetMobile.Core.Models.Dtos
         public bool ChangeAccept { get; set; }
 
         [JsonProperty("preModeration")]
-        public PreModeration PreModeration { get; set; }
+        public PreModerationDto PreModeration { get; set; }
 
         [JsonProperty("allPositions")]
-        public AllPosition[] AllPositions { get; set; }
+        public AllPositionDto[] AllPositions { get; set; }
 
         [JsonProperty("allDirections")]
-        public AllDirection[] AllDirections { get; set; }
+        public AllDirectionDto[] AllDirections { get; set; }
 
         [JsonProperty("position")]
         public string Position { get; set; }
