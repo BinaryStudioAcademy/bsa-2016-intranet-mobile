@@ -18,7 +18,7 @@
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="colorButtonNormal">@color/colorButtonNormal</item>
-    <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
   </style>
   <style name="bsButton" parent="Base.Widget.AppCompat.Button.Colored">
     <item name="android:layout_width">0dp</item>
