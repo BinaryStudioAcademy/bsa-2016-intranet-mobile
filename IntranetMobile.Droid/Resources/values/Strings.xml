@@ -4,4 +4,7 @@
   <string name="ApplicationName">Intranet</string>
   <string name="drawer_open">Open menu</string>
   <string name="drawer_close">Close menu</string>
+  <string name="pref_vibration">pref_vibration</string>
+  <string name="pref_news">pref_news</string>
+  <string name="pref_reviewer">pref_reviewer</string>
 </resources>

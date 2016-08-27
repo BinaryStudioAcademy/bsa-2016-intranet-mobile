@@ -103,7 +103,6 @@
     <Compile Include="Models\Dtos\CommentsResponseDto.cs" />
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Interfaces\ISettingsService.cs" />
   </ItemGroup>
   <ItemGroup>

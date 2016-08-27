@@ -1,14 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using IntranetMobile.Core.Models;
+﻿using IntranetMobile.Core.Models;
 
 namespace IntranetMobile.Core.Interfaces
 {
     public interface ISettingsService
     {
-        Task<Settings> GetSettings();
+        Settings GetSettings();
 
-        Task<bool> SaveSettings(Settings settings);
+        bool SaveSettings(Settings settings);
     }
 }
 

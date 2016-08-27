@@ -266,6 +266,7 @@
     <Compile Include="Views\Activities\BaseCachingFragmentActivity.cs" />
     <Compile Include="Views\Fragments\BaseFragment.cs" />
     <Compile Include="Views\Fragments\SettingsFragment.cs" />
+    <Compile Include="Services\SettingsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

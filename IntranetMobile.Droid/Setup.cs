@@ -56,6 +56,7 @@ namespace IntranetMobile.Droid
             Mvx.RegisterSingleton<ILogger>(new AndroidLogger());
             Mvx.RegisterSingleton<IDeviceInfo>(new AndroidDeviceInfo());
             Mvx.RegisterSingleton<IAlertService>(new AlertService(Mvx.Resolve<IMvxAndroidCurrentTopActivity>()));
+            Mvx.RegisterSingleton<ISettingsService>(new SettingsService(ApplicationContext));
             Mvx.RegisterSingleton<IDataBaseService>(new DataBaseService(
                 ApplicationContext.FilesDir.Path,
                 Mvx.Resolve<IMvxSqliteConnectionFactory>(),

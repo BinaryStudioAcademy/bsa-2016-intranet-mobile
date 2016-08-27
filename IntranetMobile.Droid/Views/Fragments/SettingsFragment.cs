@@ -1,19 +1,9 @@
-﻿using System;
-using Android.Content.Res;
-using Android.OS;
-using Android.Preferences;
+﻿using Android.OS;
 using Android.Runtime;
-using Android.Support.V7.Preferences;
-using Android.Support.V7.Widget;
-using Android.Views;
 using IntranetMobile.Core.ViewModels;
 using IntranetMobile.Core.ViewModels.Settings;
-using IntranetMobile.Droid.Views.Activities;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.Preference;
 
 namespace IntranetMobile.Droid.Views.Fragments
@@ -40,21 +30,6 @@ namespace IntranetMobile.Droid.Views.Fragments
         public override void OnCreatePreferences(Bundle savedInstanceState, string rootKey)
         {
             this.AddPreferencesFromResource(Resource.Xml.preferences);
-        }
-
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            var view = base.OnCreateView(inflater, container, savedInstanceState);
-
-            //var serverPreference = (EditTextPreference)this.FindPreference("pref_server");
-
-            //var bindingSet = this.CreateBindingSet<SettingsFragment, SettingsViewModel>();
-            //bindingSet.Bind(serverPreference)
-            //    .For(v => v.Text)
-            //    .To(vm => vm.ServerAddress);
-            //bindingSet.Apply();
-
-            return view;
         }
     }
 }

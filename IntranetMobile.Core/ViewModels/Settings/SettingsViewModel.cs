@@ -12,16 +12,7 @@ namespace IntranetMobile.Core.ViewModels.Settings
         {
             _appSettings = new Models.Settings();
             Title = "Settings";
-            Task.Run(async () =>
-            {
-                _appSettings = await ServiceBus.SettingsService.GetSettings();
-                InvokeOnMainThread(() =>
-                {
-                    RaisePropertyChanged(() => IsVibrationEnabled);
-                    RaisePropertyChanged(() => IsNewsNotificationEnabled);
-                    RaisePropertyChanged(() => IsReviewerNotificationEnabled);
-                });
-            });
+            _appSettings = ServiceBus.SettingsService.GetSettings();
         }
 
         public bool IsVibrationEnabled

@@ -6,15 +6,18 @@
 			android:title="Notifications">
         <android.support.v7.preference.SwitchPreferenceCompat
         			  android:title="Vibration"
-                      android:key="pref_vibration"
+                      android:key="@string/pref_vibration"
+					  android:defaultValue="true"
                       android:summary="Vibrate when notification is received"/>
 		<android.support.v7.preference.SwitchPreferenceCompat
         			  android:title="News"
-                      android:key="pref_news"
+                      android:key="@string/pref_news"
+					  android:defaultValue="true"
                       android:summary="Notify about company news"/>
 		<android.support.v7.preference.SwitchPreferenceCompat
         			  android:title="Reviewer"
-                      android:key="pref_reviewer"
+                      android:key="@string/pref_reviewer"
+					  android:defaultValue="true"
                       android:summary="Notify about new Reviewer tickets"/>
     </android.support.v7.preference.PreferenceCategory>
 	
