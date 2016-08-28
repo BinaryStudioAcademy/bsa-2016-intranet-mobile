@@ -2,7 +2,6 @@ using Android.App;
 using IntranetMobile.Core.ViewModels.Profile;
 using IntranetMobile.Droid.Views.Activities;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Droid.Support.V7.RecyclerView;
 
 namespace IntranetMobile.Droid.Views.Fragments.Profile
 {
@@ -17,14 +16,21 @@ namespace IntranetMobile.Droid.Views.Fragments.Profile
         {
             base.OnViewModelSet();
 
-            var technologiesRecyclerView =
-                FindViewById<MvxRecyclerView>(Resource.Id.content_profile_technologies_recycler_view);
-            technologiesRecyclerView.NestedScrollingEnabled = false;
+            // Used for RecyclerView issue eliminating. Testing for now.
+            //var technologiesRecyclerView =
+            //    FindViewById<MvxRecyclerView>(Resource.Id.content_profile_technologies_recycler_view);
+            //technologiesRecyclerView.NestedScrollingEnabled = false;
+
+            //var nestedScrollView = FindViewById<NestedScrollView>(Resource.Id.activity_profile_nestedscrollview);
+            //technologiesRecyclerView.ChildViewAdded += delegate
+            //{
+            //    nestedScrollView.ScrollTo(0, 0);
+            //};
 
             var bindingSet = this.CreateBindingSet<ProfileActivity, ProfileViewModel>();
             bindingSet.Bind(SupportActionBar)
-                      .For(bar => bar.Title)
-                      .To(vm => vm.FullName);
+                .For(bar => bar.Title)
+                .To(vm => vm.FullName);
             bindingSet.Apply();
         }
     }
