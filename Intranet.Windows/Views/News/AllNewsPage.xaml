@@ -17,7 +17,7 @@
                         <AdaptiveTrigger MinWindowWidth="720" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="FrameTitle.Margin" Value="10,0,0,0" />
+                        <Setter Target="FrameTitle.Margin" Value="12,0,0,0" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Compact">

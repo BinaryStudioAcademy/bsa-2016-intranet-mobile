@@ -49,63 +49,70 @@
             CompactPaneLength="48"
             OpenPaneLength="266">
             <SplitView.Pane>
-                <StackPanel Background="#F5F5F5" Margin="0, 48, 0, 0">
-                    <ListView
+                <ListView
                         x:Name="MenuItemList"
+                        Margin="0, 48, 0, 0"
+                        Background="#F5F5F5"
                         IsMultiSelectCheckBoxEnabled="False"
                         SelectionChanged="MainMenu_OnSelectionChanged">
-                        <ListViewItem>
-                            <ListViewItem.Content>
-                                <StackPanel Orientation="Horizontal" Margin="-2,10,0,10">
-                                    <Image
+                    <ListViewItem>
+                        <ListViewItem.Content>
+                            <StackPanel Orientation="Horizontal" Margin="-2,10,0,10">
+                                <Image
                                 VerticalAlignment="Center"
                                 Width="27"
                                 Height="27"
                                 Source="../../Images/avatar_circle_grey.png"
                                 Margin="0,0,14,0"/>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                                        <TextBlock
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                    <TextBlock
                                     Text="{Binding Menu.UserName}"
                                     Foreground="{StaticResource SolidBrushGray3}"/>
-                                        <TextBlock
+                                    <TextBlock
                                     Text="Additional info"
                                     Foreground="{StaticResource SolidBrushGray1}"/>
-                                    </StackPanel>
                                 </StackPanel>
-                            </ListViewItem.Content>
-                        </ListViewItem>
-                        <ListViewItem IsSelected="True">
-                            <ListViewItem.Content>
-                                <controls:MenuItemControl Label="News" IconUri="../../Images/home_black.png"/>
-                            </ListViewItem.Content>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <ListViewItem.Content>
-                                <controls:MenuItemControl Label="Reviewer" IconUri="../../Images/group_black.png"/>
-                            </ListViewItem.Content>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <ListViewItem.Content>
-                                <controls:MenuItemControl Label="Profile" IconUri="../../Images/accessibility_black.png"/>
-                            </ListViewItem.Content>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <ListViewItem.Content>
-                                <controls:MenuItemControl Label="Asciit" IconUri="../../Images/bug_report_black.png"/>
-                            </ListViewItem.Content>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <ListViewItem.Content>
-                                <controls:MenuItemControl Label="Settings" IconUri="../../Images/settings_black.png"/>
-                            </ListViewItem.Content>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <ListViewItem.Content>
-                                <controls:MenuItemControl Label="Log out" IconUri="../../Images/exit_to_app_black.png"/>
-                            </ListViewItem.Content>
-                        </ListViewItem>
-                    </ListView>
-                </StackPanel>
+                            </StackPanel>
+                        </ListViewItem.Content>
+                    </ListViewItem>
+                    <ListViewItem IsSelected="True">
+                        <ListViewItem.Content>
+                            <controls:MenuItemControl Label="News" IconUri="../../Images/home_black.png"/>
+                        </ListViewItem.Content>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <ListViewItem.Content>
+                            <controls:MenuItemControl Label="Reviewer" IconUri="../../Images/group_black.png"/>
+                        </ListViewItem.Content>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <ListViewItem.Content>
+                            <controls:MenuItemControl Label="Profile" IconUri="../../Images/accessibility_black.png"/>
+                        </ListViewItem.Content>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <ListViewItem.Content>
+                            <controls:MenuItemControl Label="Asciit" IconUri="../../Images/bug_report_black.png"/>
+                        </ListViewItem.Content>
+                    </ListViewItem>
+                    <ListView.Footer>
+                        <ListView
+                            x:Name="MenuListFooter"
+                            IsMultiSelectCheckBoxEnabled="False"
+                            SelectionChanged="MainMenuFooter_OnSelectionChanged">
+                            <ListViewItem>
+                                <ListViewItem.Content>
+                                    <controls:MenuItemControl Label="Settings" IconUri="../../Images/settings_black.png"/>
+                                </ListViewItem.Content>
+                            </ListViewItem>
+                            <ListViewItem>
+                                <ListViewItem.Content>
+                                    <controls:MenuItemControl Label="Log out" IconUri="../../Images/exit_to_app_black.png"/>
+                                </ListViewItem.Content>
+                            </ListViewItem>
+                        </ListView>
+                    </ListView.Footer>
+                </ListView>
             </SplitView.Pane>
             <Frame x:Name="MainContent">
                 <Frame.ContentTransitions>

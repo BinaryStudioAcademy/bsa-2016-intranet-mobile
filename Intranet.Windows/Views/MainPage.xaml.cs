@@ -18,7 +18,7 @@ namespace Intranet.WindowsUWP
         public MainPage()
         {
             this.InitializeComponent();
-            _prevSelectedMenuItem = -1;
+            _prevSelectedMenuItem = 1;
 
             DataContextChanged += (sender, args) =>
             {
@@ -38,9 +38,13 @@ namespace Intranet.WindowsUWP
         private void MainMenu_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var vm = ViewModel as MainViewModel;
-            if (vm == null || MenuItemList.SelectedIndex == _prevSelectedMenuItem)
+            if (vm == null ||
+                MenuItemList.SelectedIndex == _prevSelectedMenuItem ||
+                MenuItemList.SelectedIndex < 0)
                 return;
-            
+
+            MenuListFooter.SelectedIndex = -1;
+
             switch (MenuItemList.SelectedIndex)
             {
                 case 1:
@@ -49,13 +53,38 @@ namespace Intranet.WindowsUWP
                 case 3:
                     vm.Menu.ShowUsers();
                     break;
-                case 6:
-                    MenuItemList.SelectedIndex = _prevSelectedMenuItem;
-                    vm.Menu.Logout();
-                    break;
             }
 
             _prevSelectedMenuItem = MenuItemList.SelectedIndex;
+        }
+
+        private void MainMenuFooter_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var currentSelectedIndex = MenuListFooter.SelectedIndex + 5;
+            var vm = ViewModel as MainViewModel;
+            if (vm == null ||
+                currentSelectedIndex == _prevSelectedMenuItem ||
+                MenuListFooter.SelectedIndex < 0)
+                return;
+
+            MenuItemList.SelectedIndex = -1;
+            switch (currentSelectedIndex)
+            {
+                case 5:
+                    vm.Menu.ShowSettings();
+                    _prevSelectedMenuItem = currentSelectedIndex;
+                    break;
+                case 6:
+                    if (_prevSelectedMenuItem > 4)
+                        MenuListFooter.SelectedIndex = 0;
+                    else
+                    {
+                        MenuListFooter.SelectedIndex = -1;
+                        MenuItemList.SelectedIndex = _prevSelectedMenuItem;
+                    }
+                    vm.Menu.Logout();
+                    break;
+            }
         }
     }
 }

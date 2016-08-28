@@ -18,9 +18,12 @@ namespace Intranet.WindowsUWP.Services
             var localSettings = ApplicationData.Current.LocalSettings;
             var composite = (ApplicationDataCompositeValue)localSettings.Values[AppSettingsKey];
 
-            settings.IsVibrationEnabled = (bool)composite[IsVibrationEnabledKey];
-            settings.IsNewsNotificationEnabled = (bool)composite[IsNewsNotificationEnabledKey];
-            settings.IsReviewerNotificationEnabled = (bool)composite[IsReviewerNotificationEnabledKey];
+            if (composite != null)
+            {
+                settings.IsVibrationEnabled = (bool) composite[IsVibrationEnabledKey];
+                settings.IsNewsNotificationEnabled = (bool) composite[IsNewsNotificationEnabledKey];
+                settings.IsReviewerNotificationEnabled = (bool) composite[IsReviewerNotificationEnabledKey];
+            }
 
             return settings;
         }
