@@ -151,12 +151,15 @@ namespace IntranetMobile.Core.Models
     {
         public string TechnologyId { get; set; }
 
-        public object Stars { get; set; }
+        public int Stars { get; set; }
 
         public UserTechnology UpdateFromDto(TechnologyDto technologyDto)
         {
             TechnologyId = technologyDto.UserTech;
-            Stars = technologyDto.Stars;
+
+            int stars;
+            if (int.TryParse(technologyDto.Stars, out stars))
+                Stars = stars;
 
             // For fluent interface purposes
             return this;

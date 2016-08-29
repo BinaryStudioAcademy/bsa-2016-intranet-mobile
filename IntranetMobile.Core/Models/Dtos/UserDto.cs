@@ -9,7 +9,7 @@ namespace IntranetMobile.Core.Models.Dtos
         public string UserTech { get; set; }
 
         [JsonProperty("stars")]
-        public object Stars { get; set; }
+        public string Stars { get; set; }
     }
 
     public class UserCvDto

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
@@ -44,10 +45,10 @@ namespace IntranetMobile.Core.ViewModels.Profile
                     Position = (await ServiceBus.UserService.GetPositionById(User.PositionId))?.Name ?? "?";
 
                     UserTechnologyViewModels.Clear();
-                    foreach (var userTechnology in _user.Cv.UserTechnologies)
+                    foreach (var userTechnology in _user.Cv.UserTechnologies.OrderByDescending(t => t.Stars))
                     {
-                        var userTechnologyViewModel = new UserTechnologyViewModel();
-                        userTechnologyViewModel.Init(userTechnology.TechnologyId, userTechnology.Stars.ToString());
+                        var userTechnologyViewModel = new UserTechnologyViewModel(userTechnology.TechnologyId,
+                                                                                  userTechnology.Stars);
                         UserTechnologyViewModels.Add(userTechnologyViewModel);
                     }
 
