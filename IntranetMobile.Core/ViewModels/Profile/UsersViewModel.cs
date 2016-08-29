@@ -44,10 +44,10 @@ namespace IntranetMobile.Core.ViewModels.Profile
         {
             var users = await ServiceBus.UserService.GetAllUsers();
             var currentUser = ServiceBus.UserService.CurrentUser;
-            Users.Add(await UserItemViewModel.FromModel(currentUser));
+            Users.Add(UserItemViewModel.FromModel(currentUser));
             foreach (var user in users.Where(user => user.UserId != currentUser.UserId).OrderBy(u => u.FullName))
             {
-                InvokeOnMainThread(async () => { Users.Add(await UserItemViewModel.FromModel(user)); });
+                InvokeOnMainThread(() => { Users.Add(UserItemViewModel.FromModel(user)); });
             }
         }
     }

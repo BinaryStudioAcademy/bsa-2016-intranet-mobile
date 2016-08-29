@@ -1,14 +1,10 @@
-﻿using System.Threading.Tasks;
-using IntranetMobile.Core.Models;
-using IntranetMobile.Core.Services;
+﻿using IntranetMobile.Core.Models;
 
 namespace IntranetMobile.Core.ViewModels.Profile
 {
     public class UserItemViewModel : BaseViewModel
     {
-        private string _firstName;
         private string _fullName;
-        private string _lastName;
         private string _positionName;
         private string _previewImageUri;
 
@@ -44,7 +40,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string Id { get; set; }
 
-        public static async Task<UserItemViewModel> FromModel(UserInfo user)
+        public static UserItemViewModel FromModel(UserInfo user)
         {
             return new UserItemViewModel
             {
