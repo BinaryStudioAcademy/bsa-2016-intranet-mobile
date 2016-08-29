@@ -10,7 +10,6 @@ namespace IntranetMobile.Core.ViewModels.Profile
     public class UsersViewModel : BaseViewModel
     {
         private UserItemViewModel _selectedItem;
-        //private UserViewModel _curretUser;
 
         public UsersViewModel()
         {
@@ -46,7 +45,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
             var users = await ServiceBus.UserService.GetAllUsers();
             var currentUser = ServiceBus.UserService.CurrentUser;
             Users.Add(await UserItemViewModel.FromModel(currentUser));
-            foreach (var user in users.Where(user => user.UserId != currentUser.UserId).OrderBy(u => u.FirstName))
+            foreach (var user in users.Where(user => user.UserId != currentUser.UserId).OrderBy(u => u.FullName))
             {
                 InvokeOnMainThread(async () => { Users.Add(await UserItemViewModel.FromModel(user)); });
             }

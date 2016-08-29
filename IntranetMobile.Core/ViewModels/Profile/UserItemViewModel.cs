@@ -22,26 +22,6 @@ namespace IntranetMobile.Core.ViewModels.Profile
             }
         }
 
-        public string FirstName
-        {
-            get { return _firstName; }
-            set
-            {
-                _firstName = value;
-                RaisePropertyChanged(() => FirstName);
-            }
-        }
-
-        public string LastName
-        {
-            get { return _lastName; }
-            set
-            {
-                _lastName = value;
-                RaisePropertyChanged(() => LastName);
-            }
-        }
-
         public string FullName
         {
             get { return _fullName; }
@@ -64,17 +44,14 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string Id { get; set; }
 
-        public static async Task<UserItemViewModel> FromModel(User user)
+        public static async Task<UserItemViewModel> FromModel(UserInfo user)
         {
-            var position = await ServiceBus.UserService.GetPositionById(user.PositionId);
             return new UserItemViewModel
             {
                 Id = user.UserId,
                 PreviewImageUri = Constants.BaseUrl + user.AvatarUri,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                FullName = $"{user.FirstName} {user.LastName}",
-                PositionName = position != null ? position.Name : ""
+                FullName = user.FullName,
+                PositionName = user.Department
             };
         }
     }

@@ -9,7 +9,6 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class WeeklyItemViewModel : BaseViewModel
     {
-        private User _author;
         private string _authorId;
         private DateTime _date;
         private string _previewImageUri;
@@ -54,8 +53,8 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             Task.Run(async () =>
             {
-                _author = await ServiceBus.UserService.GetUserById(AuthorId) ?? new User();
-                Subtitle = $"{_author?.FirstName} {_author?.LastName}     {Date.ToString("dd-MM-yyyy HH:mm")}";
+                var author = await ServiceBus.UserService.GetUserInfoById(AuthorId) ?? new UserInfo();
+                Subtitle = $"{author.FullName}     {Date.ToString("dd-MM-yyyy HH:mm")}";
 
                 InvokeOnMainThread(() => RaisePropertyChanged(() => Subtitle));
             });

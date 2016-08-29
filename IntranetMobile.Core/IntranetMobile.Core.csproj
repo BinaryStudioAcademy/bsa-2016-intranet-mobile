@@ -107,6 +107,8 @@
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Interfaces\ISettingsService.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\Dtos\UserInfoDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
