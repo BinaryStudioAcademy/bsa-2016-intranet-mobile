@@ -1,14 +1,10 @@
-﻿using System.Threading.Tasks;
-using IntranetMobile.Core.Models;
-using IntranetMobile.Core.Services;
+﻿using IntranetMobile.Core.Models;
 
 namespace IntranetMobile.Core.ViewModels.Profile
 {
     public class UserItemViewModel : BaseViewModel
     {
-        private string _firstName;
         private string _fullName;
-        private string _lastName;
         private string _positionName;
         private string _previewImageUri;
 
@@ -19,26 +15,6 @@ namespace IntranetMobile.Core.ViewModels.Profile
             {
                 _previewImageUri = value;
                 RaisePropertyChanged(() => PreviewImageUri);
-            }
-        }
-
-        public string FirstName
-        {
-            get { return _firstName; }
-            set
-            {
-                _firstName = value;
-                RaisePropertyChanged(() => FirstName);
-            }
-        }
-
-        public string LastName
-        {
-            get { return _lastName; }
-            set
-            {
-                _lastName = value;
-                RaisePropertyChanged(() => LastName);
             }
         }
 
@@ -64,17 +40,14 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string Id { get; set; }
 
-        public static async Task<UserItemViewModel> FromModel(User user)
+        public static UserItemViewModel FromModel(UserInfo user)
         {
-            var position = await ServiceBus.UserService.GetPositionById(user.PositionId);
             return new UserItemViewModel
             {
                 Id = user.UserId,
                 PreviewImageUri = Constants.BaseUrl + user.AvatarUri,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                FullName = $"{user.FirstName} {user.LastName}",
-                PositionName = position != null ? position.Name : ""
+                FullName = user.FullName,
+                PositionName = user.Department
             };
         }
     }

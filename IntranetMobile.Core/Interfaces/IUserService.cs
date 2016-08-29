@@ -6,11 +6,13 @@ namespace IntranetMobile.Core.Interfaces
 {
     public interface IUserService
     {
-        User CurrentUser { get; }
+        UserInfo CurrentUser { get; }
 
-        Task<User> GetCurrentUserAsync();
+        Task<UserInfo> GetCurrentUserAsync();
 
-        Task<List<User>> GetAllUsers();
+        Task<List<UserInfo>> GetAllUsers();
+
+        Task<UserInfo> GetUserInfoById(string id);
 
         Task<User> GetUserById(string id);
 

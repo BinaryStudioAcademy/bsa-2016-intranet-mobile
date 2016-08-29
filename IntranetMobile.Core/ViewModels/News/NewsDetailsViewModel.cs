@@ -65,7 +65,7 @@ namespace IntranetMobile.Core.ViewModels.News
             Visibility = !_visibility;
         }
 
-        public User Author { get; set; }
+        public UserInfo Author { get; set; }
 
         public async void Init(Parameters arg)
         {
@@ -73,7 +73,7 @@ namespace IntranetMobile.Core.ViewModels.News
             _dataModel = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
 
             Title = _dataModel.Title;
-            Author = await ServiceBus.UserService.GetUserById(_dataModel.AuthorId);
+            Author = await ServiceBus.UserService.GetUserInfoById(_dataModel.AuthorId);
             Subtitle = $" {Author.FullName} {_dataModel.Date.ToString("dd-MM-yyyy HH:mm")}";
             RaisePropertyChanged(() => LikesCount);
             RaisePropertyChanged(() => CommentsCount);

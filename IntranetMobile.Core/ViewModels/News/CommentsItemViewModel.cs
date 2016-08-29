@@ -35,9 +35,9 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private async Task<string> GetAuthor(string authorId)
         {
-            var author = await ServiceBus.UserService.GetUserById(authorId);
+            var author = await ServiceBus.UserService.GetUserInfoById(authorId);
             PreviewImageUri = Constants.BaseUrl + author.AvatarUri;
-            return author.FirstName + " " + author.LastName;
+            return author.FullName;
         }
 
         public ICommand ClickLikeCommand { get; private set; }

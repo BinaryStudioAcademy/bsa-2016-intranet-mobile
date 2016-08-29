@@ -33,22 +33,12 @@ namespace IntranetMobile.Droid.Views.Fragments.Profile
         {
         }
 
-        public override int ViewTypeCount
-        {
-            get { return 2; }
-        }
-
-        public override int GetItemViewType(int position)
-        {
-            //var item = GetRawItem(position);
-            if (position == 0)
-                return 0;
-            return 1;
-        }
-
         protected override View GetBindableView(View convertView, object source, int templateId)
         {
-            templateId = ItemsSource.ElementAt(0) == source ? Resource.Layout.current_user : Resource.Layout.item_user;
+            templateId = ItemsSource.ElementAt(0) == source
+                            ? Resource.Layout.current_user
+                            : Resource.Layout.item_user;
+            
             return base.GetBindableView(convertView, source, templateId);
         }
     }

@@ -16,17 +16,6 @@ namespace IntranetMobile.Droid.Views.Fragments.Profile
         {
             base.OnViewModelSet();
 
-            // Used for RecyclerView issue eliminating. Testing for now.
-            //var technologiesRecyclerView =
-            //    FindViewById<MvxRecyclerView>(Resource.Id.content_profile_technologies_recycler_view);
-            //technologiesRecyclerView.NestedScrollingEnabled = false;
-
-            //var nestedScrollView = FindViewById<NestedScrollView>(Resource.Id.activity_profile_nestedscrollview);
-            //technologiesRecyclerView.ChildViewAdded += delegate
-            //{
-            //    nestedScrollView.ScrollTo(0, 0);
-            //};
-
             var bindingSet = this.CreateBindingSet<ProfileActivity, ProfileViewModel>();
             bindingSet.Bind(SupportActionBar)
                 .For(bar => bar.Title)

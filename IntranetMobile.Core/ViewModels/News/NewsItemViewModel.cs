@@ -10,7 +10,7 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class NewsItemViewModel : BaseViewModel
     {
-        private User _author;
+        private UserInfo _author;
         private string _authorId;
 
         private Models.News _dataModel;
@@ -26,7 +26,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public string NewsId { get; set; }
 
-        public User Author
+        public UserInfo Author
         {
             get { return _author; }
             set
@@ -43,7 +43,7 @@ namespace IntranetMobile.Core.ViewModels.News
             set
             {
                 _authorId = value;
-                Task.Run(async () => { Author = await ServiceBus.UserService.GetUserById(_authorId); });
+                Task.Run(async () => { Author = await ServiceBus.UserService.GetUserInfoById(_authorId); });
             }
         }
 
@@ -132,7 +132,7 @@ namespace IntranetMobile.Core.ViewModels.News
         private void RefreshSutitile()
         {
             Subtitle = Author != null
-                ? $"{Author.FirstName} {Author.LastName} on {Date.ToString("dd-MM-yyyy HH:mm")}"
+                ? $"{Author.FullName} on {Date.ToString("dd-MM-yyyy HH:mm")}"
                 : $"{Date.ToString("dd-MM-yyyy HH:mm")}";
         }
 

@@ -1,41 +1,33 @@
-﻿using System;
-using IntranetMobile.Core.Models;
-using IntranetMobile.Core.Services;
+﻿using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.ViewModels.Profile
 {
     public class UserTechnologyViewModel : BaseViewModel
     {
-        private int _stars;
-        private Technology _technology;
-
-        public int Stars
+        public UserTechnologyViewModel()
         {
-            get { return _stars; }
-            set
-            {
-                _stars = value;
-                RaisePropertyChanged(() => Stars);
-            }
         }
 
-        public string TechnologyName => Technology.Name;
-
-        public Technology Technology
+        public UserTechnologyViewModel(string technologyId, int stars)
         {
-            get { return _technology; }
-            private set
+            Init(technologyId, stars);
+        }
+
+        public int Stars { get; private set; }
+
+        public string TechnologyName { get; private set; } = string.Empty;
+
+        public async void Init(string technologyId, int stars)
+        {
+            var technology = await ServiceBus.UserService.GetTechnologyById(technologyId);
+            if (technology != null)
             {
-                _technology = value;
-                RaisePropertyChanged(() => Technology);
+                TechnologyName = technology.Name;
+                Stars = stars;
+
+                RaisePropertyChanged(() => Stars);
                 RaisePropertyChanged(() => TechnologyName);
             }
-        }
-
-        public async void Init(string technologyId, string stars)
-        {
-            Technology = await ServiceBus.UserService.GetTechnologyById(technologyId);
-            Stars = Convert.ToInt32(stars);
         }
     }
 }
