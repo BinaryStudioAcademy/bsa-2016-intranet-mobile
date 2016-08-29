@@ -58,18 +58,23 @@
                     <ListViewItem>
                         <ListViewItem.Content>
                             <StackPanel Orientation="Horizontal" Margin="-2,10,0,10">
-                                <Image
-                                VerticalAlignment="Center"
-                                Width="27"
-                                Height="27"
-                                Source="../../Images/avatar_circle_grey.png"
-                                Margin="0,0,14,0"/>
+                                <Grid VerticalAlignment="Center" Margin="-3,1,14,0">
+                                    <Image
+                                        Width="32"
+                                        Height="32"
+                                        Source="../../Images/avatar_circle_grey.png"/>
+                                    <Ellipse Width="32" Height="32">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding Menu.AvatarUrl}" Stretch="UniformToFill"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                                     <TextBlock
                                     Text="{Binding Menu.UserName}"
                                     Foreground="{StaticResource SolidBrushGray3}"/>
                                     <TextBlock
-                                    Text="Additional info"
+                                    Text="{Binding Menu.Email}"
                                     Foreground="{StaticResource SolidBrushGray1}"/>
                                 </StackPanel>
                             </StackPanel>

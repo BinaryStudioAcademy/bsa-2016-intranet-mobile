@@ -53,6 +53,9 @@ namespace Intranet.WindowsUWP
                 case 3:
                     vm.Menu.ShowUsers();
                     break;
+                case 4:
+                    vm.Menu.ShowAsciit();
+                    break;
             }
 
             _prevSelectedMenuItem = MenuItemList.SelectedIndex;
