@@ -1,5 +1,4 @@
-﻿using System;
-using IntranetMobile.Core.Services;
+﻿using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.ViewModels.Profile
 {
@@ -13,10 +12,10 @@ namespace IntranetMobile.Core.ViewModels.Profile
         {
             Init(technologyId, stars);
         }
-        
+
         public int Stars { get; private set; }
 
-        public string TechnologyName { get; private set; } = "";
+        public string TechnologyName { get; private set; } = string.Empty;
 
         public async void Init(string technologyId, int stars)
         {

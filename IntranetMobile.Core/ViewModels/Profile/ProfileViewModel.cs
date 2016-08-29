@@ -47,8 +47,14 @@ namespace IntranetMobile.Core.ViewModels.Profile
                     UserTechnologyViewModels.Clear();
                     foreach (var userTechnology in _user.Cv.UserTechnologies.OrderByDescending(t => t.Stars))
                     {
+                        // Same check is used insinde UserTechnologyViewModel to eliminate reference passing and do UserTechnologyViewModel more flexible
+                        var technology = await ServiceBus.UserService.GetTechnologyById(userTechnology.TechnologyId);
+                        if (technology == null)
+                        {
+                            continue;
+                        }
                         var userTechnologyViewModel = new UserTechnologyViewModel(userTechnology.TechnologyId,
-                                                                                  userTechnology.Stars);
+                            userTechnology.Stars);
                         UserTechnologyViewModels.Add(userTechnologyViewModel);
                     }
 
