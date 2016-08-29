@@ -87,7 +87,7 @@ namespace IntranetMobile.Droid.Views.Fragments
                 }
                 case Resource.Id.nav_asciit:
                 {
-                    ViewModel.ShowNews();
+                    ViewModel.ShowAsciit();
                     break;
                 }
                 case Resource.Id.nav_settings:
