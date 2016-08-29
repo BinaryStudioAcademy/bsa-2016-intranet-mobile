@@ -47,9 +47,14 @@ namespace IntranetMobile.Core.Services
                 return new List<UserInfo>(_cachedUsers);
             }
 
-            var userInfoDtos = await _restClient.GetAsync<List<UserInfoDto>>(AllUsersInfoPath).ConfigureAwait(false);
-            var userDtos = await _restClient.GetAsync<List<UserDto>>(AllUsersPath).ConfigureAwait(false);
-            var currentUserDto = await _restClient.GetAsync<MyUser>(CurrentUserPath).ConfigureAwait(false);
+            var usersInfoTask = _restClient.GetAsync<List<UserInfoDto>>(AllUsersInfoPath);
+            var usersTask = _restClient.GetAsync<List<UserDto>>(AllUsersPath);
+            var currentUserTask = _restClient.GetAsync<MyUser>(CurrentUserPath);
+            await Task.WhenAll(usersInfoTask, usersTask, currentUserTask);
+
+            var userInfoDtos = await usersInfoTask;
+            var userDtos = await usersTask;
+            var currentUserDto = await currentUserTask;
 
             foreach (var dto in userDtos)
             {
@@ -60,18 +65,16 @@ namespace IntranetMobile.Core.Services
                 }
             }
 
-            await GetAllPositions();
-            await GetAllTechnologies();
-
-            // TODO: For possible future runtime updates it is necessary to update existing users
-            // TODO: And create UpdateFromDto method for User
-
             _cachedUsers.AddRange(userInfoDtos.Select(userDto => new UserInfo().UpdateFromDto(userDto)));
 
             CurrentUser = _cachedUsers.FirstOrDefault(u => u.UserId == currentUserDto.Id);
             CurrentUser.Email = currentUserDto?.Email;
 
             _semaphoreAllUser.Release();
+
+            // Don't need to be awaited because at this moment we don't use results of those tasks
+            GetAllPositions();
+            GetAllTechnologies();
 
             // Prevent user-defined code from cache modifying
             return new List<UserInfo>(_cachedUsers);
