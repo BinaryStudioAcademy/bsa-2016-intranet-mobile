@@ -95,6 +95,9 @@
     <Compile Include="ViewModels\News\CommentsItemViewModel.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="ViewModels\Profile\UserAchievementViewModel.cs" />
+    <Compile Include="ViewModels\Profile\UserCertificationViewModel.cs" />
+    <Compile Include="ViewModels\Profile\UserStepsViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserTechnologyViewModel.cs" />
     <Compile Include="ViewModels\Profile\UsersViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserItemViewModel.cs" />

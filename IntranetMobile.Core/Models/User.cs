@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using IntranetMobile.Core.Models.Dtos;
 
@@ -72,6 +74,8 @@ namespace IntranetMobile.Core.Models
         public object[] Tests { get; set; }
 
         public Technology2[] Technologies { get; set; }
+        public List<Achievement> Achievements { get;} = new List<Achievement>();
+        public List<Certification> Certifications { get;} = new List<Certification>();
 
         public bool IsDeleted { get; set; }
 
@@ -86,6 +90,20 @@ namespace IntranetMobile.Core.Models
             Position = userPdpDto.Position;
             Direction = userPdpDto.Direction;
             Technologies = userPdpDto.Technologies.Select(tech => new Technology2().UpdateFromDto(tech)).ToArray();
+           
+            try
+            {
+                if (userPdpDto.CompletedCertifications != null)
+                    Certifications.AddRange(userPdpDto.CompletedCertifications.Select(cer => new Certification().UpdateFromDto(cer)));
+                if (userPdpDto.Achievements != null)
+                    Achievements.AddRange(userPdpDto.Achievements.Select(ach => new Achievement().UpdateFromDto(ach)));
+            }
+            catch (Exception e)
+            {
+                var a = e.Message;
+                throw;
+            }
+
             IsDeleted = userPdpDto.IsDeleted;
             // TODO: Use DateTime?
             CreatedAt = userPdpDto.CreatedAt;
@@ -94,6 +112,37 @@ namespace IntranetMobile.Core.Models
             Id = userPdpDto.Id;
 
             // For fluent interface purposes
+            return this;
+        }
+    }
+
+    public class Achievement
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+
+        public Achievement UpdateFromDto(AchievementDto AchievementDto)
+        {
+            Id = AchievementDto.Id;
+            Name = AchievementDto.Name;
+            //TODO: when categories will be noraml try catch can be removed
+            Category = Category!=null ? AchievementDto.Category.Name : "NULL";
+
+            return this;
+        }
+    }
+
+    public class Certification
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public Certification UpdateFromDto(CompletedCertificationDto completedCertificationDto)
+        {
+            Id = completedCertificationDto.Id;
+            Name = completedCertificationDto.Name;
+            Category = Category != null ? completedCertificationDto.Category.Name : "NULL";
             return this;
         }
     }

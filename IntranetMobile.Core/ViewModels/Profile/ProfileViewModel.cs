@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
+using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Profile
 {
@@ -11,6 +13,31 @@ namespace IntranetMobile.Core.ViewModels.Profile
         private string _position = string.Empty;
         private User _user;
         private string _userId;
+        private bool _certificationsVisibility = true;
+        private bool _achievementsVisibility = true;
+        private bool _stepsVisibility = true;
+
+        public ProfileViewModel()
+        {
+            ChangeAchievementsVisibilityCommand = new MvxCommand(ChangeAchievementsVisibilityCommandExecute);
+            ChangeCertificationsVisibilityCommand = new MvxCommand(ChangeCertificationsVisibilityCommandExecute);
+            ChangeStepsVisibilityCommand = new MvxCommand(ChangeStepsVisibilityCommandExecute);
+        }
+
+        private void ChangeStepsVisibilityCommandExecute()
+        {
+            StepsVisibility = !_stepsVisibility;
+        }
+
+        private void ChangeCertificationsVisibilityCommandExecute()
+        {
+            CertificationsVisibility = !_certificationsVisibility;
+        }
+
+        private void ChangeAchievementsVisibilityCommandExecute()
+        {
+            AchievementsVisibility = !_achievementsVisibility;
+        }
 
         public User User
         {
@@ -50,7 +77,16 @@ namespace IntranetMobile.Core.ViewModels.Profile
                         userTechnologyViewModel.Init(userTechnology.TechnologyId, userTechnology.Stars.ToString());
                         UserTechnologyViewModels.Add(userTechnologyViewModel);
                     }
-
+                    foreach (var achievement in _user.Pdp.Achievements)
+                    {
+                        var userAchievementVM = new UserAchievementViewModel() {Name = achievement.Name,Category = achievement.Category};
+                        Achievements.Add(userAchievementVM);
+                    }
+                    foreach (var certification in _user.Pdp.Certifications)
+                    {
+                        var userCertificationVM = new UserCertificationViewModel() {Name = certification.Name, Category = certification.Category};
+                        Certifications.Add(userCertificationVM);
+                    }
                     InvokeOnMainThread(() => RaisePropertyChanged(() => TechnologiesVisibility));
                 });
             }
@@ -77,6 +113,11 @@ namespace IntranetMobile.Core.ViewModels.Profile
         public ObservableCollection<UserTechnologyViewModel> UserTechnologyViewModels { get; set; } =
             new ObservableCollection<UserTechnologyViewModel>();
 
+        public ObservableCollection<UserAchievementViewModel> Achievements { get; set; } = 
+            new ObservableCollection<UserAchievementViewModel>();
+        public ObservableCollection<UserCertificationViewModel> Certifications { get; set; } = 
+            new ObservableCollection<UserCertificationViewModel>();
+
         public string Position
         {
             get { return _position; }
@@ -94,6 +135,39 @@ namespace IntranetMobile.Core.ViewModels.Profile
         public void Init(string userId)
         {
             UserId = userId;
+        }
+        public ICommand ChangeAchievementsVisibilityCommand { get;private set; }
+        public ICommand ChangeCertificationsVisibilityCommand { get; private set; }
+        public ICommand ChangeStepsVisibilityCommand { get; private set; }
+
+        public bool StepsVisibility
+        {
+            get { return _stepsVisibility; }
+            set
+            {
+                _stepsVisibility = value;
+                RaisePropertyChanged(()=> StepsVisibility);
+            }
+        }
+
+        public bool CertificationsVisibility
+        {
+            get { return _certificationsVisibility; }
+            set
+            {
+                _certificationsVisibility = value;
+                RaisePropertyChanged(()=> CertificationsVisibility);
+            }
+        }
+
+        public bool AchievementsVisibility
+        {
+            get { return _achievementsVisibility; }
+            set
+            {
+                _achievementsVisibility = value;
+                RaisePropertyChanged(()=> AchievementsVisibility);
+            }
         }
     }
 }
