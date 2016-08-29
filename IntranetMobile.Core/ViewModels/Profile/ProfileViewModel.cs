@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IntranetMobile.Core.Models;
@@ -71,10 +72,16 @@ namespace IntranetMobile.Core.ViewModels.Profile
                     Position = (await ServiceBus.UserService.GetPositionById(User.PositionId))?.Name ?? "?";
 
                     UserTechnologyViewModels.Clear();
-                    foreach (var userTechnology in _user.Cv.UserTechnologies)
+                    foreach (var userTechnology in _user.Cv.UserTechnologies.OrderByDescending(t => t.Stars))
                     {
-                        var userTechnologyViewModel = new UserTechnologyViewModel();
-                        userTechnologyViewModel.Init(userTechnology.TechnologyId, userTechnology.Stars.ToString());
+                        // Same check is used insinde UserTechnologyViewModel to eliminate reference passing and do UserTechnologyViewModel more flexible
+                        var technology = await ServiceBus.UserService.GetTechnologyById(userTechnology.TechnologyId);
+                        if (technology == null)
+                        {
+                            continue;
+                        }
+                        var userTechnologyViewModel = new UserTechnologyViewModel(userTechnology.TechnologyId,
+                            userTechnology.Stars);
                         UserTechnologyViewModels.Add(userTechnologyViewModel);
                     }
                     foreach (var achievement in _user.Pdp.Achievements)
