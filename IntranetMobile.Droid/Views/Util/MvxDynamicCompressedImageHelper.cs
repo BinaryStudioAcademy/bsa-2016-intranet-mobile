@@ -197,8 +197,14 @@ namespace IntranetMobile.Droid.Views.Util
                     }
                     else
                     {
-                        var resultingBitmap = image;
+                        _remoteFilesCache.TryAdd(imageSource, new CacheItem
+                        {
+                            AddedAt = DateTime.Now,
+                            Image = image
+                        });
+                        CheckRemoteCache();
 
+                        var resultingBitmap = image;
                         if (image.Width > MaxWidth || image.Height > MaxHeight)
                         {
                             resultingBitmap = await Task.Run(() =>
@@ -224,13 +230,6 @@ namespace IntranetMobile.Droid.Views.Util
                                     false);
                             }, cancelToken).ConfigureAwait(false);
                         }
-
-                        _remoteFilesCache.TryAdd(imageSource, new CacheItem
-                        {
-                            AddedAt = DateTime.Now,
-                            Image = resultingBitmap
-                        });
-                        CheckRemoteCache();
 
                         NewImageAvailable(resultingBitmap);
                     }

@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:paddingTop="2dp"
-  android:paddingBottom="4dp"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:gravity="center_vertical">
-  <TextView
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="16dp"
+    android:paddingBottom="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:MvxBind="Text Name" />
-  <!--<mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+    android:gravity="center_vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:MvxBind="Text Name" />
+<!--<mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
     android:id="@+id/content_profile_technologies_recyclerview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
