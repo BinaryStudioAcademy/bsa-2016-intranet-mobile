@@ -74,8 +74,8 @@ namespace IntranetMobile.Core.Models
         public object[] Tests { get; set; }
 
         public Technology2[] Technologies { get; set; }
-        public List<Achievement> Achievements { get;} = new List<Achievement>();
-        public List<Certification> Certifications { get;} = new List<Certification>();
+        public List<string> AchievementsIds { get;} = new List<string>();
+        public List<string> CertificationsIds { get;} = new List<string>();
 
         public bool IsDeleted { get; set; }
 
@@ -93,9 +93,9 @@ namespace IntranetMobile.Core.Models
             Technologies = userPdpDto.Technologies.Select(tech => new Technology2().UpdateFromDto(tech)).ToArray();
            
                 if (userPdpDto.CompletedCertifications != null)
-                    Certifications.AddRange(userPdpDto.CompletedCertifications.Select(cer => new Certification().UpdateFromDto(cer)));
+                    CertificationsIds.AddRange(userPdpDto.CompletedCertifications.Select(cer => cer.Id));
                 if (userPdpDto.Achievements != null)
-                    Achievements.AddRange(userPdpDto.Achievements.Select(ach => new Achievement().UpdateFromDto(ach)));
+                    AchievementsIds.AddRange(userPdpDto.Achievements.Select(ach => ach.Id));
 
             IsDeleted = userPdpDto.IsDeleted;
             // TODO: Use DateTime?

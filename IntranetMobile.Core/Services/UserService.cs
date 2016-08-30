@@ -15,9 +15,12 @@ namespace IntranetMobile.Core.Services
         private const string CurrentUserPath = "/api/me";
         private const string PositionsPath = "profile/api/positions";
         private const string TechnologiesPath = "profile/api/technologies";
+        private const string AchievementPath = "profile/api/achievements";
+        private const string CertificationPath = "profile/api/certifications";
         private readonly List<Position> _cachedPositions = new List<Position>();
         private readonly List<Technology> _cachedTechnologies = new List<Technology>();
         private readonly List<UserInfo> _cachedUsers = new List<UserInfo>();
+        private readonly List<Achievement> _cachedAchievements = new List<Achievement>(); 
         private readonly RestClient _restClient;
 
         private readonly SemaphoreSlim _semaphoreAllUser;
@@ -141,6 +144,32 @@ namespace IntranetMobile.Core.Services
             return _cachedTechnologies.FirstOrDefault(technology => technology.Id == id);
         }
 
+        public async Task<List<Achievement>> GetAllAchievementsAsync()
+        {
+
+            if (_cachedAchievements.Count > 0)
+            {
+                return new List<Achievement>(_cachedAchievements);
+            }
+            var achievementsDto = await _restClient.GetAsync<List<AchievementDto>>(AchievementPath).ConfigureAwait(false);
+
+            // TODO: For possible future runtime updates it is necessary to update existing users
+            // TODO: And create UpdateFromDto method for User
+
+            _cachedAchievements.AddRange(achievementsDto.Select(dto => new Achievement().UpdateFromDto(dto)));
+
+            // Prevent user-defined code from cache modifying
+            return new List<Achievement>(_cachedAchievements);
+        }
+        public async Task<Achievement> GetAchievementsById(string id)
+        {
+            // For now every time we try to get position we will already have all the positions.
+            if (_cachedAchievements.Count == 0)
+            {
+                await GetAllTechnologies();
+            }
+            return _cachedAchievements.FirstOrDefault(a => a.Id == id);
+        }
         public async Task<List<Technology>> GetAllTechnologies()
         {
             var technologiesDto = await _restClient.GetAsync<List<TechnologyRootDto>>(TechnologiesPath).ConfigureAwait(false);

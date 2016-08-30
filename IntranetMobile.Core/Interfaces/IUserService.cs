@@ -23,5 +23,7 @@ namespace IntranetMobile.Core.Interfaces
         Task<Technology> GetTechnologyById(string id);
 
         Task<List<Technology>> GetAllTechnologies();
+        Task<List<Achievement>> GetAllAchievementsAsync();
+        Task<Achievement> GetAchievementsById(string id);
     }
 }

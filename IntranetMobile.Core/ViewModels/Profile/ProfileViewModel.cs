@@ -84,16 +84,19 @@ namespace IntranetMobile.Core.ViewModels.Profile
                             userTechnology.Stars);
                         UserTechnologyViewModels.Add(userTechnologyViewModel);
                     }
-                    foreach (var achievement in _user.Pdp.Achievements)
+
+
+                    foreach (var achievementIds in _user.Pdp.AchievementsIds)
                     {
+                        var achievement = await ServiceBus.UserService.GetAchievementsById(achievementIds);
                         var userAchievementVm = new UserAchievementViewModel() {Name = achievement.Name,Category = achievement.Category};
                         Achievements.Add(userAchievementVm);
                     }
-                    foreach (var certification in _user.Pdp.Certifications)
-                    {
-                        var userCertificationVm = new UserCertificationViewModel() {Name = certification.Name, Category = certification.Category};
-                        Certifications.Add(userCertificationVm);
-                    }
+                    //foreach (var certificationIds in _user.Pdp.CertificationsIds)
+                    //{
+                    //    var userCertificationVm = new UserCertificationViewModel() {Name = certification.Name, Category = certification.Category};
+                    //    Certifications.Add(userCertificationVm);
+                    //}
                     InvokeOnMainThread(() => RaisePropertyChanged(() => TechnologiesVisibility));
                 });
             }
