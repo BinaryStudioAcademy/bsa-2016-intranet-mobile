@@ -115,15 +115,15 @@ namespace IntranetMobile.Core.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; }
+        public CategoryDto Category { get; set; }
 
         public Achievement UpdateFromDto(AchievementDto achievementDto)
         {
             Id = achievementDto.Id;
             Name = achievementDto.Name;
             //TODO: when categories will be noraml try catch can be removed
-            Category = Category != null ? achievementDto.Category.Name : "NULL";
-
+            //Category = Category != null ? achievementDto.Category.Name : "NULL";
+            Category = achievementDto.Category;
             return this;
         }
     }
@@ -132,13 +132,13 @@ namespace IntranetMobile.Core.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; }
+        public Category2Dto Category { get; set; }
 
         public Certification UpdateFromDto(CompletedCertificationDto completedCertificationDto)
         {
             Id = completedCertificationDto.Id;
             Name = completedCertificationDto.Name;
-            Category = Category != null ? completedCertificationDto.Category.Name : "NULL";
+            Category = completedCertificationDto.Category;
             return this;
         }
     }

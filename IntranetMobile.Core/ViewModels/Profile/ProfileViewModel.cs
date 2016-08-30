@@ -66,22 +66,24 @@ namespace IntranetMobile.Core.ViewModels.Profile
                         InvokeOnMainThread(() => { UserTechnologyViewModels.Add(userTechnologyViewModel); });
                         }
 
-                    foreach (var achievement in _user.Pdp.Achievements)
+                    foreach (var achievementId in _user.Pdp.AchievementsIds)
                     {
+                        var achievement = await ServiceBus.UserService.GetAchievementsById(achievementId);
                         var userAchievementVm = new UserAchievementViewModel
                         {
                             Name = achievement.Name,
-                            Category = achievement.Category
+                            Category = achievement.Category.Name
                         };
                         InvokeOnMainThread(() => { Achievements.Add(userAchievementVm); });
                     }
 
-                    foreach (var certification in _user.Pdp.Certifications)
+                    foreach (var certificationId in _user.Pdp.CertificationsIds)
                     {
+                        var certification = await ServiceBus.UserService.GetCertificateByIdAsync(certificationId);
                         var userCertificationVm = new UserCertificationViewModel
                         {
                             Name = certification.Name,
-                            Category = certification.Category
+                            Category = certification.Category.Name
                         };
                         InvokeOnMainThread(() => { Certifications.Add(userCertificationVm); });
                     }
