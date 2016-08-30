@@ -192,7 +192,6 @@
                 android:layout_toRightOf="@id/activity_profile_technologies_imageview"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/colorText"
-                android:layout_marginBottom="-8dp"
                 android:text="Technologies" />
         </RelativeLayout>
         <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
