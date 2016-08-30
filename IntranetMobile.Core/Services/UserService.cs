@@ -17,6 +17,7 @@ namespace IntranetMobile.Core.Services
         private const string TechnologiesPath = "profile/api/technologies";
         private const string AchievementPath = "profile/api/achievements";
         private const string CertificationPath = "profile/api/certifications";
+        private const string CvsPath = "profile/api/cvs";
         private readonly List<Position> _cachedPositions = new List<Position>();
         private readonly List<Technology> _cachedTechnologies = new List<Technology>();
         private readonly List<UserInfo> _cachedUsers = new List<UserInfo>();
@@ -92,12 +93,18 @@ namespace IntranetMobile.Core.Services
             return _cachedUsers.FirstOrDefault(u => u.ServerId.Equals(id));
         }
 
-        public async Task<User> GetUserById(string id)
+        public async Task<User> GetUserByServerId(string id)
         {
             var path = $"{AllUsersPath}/{id}";
-            //var path = $"/profile/api/cvs/{id}";
-            var user = await _restClient.GetAsync<UserDto>(path);
-            return new User().UpdateFromDto(user);
+            var userDto = await _restClient.GetAsync<UserDto>(path);
+            return new User().UpdateFromDto(userDto);
+        }
+
+        public async Task<UserCvs> GetUserCvsByServerId(string id)
+        {
+            var path = $"{CvsPath}/{id}";
+            var userCvsDto = await _restClient.GetAsync<UserCvsDto>(path);
+            return new UserCvs().UpdateFromDto(userCvsDto);
         }
 
         public UserInfo CurrentUser { get; private set; }

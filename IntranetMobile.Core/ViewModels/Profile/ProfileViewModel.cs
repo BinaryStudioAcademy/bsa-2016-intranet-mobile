@@ -11,33 +11,18 @@ namespace IntranetMobile.Core.ViewModels.Profile
 {
     public class ProfileViewModel : BaseViewModel
     {
+        private bool _achievementsVisibility = true;
+        private bool _certificationsVisibility = true;
         private string _position = string.Empty;
+        private bool _stepsVisibility = true;
         private User _user;
         private string _userId;
-        private bool _certificationsVisibility = true;
-        private bool _achievementsVisibility = true;
-        private bool _stepsVisibility = true;
 
         public ProfileViewModel()
         {
             ChangeAchievementsVisibilityCommand = new MvxCommand(ChangeAchievementsVisibilityCommandExecute);
             ChangeCertificationsVisibilityCommand = new MvxCommand(ChangeCertificationsVisibilityCommandExecute);
             ChangeStepsVisibilityCommand = new MvxCommand(ChangeStepsVisibilityCommandExecute);
-        }
-
-        private void ChangeStepsVisibilityCommandExecute()
-        {
-            StepsVisibility = !_stepsVisibility;
-        }
-
-        private void ChangeCertificationsVisibilityCommandExecute()
-        {
-            CertificationsVisibility = !_certificationsVisibility;
-        }
-
-        private void ChangeAchievementsVisibilityCommandExecute()
-        {
-            AchievementsVisibility = !_achievementsVisibility;
         }
 
         public User User
@@ -47,16 +32,14 @@ namespace IntranetMobile.Core.ViewModels.Profile
             {
                 _user = value;
 
-                InvokeOnMainThread(() =>
-                {
                     RaisePropertyChanged(() => Name);
                     RaisePropertyChanged(() => Surname);
+                RaisePropertyChanged(() => FullName);
                     RaisePropertyChanged(() => Birthday);
                     RaisePropertyChanged(() => Gender);
                     RaisePropertyChanged(() => Country);
                     RaisePropertyChanged(() => HireDate);
                     RaisePropertyChanged(() => AvatarUrl);
-                });
             }
         }
 
@@ -68,36 +51,42 @@ namespace IntranetMobile.Core.ViewModels.Profile
                 _userId = value;
                 Task.Run(async () =>
                 {
-                    User = await ServiceBus.UserService.GetUserById(UserId);
-                    Position = (await ServiceBus.UserService.GetPositionById(User.PositionId))?.Name ?? "?";
+                    User = await ServiceBus.UserService.GetUserByServerId(UserId);
 
-                    UserTechnologyViewModels.Clear();
-                    foreach (var userTechnology in _user.Cv.UserTechnologies.OrderByDescending(t => t.Stars))
+                    var userCvs = await ServiceBus.UserService.GetUserCvsByServerId(UserId);
+                    var userInfo = await ServiceBus.UserService.GetUserInfoById(User.UserId);
+
+                    Position = userInfo?.Department ?? "?";
+
+                    InvokeOnMainThread(() => { UserTechnologyViewModels.Clear(); });
+                    foreach (var technologyCvs in userCvs.UserCv.Technologies.OrderByDescending(t => t.Stars))
                     {
-                        // Same check is used insinde UserTechnologyViewModel to eliminate reference passing and do UserTechnologyViewModel more flexible
-                        var technology = await ServiceBus.UserService.GetTechnologyById(userTechnology.TechnologyId);
-                        if (technology == null)
-                        {
-                            continue;
+                        var userTechnologyViewModel = new UserTechnologyViewModel(technologyCvs.Name,
+                            technologyCvs.Stars);
+                        InvokeOnMainThread(() => { UserTechnologyViewModels.Add(userTechnologyViewModel); });
                         }
-                        var userTechnologyViewModel = new UserTechnologyViewModel(userTechnology.TechnologyId,
-                            userTechnology.Stars);
-                        UserTechnologyViewModels.Add(userTechnologyViewModel);
-                    }
 
-
-                    foreach (var achievementIds in _user.Pdp.AchievementsIds)
+                    foreach (var achievement in _user.Pdp.Achievements)
                     {
-                        var achievement = await ServiceBus.UserService.GetAchievementsById(achievementIds);
-                        var userAchievementVm = new UserAchievementViewModel() {Name = achievement.Name,Category = achievement.Category};
-                        Achievements.Add(userAchievementVm);
+                        var userAchievementVm = new UserAchievementViewModel
+                        {
+                            Name = achievement.Name,
+                            Category = achievement.Category
+                        };
+                        InvokeOnMainThread(() => { Achievements.Add(userAchievementVm); });
                     }
-                    //foreach (var certificationIds in _user.Pdp.CertificationsIds)
-                    //{
-                    //    var userCertificationVm = new UserCertificationViewModel() {Name = certification.Name, Category = certification.Category};
-                    //    Certifications.Add(userCertificationVm);
-                    //}
-                    InvokeOnMainThread(() => RaisePropertyChanged(() => TechnologiesVisibility));
+
+                    foreach (var certification in _user.Pdp.Certifications)
+                    {
+                        var userCertificationVm = new UserCertificationViewModel
+                        {
+                            Name = certification.Name,
+                            Category = certification.Category
+                        };
+                        InvokeOnMainThread(() => { Certifications.Add(userCertificationVm); });
+                    }
+
+                    RaisePropertyChanged(() => TechnologiesVisibility);
                 });
             }
         }
@@ -120,11 +109,12 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public bool TechnologiesVisibility => UserTechnologyViewModels.Count != 0;
 
-        public ObservableCollection<UserTechnologyViewModel> UserTechnologyViewModels { get; set; } =
+        public ObservableCollection<UserTechnologyViewModel> UserTechnologyViewModels { get; } =
             new ObservableCollection<UserTechnologyViewModel>();
 
         public ObservableCollection<UserAchievementViewModel> Achievements { get; set; } = 
             new ObservableCollection<UserAchievementViewModel>();
+
         public ObservableCollection<UserCertificationViewModel> Certifications { get; set; } = 
             new ObservableCollection<UserCertificationViewModel>();
 
@@ -142,11 +132,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
             ? Constants.BaseUrl + User.AvatarUri
             : null;
 
-        public void Init(string userId)
-        {
-            UserId = userId;
-        }
-        public ICommand ChangeAchievementsVisibilityCommand { get;private set; }
+        public ICommand ChangeAchievementsVisibilityCommand { get; private set; }
         public ICommand ChangeCertificationsVisibilityCommand { get; private set; }
         public ICommand ChangeStepsVisibilityCommand { get; private set; }
 
@@ -156,7 +142,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
             set
             {
                 _stepsVisibility = value;
-                RaisePropertyChanged(()=> StepsVisibility);
+                RaisePropertyChanged(() => StepsVisibility);
             }
         }
 
@@ -166,7 +152,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
             set
             {
                 _certificationsVisibility = value;
-                RaisePropertyChanged(()=> CertificationsVisibility);
+                RaisePropertyChanged(() => CertificationsVisibility);
             }
         }
 
@@ -176,8 +162,28 @@ namespace IntranetMobile.Core.ViewModels.Profile
             set
             {
                 _achievementsVisibility = value;
-                RaisePropertyChanged(()=> AchievementsVisibility);
+                RaisePropertyChanged(() => AchievementsVisibility);
             }
+        }
+
+        private void ChangeStepsVisibilityCommandExecute()
+        {
+            StepsVisibility = !_stepsVisibility;
+        }
+
+        private void ChangeCertificationsVisibilityCommandExecute()
+        {
+            CertificationsVisibility = !_certificationsVisibility;
+        }
+
+        private void ChangeAchievementsVisibilityCommandExecute()
+        {
+            AchievementsVisibility = !_achievementsVisibility;
+            }
+
+        public void Init(string userId)
+        {
+            UserId = userId;
         }
     }
 }

@@ -1,285 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_profile_nestedscrollview"
+
+<android.support.v4.widget.NestedScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/activity_profile_nestedscrollview"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="@dimen/activity_horizontal_margin"
+  app:layout_behavior="@string/appbar_scrolling_view_behavior"
+  tools:showIn="@layout/activity_profile">
+  <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_profile">
-    <LinearLayout
-        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants">
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin">
+      <ImageView
+        android:id="@+id/activity_profile_position_imageview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:descendantFocusability="blocksDescendants">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
-            <ImageView
-                android:id="@+id/activity_profile_position_imageview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_grade_black_24dp" />
-            <TextView
-                android:id="@+id/activity_profile_position_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/activity_profile_position_imageview"
-                android:layout_toRightOf="@id/activity_profile_position_imageview"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorText"
-                app:MvxBind="Text Position" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_profile_position_textview"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="8dp"
-                android:layout_toEndOf="@id/activity_profile_position_imageview"
-                android:layout_toRightOf="@id/activity_profile_position_imageview"
-                android:text="Position"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/colorSecondaryText" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
-            <ImageView
-                android:id="@+id/activity_profile_birthday_imageview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_event_black_24dp" />
-            <TextView
-                android:id="@+id/activity_profile_birthday_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/activity_profile_birthday_imageview"
-                android:layout_toRightOf="@id/activity_profile_birthday_imageview"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorText"
-                app:MvxBind="Text Birthday" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_profile_birthday_textview"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="8dp"
-                android:layout_toEndOf="@id/activity_profile_birthday_imageview"
-                android:layout_toRightOf="@id/activity_profile_birthday_imageview"
-                android:text="Birthday"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/colorSecondaryText" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
-            <ImageView
-                android:id="@+id/activity_profile_location_imageview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_my_location_black_24dp" />
-            <TextView
-                android:id="@+id/activity_profile_location_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/activity_profile_location_imageview"
-                android:layout_toRightOf="@id/activity_profile_location_imageview"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorText"
-                app:MvxBind="Text Country" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_profile_location_textview"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="8dp"
-                android:layout_toEndOf="@id/activity_profile_location_imageview"
-                android:layout_toRightOf="@id/activity_profile_location_imageview"
-                android:text="Location"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/colorSecondaryText" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
-            <ImageView
-                android:id="@+id/activity_profile_hire_imageview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_schedule_black_24dp" />
-            <TextView
-                android:id="@+id/activity_profile_hire_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/activity_profile_hire_imageview"
-                android:layout_toRightOf="@id/activity_profile_hire_imageview"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorText"
-                app:MvxBind="Text HireDate" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_profile_hire_textview"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="8dp"
-                android:layout_toEndOf="@id/activity_profile_hire_imageview"
-                android:layout_toRightOf="@id/activity_profile_hire_imageview"
-                android:text="Date hired in Binary Studio"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/colorSecondaryText" />
-        </RelativeLayout>
-        <include
-            layout="@layout/item_divider" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin"
-            app:MvxBind="Visibility BoolToVisibilityConverter(TechnologiesVisibility)">
-            <ImageView
-                android:id="@+id/activity_profile_technologies_imageview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_settings_black_24dp" />
-            <TextView
-                android:id="@+id/activity_profile_technologies_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/activity_profile_technologies_imageview"
-                android:layout_toRightOf="@id/activity_profile_technologies_imageview"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorText"
-                android:text="Technologies" />
-        </RelativeLayout>
-        <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
-            android:id="@+id/content_profile_technologies_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/activity_horizontal_margin"
-            app:MvxItemTemplate="@layout/item_technology"
-            app:MvxBind="ItemsSource UserTechnologyViewModels; Visibility BoolToVisibilityConverter(TechnologiesVisibility)" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:MvxBind="Visibility BoolToVisibilityConverter(TechnologiesVisibility)">
-            <include
-                layout="@layout/item_divider" />
-        </LinearLayout>
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_grade_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_position_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_position_imageview"
+        android:layout_toRightOf="@id/activity_profile_position_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        app:MvxBind="Text Position" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_profile_position_textview"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/activity_profile_position_imageview"
+        android:layout_toRightOf="@id/activity_profile_position_imageview"
+        android:text="Position"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorSecondaryText" />
+    </RelativeLayout>
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin">
+      <ImageView
+        android:id="@+id/activity_profile_birthday_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_event_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_birthday_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_birthday_imageview"
+        android:layout_toRightOf="@id/activity_profile_birthday_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        app:MvxBind="Text Birthday" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_profile_birthday_textview"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/activity_profile_birthday_imageview"
+        android:layout_toRightOf="@id/activity_profile_birthday_imageview"
+        android:text="Birthday"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorSecondaryText" />
+    </RelativeLayout>
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin">
+      <ImageView
+        android:id="@+id/activity_profile_location_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_my_location_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_location_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_location_imageview"
+        android:layout_toRightOf="@id/activity_profile_location_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        app:MvxBind="Text Country" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_profile_location_textview"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/activity_profile_location_imageview"
+        android:layout_toRightOf="@id/activity_profile_location_imageview"
+        android:text="Location"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorSecondaryText" />
+    </RelativeLayout>
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin">
+      <ImageView
+        android:id="@+id/activity_profile_hire_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_schedule_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_hire_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_hire_imageview"
+        android:layout_toRightOf="@id/activity_profile_hire_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        app:MvxBind="Text HireDate" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_profile_hire_textview"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/activity_profile_hire_imageview"
+        android:layout_toRightOf="@id/activity_profile_hire_imageview"
+        android:text="Date hired in Binary Studio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorSecondaryText" />
+    </RelativeLayout>
+    <include
+      layout="@layout/item_divider" />
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:padding="@dimen/activity_horizontal_margin"
+      app:MvxBind="Visibility BoolToVisibilityConverter(TechnologiesVisibility)">
+      <ImageView
+        android:id="@+id/activity_profile_technologies_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_settings_black_24dp" />
+      <TextView
+        android:id="@+id/activity_profile_technologies_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@id/activity_profile_technologies_imageview"
+        android:layout_toRightOf="@id/activity_profile_technologies_imageview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorText"
+        android:text="Technologies" />
+    </RelativeLayout>
+    <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+      android:id="@+id/content_profile_technologies_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/activity_horizontal_margin"
+      app:MvxItemTemplate="@layout/item_technology"
+      app:MvxBind="ItemsSource UserTechnologyViewModels; Visibility BoolToVisibilityConverter(TechnologiesVisibility)" />
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:MvxBind="Visibility BoolToVisibilityConverter(TechnologiesVisibility)">
+      <include
+        layout="@layout/item_divider" />
+    </LinearLayout>
     <!--PDP_FLOW-->
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="48dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Certifications"
-                    android:layout_weight="1" />
-                <Mvx.MvxImageView
-                    android:layout_weight="0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/icon_padding"
-                    android:layout_gravity="center_vertical|right"
-                    app:MvxBind="DrawableName BoolToArrowIconConverter(CertificationsVisibility); Click ChangeCertificationsVisibilityCommand" />
-            </LinearLayout>
-        <Mvx.MvxListView
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_vertical">
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Certifications"
+          android:layout_weight="1" />
+        <Mvx.MvxImageView
+          android:layout_weight="0"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/icon_padding"
+          android:layout_gravity="center_vertical|right"
+          app:MvxBind="DrawableName BoolToArrowIconConverter(CertificationsVisibility); Click ChangeCertificationsVisibilityCommand" />
+      </LinearLayout>
+      <Mvx.MvxListView
         android:id="@+id/weeklies_recycler_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:MvxItemTemplate="@layout/item_certification"
         app:MvxBind="ItemsSource Certifications; Visibility BoolToVisibilityConverter(CertificationsVisibility)" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="48dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Achievements"
-                    android:layout_weight="1" />
-                <Mvx.MvxImageView
-                    android:layout_weight="0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/icon_padding"
-                    android:layout_gravity="center_vertical|right"
-                    app:MvxBind="DrawableName BoolToArrowIconConverter(AchievementsVisibility); Click ChangeAchievementsVisibilityCommand" />
-            </LinearLayout>
-        <Mvx.MvxListView
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Achievements"
+          android:layout_weight="1" />
+        <Mvx.MvxImageView
+          android:layout_weight="0"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/icon_padding"
+          android:layout_gravity="center_vertical|right"
+          app:MvxBind="DrawableName BoolToArrowIconConverter(AchievementsVisibility); Click ChangeAchievementsVisibilityCommand" />
+      </LinearLayout>
+      <Mvx.MvxListView
         android:id="@+id/weeklies_recycler_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:MvxItemTemplate="@layout/item_achievement"
         app:MvxBind="ItemsSource Achievements; Visibility BoolToVisibilityConverter(AchievementsVisibility)" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="48dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Steps needed to reach the next position"
-                    android:layout_weight="1" />
-                <Mvx.MvxImageView
-                    android:layout_weight="0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/icon_padding"
-                    android:layout_gravity="center_vertical|right"
-                    app:MvxBind="DrawableName BoolToArrowIconConverter(StepsVisibility); Click ChangeStepsVisibilityCommand" />
-            </LinearLayout>
-        <!-- TODO: Inset item Steps needed to reach the next position-->
-        </LinearLayout>
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Steps needed to reach the next position"
+          android:layout_weight="1" />
+        <Mvx.MvxImageView
+          android:layout_weight="0"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/icon_padding"
+          android:layout_gravity="center_vertical|right"
+          app:MvxBind="DrawableName BoolToArrowIconConverter(StepsVisibility); Click ChangeStepsVisibilityCommand" />
+      </LinearLayout>
+      <!-- TODO: Inset item Steps needed to reach the next position-->
     </LinearLayout>
+  </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
