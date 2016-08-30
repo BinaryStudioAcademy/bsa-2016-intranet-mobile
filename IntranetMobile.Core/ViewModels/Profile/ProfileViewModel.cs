@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IntranetMobile.Core.Models;
@@ -52,18 +52,52 @@ namespace IntranetMobile.Core.ViewModels.Profile
                 Task.Run(async () =>
                 {
                     User = await ServiceBus.UserService.GetUserByServerId(UserId);
-                    
+
                     var userCvs = await ServiceBus.UserService.GetUserCvsByServerId(UserId);
                     var userInfo = await ServiceBus.UserService.GetUserInfoById(User.UserId);
 
                     Position = userInfo?.Department ?? "?";
 
-                    InvokeOnMainThread(() => { UserTechnologyViewModels.Clear(); });
-                    foreach (var technologyCvs in userCvs.UserCv.Technologies.OrderByDescending(t => t.Stars))
+                    InvokeOnMainThread(() => { UserTechnologyCategoryViewModels.Clear(); });
+
+                    var technologyCategoryIds = new Dictionary<string, UserTechnologyCategoryViewModel>();
+                    foreach (var technologyCvs in userCvs.UserCv.Technologies)
                     {
-                        var userTechnologyViewModel = new UserTechnologyViewModel(technologyCvs.Name,
-                            technologyCvs.Stars);
-                        InvokeOnMainThread(() => { UserTechnologyViewModels.Add(userTechnologyViewModel); });
+                        if (!technologyCategoryIds.ContainsKey(technologyCvs.Category.Id))
+                        {
+                            var userTechnologyCategoryViewModel = new UserTechnologyCategoryViewModel
+                            {
+                                Name = technologyCvs.Category.Name
+                            };
+                            technologyCategoryIds.Add(technologyCvs.Category.Id, userTechnologyCategoryViewModel);
+
+                            // TODO: Currently replaced with awful approach below
+                            //InvokeOnMainThread(
+                            //    () => { UserTechnologyCategoryViewModels.Add(userTechnologyCategoryViewModel); });
+                        }
+
+                        InvokeOnMainThread(() =>
+                        {
+                            technologyCategoryIds[technologyCvs.Category.Id].UserTechnologyViewModels.Add(
+                                new UserTechnologyViewModel(technologyCvs.Name, technologyCvs.Stars));
+                        });
+                    }
+
+                    // TODO: Awful approach suggested due to Nested ListViews are poorly supported.
+                    // TODO: Anyway, UserTechnologyCategoryViewModel has propriate collection of user technologies to create nested binding in future.
+                    foreach (var userTechnologyCategoryViewModel in technologyCategoryIds)
+                    {
+                        InvokeOnMainThread(
+                            () =>
+                            {
+                                UserTechnologyCategoryViewModels.Add(userTechnologyCategoryViewModel.Value);
+                                foreach (
+                                    var userTechnologyViewModel in
+                                        userTechnologyCategoryViewModel.Value.UserTechnologyViewModels)
+                                {
+                                    UserTechnologyCategoryViewModels.Add(userTechnologyViewModel);
+                                }
+                            });
                     }
 
                     foreach (var achievement in _user.Pdp.Achievements)
@@ -107,10 +141,10 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string HireDate => (User?.HireDate ?? default(DateTime)).ToString("dd MM yyyy");
 
-        public bool TechnologiesVisibility => UserTechnologyViewModels.Count != 0;
+        public bool TechnologiesVisibility => UserTechnologyCategoryViewModels.Count != 0;
 
-        public ObservableCollection<UserTechnologyViewModel> UserTechnologyViewModels { get; } =
-            new ObservableCollection<UserTechnologyViewModel>();
+        public ObservableCollection<BaseViewModel> UserTechnologyCategoryViewModels { get; } =
+            new ObservableCollection<BaseViewModel>();
 
         public ObservableCollection<UserAchievementViewModel> Achievements { get; set; } =
             new ObservableCollection<UserAchievementViewModel>();

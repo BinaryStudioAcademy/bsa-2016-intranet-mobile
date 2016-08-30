@@ -382,6 +382,9 @@
     <AndroidResource Include="Resources\layout\item_certification.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_technology_category.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
@@ -422,6 +425,10 @@
       <Version>23.4.0.1</Version>
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamandroidsupportv7gridlayout">
+      <Visible>False</Visible>
+      <Version>23.4.0.1</Version>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="xamandroidsupportv7recyclerview">
       <Visible>False</Visible>
       <Version>23.4.0.1</Version>
     </XamarinComponentReference>

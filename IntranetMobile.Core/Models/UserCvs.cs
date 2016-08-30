@@ -54,10 +54,12 @@ namespace IntranetMobile.Core.Models
 
     public class CategoryCvs
     {
+        public string Id { get; set; }
         public string Name { get; set; }
 
         public CategoryCvs UpdateFromDto(CategoryCvsDto categoryCvsDto)
         {
+            Id = categoryCvsDto.Id;
             Name = categoryCvsDto.Name;
 
             return this;
