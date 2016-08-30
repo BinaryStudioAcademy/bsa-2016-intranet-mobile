@@ -100,6 +100,9 @@
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\WindowsDeviceInfo.cs" />
     <Compile Include="Services\WindowsLogger.cs" />
+    <Compile Include="Views\AsciitPage.xaml.cs">
+      <DependentUpon>AsciitPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\Controls\MenuItemControl.xaml.cs">
       <DependentUpon>MenuItemControl.xaml</DependentUpon>
@@ -154,6 +157,7 @@
     <Content Include="Images\home_black.png" />
     <Content Include="Images\logo_black_1.png" />
     <Content Include="Images\news_default.png" />
+    <Content Include="Images\not_ready.png" />
     <Content Include="Images\settings_black.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -169,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\AsciitPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\MenuItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -12,6 +12,7 @@ namespace IntranetMobile.Core.ViewModels
     {
         private string _avatarUrl;
         private string _userName;
+        private string _email;
 
         public MenuViewModel()
         {
@@ -27,6 +28,16 @@ namespace IntranetMobile.Core.ViewModels
             {
                 _userName = value;
                 RaisePropertyChanged(() => UserName);
+            }
+        }
+
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                RaisePropertyChanged(() => Email);
             }
         }
 
@@ -61,7 +72,12 @@ namespace IntranetMobile.Core.ViewModels
             ShowViewModel<UsersViewModel>();
         }
 
-        public async void Logout()
+        public void ShowAsciit()
+        {
+            ShowViewModel<AsciitViewModel>();
+        }
+
+        public void Logout()
         {
             ServiceBus.AlertService.ShowDialogBox("Are you sure?",
                 "You will be logged out and your stored credentials will be removed",
@@ -84,7 +100,8 @@ namespace IntranetMobile.Core.ViewModels
             base.Start();
 
             var user = await ServiceBus.UserService.GetCurrentUserAsync();
-            UserName = user.Email;
+            UserName = user.FullName;
+            Email = user.Email;
             AvatarUrl = Constants.BaseUrl + user.AvatarUri;
         }
     }

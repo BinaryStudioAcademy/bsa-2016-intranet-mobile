@@ -267,6 +267,7 @@
     <Compile Include="Views\Fragments\BaseFragment.cs" />
     <Compile Include="Views\Fragments\SettingsFragment.cs" />
     <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Views\Fragments\AsciitFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -375,6 +376,8 @@
     <AndroidResource Include="Resources\layout\item_technology.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable-nodpi\not_ready.png" />
+    <AndroidResource Include="Resources\layout\fragment_asciit.axml" />
     <AndroidResource Include="Resources\layout\item_achievement.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

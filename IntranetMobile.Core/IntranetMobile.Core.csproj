@@ -112,6 +112,7 @@
     <Compile Include="Interfaces\ISettingsService.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\Dtos\UserInfoDto.cs" />
+    <Compile Include="ViewModels\AsciitViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">

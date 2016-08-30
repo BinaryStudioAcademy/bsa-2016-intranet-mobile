@@ -41,7 +41,8 @@
                 android:text="Additional info"
                 android:textSize="14sp"
                 android:textStyle="normal"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                app:MvxBind="Text Email" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
