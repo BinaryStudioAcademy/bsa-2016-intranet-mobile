@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Graphics;
@@ -18,6 +19,10 @@ namespace IntranetMobile.Droid.Views.Util
     {
         private const string _picCacheDir = "_Caches/Pictures/";
 
+        private const int MaxMemoryCacheSize = 40;
+
+        private const int CacheFileExpirationDays = 3;
+
         #region ImageState enum
 
         public enum ImageState
@@ -31,7 +36,9 @@ namespace IntranetMobile.Droid.Views.Util
 
         private static ConcurrentDictionary<string, Bitmap> _localFilesCache;
 
-        private static ConcurrentDictionary<string, Bitmap> _remoteFilesCache;
+        private static ConcurrentDictionary<string, CacheItem> _remoteFilesCache;
+
+        private static bool IsCacheInitialized;
 
         private CancellationTokenSource _cancellationSource;
 
@@ -99,17 +106,37 @@ namespace IntranetMobile.Droid.Views.Util
 
         public MvxDynamicCompressedBitmapHelper()
         {
-            var fileService = MvxFileStoreHelper.SafeGetFileStore();
-            fileService.EnsureFolderExists(_picCacheDir);
-
-            if (_localFilesCache == null)
+            if (!IsCacheInitialized)
             {
-                _localFilesCache = new ConcurrentDictionary<string, Bitmap>();
-            }
+                var fileService = MvxFileStoreHelper.SafeGetFileStore();
+                fileService.EnsureFolderExists(_picCacheDir);
 
-            if (_remoteFilesCache == null)
-            {
-                _remoteFilesCache = new ConcurrentDictionary<string, Bitmap>();
+                // Remove old cached files
+                var cacheFiles = fileService.GetFilesIn(_picCacheDir);
+                if (cacheFiles != null)
+                {
+                    var expiredDay = DateTime.Now.AddDays(-CacheFileExpirationDays);
+                    foreach (var file in cacheFiles)
+                    {
+                        var createdAt = System.IO.File.GetCreationTime(file);
+                        if (createdAt < expiredDay)
+                        {
+                            fileService.DeleteFile(file);
+                        }
+                    }
+                }
+
+                if (_localFilesCache == null)
+                {
+                    _localFilesCache = new ConcurrentDictionary<string, Bitmap>();
+                }
+
+                if (_remoteFilesCache == null)
+                {
+                    _remoteFilesCache = new ConcurrentDictionary<string, CacheItem>();
+                }
+
+                IsCacheInitialized = true;
             }
         }
 
@@ -136,8 +163,6 @@ namespace IntranetMobile.Droid.Views.Util
             var cancelToken = cancelTokenSource.Token;
             _cancellationSource = cancelTokenSource;
 
-            FireImageChanged(null);
-
             if (string.IsNullOrEmpty(imageSource))
             {
                 await ShowDefaultImage().ConfigureAwait(false);
@@ -146,14 +171,23 @@ namespace IntranetMobile.Droid.Views.Util
 
             if (imageSource.ToUpper().StartsWith("HTTP"))
             {
-                await NewHttpImageRequestedAsync().ConfigureAwait(false);
-
                 var error = false;
                 try
                 {
                     if (cancelToken.IsCancellationRequested)
                     {
                         return;
+                    }
+
+                    if (_remoteFilesCache.ContainsKey(imageSource))
+                    {
+                        NewImageAvailable(_remoteFilesCache[imageSource].Image);
+                        return;
+                    }
+                    else
+                    {
+                        _currentImageState = ImageState.DefaultShown;
+                        FireImageChanged(null);
                     }
 
                     var image = await GetBitmap(imageSource);
@@ -191,8 +225,14 @@ namespace IntranetMobile.Droid.Views.Util
                             }, cancelToken).ConfigureAwait(false);
                         }
 
-                        //_remoteFilesCache.TryAdd(imageSource, image);
-                        NewImageAvailable(image);
+                        _remoteFilesCache.TryAdd(imageSource, new CacheItem
+                        {
+                            AddedAt = DateTime.Now,
+                            Image = resultingBitmap
+                        });
+                        CheckRemoteCache();
+
+                        NewImageAvailable(resultingBitmap);
                     }
                 }
                 catch (Exception ex)
@@ -348,8 +388,28 @@ namespace IntranetMobile.Droid.Views.Util
             return image;
         }
 
+        private void CheckRemoteCache()
+        {
+            if (_remoteFilesCache.Count > MaxMemoryCacheSize)
+            {
+                var itemsToDelete = _remoteFilesCache.OrderBy(i => i.Value.AddedAt).Take(10);
+                foreach (var item in itemsToDelete)
+                {
+                    CacheItem removed;
+                    _remoteFilesCache.TryRemove(item.Key, out removed);
+                }
+            }
+        }
+
         protected virtual void Dispose(bool isDisposing)
         {
+        }
+
+        private class CacheItem
+        {
+            public DateTime AddedAt { get; set; }
+
+            public Bitmap Image { get; set; }
         }
     }
 }
