@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using IntranetMobile.Core.Models.Dtos;
 
@@ -8,6 +7,8 @@ namespace IntranetMobile.Core.Models
 {
     public class User : Persist
     {
+        public string Id { get; set; }
+
         public string UserId { get; set; }
 
         public UserPdp Pdp { get; set; }
@@ -44,6 +45,7 @@ namespace IntranetMobile.Core.Models
 
         public User UpdateFromDto(UserDto userDto)
         {
+            Id = userDto.Id;
             UserId = userDto.ServerUserId;
             FirstName = userDto.Name;
             LastName = userDto.Surname;
@@ -58,7 +60,7 @@ namespace IntranetMobile.Core.Models
             HireDate = DateTime.Parse(userDto.WorkDate);
             Pdp = new UserPdp().UpdateFromDto(userDto.UserPdp);
             Cv = new UserCv().UpdateFromDto(userDto.UserCv);
-            
+
             // For fluent interface purposes
             return this;
         }
@@ -74,8 +76,8 @@ namespace IntranetMobile.Core.Models
         public object[] Tests { get; set; }
 
         public Technology2[] Technologies { get; set; }
-        public List<Achievement> Achievements { get;} = new List<Achievement>();
-        public List<Certification> Certifications { get;} = new List<Certification>();
+        public List<Achievement> Achievements { get; } = new List<Achievement>();
+        public List<Certification> Certifications { get; } = new List<Certification>();
 
         public bool IsDeleted { get; set; }
 
@@ -89,13 +91,14 @@ namespace IntranetMobile.Core.Models
         {
             Position = userPdpDto.Position;
             Direction = userPdpDto.Direction;
-           
+
             Technologies = userPdpDto.Technologies.Select(tech => new Technology2().UpdateFromDto(tech)).ToArray();
-           
-                if (userPdpDto.CompletedCertifications != null)
-                    Certifications.AddRange(userPdpDto.CompletedCertifications.Select(cer => new Certification().UpdateFromDto(cer)));
-                if (userPdpDto.Achievements != null)
-                    Achievements.AddRange(userPdpDto.Achievements.Select(ach => new Achievement().UpdateFromDto(ach)));
+
+            if (userPdpDto.CompletedCertifications != null)
+                Certifications.AddRange(
+                    userPdpDto.CompletedCertifications.Select(cer => new Certification().UpdateFromDto(cer)));
+            if (userPdpDto.Achievements != null)
+                Achievements.AddRange(userPdpDto.Achievements.Select(ach => new Achievement().UpdateFromDto(ach)));
 
             IsDeleted = userPdpDto.IsDeleted;
             // TODO: Use DateTime?
@@ -120,7 +123,7 @@ namespace IntranetMobile.Core.Models
             Id = achievementDto.Id;
             Name = achievementDto.Name;
             //TODO: when categories will be noraml try catch can be removed
-            Category = Category!=null ? achievementDto.Category.Name : "NULL";
+            Category = Category != null ? achievementDto.Category.Name : "NULL";
 
             return this;
         }
@@ -131,6 +134,7 @@ namespace IntranetMobile.Core.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
+
         public Certification UpdateFromDto(CompletedCertificationDto completedCertificationDto)
         {
             Id = completedCertificationDto.Id;

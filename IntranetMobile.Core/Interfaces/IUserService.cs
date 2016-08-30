@@ -14,7 +14,7 @@ namespace IntranetMobile.Core.Interfaces
 
         Task<UserInfo> GetUserInfoById(string id);
 
-        Task<User> GetUserById(string id);
+        Task<User> GetUserByServerId(string id);
 
         Task<Position> GetPositionById(string id);
 
@@ -23,5 +23,7 @@ namespace IntranetMobile.Core.Interfaces
         Task<Technology> GetTechnologyById(string id);
 
         Task<List<Technology>> GetAllTechnologies();
+
+        Task<UserCvs> GetUserCvsByServerId(string id);
     }
 }
