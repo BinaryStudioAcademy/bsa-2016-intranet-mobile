@@ -58,7 +58,7 @@ namespace IntranetMobile.Core.Models
             HireDate = DateTime.Parse(userDto.WorkDate);
             Pdp = new UserPdp().UpdateFromDto(userDto.UserPdp);
             Cv = new UserCv().UpdateFromDto(userDto.UserCv);
-
+            
             // For fluent interface purposes
             return this;
         }
@@ -89,20 +89,13 @@ namespace IntranetMobile.Core.Models
         {
             Position = userPdpDto.Position;
             Direction = userPdpDto.Direction;
+           
             Technologies = userPdpDto.Technologies.Select(tech => new Technology2().UpdateFromDto(tech)).ToArray();
            
-            try
-            {
                 if (userPdpDto.CompletedCertifications != null)
                     Certifications.AddRange(userPdpDto.CompletedCertifications.Select(cer => new Certification().UpdateFromDto(cer)));
                 if (userPdpDto.Achievements != null)
                     Achievements.AddRange(userPdpDto.Achievements.Select(ach => new Achievement().UpdateFromDto(ach)));
-            }
-            catch (Exception e)
-            {
-                var a = e.Message;
-                throw;
-            }
 
             IsDeleted = userPdpDto.IsDeleted;
             // TODO: Use DateTime?
@@ -122,12 +115,12 @@ namespace IntranetMobile.Core.Models
         public string Name { get; set; }
         public string Category { get; set; }
 
-        public Achievement UpdateFromDto(AchievementDto AchievementDto)
+        public Achievement UpdateFromDto(AchievementDto achievementDto)
         {
-            Id = AchievementDto.Id;
-            Name = AchievementDto.Name;
+            Id = achievementDto.Id;
+            Name = achievementDto.Name;
             //TODO: when categories will be noraml try catch can be removed
-            Category = Category!=null ? AchievementDto.Category.Name : "NULL";
+            Category = Category!=null ? achievementDto.Category.Name : "NULL";
 
             return this;
         }

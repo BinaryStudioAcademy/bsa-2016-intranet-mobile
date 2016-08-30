@@ -86,13 +86,13 @@ namespace IntranetMobile.Core.ViewModels.Profile
                     }
                     foreach (var achievement in _user.Pdp.Achievements)
                     {
-                        var userAchievementVM = new UserAchievementViewModel() {Name = achievement.Name,Category = achievement.Category};
-                        Achievements.Add(userAchievementVM);
+                        var userAchievementVm = new UserAchievementViewModel() {Name = achievement.Name,Category = achievement.Category};
+                        Achievements.Add(userAchievementVm);
                     }
                     foreach (var certification in _user.Pdp.Certifications)
                     {
-                        var userCertificationVM = new UserCertificationViewModel() {Name = certification.Name, Category = certification.Category};
-                        Certifications.Add(userCertificationVM);
+                        var userCertificationVm = new UserCertificationViewModel() {Name = certification.Name, Category = certification.Category};
+                        Certifications.Add(userCertificationVm);
                     }
                     InvokeOnMainThread(() => RaisePropertyChanged(() => TechnologiesVisibility));
                 });

@@ -7,6 +7,7 @@ namespace IntranetMobile.Core.Models
     public class UserInfo : Persist
     {
         public string UserId { get; set; }
+        public string ServerId { get; set; }
 
         public string FullName { get; set; }
 
@@ -18,11 +19,12 @@ namespace IntranetMobile.Core.Models
 
         public UserInfo UpdateFromDto(UserInfoDto userDto)
         {
-            UserId = userDto.ServerId;
+            UserId = userDto.Id;
+            ServerId = userDto.ServerId;
             FullName = userDto.Name;
             AvatarUri = userDto.Avatar;
             Department = userDto.Department;
-
+            //UserServerId = userDto.ServerId;
             // For fluent interface purposes
             return this;
         }

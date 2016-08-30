@@ -67,7 +67,7 @@ namespace IntranetMobile.Core.Services
 
             _cachedUsers.AddRange(userInfoDtos.Select(userDto => new UserInfo().UpdateFromDto(userDto)));
 
-            CurrentUser = _cachedUsers.FirstOrDefault(u => u.UserId == currentUserDto.Id);
+            CurrentUser = _cachedUsers.FirstOrDefault(u => u.ServerId == currentUserDto.Id);
             CurrentUser.Email = currentUserDto?.Email;
 
             _semaphoreAllUser.Release();
@@ -86,12 +86,15 @@ namespace IntranetMobile.Core.Services
             {
                 await GetAllUsers();
             }
-            return _cachedUsers.FirstOrDefault(u => u.UserId.Equals(id));
+            return _cachedUsers.FirstOrDefault(u => u.ServerId.Equals(id));
         }
 
         public async Task<User> GetUserById(string id)
         {
-            return null;// GET /profile/api/cvs/<user_id>
+            var path = $"{AllUsersPath}/{id}";
+            //var path = $"/profile/api/cvs/{id}";
+            var user = await _restClient.GetAsync<UserDto>(path);
+            return new User().UpdateFromDto(user);
         }
 
         public UserInfo CurrentUser { get; private set; }

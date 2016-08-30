@@ -58,7 +58,7 @@ namespace IntranetMobile.Core.ViewModels.News
             if (string.IsNullOrWhiteSpace(NewComment))
                 return;
             
-            await ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
+            await ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.ServerId, NewComment, _newsId);
             NewComment = "";
 
             GetComments();

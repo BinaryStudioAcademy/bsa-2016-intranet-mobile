@@ -82,7 +82,7 @@ namespace IntranetMobile.Core.ViewModels.News
                 Task.Run(async () =>
                 {
                     var user = await ServiceBus.UserService.GetCurrentUserAsync();
-                    IsLiked = _dataModel.Likes.Contains(user.UserId);
+                    IsLiked = _dataModel.Likes.Contains(user.ServerId);
                 });
 
                 return _isLiked;
