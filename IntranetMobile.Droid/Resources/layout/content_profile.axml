@@ -165,8 +165,13 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorSecondaryText" />
         </RelativeLayout>
-        <include
-            layout="@layout/item_divider" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:MvxBind="Visibility BoolToVisibilityConverter(TechnologiesVisibility)">
+            <include
+                layout="@layout/item_divider" />
+        </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -204,7 +209,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:MvxBind="Visibility BoolToVisibilityConverter(TechnologiesVisibility)">
+            app:MvxBind="Visibility BoolToVisibilityConverter(CertificationsVisibility)">
             <include
                 layout="@layout/item_divider" />
         </LinearLayout>
@@ -245,7 +250,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:MvxBind="Visibility BoolToVisibilityConverter(CertificationsVisibility)">
+            app:MvxBind="Visibility BoolToVisibilityConverter(AchievementsVisibility)">
             <include
                 layout="@layout/item_divider" />
         </LinearLayout>
