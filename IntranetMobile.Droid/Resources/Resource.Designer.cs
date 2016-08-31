@@ -4118,7 +4118,7 @@ namespace IntranetMobile.Droid
 			public const int content_frame = 2131165300;
 			
 			// aapt resource value: 0x7f070089
-			public const int content_profile_technologies_recycler_view = 2131165321;
+			public const int content_profile_technology_categories_recyclerview = 2131165321;
 			
 			// aapt resource value: 0x7f070056
 			public const int custom = 2131165270;
