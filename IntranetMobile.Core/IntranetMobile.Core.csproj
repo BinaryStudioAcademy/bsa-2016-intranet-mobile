@@ -110,6 +110,7 @@
     <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
     <Compile Include="Models\Dtos\CommentRequestDto.cs" />
     <Compile Include="Models\Dtos\CommentsResponseDto.cs" />
+    <Compile Include="ViewModels\Reviewer\TagViewModel.cs" />
     <Compile Include="ViewModels\Reviewer\TicketDetailsViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="Models\Settings.cs" />
