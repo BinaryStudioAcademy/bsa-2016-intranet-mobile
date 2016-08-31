@@ -77,7 +77,7 @@ namespace IntranetMobile.Droid.Views.Fragments
                 }
                 case Resource.Id.nav_reviewer:
                 {
-                    ViewModel.ShowNews();
+                    ViewModel.ShowReviewer();
                     break;
                 }
                 case Resource.Id.nav_profile:

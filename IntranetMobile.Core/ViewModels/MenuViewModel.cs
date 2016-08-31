@@ -3,6 +3,7 @@ using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Login;
 using IntranetMobile.Core.ViewModels.News;
 using IntranetMobile.Core.ViewModels.Profile;
+using IntranetMobile.Core.ViewModels.Reviewer;
 using IntranetMobile.Core.ViewModels.Settings;
 using MvvmCross.Core.ViewModels;
 
@@ -75,6 +76,11 @@ namespace IntranetMobile.Core.ViewModels
         public void ShowAsciit()
         {
             ShowViewModel<AsciitViewModel>();
+        }
+
+        public void ShowReviewer()
+        {
+            ShowViewModel<ReviewerViewModel>();
         }
 
         public void Logout()
