@@ -16,7 +16,7 @@
             android:layout_height="34dp"
             android:maxWidth="34dp"
             android:maxHeight="34dp"
-            app:MvxBind="ImageUrl PreviewImageUri; DefaultImagePath 'res:user_default_100'" />
+            app:MvxBind="ImageUrl PreviewImageUri" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"

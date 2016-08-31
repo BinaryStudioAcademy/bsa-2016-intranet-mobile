@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.v4.widget.NestedScrollView
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/activity_profile_nestedscrollview"
@@ -197,12 +195,12 @@
         android:text="Technologies" />
     </RelativeLayout>
     <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
-      android:id="@+id/content_profile_technologies_recycler_view"
+            android:id="@+id/content_profile_technology_categories_recyclerview"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
       android:padding="@dimen/activity_horizontal_margin"
-      app:MvxItemTemplate="@layout/item_technology"
-      app:MvxBind="ItemsSource UserTechnologyViewModels; Visibility BoolToVisibilityConverter(TechnologiesVisibility)" />
+            app:MvxBind="ItemsSource UserTechnologyCategoryViewModels; Visibility BoolToVisibilityConverter(TechnologiesVisibility)" />
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -211,8 +209,8 @@
         layout="@layout/item_divider" />
     </LinearLayout>
     <!--PDP_FLOW-->
-      <LinearLayout  
-        android:orientation="vertical"
+    <LinearLayout
+      android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
       <LinearLayout
@@ -235,8 +233,8 @@
           app:MvxBind="DrawableName BoolToArrowIconConverter(CertificationsVisibility); Click ChangeCertificationsVisibilityCommand" />
       </LinearLayout>
         <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
-           android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
       android:padding="@dimen/activity_horizontal_margin"
         app:MvxItemTemplate="@layout/item_certification"
         app:MvxBind="ItemsSource Certifications; Visibility BoolToVisibilityConverter(CertificationsVisibility)" />
@@ -263,8 +261,8 @@
           app:MvxBind="DrawableName BoolToArrowIconConverter(AchievementsVisibility); Click ChangeAchievementsVisibilityCommand" />
       </LinearLayout>
       <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
-           android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
       android:padding="@dimen/activity_horizontal_margin"
         app:MvxItemTemplate="@layout/item_achievement"
         app:MvxBind="ItemsSource Achievements; Visibility BoolToVisibilityConverter(AchievementsVisibility)" />

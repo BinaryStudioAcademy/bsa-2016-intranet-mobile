@@ -100,6 +100,7 @@
     <Compile Include="ViewModels\Profile\UserAchievementViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserCertificationViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserStepsViewModel.cs" />
+    <Compile Include="ViewModels\Profile\UserTechnologyCategoryViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserTechnologyViewModel.cs" />
     <Compile Include="ViewModels\Profile\UsersViewModel.cs" />
     <Compile Include="ViewModels\Profile\UserItemViewModel.cs" />

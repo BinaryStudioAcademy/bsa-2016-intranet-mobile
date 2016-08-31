@@ -5,10 +5,6 @@
         private int _stars;
         private string _technologyName;
 
-        public UserTechnologyViewModel()
-        {
-        }
-
         public UserTechnologyViewModel(string technologyName, int stars)
         {
             Init(technologyName, stars);

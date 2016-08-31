@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Graphics;
+using IntranetMobile.Core.Services;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
@@ -13,6 +17,12 @@ namespace IntranetMobile.Droid.Views.Util
     public class MvxDynamicCompressedBitmapHelper
         : IMvxImageHelper<Bitmap>
     {
+        private const string _picCacheDir = "_Caches/Pictures/";
+
+        private const int MaxMemoryCacheSize = 40;
+
+        private const int CacheFileExpirationDays = 3;
+
         #region ImageState enum
 
         public enum ImageState
@@ -23,6 +33,12 @@ namespace IntranetMobile.Droid.Views.Util
         }
 
         #endregion ImageState enum
+
+        private static ConcurrentDictionary<string, Bitmap> _localFilesCache;
+
+        private static ConcurrentDictionary<string, CacheItem> _remoteFilesCache;
+
+        private static bool IsCacheInitialized;
 
         private CancellationTokenSource _cancellationSource;
 
@@ -88,6 +104,42 @@ namespace IntranetMobile.Droid.Views.Util
         public int MaxWidth { get; set; }
         public int MaxHeight { get; set; }
 
+        public MvxDynamicCompressedBitmapHelper()
+        {
+            if (!IsCacheInitialized)
+            {
+                var fileService = MvxFileStoreHelper.SafeGetFileStore();
+                fileService.EnsureFolderExists(_picCacheDir);
+
+                // Remove old cached files
+                var cacheFiles = fileService.GetFilesIn(_picCacheDir);
+                if (cacheFiles != null)
+                {
+                    var expiredDay = DateTime.Now.AddDays(-CacheFileExpirationDays);
+                    foreach (var file in cacheFiles)
+                    {
+                        var createdAt = System.IO.File.GetCreationTime(file);
+                        if (createdAt < expiredDay)
+                        {
+                            fileService.DeleteFile(file);
+                        }
+                    }
+                }
+
+                if (_localFilesCache == null)
+                {
+                    _localFilesCache = new ConcurrentDictionary<string, Bitmap>();
+                }
+
+                if (_remoteFilesCache == null)
+                {
+                    _remoteFilesCache = new ConcurrentDictionary<string, CacheItem>();
+                }
+
+                IsCacheInitialized = true;
+            }
+        }
+
         ~MvxDynamicCompressedBitmapHelper()
         {
             Dispose(false);
@@ -111,8 +163,6 @@ namespace IntranetMobile.Droid.Views.Util
             var cancelToken = cancelTokenSource.Token;
             _cancellationSource = cancelTokenSource;
 
-            FireImageChanged(null);
-
             if (string.IsNullOrEmpty(imageSource))
             {
                 await ShowDefaultImage().ConfigureAwait(false);
@@ -121,27 +171,40 @@ namespace IntranetMobile.Droid.Views.Util
 
             if (imageSource.ToUpper().StartsWith("HTTP"))
             {
-                await NewHttpImageRequestedAsync().ConfigureAwait(false);
-
                 var error = false;
                 try
                 {
-                    var cache = Mvx.Resolve<IMvxImageCache<Bitmap>>();
-                    var image = await cache.RequestImage(imageSource).ConfigureAwait(false);
-
                     if (cancelToken.IsCancellationRequested)
                     {
                         return;
                     }
 
+                    if (_remoteFilesCache.ContainsKey(imageSource))
+                    {
+                        NewImageAvailable(_remoteFilesCache[imageSource].Image);
+                        return;
+                    }
+                    else
+                    {
+                        _currentImageState = ImageState.DefaultShown;
+                        FireImageChanged(null);
+                    }
+
+                    var image = await GetBitmap(imageSource);
                     if (image == null)
                     {
                         await ShowErrorImage().ConfigureAwait(false);
                     }
                     else
                     {
-                        var resultingBitmap = image;
+                        _remoteFilesCache.TryAdd(imageSource, new CacheItem
+                        {
+                            AddedAt = DateTime.Now,
+                            Image = image
+                        });
+                        CheckRemoteCache();
 
+                        var resultingBitmap = image;
                         if (image.Width > MaxWidth || image.Height > MaxHeight)
                         {
                             resultingBitmap = await Task.Run(() =>
@@ -167,6 +230,7 @@ namespace IntranetMobile.Droid.Views.Util
                                     false);
                             }, cancelToken).ConfigureAwait(false);
                         }
+
                         NewImageAvailable(resultingBitmap);
                     }
                 }
@@ -234,17 +298,27 @@ namespace IntranetMobile.Droid.Views.Util
             {
                 FireImageChanged(null);
 
-                try
+                // Get image from memory cache if exists
+                if (_localFilesCache.ContainsKey(filePath))
                 {
-                    var localImage = await ImageFromLocalFileAsync(filePath).ConfigureAwait(false);
-                    if (localImage == null)
-                        MvxTrace.Warning("Failed to load local image for filePath {0}", filePath);
-
-                    FireImageChanged(localImage);
+                    FireImageChanged(_localFilesCache[filePath]);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Mvx.Error(ex.Message);
+                    try
+                    {
+                        var localImage = await ImageFromLocalFileAsync(filePath).ConfigureAwait(false);
+                        if (localImage == null)
+                            MvxTrace.Warning("Failed to load local image for filePath {0}", filePath);
+                        
+                        // Put newly loaded image to the memory cache
+                        _localFilesCache.TryAdd(filePath, localImage);
+                        FireImageChanged(localImage);
+                    }
+                    catch (Exception ex)
+                    {
+                        Mvx.Error(ex.Message);
+                    }
                 }
             }
         }
@@ -274,8 +348,67 @@ namespace IntranetMobile.Droid.Views.Util
             FireImageChanged(image);
         }
 
+        private async Task<Bitmap> GetBitmap(string imageSource)
+        {
+            Bitmap image = null;
+
+            var fileName = imageSource.Substring(imageSource.LastIndexOf('/') + 1);
+            if (!fileName.Contains("."))
+                fileName += ".bmp";
+
+            var fullPath = string.Format("{0}{1}", _picCacheDir, fileName);
+
+            var fileService = MvxFileStoreHelper.SafeGetFileStore();
+            if (fileService.Exists(fullPath))
+            {
+                byte[] storedFile;
+                fileService.TryReadBinaryFile(fullPath, out storedFile);
+
+                if (storedFile != null && storedFile.Length > 0)
+                {
+                    try
+                    {
+                        image = BitmapFactory.DecodeByteArray(storedFile, 0, storedFile.Length);
+                    }
+                    catch (Exception ex)
+                    {
+                        Mvx.Error(ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                var restClient = Mvx.Resolve<RestClient>();
+                var data = await restClient.DownloadContent(imageSource).ConfigureAwait(false);
+                fileService.WriteFile(fullPath, data);
+                image = BitmapFactory.DecodeByteArray(data, 0, data.Length);
+            }
+
+            return image;
+        }
+
+        private void CheckRemoteCache()
+        {
+            if (_remoteFilesCache.Count > MaxMemoryCacheSize)
+            {
+                var itemsToDelete = _remoteFilesCache.OrderBy(i => i.Value.AddedAt).Take(10);
+                foreach (var item in itemsToDelete)
+                {
+                    CacheItem removed;
+                    _remoteFilesCache.TryRemove(item.Key, out removed);
+                }
+            }
+        }
+
         protected virtual void Dispose(bool isDisposing)
         {
+        }
+
+        private class CacheItem
+        {
+            public DateTime AddedAt { get; set; }
+
+            public Bitmap Image { get; set; }
         }
     }
 }
