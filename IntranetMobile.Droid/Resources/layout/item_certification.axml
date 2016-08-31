@@ -8,7 +8,7 @@
   <Mvx.MvxImageView
     android:layout_width="24dp"
     android:layout_height="24dp"
-    android:gravity="center"
+    android:gravity="left"
     app:MvxBind="ImageUrl ImageUri"/>
   <LinearLayout
         android:orientation="vertical"
