@@ -70,20 +70,29 @@ namespace IntranetMobile.Core.ViewModels.Login
 
         private async void Login()
         {
-            ShowViewModel<LoginLoadingViewModel>();
-            var auth = await ServiceBus.AuthService.Login(Email, Password);
-            if (auth.success)
+            
+            try
             {
-                await ServiceBus.StorageService.AddItem(new Credentials {Email = Email, Password = Password});
-                ShowViewModel<MainViewModel>();
+                ShowViewModel<LoginLoadingViewModel>();
+                var auth = await ServiceBus.AuthService.Login(Email, Password);
+                if (auth.success)
+                {
+                    await ServiceBus.StorageService.AddItem(new Credentials { Email = Email, Password = Password });
+                    ShowViewModel<MainViewModel>();
+                }
+                else
+                {
+                    HasErrors = true;
+                    ErrorText = "Login failed";
+                    Password = string.Empty;
+                    ShowViewModel<UserCredentialsViewModel>();
+                    ServiceBus.AlertService.ShowMessageBox(Title, auth.message);
+                }
             }
-            else
+            catch
             {
-                HasErrors = true;
-                ErrorText = "Login failed";
-                Password = string.Empty;
-                ShowViewModel<UserCredentialsViewModel>();
-                ServiceBus.AlertService.ShowMessageBox(Title, auth.message);
+                ShowViewModel<LoginViewModel>();
+                ServiceBus.AlertService.ShowPopupMessage("Something wrong, try later");
             }
         }
 

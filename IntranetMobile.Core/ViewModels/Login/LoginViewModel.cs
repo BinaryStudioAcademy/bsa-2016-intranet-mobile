@@ -20,16 +20,26 @@ namespace IntranetMobile.Core.ViewModels.Login
             if (credentials != null)
             {
                 ShowViewModel<LoginLoadingViewModel>();
-                var result = await ServiceBus.AuthService.Login(credentials.Email, credentials.Password);
-                if (result.success)
+                try
                 {
-                    ShowViewModel<MainViewModel>();
+                    var result = await ServiceBus.AuthService.Login(credentials.Email, credentials.Password);
+                    if (result.success)
+                    {
+                        ShowViewModel<MainViewModel>();
+                    }
+                    else
+                    {
+                        await ServiceBus.StorageService.RemoveItem(credentials);
+                        ShowViewModel<UserCredentialsViewModel>();
+                    }
                 }
-                else
+                catch
                 {
+
                     await ServiceBus.StorageService.RemoveItem(credentials);
                     ShowViewModel<UserCredentialsViewModel>();
                 }
+
             }
             else
             {

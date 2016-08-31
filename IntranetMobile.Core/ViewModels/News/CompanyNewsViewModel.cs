@@ -59,13 +59,21 @@ namespace IntranetMobile.Core.ViewModels.News
         public virtual async Task ReloadData()
         {
             // TODO: Normalize news pull
-            var companyNews = await ServiceBus.NewsService.GetCompanyNewsAsync(0, 10);
-
-            InvokeOnMainThread(News.Clear);
-            foreach (var news in companyNews)
+            try
             {
-                InvokeOnMainThread(() => { News.Add(NewsItemViewModel.FromModel(news)); });
+                var companyNews = await ServiceBus.NewsService.GetCompanyNewsAsync(0, 10);
+
+                InvokeOnMainThread(News.Clear);
+                foreach (var news in companyNews)
+                {
+                    InvokeOnMainThread(() => { News.Add(NewsItemViewModel.FromModel(news)); });
+                }
             }
+            catch
+            {
+                
+            }
+
         }
     }
 }

@@ -13,15 +13,22 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public async void Init(Parameters arg)
         {
-            _dataModel = await ServiceBus.NewsService.GetWeeklyNewsByIdAsync(arg.WeekliesId);
-            foreach (var fullNews in _dataModel.FullNews)
+            try
             {
-                var newDeatilsViewModel = new NewsDetailsViewModel();
-                newDeatilsViewModel.Init(new NewsDetailsViewModel.Parameters {NewsId = fullNews});
+                _dataModel = await ServiceBus.NewsService.GetWeeklyNewsByIdAsync(arg.WeekliesId);
+                foreach (var fullNews in _dataModel.FullNews)
+                {
+                    var newDeatilsViewModel = new NewsDetailsViewModel();
+                    newDeatilsViewModel.Init(new NewsDetailsViewModel.Parameters { NewsId = fullNews });
 
-                News.Add(newDeatilsViewModel);
+                    News.Add(newDeatilsViewModel);
+                }
+                Title = _dataModel.Title;
             }
-            Title = _dataModel.Title;
+            catch
+            {
+            }
+
         }
 
         public class Parameters

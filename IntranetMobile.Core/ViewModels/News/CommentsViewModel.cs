@@ -27,15 +27,24 @@ namespace IntranetMobile.Core.ViewModels.News
         public async void GetComments()
         {
             IsBusy = true;
-            var data = await ServiceBus.NewsService.LoadListOfCommentsAsync(_newsId);
-            if (data == null) return;
-
-            Comments.Clear();
-            foreach (var c in data.comments)
+            try
             {
-                var comment = new CommentsItemViewModel(c, _newsId);
-                Comments.Add(comment);
+                var data = await ServiceBus.NewsService.LoadListOfCommentsAsync(_newsId);
+                if (data == null) return;
+
+                Comments.Clear();
+                foreach (var c in data.comments)
+                {
+                    var comment = new CommentsItemViewModel(c, _newsId);
+                    Comments.Add(comment);
+                }
             }
+            catch
+            {
+                ServiceBus.AlertService.ShowPopupMessage("please check your connection");
+                ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters { NewsId = _newsId });
+            }
+
             IsBusy = false;
         }
 
@@ -57,11 +66,16 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             if (string.IsNullOrWhiteSpace(NewComment))
                 return;
-            
-            await ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
-            NewComment = "";
-
-            GetComments();
+            try
+            {
+                await ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
+                NewComment = "";
+                GetComments();
+            }
+            catch
+            {
+                ServiceBus.AlertService.ShowPopupMessage("Something wrang, try later");
+            }
         }
 
         public class Parameters

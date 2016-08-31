@@ -70,15 +70,22 @@ namespace IntranetMobile.Core.ViewModels.News
         public async void Init(Parameters arg)
         {
             _newsId = arg.NewsId;
-            _dataModel = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
 
-            Title = _dataModel.Title;
-            Author = await ServiceBus.UserService.GetUserInfoById(_dataModel.AuthorId);
-            Subtitle = $" {Author.FullName} {_dataModel.Date.ToString("dd-MM-yyyy HH:mm")}";
-            RaisePropertyChanged(() => LikesCount);
-            RaisePropertyChanged(() => CommentsCount);
-            RaisePropertyChanged(() => IsLiked);
-            RaisePropertyChanged(() => Body);
+            try
+            {
+                _dataModel = await ServiceBus.NewsService.GetNewsByIdAsync(_newsId);
+
+                Title = _dataModel.Title;
+                Author = await ServiceBus.UserService.GetUserInfoById(_dataModel.AuthorId);
+                Subtitle = $" {Author.FullName} {_dataModel.Date.ToString("dd-MM-yyyy HH:mm")}";
+                RaisePropertyChanged(() => LikesCount);
+                RaisePropertyChanged(() => CommentsCount);
+                RaisePropertyChanged(() => IsLiked);
+                RaisePropertyChanged(() => Body);
+            }
+            catch
+            {
+            }
         }
 
         private async void Like()

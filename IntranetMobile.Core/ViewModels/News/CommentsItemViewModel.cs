@@ -102,18 +102,31 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        private void ClickLikeCommandExecute()
+        private async void ClickLikeCommandExecute()
         {
-            IsLiked = !_isLiked;
-            if (IsLiked)
+            
+
+            if (!IsLiked)
             {
-                CountLikes = _countLikes + 1;
-                ServiceBus.NewsService.LikeCommentAsync(_newsId, _commentId);
+                
+                var result = await ServiceBus.NewsService.LikeCommentAsync(_newsId, _commentId);
+
+                if (result)
+                {
+                    IsLiked = !_isLiked;
+                    CountLikes = CountLikes + 1;
+                }
             }
+
             else
             {
-                CountLikes = _countLikes - 1;
-                ServiceBus.NewsService.UnlikeCommentAsync(_newsId, _commentId);
+                var result = await ServiceBus.NewsService.UnlikeCommentAsync(_newsId, _commentId);
+
+                if (result)
+                {
+                    IsLiked = !_isLiked;
+                    CountLikes = CountLikes - 1;
+                }
             }
         }
     }

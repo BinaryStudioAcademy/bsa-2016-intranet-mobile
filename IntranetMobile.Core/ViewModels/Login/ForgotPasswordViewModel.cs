@@ -30,19 +30,27 @@ namespace IntranetMobile.Core.ViewModels.Login
 
         private async void Send()
         {
-            var result = await ServiceBus.AuthService.ResetPassword(Email);
-            string message;
-            if (result)
+            try
             {
-                BackToLogin();
-                message = "Please check your email for further instructions";
+                var result = await ServiceBus.AuthService.ResetPassword(Email);
+                string message;
+                if (result)
+                {
+                    BackToLogin();
+                    message = "Please check your email for further instructions";
+                }
+                else
+                {
+                    message = "Password reset failed";
+                }
+
+                ServiceBus.AlertService.ShowMessageBox("Password reset", message);
             }
-            else
+            catch
             {
-                message = "Password reset failed";
+                ServiceBus.AlertService.ShowPopupMessage("Something wrong, try later");
             }
 
-            ServiceBus.AlertService.ShowMessageBox("Password reset", message);
         }
 
         private bool CanExecuteSend()
