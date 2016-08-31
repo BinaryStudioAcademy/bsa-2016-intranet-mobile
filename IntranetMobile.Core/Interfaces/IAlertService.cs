@@ -14,5 +14,7 @@ namespace IntranetMobile.Core.Interfaces
             string okButtonCaption,
             string cancelButtonCaption,
             Action okButtonAction);
+
+        void ShowConnectionLostMessage();
     }
 }

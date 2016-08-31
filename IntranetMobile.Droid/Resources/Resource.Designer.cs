@@ -4991,6 +4991,9 @@ namespace IntranetMobile.Droid
 			// aapt resource value: 0x7f09001c
 			public const int fab_scroll_translation_autohide_behavior = 2131296284;
 			
+			// aapt resource value: 0x7f090022
+			public const int msg_connection_unavailable = 2131296290;
+			
 			// aapt resource value: 0x7f090020
 			public const int pref_news = 2131296288;
 			

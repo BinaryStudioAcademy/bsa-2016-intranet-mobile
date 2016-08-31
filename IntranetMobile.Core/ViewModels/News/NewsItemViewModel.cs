@@ -140,7 +140,7 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             return new NewsItemViewModel
             {
-                PreviewImageUri = news.Body.GetFirstImageUri(),
+                PreviewImageUri = news.Body != null ? news.Body.GetFirstImageUri() : "",
                 NewsId = news.NewsId,
                 Title = news.Title,
                 AuthorId = news.AuthorId,

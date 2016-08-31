@@ -8,7 +8,7 @@ using MvvmCross.Binding.BindingContext;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
-    [Activity(Theme = "@style/BSTheme")]
+    [Activity(Theme = "@style/BSTheme", LaunchMode = Android.Content.PM.LaunchMode.SingleTop)]
     public class NewsDetailsActivity : BaseToolbarActivity<NewsDetailsViewModel>
     {
         private CommentActionsWrapper _commentActionsWrapper;

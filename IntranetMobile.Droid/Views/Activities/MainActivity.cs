@@ -7,7 +7,9 @@ using IntranetMobile.Droid.Views.Fragments;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
-    [Activity(Label = "Intranet", Theme = "@style/BSTheme")]
+    [Activity(Label = "Intranet",
+              Theme = "@style/BSTheme",
+              LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
     public class MainActivity : BaseCachingFragmentActivity<MainViewModel>, IDrawerActivity
     {
         public DrawerLayout DrawerLayout { get; set; }

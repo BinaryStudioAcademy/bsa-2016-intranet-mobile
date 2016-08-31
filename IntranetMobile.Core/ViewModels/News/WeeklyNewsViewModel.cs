@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IntranetMobile.Core.Services;
@@ -58,7 +59,6 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public virtual async Task ReloadData()
         {
-
             try
             {
                 var allNews = await ServiceBus.NewsService.GetWeeklyNewsAsync(0, 10);
@@ -69,11 +69,9 @@ namespace IntranetMobile.Core.ViewModels.News
                     InvokeOnMainThread(async () => { News.Add(await WeeklyItemViewModel.FromModel(item)); });
                 }
             }
-            catch
+            catch(Exception e)
             {
-               
             }
-
         }
     }
 }

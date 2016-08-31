@@ -7,4 +7,5 @@
   <string name="pref_vibration">pref_vibration</string>
   <string name="pref_news">pref_news</string>
   <string name="pref_reviewer">pref_reviewer</string>
+  <string name="msg_connection_unavailable">Internet connection unavailable</string>
 </resources>

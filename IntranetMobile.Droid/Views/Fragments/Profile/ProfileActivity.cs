@@ -11,7 +11,7 @@ using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace IntranetMobile.Droid.Views.Fragments.Profile
 {
-    [Activity(Theme = "@style/BSTheme")]
+    [Activity(Theme = "@style/BSTheme", LaunchMode = Android.Content.PM.LaunchMode.SingleTop)]
     public class ProfileActivity : BaseToolbarActivity<ProfileViewModel>
     {
         public override int ActivityLayout { get; } = Resource.Layout.activity_profile;

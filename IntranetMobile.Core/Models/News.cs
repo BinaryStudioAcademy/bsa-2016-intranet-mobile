@@ -26,6 +26,9 @@ namespace IntranetMobile.Core.Models
 
         public News UpdateFromDto(NewsDto newsDto)
         {
+            if (newsDto == null)
+                return this;
+
             NewsId = newsDto.newsId;
             AuthorId = newsDto.authorId;
             Title = newsDto.title;
@@ -39,7 +42,8 @@ namespace IntranetMobile.Core.Models
 
             // Same thing here
             Comments.Clear();
-            Comments.AddRange(newsDto.comments.Select(commentDto => commentDto.commentId));
+            if (newsDto.comments != null)
+                Comments.AddRange(newsDto.comments.Select(commentDto => commentDto.commentId));
 
             // For fluent interface purposes
             return this;

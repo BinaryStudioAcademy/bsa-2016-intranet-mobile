@@ -3,6 +3,7 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Widget;
 using IntranetMobile.Core.Interfaces;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 
 namespace IntranetMobile.Droid.Services
@@ -55,6 +56,13 @@ namespace IntranetMobile.Droid.Services
                     .SetNegativeButton(cancelButtonCaption, (sender, args) => { })
                     .Show();
             });
+        }
+
+        public void ShowConnectionLostMessage()
+        {
+            var context = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
+            if (context != null && context.Activity != null)
+                ShowPopupMessage(context.Activity.GetString(Resource.String.msg_connection_unavailable));
         }
     }
 }

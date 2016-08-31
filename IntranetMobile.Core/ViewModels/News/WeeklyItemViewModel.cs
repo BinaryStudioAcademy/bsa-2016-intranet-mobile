@@ -68,7 +68,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
             return new WeeklyItemViewModel
             {
-                PreviewImageUri = firstNews.Body.GetFirstImageUri(),
+                PreviewImageUri = firstNews.Body != null ? firstNews.Body.GetFirstImageUri() : "",
                 WeeklyId = news.WeeklyId,
                 Title = news.Title,
                 AuthorId = news.AuthorId,

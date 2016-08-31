@@ -379,9 +379,16 @@ namespace IntranetMobile.Droid.Views.Util
             else
             {
                 var restClient = Mvx.Resolve<RestClient>();
-                var data = await restClient.DownloadContent(imageSource).ConfigureAwait(false);
-                fileService.WriteFile(fullPath, data);
-                image = BitmapFactory.DecodeByteArray(data, 0, data.Length);
+                try
+                {
+                    var data = await restClient.DownloadContent(imageSource).ConfigureAwait(false);
+                    fileService.WriteFile(fullPath, data);
+                    image = BitmapFactory.DecodeByteArray(data, 0, data.Length);
+                }
+                catch (Exception ex)
+                {
+                    Mvx.Error(ex.Message);
+                }
             }
 
             return image;

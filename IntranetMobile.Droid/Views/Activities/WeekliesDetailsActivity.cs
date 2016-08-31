@@ -6,7 +6,7 @@ using MvvmCross.Binding.Droid.Views;
 
 namespace IntranetMobile.Droid.Views.Activities
 {
-    [Activity(Theme = "@style/BSTheme")]
+    [Activity(Theme = "@style/BSTheme", LaunchMode = Android.Content.PM.LaunchMode.SingleTop)]
     public class WeekliesDetailsActivity : BaseToolbarActivity<WeekliesDetailsViewModel>
     {
         public override int ActivityLayout { get; } = Resource.Layout.activity_weeklies_details;

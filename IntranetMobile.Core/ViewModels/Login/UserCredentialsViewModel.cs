@@ -92,7 +92,7 @@ namespace IntranetMobile.Core.ViewModels.Login
             catch
             {
                 ShowViewModel<LoginViewModel>();
-                ServiceBus.AlertService.ShowPopupMessage("Something wrong, try later");
+                ServiceBus.AlertService.ShowConnectionLostMessage();
             }
         }
 

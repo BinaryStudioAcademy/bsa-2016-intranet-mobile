@@ -41,8 +41,7 @@ namespace IntranetMobile.Core.ViewModels.News
             }
             catch
             {
-                ServiceBus.AlertService.ShowPopupMessage("please check your connection");
-                ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters { NewsId = _newsId });
+                ServiceBus.AlertService.ShowConnectionLostMessage();
             }
 
             IsBusy = false;
@@ -74,7 +73,7 @@ namespace IntranetMobile.Core.ViewModels.News
             }
             catch
             {
-                ServiceBus.AlertService.ShowPopupMessage("Something wrang, try later");
+                ServiceBus.AlertService.ShowConnectionLostMessage();
             }
         }
 
