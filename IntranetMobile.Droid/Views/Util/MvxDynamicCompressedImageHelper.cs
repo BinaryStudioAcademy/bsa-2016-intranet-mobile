@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Android.Graphics;
 using IntranetMobile.Core.Services;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.DownloadCache;

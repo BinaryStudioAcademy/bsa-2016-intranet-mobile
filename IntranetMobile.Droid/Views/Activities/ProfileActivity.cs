@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Support.V7.Widget;
 using IntranetMobile.Core.ViewModels.Profile;
-using IntranetMobile.Droid.Views.Activities;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
-namespace IntranetMobile.Droid.Views.Fragments.Profile
+namespace IntranetMobile.Droid.Views.Activities
 {
     [Activity(Theme = "@style/BSTheme", LaunchMode = Android.Content.PM.LaunchMode.SingleTop)]
     public class ProfileActivity : BaseToolbarActivity<ProfileViewModel>

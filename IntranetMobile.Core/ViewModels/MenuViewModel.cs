@@ -3,6 +3,7 @@ using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels.Login;
 using IntranetMobile.Core.ViewModels.News;
 using IntranetMobile.Core.ViewModels.Profile;
+using IntranetMobile.Core.ViewModels.Reviewer;
 using IntranetMobile.Core.ViewModels.Settings;
 using MvvmCross.Core.ViewModels;
 
@@ -11,8 +12,8 @@ namespace IntranetMobile.Core.ViewModels
     public class MenuViewModel : BaseViewModel
     {
         private string _avatarUrl;
-        private string _userName;
         private string _email;
+        private string _userName;
 
         public MenuViewModel()
         {
@@ -65,6 +66,11 @@ namespace IntranetMobile.Core.ViewModels
         {
             var user = await ServiceBus.UserService.GetCurrentUserAsync();
             ShowViewModel<ProfileViewModel>(new {userId = user.UserId});
+        }
+
+        public void ShowReviewer()
+        {
+            ShowViewModel<TicketDetailsViewModel>();
         }
 
         public void ShowUsers()

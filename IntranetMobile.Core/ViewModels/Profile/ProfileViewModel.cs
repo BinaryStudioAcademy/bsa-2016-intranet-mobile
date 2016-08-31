@@ -12,8 +12,6 @@ namespace IntranetMobile.Core.ViewModels.Profile
 {
     public class ProfileViewModel : BaseViewModel
     {
-        private bool _achievementsVisibility = true;
-        private bool _certificationsVisibility = true;
         private string _position = string.Empty;
         private bool _stepsVisibility = true;
         private User _user;
@@ -96,7 +94,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
         public string AvatarUrl => User != null
             ? Constants.BaseUrl + User.AvatarUri
             : null;
-        
+
         public ICommand ChangeStepsVisibilityCommand { get; private set; }
 
         public bool StepsVisibility
@@ -165,9 +163,9 @@ namespace IntranetMobile.Core.ViewModels.Profile
                             UserTechnologyCategoryViewModels.Add(userTechnologyCategoryViewModel.Value);
                             foreach (
                                 var userTechnologyViewModel in userTechnologyCategoryViewModel
-                                                                .Value
-                                                                .UserTechnologyViewModels
-                                                                .OrderByDescending(i => i.Stars))
+                                    .Value
+                                    .UserTechnologyViewModels
+                                    .OrderByDescending(i => i.Stars))
                             {
                                 UserTechnologyCategoryViewModels.Add(userTechnologyViewModel);
                             }
@@ -184,7 +182,6 @@ namespace IntranetMobile.Core.ViewModels.Profile
                         Name = achievement.Name,
                         Category = achievement.Category.Name,
                         ImageUri = Constants.BaseUrl + achievement.ImageUri
-
                     };
                     InvokeOnMainThread(() => { Achievements.Add(userAchievementVm); });
                 }
