@@ -211,42 +211,47 @@
         layout="@layout/item_divider" />
     </LinearLayout>
     <!--PDP_FLOW-->
-    <LinearLayout
-      android:orientation="vertical"
+      <LinearLayout  
+        android:orientation="vertical"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center_vertical">
+      android:layout_height="wrap_content">
       <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="wrap_content">
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="Certifications"
+          android:gravity="center_vertical"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
           android:layout_weight="1" />
         <Mvx.MvxImageView
           android:layout_weight="0"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:padding="@dimen/icon_padding"
-          android:layout_gravity="center_vertical|right"
+          android:layout_gravity="right"
           app:MvxBind="DrawableName BoolToArrowIconConverter(CertificationsVisibility); Click ChangeCertificationsVisibilityCommand" />
       </LinearLayout>
-      <Mvx.MvxListView
-        android:id="@+id/weeklies_recycler_view"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+           android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/activity_horizontal_margin"
         app:MvxItemTemplate="@layout/item_certification"
         app:MvxBind="ItemsSource Certifications; Visibility BoolToVisibilityConverter(CertificationsVisibility)" />
+      </LinearLayout>
+    <include
+    layout="@layout/item_divider" />
       <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="wrap_content">
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+                   android:gravity="center_vertical"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
           android:text="Achievements"
           android:layout_weight="1" />
         <Mvx.MvxImageView
@@ -257,17 +262,16 @@
           android:layout_gravity="center_vertical|right"
           app:MvxBind="DrawableName BoolToArrowIconConverter(AchievementsVisibility); Click ChangeAchievementsVisibilityCommand" />
       </LinearLayout>
-      <Mvx.MvxListView
-        android:id="@+id/weeklies_recycler_view"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+      <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+           android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/activity_horizontal_margin"
         app:MvxItemTemplate="@layout/item_achievement"
         app:MvxBind="ItemsSource Achievements; Visibility BoolToVisibilityConverter(AchievementsVisibility)" />
-      <LinearLayout
+      <!--<LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="wrap_content">
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -280,8 +284,8 @@
           android:padding="@dimen/icon_padding"
           android:layout_gravity="center_vertical|right"
           app:MvxBind="DrawableName BoolToArrowIconConverter(StepsVisibility); Click ChangeStepsVisibilityCommand" />
-      </LinearLayout>
+      </LinearLayout>-->
       <!-- TODO: Inset item Steps needed to reach the next position-->
     </LinearLayout>
-  </LinearLayout>
+
 </android.support.v4.widget.NestedScrollView>

@@ -72,7 +72,9 @@ namespace IntranetMobile.Core.ViewModels.Profile
                         var userAchievementVm = new UserAchievementViewModel
                         {
                             Name = achievement.Name,
-                            Category = achievement.Category.Name
+                            Category = achievement.Category.Name,
+                            ImageUri = "http://team.binary-studio.com"+achievement.ImageUri
+
                         };
                         InvokeOnMainThread(() => { Achievements.Add(userAchievementVm); });
                     }
@@ -83,7 +85,8 @@ namespace IntranetMobile.Core.ViewModels.Profile
                         var userCertificationVm = new UserCertificationViewModel
                         {
                             Name = certification.Name,
-                            Category = certification.Category.Name
+                            Category = certification.Category.Name,
+                            ImageUri = "http://team.binary-studio.com" + certification.ImageUri
                         };
                         InvokeOnMainThread(() => { Certifications.Add(userCertificationVm); });
                     }

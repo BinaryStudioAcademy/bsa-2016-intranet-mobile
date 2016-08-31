@@ -10,6 +10,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
     {
         private string _name;
         private string _category;
+        private string _imageUri;
 
         public string Name
         {
@@ -28,6 +29,15 @@ namespace IntranetMobile.Core.ViewModels.Profile
             {
                 _category = value;
                 RaisePropertyChanged(()=> Category);
+            }
+        }
+        public string ImageUri
+        {
+            get { return _imageUri; }
+            set
+            {
+                _imageUri = value;
+                RaisePropertyChanged(() => ImageUri);
             }
         }
     }

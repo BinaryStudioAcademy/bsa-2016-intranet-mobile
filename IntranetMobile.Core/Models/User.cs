@@ -116,6 +116,7 @@ namespace IntranetMobile.Core.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public CategoryDto Category { get; set; }
+        public string ImageUri { get; set; }
 
         public Achievement UpdateFromDto(AchievementDto achievementDto)
         {
@@ -124,6 +125,7 @@ namespace IntranetMobile.Core.Models
             //TODO: when categories will be noraml try catch can be removed
             //Category = Category != null ? achievementDto.Category.Name : "NULL";
             Category = achievementDto.Category;
+            ImageUri = achievementDto.Src;
             return this;
         }
     }
@@ -133,12 +135,14 @@ namespace IntranetMobile.Core.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public Category2Dto Category { get; set; }
+        public string ImageUri { get; set; }
 
         public Certification UpdateFromDto(CompletedCertificationDto completedCertificationDto)
         {
             Id = completedCertificationDto.Id;
             Name = completedCertificationDto.Name;
             Category = completedCertificationDto.Category;
+            ImageUri = completedCertificationDto.Src;
             return this;
         }
     }
