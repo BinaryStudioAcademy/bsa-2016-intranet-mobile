@@ -8,6 +8,8 @@ namespace IntranetMobile.Core.Models
     {
         public string UserId { get; set; }
 
+        public string ServerId { get; set; }
+
         public string FullName { get; set; }
 
         public string AvatarUri { get; set; }
@@ -18,7 +20,8 @@ namespace IntranetMobile.Core.Models
 
         public UserInfo UpdateFromDto(UserInfoDto userDto)
         {
-            UserId = userDto.ServerId;
+            UserId = userDto.Id;
+            ServerId = userDto.ServerId;
             FullName = userDto.Name;
             AvatarUri = userDto.Avatar;
             Department = userDto.Department;

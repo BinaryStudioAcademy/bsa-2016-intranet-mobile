@@ -61,7 +61,6 @@ namespace IntranetMobile.Droid
                 ApplicationContext.FilesDir.Path,
                 Mvx.Resolve<IMvxSqliteConnectionFactory>(),
                 Mvx.Resolve<ILogger>()));
-            Mvx.RegisterType<IMvxHttpFileDownloader, MvxAuthorizedHttpFileDownloader>();
             Mvx.RegisterType<IMvxImageHelper<Bitmap>, MvxDynamicCompressedBitmapHelper>();
         }
 
