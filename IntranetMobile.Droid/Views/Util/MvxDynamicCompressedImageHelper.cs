@@ -181,7 +181,8 @@ namespace IntranetMobile.Droid.Views.Util
 
                     if (_remoteFilesCache.ContainsKey(imageSource))
                     {
-                        NewImageAvailable(_remoteFilesCache[imageSource].Image);
+                        var resultingBitmap = await GetCompressedBitmap(_remoteFilesCache[imageSource].Image, cancelToken);
+                        NewImageAvailable(resultingBitmap);
                         return;
                     }
                     else
@@ -204,33 +205,7 @@ namespace IntranetMobile.Droid.Views.Util
                         });
                         CheckRemoteCache();
 
-                        var resultingBitmap = image;
-                        if (image.Width > MaxWidth || image.Height > MaxHeight)
-                        {
-                            resultingBitmap = await Task.Run(() =>
-                            {
-                                int outWidth;
-                                int outHeight;
-                                var inWidth = image.Width;
-                                var inHeight = image.Height;
-
-                                if (inWidth > inHeight)
-                                {
-                                    outWidth = MaxWidth;
-                                    outHeight = inHeight*MaxWidth/inWidth;
-                                }
-                                else
-                                {
-                                    outHeight = MaxHeight;
-                                    outWidth = inWidth*MaxHeight/inHeight;
-                                }
-
-                                return Bitmap.CreateScaledBitmap(image, outWidth,
-                                    outHeight,
-                                    false);
-                            }, cancelToken).ConfigureAwait(false);
-                        }
-
+                        var resultingBitmap = await GetCompressedBitmap(image, cancelToken);
                         NewImageAvailable(resultingBitmap);
                     }
                 }
@@ -405,6 +380,38 @@ namespace IntranetMobile.Droid.Views.Util
                     _remoteFilesCache.TryRemove(item.Key, out removed);
                 }
             }
+        }
+
+        private async Task<Bitmap> GetCompressedBitmap(Bitmap image, CancellationToken cancelToken)
+        {
+            Bitmap resultingBitmap = image;
+            if (image.Width > MaxWidth || image.Height > MaxHeight)
+            {
+                resultingBitmap = await Task.Run(() =>
+                {
+                    int outWidth;
+                    int outHeight;
+                    var inWidth = image.Width;
+                    var inHeight = image.Height;
+
+                    if (inWidth > inHeight)
+                    {
+                        outWidth = MaxWidth;
+                        outHeight = inHeight * MaxWidth / inWidth;
+                    }
+                    else
+                    {
+                        outHeight = MaxHeight;
+                        outWidth = inWidth * MaxHeight / inHeight;
+                    }
+
+                    return Bitmap.CreateScaledBitmap(image, outWidth,
+                        outHeight,
+                        false);
+                }, cancelToken).ConfigureAwait(false);
+            }
+
+            return resultingBitmap;
         }
 
         protected virtual void Dispose(bool isDisposing)
