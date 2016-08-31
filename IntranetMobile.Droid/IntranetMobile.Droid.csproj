@@ -385,6 +385,16 @@
     <AndroidResource Include="Resources\layout\item_technology_category.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_description_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_description_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_description_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_description_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_description_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_extension_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_extension_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_extension_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_extension_black_24dp.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_extension_black_24dp.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">

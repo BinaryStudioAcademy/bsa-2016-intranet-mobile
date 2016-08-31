@@ -3,25 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" 
-    android:paddingBottom="8dp">
-  <Mvx.MvxImageView
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:gravity="left"
-    app:MvxBind="ImageUrl ImageUri"/>
-  <LinearLayout
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+<!--<Mvx.MvxImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:gravity="left"
+        app:MvxBind="ImageUrl ImageUri" />-->
+    <LinearLayout
         android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-        android:gravity="right|center">
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:MvxBind="Text Name"/>
-  <TextView
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  app:MvxBind="Text Category"/>
-  </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:MvxBind="Text Name" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:MvxBind="Text Category" />
+    </LinearLayout>
 </LinearLayout>
