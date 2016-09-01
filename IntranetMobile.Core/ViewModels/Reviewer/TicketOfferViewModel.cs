@@ -32,8 +32,13 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             {
                 _user = value;
                 RaisePropertyChanged(() => Name);
+                RaisePropertyChanged(() => AvatarUrl);
             }
         }
+
+        public string AvatarUrl => User != null
+            ? Constants.BaseUrl + User.AvatarUri
+            : null;
 
         public string Name => User?.FullName;
 

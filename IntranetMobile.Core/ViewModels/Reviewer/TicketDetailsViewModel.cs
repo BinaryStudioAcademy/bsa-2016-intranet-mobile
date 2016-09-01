@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
@@ -25,11 +26,11 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             Tags.Add(new TagViewModel());
             Tags.Add(new TagViewModel());
 
-            Offers.Add(new TicketOfferViewModel());
-            Offers.Add(new TicketOfferViewModel());
-            Offers.Add(new TicketOfferViewModel());
-            Offers.Add(new TicketOfferViewModel());
-            Offers.Add(new TicketOfferViewModel());
+            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
+            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
+            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
+            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
+            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
         }
 
         public string AuthorName { get; } = "AuthorName";
