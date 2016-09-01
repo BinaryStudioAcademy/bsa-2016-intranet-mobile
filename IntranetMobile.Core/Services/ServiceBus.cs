@@ -15,6 +15,7 @@ namespace IntranetMobile.Core.Services
         private static IUserService _userService;
         private static IDeviceInfo _deviceInfo;
         private static ISettingsService _settingsService;
+        private static IReviewerService _reviewerService;
 
         private static IMvxMessenger _messengerHub;
 
@@ -41,5 +42,8 @@ namespace IntranetMobile.Core.Services
 
         public static ISettingsService SettingsService
             => _settingsService ?? (_settingsService = Mvx.Resolve<ISettingsService>());
+
+        public static IReviewerService ReviewerService
+        => _reviewerService ?? (_reviewerService = Mvx.Resolve<IReviewerService>());
     }
 }
