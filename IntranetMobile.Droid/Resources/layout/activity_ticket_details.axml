@@ -3,114 +3,192 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
   <include
     android:id="@+id/activity_ticket_details_toolbar"
     layout="@layout/mvx_toolbar" />
-
-  <LinearLayout
-    android:layout_below="@id/activity_ticket_details_toolbar"
+  <android.support.v4.widget.NestedScrollView
+    android:id="@+id/activity_ticket_details_nestedscrollview"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:descendantFocusability="blocksDescendants">
-    <RelativeLayout
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:layout_below="@id/activity_ticket_details_toolbar"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="?attr/selectableItemBackground"
-      android:clickable="true"
-      android:padding="@dimen/activity_horizontal_margin">
-      <MvxAppCompatCircleImageView
-        android:id="@+id/activity_ticket_details_author_imageview"
-        android:layout_width="wrap_content"
+      android:orientation="vertical"
+      android:descendantFocusability="blocksDescendants">
+      <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_launcher" />
-      <TextView
-        android:id="@+id/activity_ticket_details_author_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_toEndOf="@id/activity_ticket_details_author_imageview"
-        android:layout_toRightOf="@id/activity_ticket_details_author_imageview"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorText"
-        app:MvxBind="Text AuthorName" />
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_ticket_details_author_textview"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@id/activity_ticket_details_author_imageview"
-        android:layout_toRightOf="@id/activity_ticket_details_author_imageview"
-        android:text="Author"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@color/colorSecondaryText" />
-    </RelativeLayout>
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:padding="@dimen/activity_horizontal_margin">
+        <MvxAppCompatCircleImageView
+          android:id="@+id/activity_ticket_details_author_imageview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="@dimen/activity_horizontal_margin"
+          android:layout_marginRight="@dimen/activity_horizontal_margin"
+          android:src="@drawable/ic_launcher" />
+        <TextView
+          android:id="@+id/activity_ticket_details_author_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_toEndOf="@id/activity_ticket_details_author_imageview"
+          android:layout_toRightOf="@id/activity_ticket_details_author_imageview"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+          android:textColor="@color/colorText"
+          app:MvxBind="Text AuthorName" />
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/activity_ticket_details_author_textview"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginTop="8dp"
+          android:layout_toEndOf="@id/activity_ticket_details_author_imageview"
+          android:layout_toRightOf="@id/activity_ticket_details_author_imageview"
+          android:text="Author"
+          android:textAppearance="@style/TextAppearance.AppCompat.Small"
+          android:textColor="@color/colorSecondaryText" />
+      </RelativeLayout>
 
-    <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
-      android:id="@+id/activity_ticket_details_tags"
-      android:scrollbars="horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:scrollbarStyle="outsideInset"
-      android:layout_marginLeft="@dimen/activity_horizontal_margin"
-      android:layout_marginRight="@dimen/activity_horizontal_margin"
-      android:requiresFadingEdge="horizontal|vertical"
-      app:MvxItemTemplate="@layout/item_tag"
-      app:MvxBind="ItemsSource Tags" />
+      <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+        android:id="@+id/activity_ticket_details_tags"
+        android:scrollbars="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarStyle="outsideInset"
+        android:requiresFadingEdge="horizontal|vertical"
+        app:MvxItemTemplate="@layout/item_tag"
+        app:MvxBind="ItemsSource Tags" />
 
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="@dimen/activity_horizontal_margin"
-      android:layout_marginRight="@dimen/activity_horizontal_margin"
-      android:textColor="@color/colorSecondaryText"
-      app:MvxBind="Text TicketText" />
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorSecondaryText"
+        app:MvxBind="Text TicketText" />
 
-    <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="?attr/selectableItemBackground"
-      android:clickable="true"
-      android:padding="@dimen/activity_horizontal_margin">
-      <ImageView
-        android:id="@+id/activity_ticket_details_date_imageview"
-        android:layout_width="wrap_content"
+      <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_schedule_black_24dp" />
-      <TextView
-        android:id="@+id/activity_ticket_details_date_textview"
-        android:layout_width="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:padding="@dimen/activity_horizontal_margin">
+        <ImageView
+          android:id="@+id/activity_ticket_details_category_imageview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="@dimen/activity_horizontal_margin"
+          android:layout_marginRight="@dimen/activity_horizontal_margin"
+          android:src="@drawable/ic_extension_black_24dp" />
+        <TextView
+          android:id="@+id/activity_ticket_details_category_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_toEndOf="@id/activity_ticket_details_category_imageview"
+          android:layout_toRightOf="@id/activity_ticket_details_category_imageview"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+          android:textColor="@color/colorText"
+          app:MvxBind="Text CategoryName" />
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/activity_ticket_details_category_textview"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginTop="8dp"
+          android:layout_toEndOf="@id/activity_ticket_details_category_imageview"
+          android:layout_toRightOf="@id/activity_ticket_details_category_imageview"
+          android:text="Category"
+          android:textAppearance="@style/TextAppearance.AppCompat.Small"
+          android:textColor="@color/colorSecondaryText" />
+      </RelativeLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_toEndOf="@id/activity_ticket_details_date_imageview"
-        android:layout_toRightOf="@id/activity_ticket_details_date_imageview"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorText"
-        app:MvxBind="Text ReviewDate" />
-      <TextView
-        android:layout_width="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:padding="@dimen/activity_horizontal_margin">
+        <ImageView
+          android:id="@+id/activity_ticket_details_date_imageview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="@dimen/activity_horizontal_margin"
+          android:layout_marginRight="@dimen/activity_horizontal_margin"
+          android:src="@drawable/ic_schedule_black_24dp" />
+        <TextView
+          android:id="@+id/activity_ticket_details_date_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_toEndOf="@id/activity_ticket_details_date_imageview"
+          android:layout_toRightOf="@id/activity_ticket_details_date_imageview"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+          android:textColor="@color/colorText"
+          app:MvxBind="Text ReviewDate" />
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/activity_ticket_details_date_textview"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_marginTop="8dp"
+          android:layout_toEndOf="@id/activity_ticket_details_date_imageview"
+          android:layout_toRightOf="@id/activity_ticket_details_date_imageview"
+          android:text="Date of review"
+          android:textAppearance="@style/TextAppearance.AppCompat.Small"
+          android:textColor="@color/colorSecondaryText" />
+      </RelativeLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/activity_ticket_details_date_textview"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@id/activity_ticket_details_date_imageview"
-        android:layout_toRightOf="@id/activity_ticket_details_date_imageview"
-        android:text="Date of review"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@color/colorSecondaryText" />
-    </RelativeLayout>
-  </LinearLayout>
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:padding="@dimen/activity_horizontal_margin">
+        <ImageView
+          android:id="@+id/activity_ticket_details_offers_header_imageview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="@dimen/activity_horizontal_margin"
+          android:layout_marginRight="@dimen/activity_horizontal_margin"
+          android:src="@drawable/ic_group_black_24dp" />
+        <TextView
+          android:id="@+id/activity_ticket_details_offers_header_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/activity_horizontal_margin"
+          android:layout_marginStart="@dimen/activity_horizontal_margin"
+          android:layout_toEndOf="@id/activity_ticket_details_offers_header_imageview"
+          android:layout_toRightOf="@id/activity_ticket_details_offers_header_imageview"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+          android:textColor="@color/colorText"
+          android:text="Offers" />
+      </RelativeLayout>
+
+      <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+        android:id="@+id/activity_ticket_details_offers"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:MvxItemTemplate="@layout/item_offer"
+        app:MvxBind="ItemsSource Offers" />
+    </LinearLayout>
+  </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>
