@@ -126,13 +126,10 @@
     <Compile Include="Models\Dtos\TicketsDto.cs" />
     <Compile Include="Services\ReviewerService.cs" />
     <Compile Include="Models\Dtos\UserTickets.cs" />
-    <Compile Include="Models\Dtos\GroupTickets.cs" />
-    <Compile Include="Models\Dtos\PivotTickets.cs" />
     <Compile Include="Models\Dtos\TagTickets.cs" />
-    <Compile Include="Models\Dtos\ReviewTicketsReqeustDto.cs" />
-    <Compile Include="Models\Dtos\ReviewTicktsResponseDto.cs" />
     <Compile Include="Models\Dtos\SubscribedTicketDto.cs" />
-    <Compile Include="Models\Dtos\CommentsTicketDto.cs" />
+    <Compile Include="Models\Dtos\CommentTicketDto.cs" />
+    <Compile Include="Models\Dtos\ReviewTicketRequestDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">

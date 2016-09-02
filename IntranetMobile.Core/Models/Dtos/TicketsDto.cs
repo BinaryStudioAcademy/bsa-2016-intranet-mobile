@@ -16,7 +16,13 @@ namespace IntranetMobile.Core
         public UserTickets user { get; set; }
         public GroupTickets group { get; set; }
         public List<TagTickets> tags { get; set; }
-        public List<string> users { get; set; }
+        public List<UserTickets> users { get; set; }
+
+        public class GroupTickets
+        {
+            public string id { get; set; }
+            public string title { get; set; }
+        }
     }
 }
 
