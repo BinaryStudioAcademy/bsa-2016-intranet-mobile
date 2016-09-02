@@ -12,6 +12,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private string _titleName;
         private string _author;
         private string _dateTime;
+        private string _reviewerText;
+        private bool _signed;
 
         public string AuthorImage
         {
@@ -22,7 +24,6 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 RaisePropertyChanged(()=> AuthorImage);
             }
         }
-
         public string TitleName
         {
             get { return _titleName; }
@@ -50,6 +51,26 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             {
                 _dateTime = value; 
                 RaisePropertyChanged(()=>DateTime);
+            }
+        }
+
+        public bool Signed
+        {
+            get { return _signed; }
+            set
+            {
+                _signed = value; 
+                RaisePropertyChanged(()=>Signed);
+            }
+        }
+
+        public string ReviewerText
+        {
+            get { return _reviewerText; }
+            set
+            {
+                _reviewerText = value;
+                RaisePropertyChanged(()=>ReviewerText);
             }
         }
     }

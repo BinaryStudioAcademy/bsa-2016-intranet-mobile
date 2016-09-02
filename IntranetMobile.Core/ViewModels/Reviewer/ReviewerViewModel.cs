@@ -16,42 +16,11 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         public ReviewerViewModel()
         {
             Title = "Reviewer";
-           
-            ReloadCommand = new MvxCommand(async () =>
-            {
-                IsRefreshing = true;
-                await ReloadData();
-                IsRefreshing = false;
-            });
-
-            Task.Run(ReloadData);
-
         }
-        public virtual bool IsRefreshing
-        {
-            get { return _isRefreshing; }
-            set
-            {
-                _isRefreshing = value;
-                RaisePropertyChanged(() => IsRefreshing);
-            }
-        }
-        public ObservableCollection<ItemReviewViewModel> Reviews 
-            = new ObservableCollection<ItemReviewViewModel>();
 
-        private bool _isRefreshing;
-        public ICommand ReloadCommand { get; private set; }
-        public virtual async Task ReloadData()
-        {
-            try
-            {         
-               InvokeOnMainThread(() => { Reviews.Add(new ItemReviewViewModel() { TitleName = "123", Author = "daun", DateTime = "12354" }); });               
-            }
-            catch (Exception e)
-            {
+        public ReviewerSectionViewModel Cs { get; set; } = new ReviewerSectionViewModel();
+        public ReviewerSectionViewModel Js { get; set; } = new ReviewerSectionViewModel();
+        public ReviewerSectionViewModel Php { get; set; } = new ReviewerSectionViewModel();
 
-            }
-
-        }
     }
 }

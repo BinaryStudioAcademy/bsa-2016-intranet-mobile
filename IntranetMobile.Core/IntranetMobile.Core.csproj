@@ -111,6 +111,7 @@
     <Compile Include="Models\Dtos\CommentRequestDto.cs" />
     <Compile Include="Models\Dtos\CommentsResponseDto.cs" />
     <Compile Include="ViewModels\Reviewer\ItemReviewViewModel.cs" />
+    <Compile Include="ViewModels\Reviewer\ReviewerSectionViewModel.cs" />
     <Compile Include="ViewModels\Reviewer\ReviewerViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="Models\Settings.cs" />

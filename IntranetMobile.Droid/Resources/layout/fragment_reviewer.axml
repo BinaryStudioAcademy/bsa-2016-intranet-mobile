@@ -3,28 +3,21 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:local="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/main_content"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
   <include
     android:id="@+id/reviewer_toolbar"
-    layout="@layout/mvx_toolbar" />
+    layout="@layout/tabbed_toolbar" />
   <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_below="@id/reviewer_toolbar">
-    <MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        local:layout_behavior="@string/appbar_scrolling_view_behavior"
-        local:MvxBind="Refreshing IsRefreshing; RefreshCommand ReloadCommand">
-      <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
-          android:id="@+id/recycler_view_reviewer"
-          android:scrollbars="vertical"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          local:MvxItemTemplate="@layout/card_view_reviewer"
-          local:MvxBind="ItemsSource Reviews; ItemClick SelectItem" />
-    </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
+    <android.support.v4.view.ViewPager
+      android:id="@+id/reviewer_viewpager"
+      android:layout_width="match_parent"
+      android:layout_height="fill_parent"
+      local:layout_behavior="@string/appbar_scrolling_view_behavior" />
   </LinearLayout>
 </RelativeLayout>
