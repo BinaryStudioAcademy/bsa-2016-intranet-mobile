@@ -70,7 +70,7 @@ namespace IntranetMobile.Core.ViewModels
 
         public void ShowReviewer()
         {
-            ShowViewModel<TicketDetailsViewModel>();
+            ShowViewModel<ReviewerViewModel>();
         }
 
         public void ShowUsers()
@@ -81,11 +81,6 @@ namespace IntranetMobile.Core.ViewModels
         public void ShowAsciit()
         {
             ShowViewModel<AsciitViewModel>();
-        }
-
-        public void ShowReviewer()
-        {
-            ShowViewModel<ReviewerViewModel>();
         }
 
         public void Logout()
