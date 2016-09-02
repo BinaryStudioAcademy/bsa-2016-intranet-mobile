@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
@@ -14,6 +16,18 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private string _dateTime;
         private string _reviewerText;
         private bool _signed;
+
+        public ItemReviewViewModel()
+        {
+            ClickViewDetailsCommand = new MvxCommand(ClickViewDetailsCommandExecute);
+        }
+
+        private void ClickViewDetailsCommandExecute()
+        {
+            ShowViewModel<TicketDetailsViewModel>();
+        }
+
+        public ICommand ClickViewDetailsCommand { get; private set; }
 
         public string AuthorImage
         {
