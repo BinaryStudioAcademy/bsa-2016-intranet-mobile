@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
@@ -39,7 +40,7 @@ namespace IntranetMobile.Core.ViewModels.News
                     Comments.Add(comment);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 ServiceBus.AlertService.ShowConnectionLostMessage();
             }

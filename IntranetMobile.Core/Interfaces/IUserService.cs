@@ -12,7 +12,7 @@ namespace IntranetMobile.Core.Interfaces
 
         Task<List<UserInfo>> GetAllUsers();
 
-        Task<UserInfo> GetUserInfoById(string id);
+        Task<UserInfo> GetUserInfoById(string id, bool searchByServerId = true);
 
         Task<User> GetUserByServerId(string id);
 

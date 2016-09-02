@@ -257,11 +257,11 @@ namespace IntranetMobile.Core.Services
             return await _restClient.GetAsync<NewsDto>(string.Format(NewsByIdPath, newsId));
         }
 
-        public async Task<CommentsResponseDto> LoadListOfCommentsAsync(string newsId)
+        public Task<CommentsResponseDto> LoadListOfCommentsAsync(string newsId)
         {
             var resource = string.Format(NewsByIdPath, newsId) + "comments";
 
-            return await _restClient.GetAsync<CommentsResponseDto>(resource);
+            return _restClient.GetAsync<CommentsResponseDto>(resource);
         }
 
         private void SortNewsCache()

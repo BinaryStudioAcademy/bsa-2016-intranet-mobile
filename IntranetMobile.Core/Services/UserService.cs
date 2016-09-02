@@ -85,13 +85,17 @@ namespace IntranetMobile.Core.Services
             return new List<UserInfo>(_cachedUsers);
         }
 
-        public async Task<UserInfo> GetUserInfoById(string id)
+        public async Task<UserInfo> GetUserInfoById(string id, bool searchByServerId = true)
         {
             if (_cachedUsers.Count == 0)
             {
                 await GetAllUsers();
             }
-            return _cachedUsers.FirstOrDefault(u => u.ServerId.Equals(id));
+
+            if (searchByServerId)
+                return _cachedUsers.FirstOrDefault(u => u.ServerId.Equals(id));
+            else
+                return _cachedUsers.FirstOrDefault(u => u.UserId.Equals(id));
         }
 
         public async Task<User> GetUserByServerId(string id)
