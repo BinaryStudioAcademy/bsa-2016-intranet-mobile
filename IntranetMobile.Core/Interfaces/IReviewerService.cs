@@ -9,16 +9,16 @@ namespace IntranetMobile.Core
         Task<List<TicketsDto>> GetListOfTicketsAsync();
         Task<List<TicketsDto>> GetListOfTicketsForConcreteGroupAsync(string groupId);
         Task<List<TicketsDto>> GetListOfMyTicketsAsync();
-        Task<bool> JoinTicketAsync(string userId, string tickedId);
-        Task<bool> UndoJoinTicketAsync(string tickedId);
-        Task<TicketsDto> GetTicketDetailsAsync(string tickedId);
-        Task<ReviewTicktsResponseDto> CreateReviewTicketAsync();
+        Task<bool> JoinTicketAsync(string userId, string ticketId);
+        Task<bool> UndoJoinTicketAsync(string ticketId);
+        Task<TicketsDto> GetTicketDetailsAsync(string ticketId);
+        Task<TicketsDto> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto);
         Task<List<SubscribedTicketDto>> GetListOfSubscribedTicketsAsync();
-        Task<bool> DeleteTicketRequstAsync();
-        Task<List<CommentsTicketDto>> GetListOfTicketCommentsAsync(string tickedId);
-        Task<CommentsTicketDto> WtiteCommentAsync(string ticketId);
-        Task<bool> AcceptUserReviewRequestForTicketAsync(string userId, string tickedId);
-        Task<bool> DeclineuserReviewRequestForTicketAsync(string userId, string tickedId);
+        Task<bool> DeleteTicketAsync();
+        Task<List<CommentTicketDto>> GetListOfTicketCommentsAsync(string ticketId);
+        Task<CommentTicketDto> WtiteCommentAsync(string ticketId, string text);
+        Task<bool> AcceptUserReviewForTicketAsync(string userId, string ticketId);
+        Task<bool> DeclineuserReviewForTicketAsync(string userId, string ticketId);
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -225,6 +226,11 @@ namespace IntranetMobile.Core.Services
 
             // Prevent user-defined code from cache modifying
             return new List<Certification>(_cachedCertifications);
+        }
+
+        public async Task<bool> ReviewerLoginAsync()
+        {
+            return await _restClient.GetAsync("reviewr/users/login");
         }
     }
 }

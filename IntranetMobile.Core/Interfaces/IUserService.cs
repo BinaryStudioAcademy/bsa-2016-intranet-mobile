@@ -29,5 +29,7 @@ namespace IntranetMobile.Core.Interfaces
         Task<UserCvs> GetUserCvsByServerId(string id);
         Task<Certification> GetCertificateByIdAsync(string id);
         Task<List<Certification>> GetAllCertificatesAsync();
+
+        Task<bool> ReviewerLoginAsync();
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IntranetMobile.Core
 {
-    public class ReviewTicketsReqeustDto
+    public class ReviewTicketRequestDto
     {
         public string title { get; set; }
         public string details { get; set; }

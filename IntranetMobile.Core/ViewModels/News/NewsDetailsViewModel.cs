@@ -110,6 +110,7 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
+       
         private void Comment()
         {
             ShowViewModel<CommentsViewModel>(new CommentsViewModel.Parameters {NewsId = _newsId});

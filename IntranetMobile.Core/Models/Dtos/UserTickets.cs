@@ -18,6 +18,17 @@ namespace IntranetMobile.Core
         public string city { get; set; }
         public string job { get; set; }
         public string department { get; set; }
+        public Pivot pivot { get; set; }
+
+        public class Pivot
+        {
+            public int review_request_id { get; set; }
+            public int user_id { get; set; }
+            public int isAccepted { get; set; }
+            public string status { get; set; }
+        }
+
+
     }
 }
 

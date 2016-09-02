@@ -32,6 +32,7 @@ namespace IntranetMobile.Core.Services
             if (authDto.success)
             {
                 ServiceBus.UserService.GetAllUsers();
+                ServiceBus.UserService.ReviewerLoginAsync();
             }
 
             return authDto;
