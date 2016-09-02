@@ -67,7 +67,7 @@ namespace IntranetMobile.Core.ViewModels.News
                 return;
             try
             {
-                await ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.UserId, NewComment, _newsId);
+                await ServiceBus.NewsService.AddCommentAsync(ServiceBus.UserService.CurrentUser.ServerId, NewComment, _newsId);
                 NewComment = "";
                 GetComments();
             }
