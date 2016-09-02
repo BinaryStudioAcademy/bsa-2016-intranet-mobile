@@ -12,8 +12,8 @@ namespace IntranetMobile.Core.ViewModels
     public class MenuViewModel : BaseViewModel
     {
         private string _avatarUrl;
-        private string _userName;
         private string _email;
+        private string _userName;
 
         public MenuViewModel()
         {
@@ -66,6 +66,11 @@ namespace IntranetMobile.Core.ViewModels
         {
             var user = await ServiceBus.UserService.GetCurrentUserAsync();
             ShowViewModel<ProfileViewModel>(new {userId = user.UserId});
+        }
+
+        public void ShowReviewer()
+        {
+            ShowViewModel<TicketDetailsViewModel>();
         }
 
         public void ShowUsers()

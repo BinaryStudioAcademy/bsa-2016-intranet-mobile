@@ -250,10 +250,11 @@
     <Compile Include="Views\Fragments\MenuFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Fragments\Profile\ProfileActivity.cs" />
+    <Compile Include="Views\Activities\ProfileActivity.cs" />
     <Compile Include="Views\Fragments\Profile\UsersProfilesFragment.cs" />
     <Compile Include="Views\Fragments\Reviewer\ReviewerFragment.cs" />
     <Compile Include="Views\Fragments\Reviewer\ReviewerRecycleFragment.cs" />
+    <Compile Include="Views\Activities\TicketDetailsActivity.cs" />
     <Compile Include="Views\Util\CommentActionsWrapper.cs" />
     <Compile Include="Views\Util\DisplayUtils.cs" />
     <Compile Include="Views\Util\FromHtmlValueConverter.cs" />
@@ -397,6 +398,15 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_extension_black_24dp.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_extension_black_24dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_extension_black_24dp.png" />
+    <AndroidResource Include="Resources\layout\activity_ticket_details.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_tag.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_offer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\card_view_reviewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -456,6 +466,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Views\Fragments\Reviewer\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />
@@ -805,6 +816,39 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_schedule_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\accent_rounded_corner.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_clear_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_done_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_clear_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_done_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_clear_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_done_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_clear_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_done_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_clear_black_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_done_black_24dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
