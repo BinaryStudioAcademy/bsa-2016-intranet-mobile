@@ -59,6 +59,7 @@ namespace IntranetMobile.Core
 
         public async Task<List<TicketsDto>> GetListOfTicketsForConcreteGroupAsync(string groupId)
         {
+            // Id = 1:PHP 2:JS 3:C#
             return await _restClient.GetAsync<List<TicketsDto>>(_reviewrPath + "/group/" + groupId);
         }
 

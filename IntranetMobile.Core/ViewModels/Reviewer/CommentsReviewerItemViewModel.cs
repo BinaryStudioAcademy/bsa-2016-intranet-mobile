@@ -1,5 +1,4 @@
-﻿using System;
-namespace IntranetMobile.Core
+﻿namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class CommentsReviewerItemViewModel
     {

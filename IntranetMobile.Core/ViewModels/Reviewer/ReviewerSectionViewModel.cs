@@ -5,16 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class ReviewerSectionViewModel : BaseViewModel
     {
-        public ReviewerSectionViewModel()
+        private readonly string _groupId;
+        public ReviewerSectionViewModel(string groupId)
         {
             Title = "ReviewerSectionViewModel";
-
+            _groupId = groupId;
             ReloadCommand = new MvxCommand(async () =>
             {
                 IsRefreshing = true;
@@ -44,11 +46,16 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         {
             try
             {
-                InvokeOnMainThread(() => { Reviews.Add(new ItemReviewViewModel() { TitleName = "Testing Title Name", Author = "Ivan Ivanov", DateTime = DateTime.Now.ToString(), ReviewerText = "This review was created by Ivan Ivanov for testing this code review"}); });
+                var dtos = await ServiceBus.ReviewerService.GetListOfTicketsForConcreteGroupAsync(_groupId);
+                InvokeOnMainThread(Reviews.Clear);
+                foreach (var dto in dtos)
+                {
+                    InvokeOnMainThread(() => { Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto)); });
+                }
             }
             catch (Exception e)
             {
-
+               
             }
 
         }

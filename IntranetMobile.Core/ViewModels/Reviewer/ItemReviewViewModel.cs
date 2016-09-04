@@ -1,30 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class ItemReviewViewModel : BaseViewModel
     {
-        private string _authorImage;
-        private string _titleName;
         private string _author;
+        private string _authorImage;
         private string _dateTime;
         private string _reviewerText;
         private bool _signed;
+        private string _titleName;
 
         public ItemReviewViewModel()
         {
             ClickViewDetailsCommand = new MvxCommand(ClickViewDetailsCommandExecute);
-        }
-
-        private void ClickViewDetailsCommandExecute()
-        {
-            ShowViewModel<TicketDetailsViewModel>();
         }
 
         public ICommand ClickViewDetailsCommand { get; private set; }
@@ -35,16 +25,17 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _authorImage = value;
-                RaisePropertyChanged(()=> AuthorImage);
+                RaisePropertyChanged(() => AuthorImage);
             }
         }
+
         public string TitleName
         {
             get { return _titleName; }
             set
             {
-                _titleName = value; 
-                RaisePropertyChanged(()=> TitleName);
+                _titleName = value;
+                RaisePropertyChanged(() => TitleName);
             }
         }
 
@@ -54,7 +45,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _author = value;
-                RaisePropertyChanged(()=> Author);
+                RaisePropertyChanged(() => Author);
             }
         }
 
@@ -63,8 +54,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             get { return _dateTime; }
             set
             {
-                _dateTime = value; 
-                RaisePropertyChanged(()=>DateTime);
+                _dateTime = value;
+                RaisePropertyChanged(() => DateTime);
             }
         }
 
@@ -73,8 +64,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             get { return _signed; }
             set
             {
-                _signed = value; 
-                RaisePropertyChanged(()=>Signed);
+                _signed = value;
+                RaisePropertyChanged(() => Signed);
             }
         }
 
@@ -84,8 +75,25 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _reviewerText = value;
-                RaisePropertyChanged(()=>ReviewerText);
+                RaisePropertyChanged(() => ReviewerText);
             }
+        }
+
+        private void ClickViewDetailsCommandExecute()
+        {
+            ShowViewModel<TicketDetailsViewModel>();
+        }
+
+        public static ItemReviewViewModel GetItemReviewViewModelFromDto(TicketsDto dto)
+        {
+            return new ItemReviewViewModel
+            {
+                AuthorImage = Constants.BaseUrl + dto.user.avatar,
+                Author = $"{dto.user.first_name} {dto.user.last_name}",
+                DateTime = dto.date_review,
+                ReviewerText = dto.details,
+                TitleName = dto.title
+            };
         }
     }
 }
