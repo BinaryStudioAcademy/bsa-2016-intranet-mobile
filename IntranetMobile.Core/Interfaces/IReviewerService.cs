@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace IntranetMobile.Core
+namespace IntranetMobile.Core.Interfaces
 {
     public interface IReviewerService
     {
@@ -17,6 +17,6 @@ namespace IntranetMobile.Core
         Task<List<CommentTicketDto>> GetListOfTicketCommentsAsync(string ticketId);
         Task<CommentTicketDto> WtiteCommentAsync(string ticketId, string text);
         Task<bool> AcceptUserReviewForTicketAsync(string userId, string ticketId);
-        Task<bool> DeclineuserReviewForTicketAsync(string userId, string ticketId);
+        Task<bool> DeclineUserReviewForTicketAsync(string userId, string ticketId);
     }
 }

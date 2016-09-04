@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using IntranetMobile.Core.Services;
+using IntranetMobile.Core.Interfaces;
 
-namespace IntranetMobile.Core
+namespace IntranetMobile.Core.Services
 {
     public class ReviewerService : IReviewerService
     {
@@ -27,7 +27,7 @@ namespace IntranetMobile.Core
             return await _restClient.PostAsync<TicketsDto>(_reviewrPath, reviewTicketRequestDto);
         }
 
-        public async Task<bool> DeclineuserReviewForTicketAsync(string userId, string ticketId)
+        public async Task<bool> DeclineUserReviewForTicketAsync(string userId, string ticketId)
         {
             return await _restClient.GetAsync(_actionTicketPath + userId + "/decline/" + ticketId);
         }
