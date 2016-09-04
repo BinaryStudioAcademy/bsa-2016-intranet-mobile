@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class CommentsViewModel : BaseViewModel
+    public class CommentsNewsViewModel : BaseViewModel
     {
         private string _newComment;
         private string _newsId;
 
-        public CommentsViewModel()
+        public CommentsNewsViewModel()
         {
-            Comments = new ObservableCollection<CommentsItemViewModel>();
+            Comments = new ObservableCollection<CommentsNewsItemViewModel>();
             ClickSendCommentCommand = new MvxCommand(SendCommentExecute);
             Title = "Comments";
         }
@@ -36,11 +34,11 @@ namespace IntranetMobile.Core.ViewModels.News
                 Comments.Clear();
                 foreach (var c in data.comments)
                 {
-                    var comment = new CommentsItemViewModel(c, _newsId);
+                    var comment = new CommentsNewsItemViewModel(c, _newsId);
                     Comments.Add(comment);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 ServiceBus.AlertService.ShowConnectionLostMessage();
             }
@@ -60,7 +58,7 @@ namespace IntranetMobile.Core.ViewModels.News
             }
         }
 
-        public ObservableCollection<CommentsItemViewModel> Comments { get; private set; }
+        public ObservableCollection<CommentsNewsItemViewModel> Comments { get; private set; }
 
         private async void SendCommentExecute()
         {

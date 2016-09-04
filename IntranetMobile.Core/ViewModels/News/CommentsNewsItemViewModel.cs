@@ -7,7 +7,7 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.News
 {
-    public class CommentsItemViewModel : BaseViewModel
+    public class CommentsNewsItemViewModel : BaseViewModel
     {
         private string _body;
         private int _countLikes;
@@ -19,7 +19,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private string _newsId;
 
-        public CommentsItemViewModel(CommentDto comment, string newsId)
+        public CommentsNewsItemViewModel(CommentDto comment, string newsId)
         {
             _newsId = newsId;
 

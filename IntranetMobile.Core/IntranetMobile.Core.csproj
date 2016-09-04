@@ -93,8 +93,8 @@
     <Compile Include="ViewModels\News\NewsItemViewModel.cs" />
     <Compile Include="ViewModels\News\WeeklyNewsViewModel.cs" />
     <Compile Include="Models\Comment.cs" />
-    <Compile Include="ViewModels\News\CommentsViewModel.cs" />
-    <Compile Include="ViewModels\News\CommentsItemViewModel.cs" />
+    <Compile Include="ViewModels\News\CommentsNewsViewModel.cs" />
+    <Compile Include="ViewModels\News\CommentsNewsItemViewModel.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="ViewModels\Profile\UserAchievementViewModel.cs" />
@@ -130,6 +130,8 @@
     <Compile Include="Models\Dtos\SubscribedTicketDto.cs" />
     <Compile Include="Models\Dtos\CommentTicketDto.cs" />
     <Compile Include="Models\Dtos\ReviewTicketRequestDto.cs" />
+    <Compile Include="ViewModels\Reviewer\CommentsReviewerViewModel.cs" />
+    <Compile Include="ViewModels\Reviewer\CommentsReviewerItemViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.7.21211, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">

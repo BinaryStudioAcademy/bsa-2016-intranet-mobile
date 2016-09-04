@@ -7,8 +7,8 @@ namespace IntranetMobile.Droid.Views.Activities
               Theme = "@style/BSTheme",
               WindowSoftInputMode = Android.Views.SoftInput.AdjustPan,
               LaunchMode = Android.Content.PM.LaunchMode.SingleTop)]
-    public class CommentsActivity : BaseToolbarActivity<CommentsViewModel>
+    public class CommentsNewsActivity : BaseToolbarActivity<CommentsNewsViewModel>
     {
-        public override int ActivityLayout { get; } = Resource.Layout.activity_comments;
+        public override int ActivityLayout { get; } = Resource.Layout.activity_commentsnews;
     }
 }

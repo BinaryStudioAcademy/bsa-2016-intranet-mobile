@@ -261,7 +261,7 @@
     <Compile Include="Views\Util\ImageGetter.cs" />
     <Compile Include="Views\Util\LikeActionsWrapper.cs" />
     <Compile Include="Views\Util\MvxDynamicCompressedImageHelper.cs" />
-    <Compile Include="Views\Activities\CommentsActivity.cs" />
+    <Compile Include="Views\Activities\CommentsNewsActivity.cs" />
     <Compile Include="Views\Fragments\News\WeekliesRecyclerViewFragment.cs" />
     <Compile Include="Converters\BoolToWhiteLikeIconConverter.cs" />
     <Compile Include="Views\Activities\BaseCachingFragmentActivity.cs" />
@@ -269,6 +269,7 @@
     <Compile Include="Views\Fragments\SettingsFragment.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Views\Fragments\AsciitFragment.cs" />
+    <Compile Include="Views\Activities\CommentsReviewerActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -328,8 +329,8 @@
     <AndroidResource Include="Resources\layout\menu_news_details_text_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\activity_comments.axml" />
-    <AndroidResource Include="Resources\layout\listview_comments.axml" />
+    <AndroidResource Include="Resources\layout\activity_commentsnews.axml" />
+    <AndroidResource Include="Resources\layout\listview_commentsnews.axml" />
     <AndroidResource Include="Resources\drawable-nodpi\news_default.png" />
     <AndroidResource Include="Resources\layout\fragment_users.axml">
       <SubType>Designer</SubType>
@@ -416,6 +417,8 @@
     <AndroidResource Include="Resources\layout\recycle_view_reviewer.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_commentsreviewer.axml" />
+    <AndroidResource Include="Resources\layout\listview_commentsreviewer.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">

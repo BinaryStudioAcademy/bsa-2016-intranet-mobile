@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
-        app:MvxItemTemplate="@layout/listview_comments"
+        app:MvxItemTemplate="@layout/listview_commentsnews"
         app:MvxBind="ItemsSource Comments" />
     <RelativeLayout
         android:layout_width="match_parent"
