@@ -419,6 +419,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_commentsreviewer.axml" />
     <AndroidResource Include="Resources\layout\listview_commentsreviewer.axml" />
+    <AndroidResource Include="Resources\layout\card_view_user_reviewer.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
@@ -469,7 +472,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Views\Fragments\Reviewer\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />

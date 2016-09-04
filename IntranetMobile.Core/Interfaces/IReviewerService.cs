@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace IntranetMobile.Core
@@ -14,11 +13,10 @@ namespace IntranetMobile.Core
         Task<TicketsDto> GetTicketDetailsAsync(string ticketId);
         Task<TicketsDto> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto);
         Task<List<SubscribedTicketDto>> GetListOfSubscribedTicketsAsync();
-        Task<bool> DeleteTicketAsync();
+        Task<bool> DeleteTicketAsync(string id);
         Task<List<CommentTicketDto>> GetListOfTicketCommentsAsync(string ticketId);
         Task<CommentTicketDto> WtiteCommentAsync(string ticketId, string text);
         Task<bool> AcceptUserReviewForTicketAsync(string userId, string ticketId);
         Task<bool> DeclineuserReviewForTicketAsync(string userId, string ticketId);
     }
 }
-

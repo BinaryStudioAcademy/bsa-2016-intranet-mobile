@@ -5,12 +5,12 @@ using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core
 {
-    public class ReviewerService:IReviewerService
+    public class ReviewerService : IReviewerService
     {
-        private readonly string _reviewrPath = "reviewr/api/v1/reviewrequest";
         private readonly string _actionTicketPath = "reviewr/api/v1/user/";
 
         private readonly RestClient _restClient;
+        private readonly string _reviewrPath = "reviewr/api/v1/reviewrequest";
 
         public ReviewerService(RestClient client)
         {
@@ -32,8 +32,9 @@ namespace IntranetMobile.Core
             return await _restClient.GetAsync(_actionTicketPath + userId + "/decline/" + ticketId);
         }
 
-        public async Task<bool> DeleteTicketAsync()
+        public async Task<bool> DeleteTicketAsync(string id)
         {
+            //TODO: WTF is this?????????
             return await _restClient.DeleteAsync(_reviewrPath + "/186");
         }
 
@@ -89,4 +90,3 @@ namespace IntranetMobile.Core
         }
     }
 }
-

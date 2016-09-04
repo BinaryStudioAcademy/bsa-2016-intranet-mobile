@@ -3,80 +3,42 @@ using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
-    public class ItemReviewViewModel : BaseViewModel
+    public class ItemReviewViewModel : BaseItemReviewViewModel
     {
-        private string _author;
-        private string _authorImage;
-        private string _dateTime;
-        private string _reviewerText;
-        private bool _signed;
-        private string _titleName;
+        private string _buttonText;
+        private bool _isSigned;
 
         public ItemReviewViewModel()
         {
             ClickViewDetailsCommand = new MvxCommand(ClickViewDetailsCommandExecute);
+            ClickSignCommand = new MvxCommand(ClickSignCommandxecute);
         }
 
-        public ICommand ClickViewDetailsCommand { get; private set; }
+        public ICommand ClickSignCommand { get; set; }
 
-        public string AuthorImage
+        public string ButtonText
         {
-            get { return _authorImage; }
+            get { return _buttonText; }
             set
             {
-                _authorImage = value;
-                RaisePropertyChanged(() => AuthorImage);
+                _buttonText = value;
+                RaisePropertyChanged(() => ButtonText);
             }
         }
 
-        public string TitleName
+        public bool IsSigned
         {
-            get { return _titleName; }
+            get { return _isSigned; }
             set
             {
-                _titleName = value;
-                RaisePropertyChanged(() => TitleName);
+                _isSigned = value;
+                ButtonText = _isSigned ? "Undo" : "Join";
             }
         }
 
-        public string Author
+        private void ClickSignCommandxecute()
         {
-            get { return _author; }
-            set
-            {
-                _author = value;
-                RaisePropertyChanged(() => Author);
-            }
-        }
-
-        public string DateTime
-        {
-            get { return _dateTime; }
-            set
-            {
-                _dateTime = value;
-                RaisePropertyChanged(() => DateTime);
-            }
-        }
-
-        public bool Signed
-        {
-            get { return _signed; }
-            set
-            {
-                _signed = value;
-                RaisePropertyChanged(() => Signed);
-            }
-        }
-
-        public string ReviewerText
-        {
-            get { return _reviewerText; }
-            set
-            {
-                _reviewerText = value;
-                RaisePropertyChanged(() => ReviewerText);
-            }
+            IsSigned = !_isSigned;
         }
 
         private void ClickViewDetailsCommandExecute()
@@ -93,6 +55,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 DateTime = dto.date_review,
                 ReviewerText = dto.details,
                 TitleName = dto.title
+                //IsSigned need responce from server to know is user signed or not
             };
         }
     }
