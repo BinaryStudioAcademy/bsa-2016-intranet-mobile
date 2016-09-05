@@ -11,9 +11,9 @@ namespace IntranetMobile.Core.Services
     public class ReviewerService : IReviewerService
     {
         private readonly string _actionTicketPath = "reviewr/api/v1/user/";
+        private readonly string _reviewrPath = "reviewr/api/v1/reviewrequest";
 
         private readonly RestClient _restClient;
-        private readonly string _reviewrPath = "reviewr/api/v1/reviewrequest";
 
         public ReviewerService(RestClient client)
         {
@@ -82,9 +82,19 @@ namespace IntranetMobile.Core.Services
             return await _restClient.GetAsync<List<TicketDto>>(_reviewrPath + "/group/" + groupId);
         }
 
-        public async Task<TicketDto> GetTicketDetailsAsync(string ticketId)
+        public async Task<Ticket> GetTicketDetailsAsync(string ticketId)
         {
-            return await _restClient.GetAsync<TicketDto>(_reviewrPath + "/" + ticketId);
+            var ticket = new Ticket();
+            var ticketDto = await _restClient.GetAsync<TicketDto>(_reviewrPath + "/" + ticketId);
+
+            ticket.TicketId = ticketDto.id;
+            ticket.Author = ticketDto.user.first_name + " " + ticketDto.user.last_name;
+            ticket.DateReview = ticketDto.date_review;
+            ticket.ReviewText = ticketDto.details;
+            ticket.TitleName = ticketDto.title;
+            ticket.AuthorImage = ticketDto.user.avatar;
+
+            return ticket;
         }
 
         public async Task<bool> JoinTicketAsync(string userId, string ticketId)

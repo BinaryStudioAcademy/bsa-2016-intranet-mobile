@@ -4,6 +4,12 @@
 
     public class Ticket
     {
+        public string TicketId { get; set; }
+        public string Author { get; set; }
+        public string DateReview { get; set; }
+        public string ReviewText { get; set; }
+        public string TitleName { get; set; }
+        public string AuthorImage { get; set; }
     }
 
     public class TicketGroup

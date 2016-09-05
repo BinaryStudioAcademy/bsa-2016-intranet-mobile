@@ -12,7 +12,7 @@ namespace IntranetMobile.Core.Interfaces
         Task<List<TicketDto>> GetListOfMyTicketsAsync();
         Task<bool> JoinTicketAsync(string userId, string ticketId);
         Task<bool> UndoJoinTicketAsync(string ticketId);
-        Task<TicketDto> GetTicketDetailsAsync(string ticketId);
+        Task<Ticket> GetTicketDetailsAsync(string ticketId);
         Task<TicketDto> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto);
         Task<List<SubscribedTicketDto>> GetListOfSubscribedTicketsAsync();
         Task<bool> DeleteTicketAsync(string id);
