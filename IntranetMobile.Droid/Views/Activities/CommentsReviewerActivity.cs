@@ -1,27 +1,14 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Android.App;
+using IntranetMobile.Core;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
-namespace IntranetMobile.Droid
+namespace IntranetMobile.Droid.Views.Activities
 {
-    [Activity(Label = "CommentsReviewerActivity")]
-    public class CommentsReviewerActivity : Activity
+    [Activity(Label = "CommentsActivity",
+              Theme = "@style/BSTheme",
+              WindowSoftInputMode = Android.Views.SoftInput.AdjustPan,
+              LaunchMode = Android.Content.PM.LaunchMode.SingleTop)]
+    public class CommentsReviewerActivity : BaseToolbarActivity<CommentsReviewerViewModel>
     {
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-            // Create your application here
-        }
+        public override int ActivityLayout { get; } = Resource.Layout.activity_commentsreviewer;
     }
 }
-

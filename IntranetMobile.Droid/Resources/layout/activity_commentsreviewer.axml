@@ -1,3 +1,46 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <include
+        android:id="@+id/activity_commentsreviewer_toolbar"
+        layout="@layout/mvx_toolbar" />
+    <Mvx.MvxListView
+        android:id="@+id/commentReviewerListView"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_weight="1"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"
+        app:MvxItemTemplate="@layout/listview_commentsreviewer"
+        app:MvxBind="ItemsSource Comments" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F2F2F2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#FEFEFE"
+        android:padding="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:inputType="textMultiLine"
+            android:hint="Write a comment"
+            android:textColorHint="#D3D3D3"
+            app:MvxBind="Text NewComment" />
+        <ImageButton
+            android:background="@drawable/commentsendbutton"
+            android:src="@drawable/ic_send_white_24dp"
+            android:layout_margin="4dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            app:MvxBind="Click ClickSendCommentCommand" />
+    </LinearLayout>
 </LinearLayout>

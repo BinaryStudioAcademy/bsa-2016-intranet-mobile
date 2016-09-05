@@ -1,3 +1,72 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:padding="14dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginRight="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <MvxAppCompatCircleImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:maxWidth="34dp"
+            android:maxHeight="34dp"
+            app:MvxBind="ImageUrl PreviewImageUri" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingRight="10dp">
+        <TextView
+            android:text="FirstName LastName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="4dp"
+            android:textSize="@dimen/roboto_regular_small"
+            android:textColor="@color/colorPrimaryDark"
+            app:MvxBind="Text Name" />
+        <TextView
+            android:text="Some body comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/roboto_regular"
+            app:MvxBind="Text Body" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="DatePublication"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_very_small"
+                android:textColor="@color/colorPrimary"
+                app:MvxBind="Text Date" />
+            <TextView
+                android:text="count likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@color/colorPrimary"
+                app:MvxBind="Text CountLikes" />
+            <Mvx.MvxImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:gravity="right"
+                android:alpha="0.5"
+                app:MvxBind="DrawableName BoolToBlackLikeIconConverter(IsLiked); Click ClickLikeCommand" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

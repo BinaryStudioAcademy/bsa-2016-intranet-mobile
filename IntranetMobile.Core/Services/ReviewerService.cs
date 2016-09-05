@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core
@@ -47,9 +48,24 @@ namespace IntranetMobile.Core
             return await _restClient.GetAsync<List<SubscribedTicketDto>>("reviewr/api/v1/myrequests");
         }
 
-        public async Task<List<CommentTicketDto>> GetListOfTicketCommentsAsync(string ticketId)
+        public async Task<List<Comment>> GetListOfTicketCommentsAsync(string ticketId)
         {
-            return await _restClient.GetAsync<List<CommentTicketDto>>(_reviewrPath + "/" + ticketId + "/comment");
+            var comments = new List<Comment>();
+            var commentsResponse = await _restClient.GetAsync<List<CommentTicketDto>>(_reviewrPath + "/" + ticketId + "/comment");
+
+            foreach (var c in commentsResponse)
+            {
+                var comment = new Comment();
+
+                comment.AuthorId = c.user.binary_id;
+                comment.Body = c.text;
+                comment.CommentId = c.id;
+                comment.Date = c.created_at;
+
+                comments.Add(comment);
+            }
+
+            return comments;
         }
 
         public async Task<List<TicketsDto>> GetListOfTicketsAsync()
