@@ -11,8 +11,8 @@ namespace IntranetMobile.Core.Services
     public enum ReviewerGroup
     {
         none = 0,
-        JavaScript = 1,
-        Php = 2,
+        Php = 1,
+        JavaScript = 2,
         DotNet = 3
     }
 
@@ -28,40 +28,40 @@ namespace IntranetMobile.Core.Services
             _restClient = client;
         }
 
-        public async Task<bool> AcceptUserReviewForTicketAsync(string userId, string ticketId)
+        public Task<bool> AcceptUserReviewForTicketAsync(string userId, string ticketId)
         {
-            return await _restClient.GetAsync(_actionTicketPath + userId + "/accept/" + ticketId);
+            return _restClient.GetAsync(_actionTicketPath + $"{userId}/accept/{ticketId}");
         }
 
-        public async Task<TicketDto> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto)
+        public Task<TicketDto> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto)
         {
-            return await _restClient.PostAsync<TicketDto>(_reviewrPath, reviewTicketRequestDto);
+            return _restClient.PostAsync<TicketDto>(_reviewrPath, reviewTicketRequestDto);
         }
 
-        public async Task<bool> DeclineUserReviewForTicketAsync(string userId, string ticketId)
+        public Task<bool> DeclineUserReviewForTicketAsync(string userId, string ticketId)
         {
-            return await _restClient.GetAsync(_actionTicketPath + userId + "/decline/" + ticketId);
+            return _restClient.GetAsync(_actionTicketPath + $"{userId}/decline/{ticketId}");
         }
 
-        public async Task<bool> DeleteTicketAsync(string id)
+        public Task<bool> DeleteTicketAsync(string id)
         {
-            return await _restClient.DeleteAsync(_reviewrPath + $"/{id}");
+            return _restClient.DeleteAsync(_reviewrPath + $"/{id}");
         }
 
-        public async Task<List<TicketDto>> GetListOfMyTicketsAsync()
+        public Task<List<TicketDto>> GetListOfMyTicketsAsync()
         {
-            return await _restClient.GetAsync<List<TicketDto>>(_reviewrPath + "/my");
+            return _restClient.GetAsync<List<TicketDto>>(_reviewrPath + "/my");
         }
 
-        public async Task<List<SubscribedTicketDto>> GetListOfSubscribedTicketsAsync()
+        public Task<List<SubscribedTicketDto>> GetListOfSubscribedTicketsAsync()
         {
-            return await _restClient.GetAsync<List<SubscribedTicketDto>>("reviewr/api/v1/myrequests");
+            return _restClient.GetAsync<List<SubscribedTicketDto>>("reviewr/api/v1/myrequests");
         }
 
         public async Task<List<Comment>> GetListOfTicketCommentsAsync(string ticketId)
         {
             var comments = new List<Comment>();
-            var commentsResponse = await _restClient.GetAsync<List<TicketCommentDto>>(_reviewrPath + "/" + ticketId + "/comment");
+            var commentsResponse = await _restClient.GetAsync<List<TicketCommentDto>>(_reviewrPath + $"/{ticketId}/comment");
 
             foreach (var c in commentsResponse)
             {
@@ -86,16 +86,16 @@ namespace IntranetMobile.Core.Services
         public Task<List<TicketDto>> GetListOfTicketsForGroupAsync(ReviewerGroup group)
         {
             var groupId = (int)group;
-            return _restClient.GetAsync<List<TicketDto>>(_reviewrPath + "/group/" + groupId);
+            return _restClient.GetAsync<List<TicketDto>>(_reviewrPath + $"/group/{groupId}");
         }
 
         public async Task<Ticket> GetTicketDetailsAsync(string ticketId)
         {
             var ticket = new Ticket();
-            var ticketDto = await _restClient.GetAsync<TicketDto>(_reviewrPath + "/" + ticketId);
+            var ticketDto = await _restClient.GetAsync<TicketDto>(_reviewrPath + $"/{ticketId}");
 
             ticket.TicketId = ticketDto.id;
-            ticket.Author = ticketDto.user.first_name + " " + ticketDto.user.last_name;
+            ticket.Author = $"{ticketDto.user.first_name} {ticketDto.user.last_name}";
             ticket.DateReview = ticketDto.date_review;
             ticket.ReviewText = ticketDto.details;
             ticket.TitleName = ticketDto.title;
@@ -117,14 +117,14 @@ namespace IntranetMobile.Core.Services
             return ticket;
         }
 
-        public async Task<bool> JoinTicketAsync(string userId, string ticketId)
+        public Task<bool> JoinTicketAsync(string userId, string ticketId)
         {
-            return await _restClient.GetAsync(_actionTicketPath + userId + "/offeron/" + ticketId);
+            return _restClient.GetAsync(_actionTicketPath + $"{userId}/offeron/{ticketId}");
         }
 
-        public async Task<bool> UndoJoinTicketAsync(string ticketId)
+        public Task<bool> UndoJoinTicketAsync(string ticketId)
         {
-            return await _restClient.GetAsync(_actionTicketPath + "offeroff/" + ticketId);
+            return _restClient.GetAsync(_actionTicketPath + $"offeroff/{ticketId}");
         }
 
         public Task<TicketCommentDto> WtiteCommentAsync(string ticketId, string text)
@@ -134,7 +134,7 @@ namespace IntranetMobile.Core.Services
             commentTicketDto.created_at = DateTime.Now.ToString();
             commentTicketDto.formatted_created_at = "Invalid date";
 
-            return _restClient.PostAsync<TicketCommentDto>(_reviewrPath + "/" + ticketId + "/comment");
+            return _restClient.PostAsync<TicketCommentDto>(_reviewrPath + $"/{ticketId}/comment");
         }
     }
 }
