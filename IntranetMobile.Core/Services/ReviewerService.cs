@@ -37,7 +37,6 @@ namespace IntranetMobile.Core.Services
 
         public async Task<bool> DeleteTicketAsync(string id)
         {
-            //TODO: WTF is this???????????????????????
             return await _restClient.DeleteAsync(_reviewrPath + $"/{id}");
         }
 
@@ -78,7 +77,7 @@ namespace IntranetMobile.Core.Services
 
         public async Task<List<TicketDto>> GetListOfTicketsForConcreteGroupAsync(string groupId)
         {
-            // Id = 1:PHP 2:JS 3:C#
+            // Id = 2:PHP 1:JS 3:C#
             return await _restClient.GetAsync<List<TicketDto>>(_reviewrPath + "/group/" + groupId);
         }
 
