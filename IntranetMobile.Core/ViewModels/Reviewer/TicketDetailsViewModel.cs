@@ -1,53 +1,28 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class TicketDetailsViewModel : BaseViewModel
     {
+        private TicketDto _ticket;
         private string _ticketId;
+        private UserTicketDto _userTicket;
 
-        public TicketDetailsViewModel()
-        {
-            Title = "Accounting code review";
+        public string AuthorName => $"{UserTicket?.first_name} {UserTicket?.last_name}";
 
-            Tags.Add(new TagViewModel {TagName = "regex"});
-            Tags.Add(new TagViewModel {TagName = "nodejs"});
-            Tags.Add(new TagViewModel {TagName = "string"});
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
-            Tags.Add(new TagViewModel());
+        public string CategoryName => Ticket?.group?.title;
 
-            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
-            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
-            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
-            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
-            Offers.Add(new TicketOfferViewModel(ServiceBus.UserService.CurrentUser.UserId));
-        }
+        public string TicketText => Ticket?.details;
 
-        public string AuthorName { get; } = "AuthorName";
-
-        public string CategoryName { get; } = "JS";
-
-        public string TicketText { get; } =
-            @"Note that the variables are in scope in the enclosing block, so the subsequent line can use them. Most kinds of statements do not establish their own scope, so out variables declared in them are usually introduced into the enclosing scope."
-            ;
-
-        public string ReviewDate { get; } = "December 24, 2015, 23:20";
+        public string ReviewDate => Ticket?.date_review;
 
         public ObservableCollection<TagViewModel> Tags { get; } = new ObservableCollection<TagViewModel>();
 
-        public ObservableCollection<TicketOfferViewModel> Offers { get; } = new ObservableCollection<TicketOfferViewModel>();
+        public ObservableCollection<TicketOfferViewModel> Offers { get; } =
+            new ObservableCollection<TicketOfferViewModel>();
 
         public string TicketId
         {
@@ -55,11 +30,40 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _ticketId = value;
-                
+
+                Task.Run(async () => { Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(_ticketId); });
             }
         }
 
-        public Ticke
+        public TicketDto Ticket
+        {
+            get { return _ticket; }
+            set
+            {
+                _ticket = value;
+
+                Title = _ticket.title;
+
+                foreach (var tagDto in _ticket.tags)
+                {
+                    InvokeOnMainThread(() => Tags.Clear());
+                    InvokeOnMainThread(() => Tags.Add(new TagViewModel {TagName = tagDto.title}));
+                }
+
+                foreach (var userTicketDto in _ticket.users)
+                {
+                    InvokeOnMainThread(() => Offers.Clear());
+                    InvokeOnMainThread(() => Offers.Add(new TicketOfferViewModel(userTicketDto.binary_id)));
+                }
+
+                RaisePropertyChanged(() => AuthorName);
+                RaisePropertyChanged(() => CategoryName);
+                RaisePropertyChanged(() => TicketText);
+                RaisePropertyChanged(() => ReviewDate);
+            }
+        }
+
+        public UserTicketDto UserTicket => Ticket?.user;
 
         public void Init(string ticketId)
         {

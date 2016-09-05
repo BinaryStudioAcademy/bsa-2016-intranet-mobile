@@ -23,7 +23,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         private void ClickViewDetailsCommandExecute()
         {
-            ShowViewModel<TicketDetailsViewModel>(Id);
+            ShowViewModel<TicketDetailsViewModel>(new { ticketId = Id });
         }
 
         public static ItemUserReviewViewModel GetItemReviewViewModelFromDto(TicketDto dto)

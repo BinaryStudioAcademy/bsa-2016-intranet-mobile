@@ -2,7 +2,7 @@
 {
     public class TagViewModel : BaseViewModel
     {
-        private string _tagName = "Tag!";
+        private string _tagName = string.Empty;
 
         public string TagName
         {
