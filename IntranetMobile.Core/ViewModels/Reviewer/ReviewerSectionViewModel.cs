@@ -13,9 +13,12 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         private bool _isRefreshing;
 
+        public ReviewerSectionViewModel()
+        {
+        }
+
         public ReviewerSectionViewModel(ReviewerGroup group)
         {
-            Title = "ReviewerSectionViewModel";
             _group = group;
             ReloadCommand = new MvxCommand(async () =>
             {
@@ -37,7 +40,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        public ObservableCollection<BaseItemReviewViewModel> Reviews { get; set; }
+        public ObservableCollection<BaseItemReviewViewModel> Reviews { get; private set; }
             = new ObservableCollection<BaseItemReviewViewModel>();
 
         public ICommand ReloadCommand { get; private set; }
