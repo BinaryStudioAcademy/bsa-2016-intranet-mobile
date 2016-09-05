@@ -6,8 +6,6 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class ItemUserReviewViewModel : BaseItemReviewViewModel
     {
-        private string _id;
-
         public ItemUserReviewViewModel()
         {
             ClickViewDetailsCommand = new MvxCommand(ClickViewDetailsCommandExecute);
@@ -16,15 +14,6 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public ICommand ClickDeleteTicketCommand { get; private set; }
 
-        public string Id
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                RaisePropertyChanged(() => Id);
-            }
-        }
 
         private void ClickDeleteTicketCommandExecute()
         {

@@ -59,7 +59,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                     else
                     {
                         InvokeOnMainThread(
-                            () => { Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto)); });
+                            () => { Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, userId)); });
                     }
                 }
             }

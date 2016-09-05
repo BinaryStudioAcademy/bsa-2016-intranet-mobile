@@ -7,10 +7,20 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private string _author;
         private string _authorImage;
         private string _dateTime;
+        private string _id;
         private string _reviewerText;
         private string _titleName;
         public ICommand ClickViewDetailsCommand { get; set; }
 
+        public string Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                RaisePropertyChanged(() => Id);
+            }
+        }
 
         public string AuthorImage
         {
