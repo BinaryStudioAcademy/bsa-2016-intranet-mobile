@@ -9,14 +9,14 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class ReviewerSectionViewModel : BaseViewModel
     {
-        private readonly string _groupId;
+        private readonly ReviewerGroup _group;
 
         private bool _isRefreshing;
 
-        public ReviewerSectionViewModel(string groupId)
+        public ReviewerSectionViewModel(ReviewerGroup group)
         {
             Title = "ReviewerSectionViewModel";
-            _groupId = groupId;
+            _group = group;
             ReloadCommand = new MvxCommand(async () =>
             {
                 IsRefreshing = true;
@@ -46,7 +46,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         {
             try
             {
-                var dtos = await ServiceBus.ReviewerService.GetListOfTicketsForConcreteGroupAsync(_groupId);
+                var dtos = await ServiceBus.ReviewerService.GetListOfTicketsForGroupAsync(_group);
                 InvokeOnMainThread(Reviews.Clear);
                 var userId = ServiceBus.UserService.CurrentUser.ServerId;
                 foreach (var dto in dtos)

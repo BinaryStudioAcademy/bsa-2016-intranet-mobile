@@ -8,6 +8,14 @@ using IntranetMobile.Core.Models.Dtos;
 
 namespace IntranetMobile.Core.Services
 {
+    public enum ReviewerGroup
+    {
+        none = 0,
+        JavaScript = 1,
+        Php = 2,
+        DotNet = 3
+    }
+
     public class ReviewerService : IReviewerService
     {
         private readonly string _actionTicketPath = "reviewr/api/v1/user/";
@@ -75,10 +83,10 @@ namespace IntranetMobile.Core.Services
             return await _restClient.GetAsync<List<TicketDto>>(_reviewrPath);
         }
 
-        public async Task<List<TicketDto>> GetListOfTicketsForConcreteGroupAsync(string groupId)
+        public Task<List<TicketDto>> GetListOfTicketsForGroupAsync(ReviewerGroup group)
         {
-            // Id = 2:PHP 1:JS 3:C#
-            return await _restClient.GetAsync<List<TicketDto>>(_reviewrPath + "/group/" + groupId);
+            var groupId = (int)group;
+            return _restClient.GetAsync<List<TicketDto>>(_reviewrPath + "/group/" + groupId);
         }
 
         public async Task<Ticket> GetTicketDetailsAsync(string ticketId)
