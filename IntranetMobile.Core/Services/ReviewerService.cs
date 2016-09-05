@@ -54,7 +54,7 @@ namespace IntranetMobile.Core.Services
         public async Task<List<Comment>> GetListOfTicketCommentsAsync(string ticketId)
         {
             var comments = new List<Comment>();
-            var commentsResponse = await _restClient.GetAsync<List<CommentTicketDto>>(_reviewrPath + "/" + ticketId + "/comment");
+            var commentsResponse = await _restClient.GetAsync<List<TicketCommentDto>>(_reviewrPath + "/" + ticketId + "/comment");
 
             foreach (var c in commentsResponse)
             {
