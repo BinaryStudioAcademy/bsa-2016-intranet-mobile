@@ -92,6 +92,19 @@ namespace IntranetMobile.Core.Services
             ticket.ReviewText = ticketDto.details;
             ticket.TitleName = ticketDto.title;
             ticket.AuthorImage = ticketDto.user.avatar;
+            ticket.CategoryName = ticketDto.group.title;
+            ticket.ListOfUsersId = new List<string>();
+            ticket.ListOfTagTitle = new List<string>();
+
+            foreach (var id in ticketDto.users)
+            {
+                ticket.ListOfUsersId.Add(id.binary_id);
+            }
+
+            foreach (var tag in ticketDto.tags)
+            {
+                ticket.ListOfTagTitle.Add(tag.title);
+            }
 
             return ticket;
         }

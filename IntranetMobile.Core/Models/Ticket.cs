@@ -1,4 +1,6 @@
-﻿namespace IntranetMobile.Core.Models
+﻿using System.Collections.Generic;
+
+namespace IntranetMobile.Core.Models
 {
     // TODO: Create wrapper models! Why are we supposed to work with DTOs?
 
@@ -10,6 +12,9 @@
         public string ReviewText { get; set; }
         public string TitleName { get; set; }
         public string AuthorImage { get; set; }
+        public string CategoryName { get; set; }
+        public List<string> ListOfUsersId { get; set;}
+        public List<string> ListOfTagTitle { get; set; }
     }
 
     public class TicketGroup
