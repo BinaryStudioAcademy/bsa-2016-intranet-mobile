@@ -18,9 +18,9 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             Title = "Reviewer";
         }
 
-        public ReviewerSectionViewModel Cs { get; set; } = new ReviewerSectionViewModel();
-        public ReviewerSectionViewModel Js { get; set; } = new ReviewerSectionViewModel();
-        public ReviewerSectionViewModel Php { get; set; } = new ReviewerSectionViewModel();
+        public ReviewerSectionViewModel Cs { get; set; } = new ReviewerSectionViewModel("3");
+        public ReviewerSectionViewModel Js { get; set; } = new ReviewerSectionViewModel("2");
+        public ReviewerSectionViewModel Php { get; set; } = new ReviewerSectionViewModel("1");
 
     }
 }

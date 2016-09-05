@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class ReviewerSectionViewModel : BaseViewModel
     {
-        public ReviewerSectionViewModel()
+        private readonly string _groupId;
+
+        private bool _isRefreshing;
+
+        public ReviewerSectionViewModel(string groupId)
         {
             Title = "ReviewerSectionViewModel";
-
+            _groupId = groupId;
             ReloadCommand = new MvxCommand(async () =>
             {
                 IsRefreshing = true;
@@ -23,8 +25,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             });
 
             Task.Run(ReloadData);
-
         }
+
         public virtual bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -35,22 +37,35 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        public ObservableCollection<ItemReviewViewModel> Reviews { get; set; }
-            = new ObservableCollection<ItemReviewViewModel>();
+        public ObservableCollection<BaseItemReviewViewModel> Reviews { get; set; }
+            = new ObservableCollection<BaseItemReviewViewModel>();
 
-        private bool _isRefreshing;
         public ICommand ReloadCommand { get; private set; }
+
         public virtual async Task ReloadData()
         {
             try
             {
-                InvokeOnMainThread(() => { Reviews.Add(new ItemReviewViewModel() { TitleName = "Testing Title Name", Author = "Ivan Ivanov", DateTime = DateTime.Now.ToString(), ReviewerText = "This review was created by Ivan Ivanov for testing this code review"}); });
+                var dtos = await ServiceBus.ReviewerService.GetListOfTicketsForConcreteGroupAsync(_groupId);
+                InvokeOnMainThread(Reviews.Clear);
+                var userId = ServiceBus.UserService.CurrentUser.ServerId;
+                foreach (var dto in dtos)
+                {
+                    if (dto.user.binary_id == userId)
+                    {
+                        InvokeOnMainThread(
+                            () => { Reviews.Add(ItemUserReviewViewModel.GetItemReviewViewModelFromDto(dto)); });
+                    }
+                    else
+                    {
+                        InvokeOnMainThread(
+                            () => { Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, userId)); });
+                    }
+                }
             }
             catch (Exception e)
             {
-
             }
-
         }
     }
 }

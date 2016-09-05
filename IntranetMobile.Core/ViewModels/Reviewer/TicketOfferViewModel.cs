@@ -6,8 +6,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class TicketOfferViewModel : BaseViewModel
     {
-        private string _position = string.Empty;
-        private User _user;
+        private UserInfo _user;
         private string _userId;
 
         public TicketOfferViewModel(string userId)
@@ -21,11 +20,11 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _userId = value;
-                GetUserData();
+                Task.Run(async () => { User = await ServiceBus.UserService.GetUserInfoById(UserId); });
             }
         }
 
-        public User User
+        public UserInfo User
         {
             get { return _user; }
             set
@@ -33,6 +32,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 _user = value;
                 RaisePropertyChanged(() => Name);
                 RaisePropertyChanged(() => AvatarUrl);
+                RaisePropertyChanged(() => Position);
             }
         }
 
@@ -42,25 +42,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public string Name => User?.FullName;
 
-        public string Position
-        {
-            get { return _position; }
-            set
-            {
-                _position = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private void GetUserData()
-        {
-            Task.Run(async () =>
-            {
-                User = await ServiceBus.UserService.GetUserByServerId(UserId);
-                var userInfo = await ServiceBus.UserService.GetUserInfoById(User.UserId);
-                Position = userInfo?.Department ?? "?";
-            });
-        }
+        public string Position => User?.Department;
 
         public void Init(string userId)
         {

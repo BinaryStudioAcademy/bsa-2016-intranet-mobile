@@ -1,91 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using IntranetMobile.Core.Models.Dtos;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
-    public class ItemReviewViewModel : BaseViewModel
+    public class ItemReviewViewModel : BaseItemReviewViewModel
     {
-        private string _authorImage;
-        private string _titleName;
-        private string _author;
-        private string _dateTime;
-        private string _reviewerText;
-        private bool _signed;
+        private string _buttonText;
+        private bool _isSigned;
+        private string _userId;
+
 
         public ItemReviewViewModel()
         {
             ClickViewDetailsCommand = new MvxCommand(ClickViewDetailsCommandExecute);
+            ClickSignCommand = new MvxCommand(ClickSignCommandxecute);
+        }
+
+        public ICommand ClickSignCommand { get; set; }
+
+        public string ButtonText
+        {
+            get { return _buttonText; }
+            set
+            {
+                _buttonText = value;
+                RaisePropertyChanged(() => ButtonText);
+            }
+        }
+
+        public bool IsSigned
+        {
+            get { return _isSigned; }
+            set
+            {
+                _isSigned = value;
+                ButtonText = _isSigned ? "Undo" : "Join";
+            }
+        }
+
+        private void ClickSignCommandxecute()
+        {
+            IsSigned = !_isSigned;
+            if (IsSigned)
+            {
+                ServiceBus.ReviewerService.JoinTicketAsync(_userId, Id);
+            }
+            else
+            {
+                ServiceBus.ReviewerService.UndoJoinTicketAsync(Id);
+            }
         }
 
         private void ClickViewDetailsCommandExecute()
         {
-            ShowViewModel<TicketDetailsViewModel>();
+            ShowViewModel<TicketDetailsViewModel>(new { ticketId = Id });
         }
 
-        public ICommand ClickViewDetailsCommand { get; private set; }
-
-        public string AuthorImage
+        public static ItemReviewViewModel GetItemReviewViewModelFromDto(TicketDto dto, string userId)
         {
-            get { return _authorImage; }
-            set
+            return new ItemReviewViewModel
             {
-                _authorImage = value;
-                RaisePropertyChanged(()=> AuthorImage);
-            }
-        }
-        public string TitleName
-        {
-            get { return _titleName; }
-            set
-            {
-                _titleName = value; 
-                RaisePropertyChanged(()=> TitleName);
-            }
-        }
-
-        public string Author
-        {
-            get { return _author; }
-            set
-            {
-                _author = value;
-                RaisePropertyChanged(()=> Author);
-            }
-        }
-
-        public string DateTime
-        {
-            get { return _dateTime; }
-            set
-            {
-                _dateTime = value; 
-                RaisePropertyChanged(()=>DateTime);
-            }
-        }
-
-        public bool Signed
-        {
-            get { return _signed; }
-            set
-            {
-                _signed = value; 
-                RaisePropertyChanged(()=>Signed);
-            }
-        }
-
-        public string ReviewerText
-        {
-            get { return _reviewerText; }
-            set
-            {
-                _reviewerText = value;
-                RaisePropertyChanged(()=>ReviewerText);
-            }
+                AuthorImage = Constants.BaseUrl + dto.user.avatar,
+                Author = $"{dto.user.first_name} {dto.user.last_name}",
+                DateTime = dto.date_review,
+                ReviewerText = dto.details,
+                TitleName = dto.title,
+                Id = dto.id,
+                _userId = userId,
+                IsSigned = false
+                //IsSigned need responce from server to know is user signed or not
+            };
         }
     }
 }

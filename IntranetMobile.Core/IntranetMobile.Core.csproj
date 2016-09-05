@@ -61,6 +61,7 @@
     <Compile Include="Models\Platform.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Technology.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserCvs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,6 +112,8 @@
     <Compile Include="Models\Dtos\CommentRequestDto.cs" />
     <Compile Include="Models\Dtos\CommentsResponseDto.cs" />
     <Compile Include="ViewModels\Reviewer\ItemReviewViewModel.cs" />
+    <Compile Include="ViewModels\Reviewer\BaseItemReviewViewModel.cs" />
+    <Compile Include="ViewModels\Reviewer\ItemUserReviewViewModel.cs" />
     <Compile Include="ViewModels\Reviewer\ReviewerSectionViewModel.cs" />
     <Compile Include="ViewModels\Reviewer\ReviewerViewModel.cs" />
     <Compile Include="ViewModels\Reviewer\TagViewModel.cs" />
@@ -123,12 +126,12 @@
     <Compile Include="Models\Dtos\UserInfoDto.cs" />
     <Compile Include="ViewModels\AsciitViewModel.cs" />
     <Compile Include="Interfaces\IReviewerService.cs" />
-    <Compile Include="Models\Dtos\TicketsDto.cs" />
+    <Compile Include="Models\Dtos\TicketDto.cs" />
     <Compile Include="Services\ReviewerService.cs" />
-    <Compile Include="Models\Dtos\UserTickets.cs" />
-    <Compile Include="Models\Dtos\TagTickets.cs" />
+    <Compile Include="Models\Dtos\UserTicketDto.cs" />
+    <Compile Include="Models\Dtos\TicketTagDto.cs" />
     <Compile Include="Models\Dtos\SubscribedTicketDto.cs" />
-    <Compile Include="Models\Dtos\CommentTicketDto.cs" />
+    <Compile Include="Models\Dtos\TicketCommentDto.cs" />
     <Compile Include="Models\Dtos\ReviewTicketRequestDto.cs" />
     <Compile Include="ViewModels\Reviewer\CommentsReviewerViewModel.cs" />
     <Compile Include="ViewModels\Reviewer\CommentsReviewerItemViewModel.cs" />
