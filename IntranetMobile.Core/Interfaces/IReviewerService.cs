@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using IntranetMobile.Core.Models.Dtos;
 
 namespace IntranetMobile.Core.Interfaces
 {
     public interface IReviewerService
     {
-        Task<List<TicketsDto>> GetListOfTicketsAsync();
-        Task<List<TicketsDto>> GetListOfTicketsForConcreteGroupAsync(string groupId);
-        Task<List<TicketsDto>> GetListOfMyTicketsAsync();
+        Task<List<TicketDto>> GetListOfTicketsAsync();
+        Task<List<TicketDto>> GetListOfTicketsForConcreteGroupAsync(string groupId);
+        Task<List<TicketDto>> GetListOfMyTicketsAsync();
         Task<bool> JoinTicketAsync(string userId, string ticketId);
         Task<bool> UndoJoinTicketAsync(string ticketId);
-        Task<TicketsDto> GetTicketDetailsAsync(string ticketId);
-        Task<TicketsDto> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto);
+        Task<TicketDto> GetTicketDetailsAsync(string ticketId);
+        Task<TicketDto> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto);
         Task<List<SubscribedTicketDto>> GetListOfSubscribedTicketsAsync();
         Task<bool> DeleteTicketAsync(string id);
-        Task<List<CommentTicketDto>> GetListOfTicketCommentsAsync(string ticketId);
-        Task<CommentTicketDto> WtiteCommentAsync(string ticketId, string text);
+        Task<List<TicketCommentDto>> GetListOfTicketCommentsAsync(string ticketId);
+        Task<TicketCommentDto> WtiteCommentAsync(string ticketId, string text);
         Task<bool> AcceptUserReviewForTicketAsync(string userId, string ticketId);
         Task<bool> DeclineUserReviewForTicketAsync(string userId, string ticketId);
     }

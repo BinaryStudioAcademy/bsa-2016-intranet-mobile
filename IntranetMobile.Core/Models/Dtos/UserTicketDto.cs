@@ -1,7 +1,6 @@
-﻿using System;
-namespace IntranetMobile.Core
+﻿namespace IntranetMobile.Core.Models.Dtos
 {
-    public class UserTickets
+    public class UserTicketDto
     {
         public string id { get; set; }
         public string bid { get; set; }
@@ -18,17 +17,14 @@ namespace IntranetMobile.Core
         public string city { get; set; }
         public string job { get; set; }
         public string department { get; set; }
-        public Pivot pivot { get; set; }
+        public PivotDto pivot { get; set; }
+    }
 
-        public class Pivot
-        {
-            public int review_request_id { get; set; }
-            public int user_id { get; set; }
-            public int isAccepted { get; set; }
-            public string status { get; set; }
-        }
-
-
+    public class PivotDto
+    {
+        public int review_request_id { get; set; }
+        public int user_id { get; set; }
+        public int isAccepted { get; set; }
+        public string status { get; set; }
     }
 }
-

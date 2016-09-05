@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -54,10 +55,10 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         private void ClickViewDetailsCommandExecute()
         {
-            ShowViewModel<TicketDetailsViewModel>();
+            ShowViewModel<TicketDetailsViewModel>(Id);
         }
 
-        public static ItemReviewViewModel GetItemReviewViewModelFromDto(TicketsDto dto, string userId)
+        public static ItemReviewViewModel GetItemReviewViewModelFromDto(TicketDto dto, string userId)
         {
             return new ItemReviewViewModel
             {

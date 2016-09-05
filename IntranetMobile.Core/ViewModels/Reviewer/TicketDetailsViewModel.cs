@@ -5,6 +5,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class TicketDetailsViewModel : BaseViewModel
     {
+        private string _ticketId;
+
         public TicketDetailsViewModel()
         {
             Title = "Accounting code review";
@@ -46,5 +48,22 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         public ObservableCollection<TagViewModel> Tags { get; } = new ObservableCollection<TagViewModel>();
 
         public ObservableCollection<TicketOfferViewModel> Offers { get; } = new ObservableCollection<TicketOfferViewModel>();
+
+        public string TicketId
+        {
+            get { return _ticketId; }
+            set
+            {
+                _ticketId = value;
+                
+            }
+        }
+
+        public Ticke
+
+        public void Init(string ticketId)
+        {
+            TicketId = ticketId;
+        }
     }
 }
