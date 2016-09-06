@@ -25,30 +25,30 @@
                 app:MvxBind="ImageUrl AuthorImage" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="10dp"
+                    android:layout_weight="1"
                     app:MvxBind="Text Title"
                     android:lines="1"
-                    android:gravity="bottom"
                     android:ellipsize="end"
                     android:textSize="@dimen/text_size_small"
                     android:textStyle="bold" />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="top"
+                    android:layout_height="10dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="10dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         app:MvxBind="Text Author" />
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         app:MvxBind="Text DateTime" />
                 </LinearLayout>
             </LinearLayout>
