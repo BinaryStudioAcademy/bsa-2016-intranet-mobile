@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IntranetMobile.Core.Models.Dtos;
 
 namespace IntranetMobile.Core.Models
@@ -10,7 +11,7 @@ namespace IntranetMobile.Core.Models
         public string TicketId { get; set; }
         public string AuthorName { get; set; }
         public string UserServerId { get; set; }
-        public string DateReview { get; set; }
+        public DateTime DateReview { get; set; }
         public string ReviewText { get; set; }
         public string TitleName { get; set; }
         public string AuthorImage { get; set; }
@@ -18,7 +19,7 @@ namespace IntranetMobile.Core.Models
         public List<string> ListOfUserIds { get; set; }
         public List<string> ListOfTagTitles { get; set; }
 
-        public static Ticket TicketFromDto(TicketDto dto)
+        public static Ticket FromDto(TicketDto dto)
         {
             return new Ticket
             {
@@ -28,7 +29,7 @@ namespace IntranetMobile.Core.Models
                 AuthorImage = dto.user.avatar,
                 CategoryName = dto.group.title,
                 ReviewText = dto.details,
-                DateReview = dto.date_review,
+                DateReview = DateTime.Parse(dto.date_review),
                 UserServerId = dto.user.binary_id
             };
         }

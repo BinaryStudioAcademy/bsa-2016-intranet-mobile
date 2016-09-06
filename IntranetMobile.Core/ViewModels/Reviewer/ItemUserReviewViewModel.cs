@@ -32,16 +32,16 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             ShowViewModel<TicketDetailsViewModel>(new {ticketId = Id});
         }
 
-        public static ItemUserReviewViewModel GetItemReviewViewModelFromDto(Ticket dto)
+        public static ItemUserReviewViewModel FromModel(Ticket model)
         {
             return new ItemUserReviewViewModel
             {
-                AuthorImage = Constants.BaseUrl + dto.AuthorImage,
-                Author = dto.AuthorName,
-                DateTime = dto.DateReview,
-                ReviewerText = dto.ReviewText,
-                TitleName = dto.TitleName,
-                Id = dto.TicketId
+                AuthorImage = Constants.BaseUrl + model.AuthorImage,
+                Author = model.AuthorName,
+                dateTime = model.DateReview,
+                ReviewText = model.ReviewText,
+                Title = model.TitleName,
+                Id = model.TicketId
             };
         }
     }

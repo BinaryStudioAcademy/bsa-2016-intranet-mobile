@@ -42,14 +42,22 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         private async void ClickSignCommandxecute()
         {
-            IsSigned = !_isSigned;
-            if (IsSigned)
+            var newSignedValue = !_isSigned;
+            if (newSignedValue)
             {
                 await ServiceBus.ReviewerService.JoinTicketAsync(_userId, Id);
+                ServiceBus.AlertService.ShowPopupMessage($"You joined \"{Title}\" by {Author}");
+                IsSigned = newSignedValue;
             }
             else
             {
-                await ServiceBus.ReviewerService.UndoJoinTicketAsync(Id);
+                ServiceBus.AlertService.ShowDialogBox("Are you sure?",
+                $"You will be unsubscribed from review \"{Title}\"",
+                "Yes", "No", async () =>
+                {
+                    await ServiceBus.ReviewerService.UndoJoinTicketAsync(Id);
+                    IsSigned = newSignedValue;
+                });
             }
         }
 
@@ -58,16 +66,16 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             ShowViewModel<TicketDetailsViewModel>(new {ticketId = Id});
         }
 
-        public static ItemReviewViewModel GetItemReviewViewModelFromDto(Ticket dto, string currentUserId)
+        public static ItemReviewViewModel FromModel(Ticket model, string currentUserId)
         {
             return new ItemReviewViewModel
             {
-                AuthorImage = Constants.BaseUrl + dto.AuthorImage,
-                Author = dto.AuthorName,
-                DateTime = dto.DateReview,
-                ReviewerText = dto.ReviewText,
-                TitleName = dto.TitleName,
-                Id = dto.TicketId,
+                AuthorImage = Constants.BaseUrl + model.AuthorImage,
+                Author = model.AuthorName,
+                dateTime = model.DateReview,
+                ReviewText = model.ReviewText,
+                Title = model.TitleName,
+                Id = model.TicketId,
                 _userId = currentUserId,
                 IsSigned = false
                 //IsSigned need responce from server to know is user signed or not

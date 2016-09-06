@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
+using IntranetMobile.Core.Extensions;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
@@ -6,12 +8,12 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
     {
         private string _author;
         private string _authorImage;
-        private string _dateTime;
         private string _id;
         private string _reviewerText;
-        private string _titleName;
         public ICommand ClickViewDetailsCommand { get; set; }
         public int VmId { get; set; }
+
+        protected DateTime dateTime;
 
         public string Id
         {
@@ -33,16 +35,6 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        public string TitleName
-        {
-            get { return _titleName; }
-            set
-            {
-                _titleName = value;
-                RaisePropertyChanged(() => TitleName);
-            }
-        }
-
         public string Author
         {
             get { return _author; }
@@ -55,21 +47,16 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public string DateTime
         {
-            get { return _dateTime; }
-            set
-            {
-                _dateTime = value;
-                RaisePropertyChanged(() => DateTime);
-            }
+            get { return dateTime.ToDateTimeString(); }
         }
 
-        public string ReviewerText
+        public string ReviewText
         {
             get { return _reviewerText; }
             set
             {
                 _reviewerText = value;
-                RaisePropertyChanged(() => ReviewerText);
+                RaisePropertyChanged(() => ReviewText);
             }
         }
     }

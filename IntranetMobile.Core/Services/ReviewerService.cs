@@ -95,17 +95,19 @@ namespace IntranetMobile.Core.Services
         {
             var groupId = (int) group;
             var dtos = await _restClient.GetAsync<List<TicketDto>>(_reviewrPath + $"/group/{groupId}");
-            return dtos.Select(dto => Ticket.TicketFromDto(dto)).ToList();
+            return dtos.Select(dto => Ticket.FromDto(dto)).ToList();
         }
 
         public async Task<Ticket> GetTicketDetailsAsync(string ticketId)
         {
             var ticket = new Ticket();
             var ticketDto = await _restClient.GetAsync<TicketDto>(_reviewrPath + $"/{ticketId}");
+            if (ticketDto == null)
+                return null;
 
             ticket.TicketId = ticketDto.id;
             ticket.AuthorName = $"{ticketDto.user.first_name} {ticketDto.user.last_name}";
-            ticket.DateReview = ticketDto.date_review;
+            ticket.DateReview = DateTime.Parse(ticketDto.date_review);
             ticket.ReviewText = ticketDto.details;
             ticket.TitleName = ticketDto.title;
             ticket.AuthorImage = ticketDto.user.avatar;

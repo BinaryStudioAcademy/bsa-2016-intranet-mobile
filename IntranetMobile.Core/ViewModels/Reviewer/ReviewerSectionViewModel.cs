@@ -62,17 +62,17 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         {
             try
             {
-                var dtos = await ServiceBus.ReviewerService.GetListOfTicketsForGroupAsync(_group);
+                var tickets = await ServiceBus.ReviewerService.GetListOfTicketsForGroupAsync(_group);
                 InvokeOnMainThread(Reviews.Clear);
                 var currentUserId = ServiceBus.UserService.CurrentUser.ServerId;
-                foreach (var dto in dtos)
+                foreach (var model in tickets)
                 {
-                    if (dto.UserServerId == currentUserId)
+                    if (model.UserServerId == currentUserId)
                     {
                         InvokeOnMainThread(
                             () =>
                             {
-                                var item = ItemUserReviewViewModel.GetItemReviewViewModelFromDto(dto);
+                                var item = ItemUserReviewViewModel.FromModel(model);
                                 item.NotifyItemDeleted = ItemDeleted;
                                 item.VmId = _vmId;
                                 _vmId++;
@@ -84,12 +84,12 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                         InvokeOnMainThread(
                             () =>
                             {
-                                Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, currentUserId));
+                                Reviews.Add(ItemReviewViewModel.FromModel(model, currentUserId));
                             });
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
             }
         }
