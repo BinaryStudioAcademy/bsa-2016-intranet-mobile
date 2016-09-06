@@ -6,7 +6,8 @@
   android:layout_width="match_parent"
   android:layout_height="176dp"
   android:layout_margin="5dp"
-  app:cardCornerRadius="4dp">
+  app:cardCornerRadius="4dp"
+  app:MvxBind="Click ClickViewDetailsCommand">
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -75,6 +76,8 @@
         android:paddingRight="8dp"
         android:paddingLeft="8dp"
         android:textSize="13sp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPrimary"
         app:MvxBind="Click ClickSignCommand; Text ButtonText" />
       <Button
         android:layout_width="wrap_content"
@@ -85,6 +88,8 @@
         android:text="Details"
         android:paddingRight="8dp"
         android:paddingLeft="8dp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPrimary"
         app:MvxBind="Click ClickViewDetailsCommand" />
     </LinearLayout>
   </LinearLayout>
