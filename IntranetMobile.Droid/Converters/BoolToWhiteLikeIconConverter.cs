@@ -4,11 +4,11 @@ using MvvmCross.Platform.Converters;
 
 namespace IntranetMobile.Droid.Converters
 {
-    public class BoolToWhiteLikeIconConverter : MvxValueConverter<bool, string>
+    public class BoolToWhiteLikeIconConverter : MvxValueConverter<bool, long>
     {
-        protected override string Convert(bool value, Type targetType, object parameter, CultureInfo culture)
+        protected override long Convert(bool value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value ? "ic_favorite_white_24dp" : "ic_favorite_border_white_24dp";
+            return value ? Resource.Drawable.ic_favorite_white_24dp : Resource.Drawable.ic_favorite_border_white_24dp;
         }
     }
 }
