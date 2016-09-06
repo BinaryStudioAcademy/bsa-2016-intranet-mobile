@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IntranetMobile.Core.Services;
@@ -46,18 +47,6 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public ICommand ReloadCommand { get; private set; }
 
-        private void ItemDeleted(int id)
-        {
-            foreach (var baseItemReviewViewModel in Reviews)
-            {
-                if (baseItemReviewViewModel.VmId == id)
-                {
-                    Reviews.Remove(baseItemReviewViewModel);
-                    return;
-                }
-            }
-        }
-
         public virtual async Task ReloadData()
         {
             try
@@ -91,6 +80,13 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             {
                 Log.Error(ex);
             }
+        }
+
+        private void ItemDeleted(int id)
+        {
+            var deleted = Reviews.FirstOrDefault(i => i.VmId == id);
+            if (deleted != null) 
+                Reviews.Remove(deleted);
         }
     }
 }
