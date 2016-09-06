@@ -146,13 +146,14 @@ namespace IntranetMobile.Core.Services
             var requestObject = new NewsLikeDto {id = newsId};
 
             var result = await _restClient.PostAsync(resource, requestObject);
-
             if (result)
             {
-                // Null check is not used, it's desired that news will exist in cache already
-                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
-                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
-                // It is also possible to add like by hands, but it is better to update whole news.
+                var currentNews = _newsCache.FirstOrDefault(n => n.NewsId.Equals(newsId));
+                if (currentNews != null)
+                {
+                    if (currentNews.Likes != null)
+                        currentNews.Likes.Add(ServiceBus.UserService.CurrentUser.ServerId);
+                }
             }
 
             return result;
@@ -163,13 +164,14 @@ namespace IntranetMobile.Core.Services
             var resource = string.Format(LikeUnlikeNewsPath, newsId);
 
             var result = await _restClient.DeleteAsync(resource);
-
             if (result)
             {
-                // Null check is not used, it's desired that news will exist in cache already
-                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
-                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
-                // It is also possible to add like by hands, but it is better to update whole news.
+                var currentNews = _newsCache.FirstOrDefault(n => n.NewsId.Equals(newsId));
+                if (currentNews != null)
+                {
+                    if (currentNews.Likes != null && currentNews.Likes.Count > 0)
+                        currentNews.Likes.Remove(ServiceBus.UserService.CurrentUser.ServerId);
+                }
             }
 
             return result;
@@ -186,15 +188,9 @@ namespace IntranetMobile.Core.Services
             };
 
             var result = await _restClient.PostAsync(resource, requestObject);
-
             if (result)
             {
-                // Null check is not used, it's desired that news will exist in cache already
-                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
-                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
-                // It is also possible to add like by hands, but it is better to update whole news.
-
-                // TODO: Update comment cache model too
+                updateNewsItem(newsId);
             }
 
             return result;
@@ -205,15 +201,9 @@ namespace IntranetMobile.Core.Services
             var resource = string.Format(LikeUnlikeCommentPath, newsId, commentId);
 
             var result = await _restClient.DeleteAsync(resource);
-
             if (result)
             {
-                // Null check is not used, it's desired that news will exist in cache already
-                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
-                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
-                // It is also possible to add like by hands, but it is better to update whole news.
-
-                // TODO: Update comment cache model too
+                updateNewsItem(newsId);
             }
 
             return result;
@@ -264,6 +254,13 @@ namespace IntranetMobile.Core.Services
         {
             // OrderBy is dropped due to collection recreating
             _newsCache.Sort((n1, n2) => n2.Date.CompareTo(n1.Date));
+        }
+
+        private async void updateNewsItem(string newsId)
+        {
+            var currentNews = _newsCache.FirstOrDefault(n => n.NewsId.Equals(newsId));
+            if (currentNews != null)
+                currentNews.UpdateFromDto(await LoadNewsByIdAsync(newsId));
         }
     }
 }

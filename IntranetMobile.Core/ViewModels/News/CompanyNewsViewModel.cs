@@ -57,6 +57,15 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public ICommand ReloadCommand { get; private set; }
 
+        public override void Resume()
+        {
+            base.Resume();
+
+            if (News != null && News.Count > 0)
+            foreach (var item in News)
+                item.Resume();
+        }
+
         public virtual async Task ReloadData()
         {
             try

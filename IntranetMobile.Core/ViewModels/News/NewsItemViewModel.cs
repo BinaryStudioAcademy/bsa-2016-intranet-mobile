@@ -22,6 +22,16 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             ClickCommentCommand = new MvxCommand(ClickCommentCommandExecute);
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
+            Task.Run(async () =>
+            {
+                await ServiceBus.UserService.GetCurrentUserAsync();
+                InvokeOnMainThread(() =>
+                {
+                    RaisePropertyChanged(() => IsLiked);
+                    RaisePropertyChanged(() => LikesCount);
+                    RaisePropertyChanged(() => CommentsCount);
+                });
+            });
         }
 
         public string NewsId { get; set; }
@@ -75,52 +85,25 @@ namespace IntranetMobile.Core.ViewModels.News
         public ICommand ClickLikeCommand { get; private set; }
         public ICommand ClickCommentCommand { get; private set; }
 
-        public bool IsLiked
-        {
-            get
-            {
-                Task.Run(async () =>
-                {
-                    var user = await ServiceBus.UserService.GetCurrentUserAsync();
-                    IsLiked = _dataModel.Likes.Contains(user.ServerId);
-                });
-
-                return _isLiked;
-            }
-            set
-            {
-                _isLiked = value;
-                RaisePropertyChanged(() => IsLiked);
-            }
-        }
-
-        public override void Start()
-        {
-            base.Start();
-
-            RaisePropertyChanged(() => LikesCount);
-            RaisePropertyChanged(() => CommentsCount);
-        }
+        public bool IsLiked => _dataModel.Likes.Contains(ServiceBus.UserService.CurrentUser.ServerId);
 
         private async void ClickLikeCommandExecute()
         {
+            Task<bool> task;
             if (!IsLiked)
             {
-                var result = await ServiceBus.NewsService.LikeNewsAsync(_dataModel.NewsId);
-                if (result)
-                {
-                    RaisePropertyChanged(() => IsLiked);
-                    RaisePropertyChanged(() => LikesCount);
-                }
+                task = ServiceBus.NewsService.LikeNewsAsync(_dataModel.NewsId);
             }
             else
             {
-                var result = await ServiceBus.NewsService.UnLikeNewsAsync(_dataModel.NewsId);
-                if (result)
-                {
-                    RaisePropertyChanged(() => IsLiked);
-                    RaisePropertyChanged(() => LikesCount);
-                }
+                task = ServiceBus.NewsService.UnLikeNewsAsync(_dataModel.NewsId);
+            }
+
+            var result = await task;
+            if (result)
+            {
+                RaisePropertyChanged(() => IsLiked);
+                RaisePropertyChanged(() => LikesCount);
             }
         }
 
@@ -134,6 +117,14 @@ namespace IntranetMobile.Core.ViewModels.News
             Subtitle = Author != null
                 ? $"{Author.FullName} on {Date.ToDateTimeString()}"
                 : $"{Date.ToDateTimeString()}";
+        }
+
+        public override void Resume()
+        {
+            base.Resume();
+            RaisePropertyChanged(() => IsLiked);
+            RaisePropertyChanged(() => CommentsCount);
+            RaisePropertyChanged(() => LikesCount);
         }
 
         public static NewsItemViewModel FromModel(Models.News news)
