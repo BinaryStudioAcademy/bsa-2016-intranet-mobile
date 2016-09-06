@@ -10,9 +10,9 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
     public class ReviewerSectionViewModel : BaseViewModel
     {
         private readonly ReviewerGroup _group;
-        private int _vmId = 1;
 
         private bool _isRefreshing;
+        private int _vmId = 1;
 
         public ReviewerSectionViewModel()
         {
@@ -41,11 +41,12 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        public ObservableCollection<BaseItemReviewViewModel> Reviews { get; private set; }
+        public ObservableCollection<BaseItemReviewViewModel> Reviews { get; }
             = new ObservableCollection<BaseItemReviewViewModel>();
 
         public ICommand ReloadCommand { get; private set; }
-        private  void ItemDeleted(int id)
+
+        private void ItemDeleted(int id)
         {
             foreach (var baseItemReviewViewModel in Reviews)
             {
@@ -56,16 +57,17 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 }
             }
         }
+
         public virtual async Task ReloadData()
         {
             try
             {
                 var dtos = await ServiceBus.ReviewerService.GetListOfTicketsForGroupAsync(_group);
                 InvokeOnMainThread(Reviews.Clear);
-                var userId = ServiceBus.UserService.CurrentUser.ServerId;
+                var currentUserId = ServiceBus.UserService.CurrentUser.ServerId;
                 foreach (var dto in dtos)
                 {
-                    if (dto.user.binary_id == userId)
+                    if (dto.UserServerId == currentUserId)
                     {
                         InvokeOnMainThread(
                             () =>
@@ -80,7 +82,10 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                     else
                     {
                         InvokeOnMainThread(
-                            () => { Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, userId)); });
+                            () =>
+                            {
+                                Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, currentUserId));
+                            });
                     }
                 }
             }

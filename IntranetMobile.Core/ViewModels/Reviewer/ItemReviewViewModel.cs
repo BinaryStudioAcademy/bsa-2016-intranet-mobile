@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows.Input;
-using IntranetMobile.Core.Models.Dtos;
+﻿using System.Windows.Input;
+using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 
@@ -12,7 +11,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private bool _isSigned;
         private string _userId;
 
- 
+
         public ItemReviewViewModel()
         {
             ClickViewDetailsCommand = new MvxCommand(ClickViewDetailsCommandExecute);
@@ -46,30 +45,30 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             IsSigned = !_isSigned;
             if (IsSigned)
             {
-               await ServiceBus.ReviewerService.JoinTicketAsync(_userId, Id);
+                await ServiceBus.ReviewerService.JoinTicketAsync(_userId, Id);
             }
             else
             {
-              await  ServiceBus.ReviewerService.UndoJoinTicketAsync(Id);
+                await ServiceBus.ReviewerService.UndoJoinTicketAsync(Id);
             }
         }
 
         private void ClickViewDetailsCommandExecute()
         {
-            ShowViewModel<TicketDetailsViewModel>(new { ticketId = Id });
+            ShowViewModel<TicketDetailsViewModel>(new {ticketId = Id});
         }
 
-        public static ItemReviewViewModel GetItemReviewViewModelFromDto(TicketDto dto, string userId)
+        public static ItemReviewViewModel GetItemReviewViewModelFromDto(Ticket dto, string currentUserId)
         {
             return new ItemReviewViewModel
             {
-                AuthorImage = Constants.BaseUrl + dto.user.avatar,
-                Author = $"{dto.user.first_name} {dto.user.last_name}",
-                DateTime = dto.date_review,
-                ReviewerText = dto.details,
-                TitleName = dto.title,
-                Id = dto.id,
-                _userId = userId,
+                AuthorImage = Constants.BaseUrl + dto.AuthorImage,
+                Author = dto.AuthorName,
+                DateTime = dto.DateReview,
+                ReviewerText = dto.ReviewText,
+                TitleName = dto.TitleName,
+                Id = dto.TicketId,
+                _userId = currentUserId,
                 IsSigned = false
                 //IsSigned need responce from server to know is user signed or not
             };

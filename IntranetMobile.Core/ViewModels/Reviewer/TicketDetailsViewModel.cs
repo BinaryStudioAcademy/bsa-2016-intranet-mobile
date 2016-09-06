@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Models;
-using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
@@ -11,7 +10,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private Ticket _ticket;
         private string _ticketId;
 
-        public string AuthorName => Ticket?.Author;
+        public string AuthorName => Ticket?.AuthorName;
 
         public string CategoryName => Ticket?.CategoryName;
 
@@ -44,13 +43,13 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
                 Title = _ticket.TitleName;
 
-                foreach (var tagDto in _ticket.ListOfTagTitle)
+                foreach (var tagDto in _ticket.ListOfTagTitles)
                 {
                     InvokeOnMainThread(() => Tags.Clear());
                     InvokeOnMainThread(() => Tags.Add(new TagViewModel {TagName = tagDto}));
                 }
 
-                foreach (var userTicketDto in _ticket.ListOfUsersId)
+                foreach (var userTicketDto in _ticket.ListOfUserIds)
                 {
                     InvokeOnMainThread(() => Offers.Clear());
                     InvokeOnMainThread(() => Offers.Add(new TicketOfferViewModel(userTicketDto)));
