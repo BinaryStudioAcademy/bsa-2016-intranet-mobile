@@ -59,9 +59,9 @@ namespace IntranetMobile.Core.Services
 
         public async Task<bool> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto)
         {
-            var result = await _restClient.PostAsync<TicketDto>(_reviewrPath, reviewTicketRequestDto);
+            var result = await _restClient.PostAsync<bool>(_reviewrPath, reviewTicketRequestDto);
 
-            return result != null;
+            return result;
         }
 
         public Task<bool> DeclineUserReviewForTicketAsync(string userId, string ticketId)
@@ -82,9 +82,33 @@ namespace IntranetMobile.Core.Services
             return listOfTicket;
         }
 
-        public Task<List<SubscribedTicketDto>> GetListOfSubscribedTicketsAsync()
+        public async Task<List<SubscribedTicket>> GetListOfSubscribedTicketsAsync()
         {
-            return _restClient.GetAsync<List<SubscribedTicketDto>>("reviewr/api/v1/myrequests");
+            var subscribedTicketDto = await _restClient.GetAsync<SubscribedTicketDto>("reviewr/api/v1/myrequests");
+            var listOfSubscribedTicket = new List<SubscribedTicket>();
+
+            foreach (var s in subscribedTicketDto.message)
+            {
+                var subTicket = new SubscribedTicket();
+
+                subTicket.Id = s.id;
+                subTicket.Details = s.details;
+                subTicket.DateReview = s.date_review;
+                subTicket.GroupId = s.group_id;
+                subTicket.OffersCount = s.offers_count;
+                subTicket.UserId = s.user_id;
+                subTicket.Title = s.title;
+
+                subTicket.Pivot = new SubscribedTicket.PivotTicket();
+                subTicket.Pivot.UserId = s.pivot.user_id;
+                subTicket.Pivot.ReviewRequestId = s.pivot.review_request_id;
+                subTicket.Pivot.IsAccepted = s.pivot.isAccepted;
+                subTicket.Pivot.Status = s.pivot.status;
+
+                listOfSubscribedTicket.Add(subTicket);
+            }
+
+            return listOfSubscribedTicket;
         }
 
         public async Task<List<Comment>> GetListOfTicketCommentsAsync(string ticketId)
@@ -151,14 +175,16 @@ namespace IntranetMobile.Core.Services
             return _restClient.GetAsync(_actionTicketPath + $"offeroff/{ticketId}");
         }
 
-        public Task<TicketCommentDto> WtiteCommentAsync(string ticketId, string text)
+        public async Task<bool> WtiteCommentAsync(string ticketId, string text)
         {
-            var commentTicketDto = new TicketCommentDto();
-            commentTicketDto.text = text;
-            commentTicketDto.created_at = DateTime.Now.ToString();
-            commentTicketDto.formatted_created_at = "Invalid date";
+            var comment = new TicketCommentDto();
+            comment.text = text;
+            comment.created_at = DateTime.Now.ToString();
+            comment.formatted_created_at = "Invalid date";
 
-            return _restClient.PostAsync<TicketCommentDto>(_reviewrPath + $"/{ticketId}/comment");
+            var result = await _restClient.PostAsync<bool>(_reviewrPath + $"/{ticketId}/comment", comment);
+
+            return result;
         }
     }
 }
