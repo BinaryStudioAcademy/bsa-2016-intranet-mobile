@@ -47,7 +47,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public ICommand ReloadCommand { get; private set; }
 
-        public virtual async Task ReloadData()
+        public async Task ReloadData()
         {
             try
             {

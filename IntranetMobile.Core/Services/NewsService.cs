@@ -232,21 +232,17 @@ namespace IntranetMobile.Core.Services
                     .TotalMilliseconds
             };
 
-
             var commentRequest = new CommentRequestDto.CommentRequest {comments = comment};
-
             var commentRequestDto = new CommentRequestDto {Push = commentRequest};
 
-            var result = await _restClient.PostAsync<bool>(resource, commentRequestDto);
-
+            var result = await _restClient.PostAsync(resource, commentRequestDto);
             if (result)
             {
-                // Null check is not used, it's desired that news will exist in cache already
-                _newsCache.FirstOrDefault(news => news.NewsId == newsId)
-                    .UpdateFromDto(await LoadNewsByIdAsync(newsId));
-                // It is also possible to add like by hands, but it is better to update whole news.
-
-                // TODO: Update comment cache model too
+                var currentNews = _newsCache.FirstOrDefault(n => n.NewsId.Equals(newsId));
+                if (currentNews != null)
+                {
+                    currentNews.Comments.Add(Guid.NewGuid().ToString("N"));
+                }
             }
 
             return result;
