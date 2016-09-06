@@ -132,8 +132,8 @@ namespace IntranetMobile.Core.ViewModels.News
         private void RefreshSutitile()
         {
             Subtitle = Author != null
-                ? $"{Author.FullName} on {Date.ToString("dd-MM-yyyy HH:mm")}"
-                : $"{Date.ToString("dd-MM-yyyy HH:mm")}";
+                ? $"{Author.FullName} on {Date.ToDateTimeString()}"
+                : $"{Date.ToDateTimeString()}";
         }
 
         public static NewsItemViewModel FromModel(Models.News news)

@@ -21,6 +21,9 @@ namespace IntranetMobile.Core.Models
 
         public static Ticket FromDto(TicketDto dto)
         {
+            if (dto == null)
+                return null;
+            
             return new Ticket
             {
                 TicketId = dto.id,
@@ -29,7 +32,7 @@ namespace IntranetMobile.Core.Models
                 AuthorImage = dto.user.avatar,
                 CategoryName = dto.group.title,
                 ReviewText = dto.details,
-                DateReview = DateTime.Parse(dto.date_review),
+                DateReview = string.IsNullOrWhiteSpace(dto.date_review) ? DateTime.MinValue : DateTime.Parse(dto.date_review),
                 UserServerId = dto.user.binary_id
             };
         }

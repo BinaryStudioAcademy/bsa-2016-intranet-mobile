@@ -25,12 +25,12 @@
                 app:MvxBind="ImageUrl AuthorImage" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     app:MvxBind="Text Title"
                     android:lines="1"
                     android:ellipsize="end"
@@ -38,17 +38,16 @@
                     android:textStyle="bold" />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="10dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:MvxBind="Text Author" />
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         app:MvxBind="Text DateTime" />
                 </LinearLayout>
             </LinearLayout>
@@ -57,7 +56,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:MvxBind="Text ReviewText"
-            android:padding="8dp" />
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="16dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

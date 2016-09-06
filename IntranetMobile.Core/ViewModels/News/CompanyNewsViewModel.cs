@@ -69,11 +69,10 @@ namespace IntranetMobile.Core.ViewModels.News
                     InvokeOnMainThread(() => { News.Add(NewsItemViewModel.FromModel(news)); });
                 }
             }
-            catch(Exception e)
+            catch(Exception ex)
             {
-                
+                Log.Error(ex);
             }
-
         }
     }
 }

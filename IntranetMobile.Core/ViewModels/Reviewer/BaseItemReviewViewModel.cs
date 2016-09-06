@@ -47,7 +47,10 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public string DateTime
         {
-            get { return dateTime.ToDateTimeString(); }
+            get
+            {
+                return dateTime.ToDateTimeString();
+            }
         }
 
         public string ReviewText

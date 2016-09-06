@@ -69,28 +69,27 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 {
                     if (model.UserServerId == currentUserId)
                     {
-                        InvokeOnMainThread(
-                            () =>
-                            {
-                                var item = ItemUserReviewViewModel.FromModel(model);
-                                item.NotifyItemDeleted = ItemDeleted;
-                                item.VmId = _vmId;
-                                _vmId++;
-                                Reviews.Add(item);
-                            });
+                        InvokeOnMainThread(() =>
+                        {
+                            var item = ItemUserReviewViewModel.FromModel(model);
+                            item.NotifyItemDeleted = ItemDeleted;
+                            item.VmId = _vmId;
+                            _vmId++;
+                            Reviews.Add(item);
+                        });
                     }
                     else
                     {
-                        InvokeOnMainThread(
-                            () =>
-                            {
-                                Reviews.Add(ItemReviewViewModel.FromModel(model, currentUserId));
-                            });
+                        InvokeOnMainThread(() =>
+                        {
+                            Reviews.Add(ItemReviewViewModel.FromModel(model, currentUserId));
+                        });
                     }
                 }
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
             }
         }
     }
