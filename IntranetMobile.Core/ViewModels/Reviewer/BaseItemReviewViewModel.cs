@@ -11,6 +11,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private string _reviewerText;
         private string _titleName;
         public ICommand ClickViewDetailsCommand { get; set; }
+        public int VmId { get; set; }
 
         public string Id
         {

@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
@@ -11,7 +12,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private bool _isSigned;
         private string _userId;
 
-
+ 
         public ItemReviewViewModel()
         {
             ClickViewDetailsCommand = new MvxCommand(ClickViewDetailsCommandExecute);
@@ -40,16 +41,16 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        private void ClickSignCommandxecute()
+        private async void ClickSignCommandxecute()
         {
             IsSigned = !_isSigned;
             if (IsSigned)
             {
-                ServiceBus.ReviewerService.JoinTicketAsync(_userId, Id);
+               await ServiceBus.ReviewerService.JoinTicketAsync(_userId, Id);
             }
             else
             {
-                ServiceBus.ReviewerService.UndoJoinTicketAsync(Id);
+              await  ServiceBus.ReviewerService.UndoJoinTicketAsync(Id);
             }
         }
 

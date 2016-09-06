@@ -10,6 +10,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
     public class ReviewerSectionViewModel : BaseViewModel
     {
         private readonly string _groupId;
+        private int _vmId = 1;
 
         private bool _isRefreshing;
 
@@ -41,7 +42,17 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             = new ObservableCollection<BaseItemReviewViewModel>();
 
         public ICommand ReloadCommand { get; private set; }
-
+        private  void ItemDeleted(int id)
+        {
+            foreach (var baseItemReviewViewModel in Reviews)
+            {
+                if (baseItemReviewViewModel.VmId == id)
+                {
+                    Reviews.Remove(baseItemReviewViewModel);
+                    return;
+                }
+            }
+        }
         public virtual async Task ReloadData()
         {
             try
@@ -54,12 +65,22 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                     if (dto.user.binary_id == userId)
                     {
                         InvokeOnMainThread(
-                            () => { Reviews.Add(ItemUserReviewViewModel.GetItemReviewViewModelFromDto(dto)); });
+                            () =>
+                            {
+                                var item = ItemUserReviewViewModel.GetItemReviewViewModelFromDto(dto);
+                                item.NotifyItemDeleted = ItemDeleted;
+                                item.VmId = _vmId;
+                                _vmId++;
+                                Reviews.Add(item);
+                            });
                     }
                     else
                     {
                         InvokeOnMainThread(
-                            () => { Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, userId)); });
+                            () =>
+                            {
+                                Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, userId));
+                            });
                     }
                 }
             }
