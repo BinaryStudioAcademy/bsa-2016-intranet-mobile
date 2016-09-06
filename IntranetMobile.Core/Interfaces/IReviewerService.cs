@@ -2,17 +2,18 @@
 using System.Threading.Tasks;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Models.Dtos;
+using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.Interfaces
 {
     public interface IReviewerService
     {
         Task<List<TicketDto>> GetListOfTicketsAsync();
-        Task<List<TicketDto>> GetListOfTicketsForConcreteGroupAsync(string groupId);
+        Task<List<TicketDto>> GetListOfTicketsForGroupAsync(ReviewerGroup group);
         Task<List<TicketDto>> GetListOfMyTicketsAsync();
         Task<bool> JoinTicketAsync(string userId, string ticketId);
         Task<bool> UndoJoinTicketAsync(string ticketId);
-        Task<TicketDto> GetTicketDetailsAsync(string ticketId);
+        Task<Ticket> GetTicketDetailsAsync(string ticketId);
         Task<TicketDto> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto);
         Task<List<SubscribedTicketDto>> GetListOfSubscribedTicketsAsync();
         Task<bool> DeleteTicketAsync(string id);

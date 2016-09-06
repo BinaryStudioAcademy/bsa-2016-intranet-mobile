@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using IntranetMobile.Core.Services;
-using IntranetMobile.Core.ViewModels.News;
-using MvvmCross.Core.ViewModels;
+﻿using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
@@ -18,9 +9,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             Title = "Reviewer";
         }
 
-        public ReviewerSectionViewModel Cs { get; set; } = new ReviewerSectionViewModel("3");
-        public ReviewerSectionViewModel Js { get; set; } = new ReviewerSectionViewModel("1");
-        public ReviewerSectionViewModel Php { get; set; } = new ReviewerSectionViewModel("2");
-
+        public ReviewerSectionViewModel DotNet { get; } = new ReviewerSectionViewModel(ReviewerGroup.DotNet);
+        public ReviewerSectionViewModel JavaScript { get; } = new ReviewerSectionViewModel(ReviewerGroup.JavaScript);
+        public ReviewerSectionViewModel Php { get; } = new ReviewerSectionViewModel(ReviewerGroup.Php);
     }
 }

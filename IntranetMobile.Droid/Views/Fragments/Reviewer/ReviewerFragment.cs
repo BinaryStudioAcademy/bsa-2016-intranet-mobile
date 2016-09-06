@@ -27,16 +27,17 @@ namespace IntranetMobile.Droid.Views.Fragments.Reviewer
             var viewPager = view.FindViewById<ViewPager>(Resource.Id.reviewer_viewpager);
             if (viewPager != null)
             {
+                var reviewerRecycleFragmentType = typeof(ReviewerRecycleFragment);
                 var fragments = new List<MvxCachingFragmentStatePagerAdapter.FragmentInfo>
                 {
-                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("C#",
-                        typeof(ReviewerRecycleFragment),
-                        ViewModel.Cs),
-                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("PHP",
-                        typeof(ReviewerRecycleFragment),
-                        ViewModel.Js),
+                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo(".NET",
+                        reviewerRecycleFragmentType,
+                        ViewModel.DotNet),
                     new MvxCachingFragmentStatePagerAdapter.FragmentInfo("JS",
-                        typeof(ReviewerRecycleFragment),
+                        reviewerRecycleFragmentType,
+                        ViewModel.JavaScript),
+                    new MvxCachingFragmentStatePagerAdapter.FragmentInfo("PHP",
+                        reviewerRecycleFragmentType,
                         ViewModel.Php)
                 };
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(Activity, ChildFragmentManager, fragments);

@@ -9,15 +9,18 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class ReviewerSectionViewModel : BaseViewModel
     {
-        private readonly string _groupId;
+        private readonly ReviewerGroup _group;
         private int _vmId = 1;
 
         private bool _isRefreshing;
 
-        public ReviewerSectionViewModel(string groupId)
+        public ReviewerSectionViewModel()
         {
-            Title = "ReviewerSectionViewModel";
-            _groupId = groupId;
+        }
+
+        public ReviewerSectionViewModel(ReviewerGroup group)
+        {
+            _group = group;
             ReloadCommand = new MvxCommand(async () =>
             {
                 IsRefreshing = true;
@@ -38,7 +41,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        public ObservableCollection<BaseItemReviewViewModel> Reviews { get; set; }
+        public ObservableCollection<BaseItemReviewViewModel> Reviews { get; private set; }
             = new ObservableCollection<BaseItemReviewViewModel>();
 
         public ICommand ReloadCommand { get; private set; }
@@ -57,7 +60,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         {
             try
             {
-                var dtos = await ServiceBus.ReviewerService.GetListOfTicketsForConcreteGroupAsync(_groupId);
+                var dtos = await ServiceBus.ReviewerService.GetListOfTicketsForGroupAsync(_group);
                 InvokeOnMainThread(Reviews.Clear);
                 var userId = ServiceBus.UserService.CurrentUser.ServerId;
                 foreach (var dto in dtos)
@@ -77,10 +80,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                     else
                     {
                         InvokeOnMainThread(
-                            () =>
-                            {
-                                Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, userId));
-                            });
+                            () => { Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, userId)); });
                     }
                 }
             }

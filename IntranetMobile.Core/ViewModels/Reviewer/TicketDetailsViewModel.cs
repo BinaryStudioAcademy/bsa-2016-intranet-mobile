@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 
@@ -7,17 +8,16 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class TicketDetailsViewModel : BaseViewModel
     {
-        private TicketDto _ticket;
+        private Ticket _ticket;
         private string _ticketId;
-        private UserTicketDto _userTicket;
 
-        public string AuthorName => $"{UserTicket?.first_name} {UserTicket?.last_name}";
+        public string AuthorName => Ticket?.Author;
 
-        public string CategoryName => Ticket?.group?.title;
+        public string CategoryName => Ticket?.CategoryName;
 
-        public string TicketText => Ticket?.details;
+        public string TicketText => Ticket?.ReviewText;
 
-        public string ReviewDate => Ticket?.date_review;
+        public string ReviewDate => Ticket?.DateReview;
 
         public ObservableCollection<TagViewModel> Tags { get; } = new ObservableCollection<TagViewModel>();
 
@@ -35,25 +35,25 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        public TicketDto Ticket
+        public Ticket Ticket
         {
             get { return _ticket; }
             set
             {
                 _ticket = value;
 
-                Title = _ticket.title;
+                Title = _ticket.TitleName;
 
-                foreach (var tagDto in _ticket.tags)
+                foreach (var tagDto in _ticket.ListOfTagTitle)
                 {
                     InvokeOnMainThread(() => Tags.Clear());
-                    InvokeOnMainThread(() => Tags.Add(new TagViewModel {TagName = tagDto.title}));
+                    InvokeOnMainThread(() => Tags.Add(new TagViewModel {TagName = tagDto}));
                 }
 
-                foreach (var userTicketDto in _ticket.users)
+                foreach (var userTicketDto in _ticket.ListOfUsersId)
                 {
                     InvokeOnMainThread(() => Offers.Clear());
-                    InvokeOnMainThread(() => Offers.Add(new TicketOfferViewModel(userTicketDto.binary_id)));
+                    InvokeOnMainThread(() => Offers.Add(new TicketOfferViewModel(userTicketDto)));
                 }
 
                 RaisePropertyChanged(() => AuthorName);
@@ -62,8 +62,6 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 RaisePropertyChanged(() => ReviewDate);
             }
         }
-
-        public UserTicketDto UserTicket => Ticket?.user;
 
         public void Init(string ticketId)
         {

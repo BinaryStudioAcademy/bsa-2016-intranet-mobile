@@ -244,9 +244,6 @@
     <Compile Include="Views\Fragments\BaseDrawerFragment.cs" />
     <Compile Include="Views\Fragments\News\NewsFragment.cs" />
     <Compile Include="Views\Fragments\News\NewsRecycleViewFragment.cs" />
-    <Compile Include="Views\Fragments\ForgotPasswordFragment.cs" />
-    <Compile Include="Views\Fragments\LoadingFragment.cs" />
-    <Compile Include="Views\Fragments\LoginFragment.cs" />
     <Compile Include="Views\Fragments\MenuFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -270,6 +267,9 @@
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Views\Fragments\AsciitFragment.cs" />
     <Compile Include="Views\Activities\CommentsReviewerActivity.cs" />
+    <Compile Include="Views\Fragments\Login\ForgotPasswordFragment.cs" />
+    <Compile Include="Views\Fragments\Login\LoadingFragment.cs" />
+    <Compile Include="Views\Fragments\Login\LoginFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -472,6 +472,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Views\Fragments\Login\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />
