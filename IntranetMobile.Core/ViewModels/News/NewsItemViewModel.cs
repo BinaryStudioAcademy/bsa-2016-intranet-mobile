@@ -15,23 +15,24 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private Models.News _dataModel;
         private DateTime _date;
-        private bool _isLiked;
         private string _previewImageUri;
 
         public NewsItemViewModel()
         {
             ClickCommentCommand = new MvxCommand(ClickCommentCommandExecute);
             ClickLikeCommand = new MvxCommand(ClickLikeCommandExecute);
-            Task.Run(async () =>
-            {
-                await ServiceBus.UserService.GetCurrentUserAsync();
-                InvokeOnMainThread(() =>
+
+            if (string.IsNullOrWhiteSpace(ServiceBus.UserService.CurrentUser.ServerId))
+                Task.Run(async () =>
                 {
-                    RaisePropertyChanged(() => IsLiked);
-                    RaisePropertyChanged(() => LikesCount);
-                    RaisePropertyChanged(() => CommentsCount);
+                    await ServiceBus.UserService.GetCurrentUserAsync();
+                    InvokeOnMainThread(() =>
+                    {
+                        RaisePropertyChanged(() => IsLiked);
+                        RaisePropertyChanged(() => LikesCount);
+                        RaisePropertyChanged(() => CommentsCount);
+                    });
                 });
-            });
         }
 
         public string NewsId { get; set; }
@@ -42,7 +43,7 @@ namespace IntranetMobile.Core.ViewModels.News
             set
             {
                 _author = value;
-                RefreshSutitile();
+                RefreshSubtitle();
                 RaisePropertyChanged(() => Author);
             }
         }
@@ -63,7 +64,7 @@ namespace IntranetMobile.Core.ViewModels.News
             set
             {
                 _date = value;
-                RefreshSutitile();
+                RefreshSubtitle();
                 RaisePropertyChanged(() => Date);
             }
         }
@@ -112,11 +113,11 @@ namespace IntranetMobile.Core.ViewModels.News
             //TODO: Show Comments Window
         }
 
-        private void RefreshSutitile()
+        private void RefreshSubtitle()
         {
             Subtitle = Author != null
                 ? $"{Author.FullName} on {Date.ToDateTimeString()}"
-                : $"{Date.ToDateTimeString()}";
+                : Date.ToDateTimeString();
         }
 
         public override void Resume()
