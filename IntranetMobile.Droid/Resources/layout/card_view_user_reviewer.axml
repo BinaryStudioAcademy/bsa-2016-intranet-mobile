@@ -76,6 +76,8 @@
         android:paddingLeft="8dp"
         android:text="Delete"
         android:textSize="13sp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPrimary"
         app:MvxBind="Click ClickDeleteTicketCommand" />
       <Button
         android:layout_width="wrap_content"
@@ -86,6 +88,8 @@
         android:text="Details"
         android:paddingRight="8dp"
         android:paddingLeft="8dp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPrimary"
         app:MvxBind="Click ClickViewDetailsCommand" />
     </LinearLayout>
   </LinearLayout>
