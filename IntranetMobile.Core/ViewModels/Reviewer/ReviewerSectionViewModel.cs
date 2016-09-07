@@ -96,9 +96,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         private async void UpdateReviewList()
         {
-            var user = await ServiceBus.UserService.GetCurrentUserAsync();
-            var currentUserId = user != null ? user.ServerId : "";
-            var items = _allReviewList.Where(m => !IsCurrentUserFilterOn || m.Author.ServerId.Equals(currentUserId));
+            var items = _allReviewList.Where(m => !IsCurrentUserFilterOn || m is ItemUserReviewViewModel);
 
             InvokeOnMainThread(() =>
             {

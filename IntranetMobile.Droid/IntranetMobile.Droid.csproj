@@ -270,6 +270,7 @@
     <Compile Include="Views\Fragments\Login\ForgotPasswordFragment.cs" />
     <Compile Include="Views\Fragments\Login\LoadingFragment.cs" />
     <Compile Include="Views\Fragments\Login\LoginFragment.cs" />
+    <Compile Include="Converters\IntToInverseVisibilityConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
