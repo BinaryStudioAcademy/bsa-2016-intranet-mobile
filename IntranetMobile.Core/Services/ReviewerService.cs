@@ -10,7 +10,7 @@ namespace IntranetMobile.Core.Services
 {
     public enum ReviewerGroup
     {
-        none = 0,
+        None = 0,
         Php = 1,
         JavaScript = 2,
         DotNet = 3
@@ -26,30 +26,6 @@ namespace IntranetMobile.Core.Services
         public ReviewerService(RestClient client)
         {
             _restClient = client;
-        }
-
-        public List<Ticket> GetListOfTickets(List<TicketDto> listOfTicketsDto)
-        {
-            var result = new List<Ticket>();
-
-            foreach (var ticketDto in listOfTicketsDto)
-            {
-                var ticket = new Ticket().UpdateFromDto(ticketDto);
-
-                foreach (var id in ticketDto.users)
-                {
-                    ticket.ListOfUserIds.Add(id.binary_id);
-                }
-
-                foreach (var tag in ticketDto.tags)
-                {
-                    ticket.ListOfTagTitles.Add(tag.title);
-                }
-
-                result.Add(ticket);
-            }
-
-            return result;
         }
 
         public Task<bool> AcceptUserReviewForTicketAsync(string userId, string ticketId)
@@ -89,23 +65,16 @@ namespace IntranetMobile.Core.Services
 
         public async Task<List<Comment>> GetListOfTicketCommentsAsync(string ticketId)
         {
-            var comments = new List<Comment>();
             var commentsResponse =
                 await _restClient.GetAsync<List<TicketCommentDto>>(_reviewrPath + $"/{ticketId}/comment");
 
-            foreach (var c in commentsResponse)
+            return commentsResponse.Select(c => new Comment
             {
-                var comment = new Comment();
-
-                comment.AuthorId = c.user.binary_id;
-                comment.Body = c.text;
-                comment.CommentId = c.id;
-                comment.Date = c.created_at;
-
-                comments.Add(comment);
-            }
-
-            return comments;
+                AuthorId = c.user.binary_id,
+                Body = c.text,
+                CommentId = c.id,
+                Date = c.created_at
+            }).ToList();
         }
 
         public async Task<List<Ticket>> GetListOfTicketsAsync()
@@ -151,14 +120,42 @@ namespace IntranetMobile.Core.Services
             return _restClient.GetAsync(_actionTicketPath + $"offeroff/{ticketId}");
         }
 
+        // TODO: Use MODEL, not DTO
         public Task<TicketCommentDto> WtiteCommentAsync(string ticketId, string text)
         {
-            var commentTicketDto = new TicketCommentDto();
-            commentTicketDto.text = text;
-            commentTicketDto.created_at = DateTime.Now.ToString();
-            commentTicketDto.formatted_created_at = "Invalid date";
+            // TODO: Why dat staff is not used?
+            var commentTicketDto = new TicketCommentDto
+            {
+                text = text,
+                created_at = DateTime.Now.ToString(),
+                formatted_created_at = "Invalid date"
+            };
 
             return _restClient.PostAsync<TicketCommentDto>(_reviewrPath + $"/{ticketId}/comment");
+        }
+
+        public List<Ticket> GetListOfTickets(List<TicketDto> listOfTicketsDto)
+        {
+            var result = new List<Ticket>();
+
+            foreach (var ticketDto in listOfTicketsDto)
+            {
+                var ticket = new Ticket().UpdateFromDto(ticketDto);
+
+                foreach (var id in ticketDto.users)
+                {
+                    ticket.ListOfUserIds.Add(id.binary_id);
+                }
+
+                foreach (var tag in ticketDto.tags)
+                {
+                    ticket.ListOfTagTitles.Add(tag.title);
+                }
+
+                result.Add(ticket);
+            }
+
+            return result;
         }
     }
 }
