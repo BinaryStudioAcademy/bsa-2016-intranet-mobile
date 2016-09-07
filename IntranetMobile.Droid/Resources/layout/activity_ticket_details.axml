@@ -32,10 +32,12 @@
           android:id="@+id/activity_ticket_details_author_imageview"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:maxWidth="72dp"
+          android:maxHeight="72dp"
           android:layout_centerVertical="true"
           android:layout_marginEnd="@dimen/activity_horizontal_margin"
           android:layout_marginRight="@dimen/activity_horizontal_margin"
-          android:src="@drawable/ic_launcher" />
+          app:MvxBind="ImageUrl AuthorAvatarUrl" />
         <TextView
           android:id="@+id/activity_ticket_details_author_textview"
           android:layout_width="wrap_content"
@@ -56,9 +58,9 @@
           android:layout_marginTop="8dp"
           android:layout_toEndOf="@id/activity_ticket_details_author_imageview"
           android:layout_toRightOf="@id/activity_ticket_details_author_imageview"
-          android:text="Author"
           android:textAppearance="@style/TextAppearance.AppCompat.Small"
-          android:textColor="@color/colorSecondaryText" />
+          android:textColor="@color/colorSecondaryText"
+          app:MvxBind="Text AuthorDepartment" />
       </RelativeLayout>
 
       <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView

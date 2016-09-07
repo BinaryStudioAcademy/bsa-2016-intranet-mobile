@@ -9,8 +9,13 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
     {
         private Ticket _ticket;
         private string _ticketId;
+        private UserInfo _author;
 
-        public string AuthorName => Ticket?.AuthorName;
+        public string AuthorAvatarUrl => Author != null ? Constants.BaseUrl + Author.AvatarUri : null;
+
+        public string AuthorName => Author?.FullName;
+
+        public string AuthorDepartment => Author?.Department;
 
         public string CategoryName => Ticket?.CategoryName;
 
@@ -30,7 +35,24 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             {
                 _ticketId = value;
 
-                Task.Run(async () => { Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(_ticketId); });
+                Task.Run(async () =>
+                {
+                    Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(_ticketId);
+                    Author = await ServiceBus.UserService.GetUserInfoById(Ticket.UserServerId);
+                });
+            }
+        }
+
+        public UserInfo Author
+        {
+            get { return _author; }
+            set
+            {
+                _author = value;
+
+                RaisePropertyChanged(() => AuthorAvatarUrl);
+                RaisePropertyChanged(() => AuthorName);
+                RaisePropertyChanged(() => AuthorDepartment);
             }
         }
 
@@ -49,13 +71,12 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                     InvokeOnMainThread(() => Tags.Add(new TagViewModel {TagName = tagDto}));
                 }
 
-                foreach (var userTicketDto in _ticket.ListOfUserIds)
+                foreach (var userId in _ticket.ListOfUserIds)
                 {
                     InvokeOnMainThread(() => Offers.Clear());
-                    InvokeOnMainThread(() => Offers.Add(new TicketOfferViewModel(userTicketDto)));
+                    InvokeOnMainThread(() => Offers.Add(new TicketOfferViewModel(userId)));
                 }
 
-                RaisePropertyChanged(() => AuthorName);
                 RaisePropertyChanged(() => CategoryName);
                 RaisePropertyChanged(() => TicketText);
                 RaisePropertyChanged(() => ReviewDate);

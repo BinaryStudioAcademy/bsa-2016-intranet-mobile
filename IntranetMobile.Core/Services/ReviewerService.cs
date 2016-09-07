@@ -32,16 +32,16 @@ namespace IntranetMobile.Core.Services
         {
             var result = new List<Ticket>();
 
-            foreach (var t in listOfTicketsDto)
+            foreach (var ticketDto in listOfTicketsDto)
             {
-                var ticket = Ticket.TicketFromDto(t);
+                var ticket = new Ticket().UpdateFromDto(ticketDto);
 
-                foreach (var id in t.users)
+                foreach (var id in ticketDto.users)
                 {
                     ticket.ListOfUserIds.Add(id.binary_id);
                 }
 
-                foreach (var tag in t.tags)
+                foreach (var tag in ticketDto.tags)
                 {
                     ticket.ListOfTagTitles.Add(tag.title);
                 }
@@ -120,21 +120,13 @@ namespace IntranetMobile.Core.Services
         {
             var groupId = (int) group;
             var dtos = await _restClient.GetAsync<List<TicketDto>>(_reviewrPath + $"/group/{groupId}");
-            return dtos.Select(dto => Ticket.TicketFromDto(dto)).ToList();
+            return dtos.Select(dto => new Ticket().UpdateFromDto(dto)).ToList();
         }
 
         public async Task<Ticket> GetTicketDetailsAsync(string ticketId)
         {
-            var ticket = new Ticket();
             var ticketDto = await _restClient.GetAsync<TicketDto>(_reviewrPath + $"/{ticketId}");
-
-            ticket.TicketId = ticketDto.id;
-            ticket.DateReview = ticketDto.date_review;
-            ticket.ReviewText = ticketDto.details;
-            ticket.TitleName = ticketDto.title;    
-            ticket.CategoryName = ticketDto.group.title;
-            ticket.ListOfUserIds = new List<string>();
-            ticket.ListOfTagTitles = new List<string>();
+            var ticket = new Ticket().UpdateFromDto(ticketDto);
 
             foreach (var id in ticketDto.users)
             {

@@ -62,8 +62,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         {
             return new ItemReviewViewModel
             {
-                AuthorImage = Constants.BaseUrl + dto.AuthorImage,
-                Author = dto.AuthorName,
+                //AuthorImage = Constants.BaseUrl + dto.AuthorImage,
+                //Author = dto.AuthorName,
                 DateTime = dto.DateReview,
                 ReviewerText = dto.ReviewText,
                 TitleName = dto.TitleName,
