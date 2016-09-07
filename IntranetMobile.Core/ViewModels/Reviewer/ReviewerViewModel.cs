@@ -4,9 +4,23 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class ReviewerViewModel : BaseViewModel
     {
+        private bool _isFilterActive;
+
         public ReviewerViewModel()
         {
             Title = "Reviewer";
+        }
+
+        public bool IsFilterActive
+        {
+            get { return _isFilterActive; }
+            set
+            {
+                _isFilterActive = value;
+                DotNet.IsCurrentUserFilterOn = IsFilterActive;
+                JavaScript.IsCurrentUserFilterOn = IsFilterActive;
+                Php.IsCurrentUserFilterOn = IsFilterActive;
+            }
         }
 
         public ReviewerSectionViewModel DotNet { get; } = new ReviewerSectionViewModel(ReviewerGroup.DotNet);

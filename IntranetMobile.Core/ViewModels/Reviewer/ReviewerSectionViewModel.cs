@@ -14,6 +14,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         private bool _isRefreshing;
         private int _vmId = 1;
+        private bool _isCurrentUserFilterOn;
 
         public ReviewerSectionViewModel()
         {
@@ -39,6 +40,16 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             {
                 _isRefreshing = value;
                 RaisePropertyChanged(() => IsRefreshing);
+            }
+        }
+
+        public bool IsCurrentUserFilterOn
+        {
+            get { return _isCurrentUserFilterOn; }
+            set
+            {
+                _isCurrentUserFilterOn = value;
+                Task.Run(ReloadData);
             }
         }
 
@@ -69,6 +80,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                     }
                     else
                     {
+                        if(!IsCurrentUserFilterOn)
                         InvokeOnMainThread(() =>
                         {
                             Reviews.Add(ItemReviewViewModel.FromModel(model, currentUserId));

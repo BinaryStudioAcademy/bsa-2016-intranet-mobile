@@ -8,6 +8,8 @@ using Android.Views;
 using IntranetMobile.Core.ViewModels;
 using IntranetMobile.Core.ViewModels.Reviewer;
 using IntranetMobile.Droid.Views.Fragments.News;
+using MvvmCross.Binding;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Support.V7.RecyclerView;
@@ -45,7 +47,21 @@ namespace IntranetMobile.Droid.Views.Fragments.Reviewer
 
             var tabLayout = view.FindViewById<TabLayout>(Resource.Id.tabs);
             tabLayout.SetupWithViewPager(viewPager);
+            HasOptionsMenu = true;
             return view;
+        }
+
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        {
+            inflater.Inflate(Resource.Menu.menu_reviewer, menu);
+            var bindingSet = this.CreateBindingSet<ReviewerFragment, ReviewerViewModel>();
+            var a = menu.FindItem(Resource.Id.menu_item_reviewer);
+            bindingSet.Bind(a.ActionView.FindViewById<SwitchCompat>(Resource.Id.filter_tickets_switch))
+                .For("Checked")
+                .To(viewModel => viewModel.IsFilterActive)
+                .Mode(MvxBindingMode.TwoWay);
+            bindingSet.Apply();
+            base.OnCreateOptionsMenu(menu, inflater);
         }
     }
 }
