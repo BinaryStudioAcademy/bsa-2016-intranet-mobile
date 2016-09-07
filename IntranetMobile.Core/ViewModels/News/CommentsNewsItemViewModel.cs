@@ -24,7 +24,7 @@ namespace IntranetMobile.Core.ViewModels.News
             _newsId = newsId;
 
             Name = GetAuthor(comment.authorId).Result;
-            Date = DateTimeExtensions.UnixTimestampToDateTime(comment.date).ToString("dd-MM-yyyy HH:mm");
+            Date = comment.date.UnixTimestampToDateTime().ToDateTimeString();
             Body = comment.body.RemoveHTMLTags();
             CountLikes = comment.likes.Count;
             IsLiked = comment.likes.Contains(ServiceBus.UserService.CurrentUser.ServerId);
