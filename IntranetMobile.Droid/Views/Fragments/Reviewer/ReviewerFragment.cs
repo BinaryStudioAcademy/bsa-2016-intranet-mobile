@@ -7,7 +7,6 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using IntranetMobile.Core.ViewModels;
 using IntranetMobile.Core.ViewModels.Reviewer;
-using IntranetMobile.Droid.Views.Fragments.News;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Shared.Attributes;
