@@ -131,7 +131,7 @@ namespace IntranetMobile.Core.Services
                 formatted_created_at = "Invalid date"
             };
 
-            return _restClient.PostAsync<TicketCommentDto>(_reviewrPath + $"/{ticketId}/comment");
+            return _restClient.PostAsync<TicketCommentDto>(_reviewrPath + $"/{ticketId}/comment", commentTicketDto);
         }
 
         public List<Ticket> GetListOfTickets(List<TicketDto> listOfTicketsDto)
