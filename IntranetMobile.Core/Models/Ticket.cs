@@ -21,10 +21,12 @@ namespace IntranetMobile.Core.Models
         {
             TicketId = ticketDto.id;
             TitleName = ticketDto.title;
-            CategoryName = ticketDto.group.title;
+            CategoryName = ticketDto.group?.title;
             ReviewText = ticketDto.details;
-            DateReview = DateTime.Parse(ticketDto.date_review);
-            UserServerId = ticketDto.user.binary_id;
+            DateReview = !string.IsNullOrEmpty(ticketDto.date_review)
+                ? DateTime.Parse(ticketDto.date_review)
+                : default(DateTime);
+            UserServerId = ticketDto.user?.binary_id;
             GroupId = ticketDto.group_id;
             OffersCount = ticketDto.offers_count;
             ListOfUserIds = new List<string>();

@@ -14,7 +14,7 @@ namespace IntranetMobile.Core.Extensions
         public static string ToDateTimeString(this DateTime date)
         {
             return date == DateTime.MinValue
-                       ? ""
+                       ? string.Empty
                        : date.ToString("dd MMM yyyy  HH:mm");
         }
     }
