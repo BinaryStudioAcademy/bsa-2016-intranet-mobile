@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 
@@ -59,7 +60,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public string AuthorName => Author?.FullName;
 
-        public string DateTime => Ticket?.DateReview.ToString();
+        public string DateTime => Ticket?.DateReview.ToDateTimeString();
 
         public string ReviewText => Ticket?.ReviewText;
     }
