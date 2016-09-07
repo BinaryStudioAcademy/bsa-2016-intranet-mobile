@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IntranetMobile.Core.Models.Dtos;
 
 namespace IntranetMobile.Core.Models
@@ -7,7 +8,7 @@ namespace IntranetMobile.Core.Models
     {
         public string TicketId { get; set; }
         public string UserServerId { get; set; }
-        public string DateReview { get; set; }
+        public DateTime DateReview { get; set; }
         public string ReviewText { get; set; }
         public string TitleName { get; set; }
         public string CategoryName { get; set; }

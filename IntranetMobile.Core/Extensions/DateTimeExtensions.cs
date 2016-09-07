@@ -10,5 +10,12 @@ namespace IntranetMobile.Core.Extensions
             dateTime = dateTime.AddMilliseconds(timestamp).ToLocalTime();
             return dateTime;
         }
+
+        public static string ToDateTimeString(this DateTime date)
+        {
+            return date == DateTime.MinValue
+                       ? ""
+                       : date.ToString("dd MMM yyyy  HH:mm");
+        }
     }
 }

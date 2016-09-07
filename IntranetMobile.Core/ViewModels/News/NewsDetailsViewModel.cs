@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
@@ -8,8 +10,6 @@ namespace IntranetMobile.Core.ViewModels.News
     public class NewsDetailsViewModel : BaseViewModel
     {
         private Models.News _dataModel;
-        private bool _isLiked;
-
         private string _newsId;
         private bool _visibility;
 
@@ -31,24 +31,7 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public int CommentsCount => _dataModel.Comments.Count;
 
-        public bool IsLiked
-        {
-            get
-            {
-                Task.Run(async () =>
-                {
-                    var user = await ServiceBus.UserService.GetCurrentUserAsync();
-                    IsLiked = _dataModel.Likes.Contains(user.ServerId);
-                });
-
-                return _isLiked;
-            }
-            set
-            {
-                _isLiked = value;
-                RaisePropertyChanged(() => IsLiked);
-            }
-        }
+        public bool IsLiked => _dataModel.Likes.Contains(ServiceBus.UserService.CurrentUser.ServerId);
 
         public bool Visibility
         {
@@ -77,39 +60,39 @@ namespace IntranetMobile.Core.ViewModels.News
 
                 Title = _dataModel.Title;
                 Author = await ServiceBus.UserService.GetUserInfoById(_dataModel.AuthorId);
-                Subtitle = $" {Author.FullName} {_dataModel.Date.ToString("dd-MM-yyyy HH:mm")}";
+                Subtitle = _dataModel.Date.ToDateTimeString();
                 RaisePropertyChanged(() => LikesCount);
                 RaisePropertyChanged(() => CommentsCount);
                 RaisePropertyChanged(() => IsLiked);
                 RaisePropertyChanged(() => Body);
             }
-            catch
+            catch(Exception ex)
             {
+                Log.Error(ex);
             }
         }
 
         private async void Like()
         {
-            if (!IsLiked)
-            {
-                var result = await ServiceBus.NewsService.LikeNewsAsync(_dataModel.NewsId);
-                if (result)
-                {
-                    RaisePropertyChanged(() => IsLiked);
-                    RaisePropertyChanged(() => LikesCount);
-                }
-            }
+            Task<bool> task;
+            if (IsLiked)
+                task = ServiceBus.NewsService.UnLikeNewsAsync(_dataModel.NewsId);
             else
+                task = ServiceBus.NewsService.LikeNewsAsync(_dataModel.NewsId);
+
+            var result = await task;
+            if (result)
             {
-                var result = await ServiceBus.NewsService.UnLikeNewsAsync(_dataModel.NewsId);
-                if (result)
-                {
-                    RaisePropertyChanged(() => IsLiked);
-                    RaisePropertyChanged(() => LikesCount);
-                }
+                RaisePropertyChanged(() => IsLiked);
+                RaisePropertyChanged(() => LikesCount);
             }
         }
 
+        public override void Resume()
+        {
+            base.Resume();
+            RaisePropertyChanged(() => CommentsCount);
+        }
        
         private void Comment()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IntranetMobile.Core.Services;
@@ -46,52 +47,46 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public ICommand ReloadCommand { get; private set; }
 
-        private void ItemDeleted(int id)
-        {
-            foreach (var baseItemReviewViewModel in Reviews)
-            {
-                if (baseItemReviewViewModel.VmId == id)
-                {
-                    Reviews.Remove(baseItemReviewViewModel);
-                    return;
-                }
-            }
-        }
-
-        public virtual async Task ReloadData()
+        public async Task ReloadData()
         {
             try
             {
-                var dtos = await ServiceBus.ReviewerService.GetListOfTicketsForGroupAsync(_group);
+                var tickets = await ServiceBus.ReviewerService.GetListOfTicketsForGroupAsync(_group);
                 InvokeOnMainThread(Reviews.Clear);
                 var currentUserId = ServiceBus.UserService.CurrentUser.ServerId;
-                foreach (var dto in dtos)
+                foreach (var model in tickets)
                 {
-                    if (dto.UserServerId == currentUserId)
+                    if (model.UserServerId == currentUserId)
                     {
-                        InvokeOnMainThread(
-                            () =>
-                            {
-                                var item = ItemUserReviewViewModel.GetItemReviewViewModelFromDto(dto);
-                                item.NotifyItemDeleted = ItemDeleted;
-                                item.VmId = _vmId;
-                                _vmId++;
-                                Reviews.Add(item);
-                            });
+                        InvokeOnMainThread(() =>
+                        {
+                            var item = ItemUserReviewViewModel.FromModel(model);
+                            item.NotifyItemDeleted = ItemDeleted;
+                            item.VmId = _vmId;
+                            _vmId++;
+                            Reviews.Add(item);
+                        });
                     }
                     else
                     {
-                        InvokeOnMainThread(
-                            () =>
-                            {
-                                Reviews.Add(ItemReviewViewModel.GetItemReviewViewModelFromDto(dto, currentUserId));
-                            });
+                        InvokeOnMainThread(() =>
+                        {
+                            Reviews.Add(ItemReviewViewModel.FromModel(model, currentUserId));
+                        });
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                Log.Error(ex);
             }
+        }
+
+        private void ItemDeleted(int id)
+        {
+            var deleted = Reviews.FirstOrDefault(i => i.VmId == id);
+            if (deleted != null) 
+                Reviews.Remove(deleted);
         }
     }
 }

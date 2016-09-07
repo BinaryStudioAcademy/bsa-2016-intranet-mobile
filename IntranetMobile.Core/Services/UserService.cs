@@ -32,11 +32,13 @@ namespace IntranetMobile.Core.Services
         {
             _semaphoreAllUser = new SemaphoreSlim(1);
             _restClient = client;
+
+            CurrentUser = new UserInfo();
         }
 
         public async Task<UserInfo> GetCurrentUserAsync()
         {
-            if (CurrentUser == null)
+            if (CurrentUser == null || string.IsNullOrWhiteSpace(CurrentUser.ServerId))
             {
                 await GetAllUsers();
             }

@@ -1,4 +1,6 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using IntranetMobile.Core.Interfaces;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.ViewModels
 {
@@ -7,6 +9,18 @@ namespace IntranetMobile.Core.ViewModels
         private string _subtitle = string.Empty;
         private string _title = string.Empty;
         private bool _isBusy;
+        private ILogger log;
+
+        protected ILogger Log
+        {
+            get
+            {
+                if (log == null)
+                    log = Mvx.Resolve<ILogger>();
+                
+                return log;
+            }
+        }
 
         public string Title
         {

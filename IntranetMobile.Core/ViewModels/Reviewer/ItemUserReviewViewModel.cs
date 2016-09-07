@@ -32,7 +32,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             ShowViewModel<TicketDetailsViewModel>(new {ticketId = Id});
         }
 
-        public static ItemUserReviewViewModel GetItemReviewViewModelFromDto(Ticket dto)
+        public static ItemUserReviewViewModel FromModel(Ticket model)
         {
             return new ItemUserReviewViewModel
             {

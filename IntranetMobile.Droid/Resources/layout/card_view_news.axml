@@ -59,34 +59,33 @@
                         android:gravity="right"
                         android:layout_gravity="right"
                         android:orientation="horizontal">
-                      <TextView     
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_small"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        app:MvxBind="Text LikesCount"
-                        android:layout_gravity="center_vertical"/>            
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            app:MvxBind="Text LikesCount"
+                            android:layout_gravity="center_vertical" />
                         <Mvx.MvxImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/icon_padding"
-                            app:MvxBind="DrawableName BoolToWhiteLikeIconConverter(IsLiked); Click ClickLikeCommand"
-                          />
-                      <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_small"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        app:MvxBind="Text CommentsCount"
-                        android:layout_gravity="center_vertical"/>
-                      <ImageView
+                            app:MvxBind="DrawableId BoolToWhiteLikeIconConverter(IsLiked); Click ClickLikeCommand" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            app:MvxBind="Text CommentsCount"
+                            android:layout_gravity="center_vertical" />
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/icon_padding"
                             android:src="@drawable/ic_comment_white_24dp"
-                            app:MvxBind="Click ClickCommentCommand"/>
+                            app:MvxBind="Click ClickCommentCommand" />
                     </LinearLayout>
                 </LinearLayout>
             </FrameLayout>

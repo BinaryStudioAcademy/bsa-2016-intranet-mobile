@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 
@@ -21,7 +22,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public string TicketText => Ticket?.ReviewText;
 
-        public string ReviewDate => Ticket?.DateReview;
+        public string ReviewDate => Ticket?.DateReview.ToDateTimeString();
 
         public ObservableCollection<TagViewModel> Tags { get; } = new ObservableCollection<TagViewModel>();
 
