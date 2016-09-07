@@ -38,7 +38,7 @@ namespace IntranetMobile.Core.Services
 
         public async Task<UserInfo> GetCurrentUserAsync()
         {
-            if (CurrentUser == null || string.IsNullOrWhiteSpace(CurrentUser.ServerId))
+            if (string.IsNullOrWhiteSpace(CurrentUser?.ServerId))
             {
                 await GetAllUsers();
             }

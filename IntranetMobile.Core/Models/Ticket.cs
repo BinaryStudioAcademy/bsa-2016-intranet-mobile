@@ -23,7 +23,7 @@ namespace IntranetMobile.Core.Models
             TitleName = ticketDto.title;
             CategoryName = ticketDto.group.title;
             ReviewText = ticketDto.details;
-            DateReview = ticketDto.date_review;
+            DateReview = DateTime.Parse(ticketDto.date_review);
             UserServerId = ticketDto.user.binary_id;
             GroupId = ticketDto.group_id;
             OffersCount = ticketDto.offers_count;

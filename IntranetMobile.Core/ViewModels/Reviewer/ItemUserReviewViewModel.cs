@@ -20,28 +20,20 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         private void ClickDeleteTicketCommandExecute()
         {
-            ServiceBus.ReviewerService.DeleteTicketAsync(Id);
-            if (NotifyItemDeleted != null)
-            {
-                NotifyItemDeleted.Invoke(VmId);
-            }
+            ServiceBus.ReviewerService.DeleteTicketAsync(TicketId);
+            NotifyItemDeleted?.Invoke(VmId);
         }
 
         private void ClickViewDetailsCommandExecute()
         {
-            ShowViewModel<TicketDetailsViewModel>(new {ticketId = Id});
+            ShowViewModel<TicketDetailsViewModel>(new {ticketId = TicketId});
         }
 
         public static ItemUserReviewViewModel FromModel(Ticket model)
         {
             return new ItemUserReviewViewModel
             {
-                //AuthorImage = Constants.BaseUrl + dto.AuthorImage,
-                //Author = dto.AuthorName,
-                DateTime = dto.DateReview,
-                ReviewerText = dto.ReviewText,
-                TitleName = dto.TitleName,
-                Id = dto.TicketId
+                TicketId = model.TicketId
             };
         }
     }

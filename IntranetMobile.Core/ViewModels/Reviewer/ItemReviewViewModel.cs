@@ -9,7 +9,6 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
     {
         private string _buttonText;
         private bool _isSigned;
-        private string _userId;
 
 
         public ItemReviewViewModel()
@@ -17,6 +16,9 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             ClickViewDetailsCommand = new MvxCommand(ClickViewDetailsCommandExecute);
             ClickSignCommand = new MvxCommand(ClickSignCommandxecute);
         }
+
+        // TODO: Use CURRENT USER from service
+        private string CurrentUserId { get; set; }
 
         public ICommand ClickSignCommand { get; set; }
 
@@ -45,38 +47,33 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             var newSignedValue = !_isSigned;
             if (newSignedValue)
             {
-                await ServiceBus.ReviewerService.JoinTicketAsync(_userId, Id);
+                await ServiceBus.ReviewerService.JoinTicketAsync(CurrentUserId, TicketId);
                 ServiceBus.AlertService.ShowPopupMessage($"You joined \"{Title}\" by {Author}");
-                IsSigned = newSignedValue;
+                IsSigned = true;
             }
             else
             {
                 ServiceBus.AlertService.ShowDialogBox("Are you sure?",
-                $"You will be unsubscribed from review \"{Title}\"",
-                "Yes", "No", async () =>
-                {
-                    await ServiceBus.ReviewerService.UndoJoinTicketAsync(Id);
-                    IsSigned = newSignedValue;
-                });
+                    $"You will be unsubscribed from review \"{Title}\"",
+                    "Yes", "No", async () =>
+                    {
+                        await ServiceBus.ReviewerService.UndoJoinTicketAsync(TicketId);
+                        IsSigned = false;
+                    });
             }
         }
 
         private void ClickViewDetailsCommandExecute()
         {
-            ShowViewModel<TicketDetailsViewModel>(new {ticketId = Id});
+            ShowViewModel<TicketDetailsViewModel>(new {ticketId = TicketId});
         }
 
         public static ItemReviewViewModel FromModel(Ticket model, string currentUserId)
         {
             return new ItemReviewViewModel
             {
-                //AuthorImage = Constants.BaseUrl + dto.AuthorImage,
-                //Author = dto.AuthorName,
-                DateTime = dto.DateReview,
-                ReviewerText = dto.ReviewText,
-                TitleName = dto.TitleName,
-                Id = dto.TicketId,
-                _userId = currentUserId,
+                TicketId = model.TicketId,
+                CurrentUserId = currentUserId,
                 IsSigned = false
                 //IsSigned need responce from server to know is user signed or not
             };

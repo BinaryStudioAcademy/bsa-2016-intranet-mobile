@@ -1,66 +1,66 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using IntranetMobile.Core.Extensions;
+using IntranetMobile.Core.Models;
+using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class BaseItemReviewViewModel : BaseViewModel
     {
-        private string _author;
-        private string _authorImage;
-        private string _id;
-        private string _reviewerText;
+        private UserInfo _author;
+        private Ticket _ticket;
+        private string _ticketId;
+
         public ICommand ClickViewDetailsCommand { get; set; }
+
         public int VmId { get; set; }
 
-        protected DateTime dateTime;
-
-        public string Id
+        public string TicketId
         {
-            get { return _id; }
+            get { return _ticketId; }
             set
             {
-                _id = value;
-                RaisePropertyChanged(() => Id);
+                _ticketId = value;
+
+                Task.Run(async () =>
+                {
+                    Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(TicketId);
+                    Title = Ticket.TitleName;
+                    Author = await ServiceBus.UserService.GetUserInfoById(Ticket.UserServerId);
+                });
             }
         }
 
-        public string AuthorImage
+        public Ticket Ticket
         {
-            get { return _authorImage; }
+            get { return _ticket; }
             set
             {
-                _authorImage = value;
-                RaisePropertyChanged(() => AuthorImage);
+                _ticket = value;
+
+                RaisePropertyChanged(() => ReviewText);
+                RaisePropertyChanged(() => DateTime);
             }
         }
 
-        public string Author
+        public UserInfo Author
         {
             get { return _author; }
             set
             {
                 _author = value;
-                RaisePropertyChanged(() => Author);
+
+                RaisePropertyChanged(() => AuthorAvatarUrl);
+                RaisePropertyChanged(() => AuthorName);
             }
         }
 
-        public string DateTime
-        {
-            get
-            {
-                return dateTime.ToDateTimeString();
-            }
-        }
+        public string AuthorAvatarUrl => Author != null ? Constants.BaseUrl + Author.AvatarUri : null;
 
-        public string ReviewText
-        {
-            get { return _reviewerText; }
-            set
-            {
-                _reviewerText = value;
-                RaisePropertyChanged(() => ReviewText);
-            }
-        }
+        public string AuthorName => Author?.FullName;
+
+        public string DateTime => Ticket?.DateReview.ToString();
+
+        public string ReviewText => Ticket?.ReviewText;
     }
 }
