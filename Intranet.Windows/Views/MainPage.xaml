@@ -63,7 +63,7 @@
                                         Width="32"
                                         Height="32"
                                         Source="../../Images/avatar_circle_grey.png"/>
-                                    <Ellipse Width="32" Height="32">
+                                    <Ellipse Width="32" Height="32" Stroke="{StaticResource SolidBrushOrange}" StrokeThickness="1">
                                         <Ellipse.Fill>
                                             <ImageBrush ImageSource="{Binding Menu.AvatarUrl}" Stretch="UniformToFill"/>
                                         </Ellipse.Fill>
