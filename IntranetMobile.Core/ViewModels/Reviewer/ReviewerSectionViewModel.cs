@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,16 +13,19 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
     {
         private readonly ReviewerGroup _group;
 
+        private List<BaseItemReviewViewModel> _allReviewList;
         private bool _isRefreshing;
         private int _vmId = 1;
         private bool _isCurrentUserFilterOn;
 
         public ReviewerSectionViewModel()
         {
+            _allReviewList = new List<BaseItemReviewViewModel>();
         }
 
         public ReviewerSectionViewModel(ReviewerGroup group)
         {
+            _allReviewList = new List<BaseItemReviewViewModel>();
             _group = group;
             ReloadCommand = new MvxCommand(async () =>
             {
@@ -49,11 +53,11 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _isCurrentUserFilterOn = value;
-                Task.Run(ReloadData);
+                UpdateReviewList();
             }
         }
 
-        public ObservableCollection<BaseItemReviewViewModel> Reviews { get; }
+        public ObservableCollection<BaseItemReviewViewModel> Reviews { get; private set; }
             = new ObservableCollection<BaseItemReviewViewModel>();
 
         public ICommand ReloadCommand { get; private set; }
@@ -63,30 +67,26 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             try
             {
                 var tickets = await ServiceBus.ReviewerService.GetListOfTicketsForGroupAsync(_group);
-                InvokeOnMainThread(Reviews.Clear);
-                var currentUserId = ServiceBus.UserService.CurrentUser.ServerId;
+                _allReviewList.Clear();
+                var user = await ServiceBus.UserService.GetCurrentUserAsync();
+                var currentUserId = user.ServerId;
                 foreach (var model in tickets)
                 {
                     if (model.UserServerId == currentUserId)
                     {
-                        InvokeOnMainThread(() =>
-                        {
-                            var item = ItemUserReviewViewModel.FromModel(model);
-                            item.NotifyItemDeleted = ItemDeleted;
-                            item.VmId = _vmId;
-                            _vmId++;
-                            Reviews.Add(item);
-                        });
+                        var item = ItemUserReviewViewModel.FromModel(model);
+                        item.NotifyItemDeleted = ItemDeleted;
+                        item.VmId = _vmId;
+                        _vmId++;
+                        _allReviewList.Add(item);
                     }
                     else
                     {
-                        if(!IsCurrentUserFilterOn)
-                        InvokeOnMainThread(() =>
-                        {
-                            Reviews.Add(ItemReviewViewModel.FromModel(model, currentUserId));
-                        });
+                        _allReviewList.Add(ItemReviewViewModel.FromModel(model, currentUserId));
                     }
                 }
+
+                UpdateReviewList();
             }
             catch (Exception ex)
             {
@@ -94,11 +94,28 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
+        private async void UpdateReviewList()
+        {
+            var user = await ServiceBus.UserService.GetCurrentUserAsync();
+            var currentUserId = user != null ? user.ServerId : "";
+            var items = _allReviewList.Where(m => !IsCurrentUserFilterOn || m.Author.ServerId.Equals(currentUserId));
+
+            InvokeOnMainThread(() =>
+            {
+                Reviews.Clear();
+                Reviews = new ObservableCollection<BaseItemReviewViewModel>(items);
+                RaisePropertyChanged(() => Reviews);
+            });
+        }
+
         private void ItemDeleted(int id)
         {
             var deleted = Reviews.FirstOrDefault(i => i.VmId == id);
-            if (deleted != null) 
-                Reviews.Remove(deleted);
+            if (deleted != null)
+            {
+                _allReviewList.Remove(deleted);
+                UpdateReviewList();
+            }
         }
     }
 }

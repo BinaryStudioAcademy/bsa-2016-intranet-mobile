@@ -54,13 +54,15 @@ namespace IntranetMobile.Droid.Views.Fragments.Reviewer
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
         {
             inflater.Inflate(Resource.Menu.menu_reviewer, menu);
+
             var bindingSet = this.CreateBindingSet<ReviewerFragment, ReviewerViewModel>();
             var a = menu.FindItem(Resource.Id.menu_item_reviewer);
             bindingSet.Bind(a.ActionView.FindViewById<SwitchCompat>(Resource.Id.filter_tickets_switch))
-                .For("Checked")
+                .For(control => control.Checked)
                 .To(viewModel => viewModel.IsFilterActive)
                 .Mode(MvxBindingMode.TwoWay);
             bindingSet.Apply();
+
             base.OnCreateOptionsMenu(menu, inflater);
         }
     }

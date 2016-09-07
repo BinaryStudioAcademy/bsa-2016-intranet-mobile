@@ -70,7 +70,7 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             try
             {
-                var companyNews = await ServiceBus.NewsService.GetCompanyNewsAsync(0, 10);
+                var companyNews = await ServiceBus.NewsService.GetCompanyNewsAsync(0, 15);
 
                 InvokeOnMainThread(News.Clear);
                 foreach (var news in companyNews)
