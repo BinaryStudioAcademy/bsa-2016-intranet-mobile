@@ -108,25 +108,35 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             Task.Run(async () => { Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(TicketId); });
         }
 
-        private async void DeclineExecute()
+        private void DeclineExecute()
         {
-            var result = await ServiceBus.ReviewerService.DeclineUserReviewForTicketAsync(UserId, TicketId);
+            ServiceBus.AlertService.ShowDialogBox("Are you sure?",
+                $"You will decline review offer from \"{Name}\"",
+                "Yes", "No", async () =>
+                {
+                    var result = await ServiceBus.ReviewerService.DeclineUserReviewForTicketAsync(UserId, TicketId);
 
-            if (result)
-            {
-                NotifyOfferDeleted?.Invoke(VmId);
-                Refresh();
-            }
+                    if (result)
+                    {
+                        NotifyOfferDeleted?.Invoke(VmId);
+                        Refresh();
+                    }
+                });
         }
 
-        private async void AcceptExecute()
+        private void AcceptExecute()
         {
-            var result = await ServiceBus.ReviewerService.AcceptUserReviewForTicketAsync(UserId, TicketId);
+            ServiceBus.AlertService.ShowDialogBox("Are you sure?",
+                $"You will accept review offer from \"{Name}\"",
+                "Yes", "No", async () =>
+                {
+                    var result = await ServiceBus.ReviewerService.AcceptUserReviewForTicketAsync(UserId, TicketId);
 
-            if (result)
-            {
-                Refresh();
-            }
+                    if (result)
+                    {
+                        Refresh();
+                    }
+                });
         }
 
         public void Init(string userBinaryId, string userId, string ticketId, bool isOfferForMyTicket)
