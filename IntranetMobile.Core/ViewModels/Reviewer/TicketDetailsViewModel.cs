@@ -10,7 +10,6 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
     public class TicketDetailsViewModel : BaseViewModel
     {
         private UserInfo _author;
-        private bool _isMyTicket;
         private bool _isSigned;
         private Ticket _ticket;
         private string _ticketId;
@@ -82,6 +81,11 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 InvokeOnMainThread(() => Offers.Clear());
                 foreach (var userId in _ticket.ListOfUserIds)
                 {
+                    if (userId.Equals(ServiceBus.UserService.CurrentUser.ServerId))
+                    {
+                        IsSigned = true;
+                    }
+
                     InvokeOnMainThread(
                         () =>
                             Offers.Add(new TicketOfferViewModel(userId,
