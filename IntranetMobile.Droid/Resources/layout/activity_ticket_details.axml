@@ -188,8 +188,7 @@
           android:layout_height="wrap_content"
           android:layout_centerVertical="true"
           android:layout_alignParentRight="true"
-          android:text="Join"
-          app:MvxBind="Visibility InvertedBoolToVisibilityConverter(IsMyTicket)" />
+          app:MvxBind="Visibility InvertedBoolToVisibilityConverter(IsMyTicket); Click SignCommand; Text SignText" />
       </RelativeLayout>
 
       <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView

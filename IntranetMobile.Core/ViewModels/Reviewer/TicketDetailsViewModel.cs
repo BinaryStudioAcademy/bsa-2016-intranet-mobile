@@ -3,15 +3,17 @@ using System.Threading.Tasks;
 using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
+using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class TicketDetailsViewModel : BaseViewModel
     {
-        private Ticket _ticket;
-        private string _ticketId;
         private UserInfo _author;
         private bool _isMyTicket;
+        private bool _isSigned;
+        private Ticket _ticket;
+        private string _ticketId;
 
         public string AuthorAvatarUrl => Author != null ? Constants.BaseUrl + Author.AvatarUri : null;
 
@@ -30,6 +32,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         public ObservableCollection<TicketOfferViewModel> Offers { get; } =
             new ObservableCollection<TicketOfferViewModel>();
 
+        public MvxCommand SignCommand => new MvxCommand(SignCommandExecute);
+
         public string TicketId
         {
             get { return _ticketId; }
@@ -39,7 +43,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
                 Task.Run(async () =>
                 {
-                    Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(_ticketId);
+                    Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(TicketId);
                     Author = await ServiceBus.UserService.GetUserInfoById(Ticket.UserServerId);
                 });
             }
@@ -69,22 +73,76 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
                 Title = _ticket.TitleName;
 
+                InvokeOnMainThread(() => Tags.Clear());
                 foreach (var tagDto in _ticket.ListOfTagTitles)
                 {
-                    InvokeOnMainThread(() => Tags.Clear());
                     InvokeOnMainThread(() => Tags.Add(new TagViewModel {TagName = tagDto}));
                 }
 
+                InvokeOnMainThread(() => Offers.Clear());
                 foreach (var userId in _ticket.ListOfUserIds)
                 {
-                    InvokeOnMainThread(() => Offers.Clear());
-                    InvokeOnMainThread(() => Offers.Add(new TicketOfferViewModel(userId, Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))));
+                    InvokeOnMainThread(
+                        () =>
+                            Offers.Add(new TicketOfferViewModel(userId,
+                                Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))));
                 }
 
                 RaisePropertyChanged(() => CategoryName);
                 RaisePropertyChanged(() => TicketText);
                 RaisePropertyChanged(() => ReviewDate);
                 RaisePropertyChanged(() => IsMyTicket);
+            }
+        }
+
+        public bool IsSigned
+        {
+            get { return _isSigned; }
+            set
+            {
+                _isSigned = value;
+
+                RaisePropertyChanged(() => IsSigned);
+                RaisePropertyChanged(() => SignText);
+            }
+        }
+
+        public string SignText => IsSigned ? "Undo" : "Join";
+
+        private async void SignCommandExecute()
+        {
+            var newSignedValue = !_isSigned;
+            if (newSignedValue)
+            {
+                await ServiceBus.ReviewerService.JoinTicketAsync(ServiceBus.UserService.CurrentUser.ServerId, TicketId);
+                ServiceBus.AlertService.ShowPopupMessage($"You joined \"{Title}\" by {Author}");
+                IsSigned = true;
+                RefreshOffers();
+            }
+            else
+            {
+                ServiceBus.AlertService.ShowDialogBox("Are you sure?",
+                    $"You will be unsubscribed from review \"{Title}\"",
+                    "Yes", "No", async () =>
+                    {
+                        await ServiceBus.ReviewerService.UndoJoinTicketAsync(TicketId);
+                        IsSigned = false;
+                        RefreshOffers();
+                    });
+            }
+        }
+
+        private async void RefreshOffers()
+        {
+            var ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(TicketId);
+
+            InvokeOnMainThread(() => Offers.Clear());
+            foreach (var userId in ticket.ListOfUserIds)
+            {
+                InvokeOnMainThread(
+                    () =>
+                        Offers.Add(new TicketOfferViewModel(userId,
+                            Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))));
             }
         }
 
