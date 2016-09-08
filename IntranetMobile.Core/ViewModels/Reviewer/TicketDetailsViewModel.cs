@@ -25,7 +25,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public string TicketText => Ticket?.ReviewText;
 
-        public string ReviewDate => Ticket?.DateReview.ToDateTimeString();
+        public string ReviewDate => Ticket?.DateReview.ToDateTimeString("No date assigned");
 
         public ObservableCollection<TagViewModel> Tags { get; } = new ObservableCollection<TagViewModel>();
 

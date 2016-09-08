@@ -13,8 +13,13 @@ namespace IntranetMobile.Core.Extensions
 
         public static string ToDateTimeString(this DateTime date)
         {
+            return ToDateTimeString(date, string.Empty);
+        }
+
+        public static string ToDateTimeString(this DateTime date, string placeholder)
+        {
             return date == DateTime.MinValue
-                       ? string.Empty
+                       ? placeholder
                        : date.ToString("dd MMM yyyy  HH:mm");
         }
     }
