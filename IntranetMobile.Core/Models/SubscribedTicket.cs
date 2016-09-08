@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace IntranetMobile.Core
+﻿namespace IntranetMobile.Core.Models
 {
     public class SubscribedTicket
     {
