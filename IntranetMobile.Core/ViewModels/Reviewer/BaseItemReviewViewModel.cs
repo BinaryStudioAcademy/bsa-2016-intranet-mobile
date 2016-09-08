@@ -23,16 +23,11 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             {
                 _ticketId = value;
 
-                Task.Run(async () =>
-                {
-                    Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(TicketId);
-                    Title = Ticket.TitleName;
-                    Author = await ServiceBus.UserService.GetUserInfoById(Ticket.UserServerId);
-                });
+                Refresh();
             }
         }
 
-        public Ticket Ticket
+        public virtual Ticket Ticket
         {
             get { return _ticket; }
             set
@@ -63,5 +58,15 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         public string DateTime => Ticket?.DateReview.ToDateTimeString();
 
         public string ReviewText => Ticket?.ReviewText;
+
+        public void Refresh()
+        {
+            Task.Run(async () =>
+            {
+                Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(TicketId);
+                Title = Ticket.TitleName;
+                Author = await ServiceBus.UserService.GetUserInfoById(Ticket.UserServerId);
+            });
+        }
     }
 }

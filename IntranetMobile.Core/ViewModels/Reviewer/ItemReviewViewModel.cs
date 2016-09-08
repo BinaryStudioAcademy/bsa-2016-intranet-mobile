@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Linq;
+using System.Windows.Input;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
@@ -7,10 +8,6 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class ItemReviewViewModel : BaseItemReviewViewModel
     {
-        private string _buttonText;
-        private bool _isSigned;
-
-
         public ItemReviewViewModel()
         {
             ClickViewDetailsCommand = new MvxCommand(ClickViewDetailsCommandExecute);
@@ -22,34 +19,33 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public ICommand ClickSignCommand { get; set; }
 
-        public string ButtonText
+        public override Ticket Ticket
         {
-            get { return _buttonText; }
+            get { return base.Ticket; }
             set
             {
-                _buttonText = value;
+                base.Ticket = value;
+
+                RaisePropertyChanged(() => IsSigned);
                 RaisePropertyChanged(() => ButtonText);
             }
         }
 
+        public string ButtonText => IsSigned ? "Undo" : "Join";
+
         public bool IsSigned
-        {
-            get { return _isSigned; }
-            set
-            {
-                _isSigned = value;
-                ButtonText = _isSigned ? "Undo" : "Join";
-            }
-        }
+            => Ticket.ListOfUsers?.FirstOrDefault(userTicket => userTicket.BinaryId.Equals(CurrentUserId)) != null;
 
         private async void ClickSignCommandxecute()
         {
-            var newSignedValue = !_isSigned;
-            if (newSignedValue)
+            if (!IsSigned)
             {
-                await ServiceBus.ReviewerService.JoinTicketAsync(CurrentUserId, TicketId);
+                var result = await ServiceBus.ReviewerService.JoinTicketAsync(CurrentUserId, TicketId);
                 ServiceBus.AlertService.ShowPopupMessage($"You joined \"{Title}\" by {Author}");
-                IsSigned = true;
+                if (result)
+                {
+                    Refresh();
+                }
             }
             else
             {
@@ -57,8 +53,12 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                     $"You will be unsubscribed from review \"{Title}\"",
                     "Yes", "No", async () =>
                     {
-                        await ServiceBus.ReviewerService.UndoJoinTicketAsync(TicketId);
-                        IsSigned = false;
+                        var result = await ServiceBus.ReviewerService.UndoJoinTicketAsync(TicketId);
+
+                        if (result)
+                        {
+                            Refresh();
+                        }
                     });
             }
         }
@@ -73,9 +73,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             return new ItemReviewViewModel
             {
                 TicketId = model.TicketId,
-                CurrentUserId = currentUserId,
-                IsSigned = false
-                //IsSigned need responce from server to know is user signed or not
+                CurrentUserId = currentUserId
             };
         }
     }
