@@ -80,16 +80,16 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 }
 
                 InvokeOnMainThread(() => Offers.Clear());
-                foreach (var userId in _ticket.ListOfUserIds)
+                foreach (var userTicket in _ticket.ListOfUsers)
                 {
-                    if (userId.Equals(ServiceBus.UserService.CurrentUser.ServerId))
+                    if (userTicket.BinaryId.Equals(ServiceBus.UserService.CurrentUser.ServerId))
                     {
                         IsSigned = true;
                     }
 
                     InvokeOnMainThread(
                         () =>
-                            Offers.Add(new TicketOfferViewModel(userId, TicketId,
+                            Offers.Add(new TicketOfferViewModel(userTicket.BinaryId, userTicket.Id, TicketId,
                                 Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))
                             {
                                 NotifyOfferDeleted = OfferDeleted
@@ -145,11 +145,11 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             var ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(TicketId);
 
             InvokeOnMainThread(() => Offers.Clear());
-            foreach (var userId in ticket.ListOfUserIds)
+            foreach (var userTicket in ticket.ListOfUsers)
             {
                 InvokeOnMainThread(
                     () =>
-                        Offers.Add(new TicketOfferViewModel(userId, TicketId,
+                        Offers.Add(new TicketOfferViewModel(userTicket.BinaryId, userTicket.Id, TicketId,
                             Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))
                         {
                             NotifyOfferDeleted = OfferDeleted

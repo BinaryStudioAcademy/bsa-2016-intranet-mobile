@@ -9,12 +9,14 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
     public class TicketOfferViewModel : BaseViewModel
     {
         private bool _isOfferForMyTicket;
+        private Ticket _ticket;
+        private string _ticketId;
         private UserInfo _user;
-        private string _userId;
+        private string _userBinaryId;
 
-        public TicketOfferViewModel(string userId, string ticketId, bool isOfferForMyTicket)
+        public TicketOfferViewModel(string userBinaryId, string userId, string ticketId, bool isOfferForMyTicket)
         {
-            Init(userId, ticketId, isOfferForMyTicket);
+            Init(userBinaryId, userId, ticketId, isOfferForMyTicket);
         }
 
         public MvxCommand AcceptCommand => new MvxCommand(AcceptExecute);
@@ -25,14 +27,14 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public int VmId { get; set; }
 
-        public string UserId
+        public string UserBinaryBinaryId
         {
-            get { return _userId; }
+            get { return _userBinaryId; }
             set
             {
-                _userId = value;
+                _userBinaryId = value;
 
-                Task.Run(async () => { User = await ServiceBus.UserService.GetUserInfoById(UserId); });
+                Task.Run(async () => { User = await ServiceBus.UserService.GetUserInfoById(UserBinaryBinaryId); });
             }
         }
 
@@ -68,7 +70,43 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        public string TicketId { get; set; }
+        public bool IsAccepted
+            =>
+                Convert.ToBoolean(
+                    Ticket?.ListOfUsers?.Find(userTicket => userTicket.BinaryId.Equals(UserBinaryBinaryId))?.IsAccepted)
+            ;
+
+        public string TicketId
+        {
+            get { return _ticketId; }
+            set
+            {
+                _ticketId = value;
+
+                RaisePropertyChanged(() => TicketId);
+
+                Refresh();
+            }
+        }
+
+        public Ticket Ticket
+        {
+            get { return _ticket; }
+            set
+            {
+                _ticket = value;
+
+                RaisePropertyChanged(() => Ticket);
+                RaisePropertyChanged(() => IsAccepted);
+            }
+        }
+
+        public string UserId { get; set; }
+
+        private void Refresh()
+        {
+            Task.Run(async () => { Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(TicketId); });
+        }
 
         private async void DeclineExecute()
         {
@@ -77,16 +115,23 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             if (result)
             {
                 NotifyOfferDeleted?.Invoke(VmId);
+                Refresh();
             }
         }
 
         private async void AcceptExecute()
         {
-            await ServiceBus.ReviewerService.AcceptUserReviewForTicketAsync(UserId, TicketId);
+            var result = await ServiceBus.ReviewerService.AcceptUserReviewForTicketAsync(UserId, TicketId);
+
+            if (result)
+            {
+                Refresh();
+            }
         }
 
-        public void Init(string userId, string ticketId, bool isOfferForMyTicket)
+        public void Init(string userBinaryId, string userId, string ticketId, bool isOfferForMyTicket)
         {
+            UserBinaryBinaryId = userBinaryId;
             UserId = userId;
             TicketId = ticketId;
             IsOfferForMyTicket = isOfferForMyTicket;

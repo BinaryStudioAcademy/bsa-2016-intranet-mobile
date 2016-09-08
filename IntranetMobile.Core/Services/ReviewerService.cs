@@ -117,16 +117,6 @@ namespace IntranetMobile.Core.Services
             var ticketDto = await _restClient.GetAsync<TicketDto>(ReviewrPath + $"/{ticketId}");
             var ticket = new Ticket().UpdateFromDto(ticketDto);
 
-            foreach (var id in ticketDto.users)
-            {
-                ticket.ListOfUserIds.Add(id.binary_id);
-            }
-
-            foreach (var tag in ticketDto.tags)
-            {
-                ticket.ListOfTagTitles.Add(tag.title);
-            }
-
             return ticket;
         }
 
@@ -156,26 +146,7 @@ namespace IntranetMobile.Core.Services
 
         public List<Ticket> GetListOfTickets(List<TicketDto> listOfTicketsDto)
         {
-            var result = new List<Ticket>();
-
-            foreach (var ticketDto in listOfTicketsDto)
-            {
-                var ticket = new Ticket().UpdateFromDto(ticketDto);
-
-                foreach (var id in ticketDto.users)
-                {
-                    ticket.ListOfUserIds.Add(id.binary_id);
-                }
-
-                foreach (var tag in ticketDto.tags)
-                {
-                    ticket.ListOfTagTitles.Add(tag.title);
-                }
-
-                result.Add(ticket);
-            }
-
-            return result;
+            return listOfTicketsDto.Select(ticketDto => new Ticket().UpdateFromDto(ticketDto)).ToList();
         }
     }
 }
