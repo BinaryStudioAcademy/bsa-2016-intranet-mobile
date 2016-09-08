@@ -1,19 +1,29 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
+using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class TicketOfferViewModel : BaseViewModel
     {
+        private bool _isOfferForMyTicket;
         private UserInfo _user;
         private string _userId;
-        private bool _isOfferForMyTicket;
 
-        public TicketOfferViewModel(string userId, bool isOfferForMyTicket)
+        public TicketOfferViewModel(string userId, string ticketId, bool isOfferForMyTicket)
         {
-            Init(userId, isOfferForMyTicket);
+            Init(userId, ticketId, isOfferForMyTicket);
         }
+
+        public MvxCommand AcceptCommand => new MvxCommand(AcceptExecute);
+
+        public MvxCommand DeclineCommand => new MvxCommand(DeclineExecute);
+
+        public Action<int> NotifyOfferDeleted { get; set; }
+
+        public int VmId { get; set; }
 
         public string UserId
         {
@@ -21,6 +31,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _userId = value;
+
                 Task.Run(async () => { User = await ServiceBus.UserService.GetUserInfoById(UserId); });
             }
         }
@@ -31,6 +42,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _user = value;
+
                 RaisePropertyChanged(() => Name);
                 RaisePropertyChanged(() => AvatarUrl);
                 RaisePropertyChanged(() => Position);
@@ -51,14 +63,32 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _isOfferForMyTicket = value;
-                
+
                 RaisePropertyChanged(() => IsOfferForMyTicket);
             }
         }
 
-        public void Init(string userId, bool isOfferForMyTicket)
+        public string TicketId { get; set; }
+
+        private async void DeclineExecute()
+        {
+            var result = await ServiceBus.ReviewerService.DeclineUserReviewForTicketAsync(UserId, TicketId);
+
+            if (result)
+            {
+                NotifyOfferDeleted?.Invoke(VmId);
+            }
+        }
+
+        private async void AcceptExecute()
+        {
+            await ServiceBus.ReviewerService.AcceptUserReviewForTicketAsync(UserId, TicketId);
+        }
+
+        public void Init(string userId, string ticketId, bool isOfferForMyTicket)
         {
             UserId = userId;
+            TicketId = ticketId;
             IsOfferForMyTicket = isOfferForMyTicket;
         }
     }

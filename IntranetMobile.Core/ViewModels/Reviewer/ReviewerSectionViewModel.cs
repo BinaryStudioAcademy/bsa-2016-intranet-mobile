@@ -13,19 +13,17 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
     {
         private readonly ReviewerGroup _group;
 
-        private List<BaseItemReviewViewModel> _allReviewList;
+        private readonly List<BaseItemReviewViewModel> _allReviewList = new List<BaseItemReviewViewModel>();
         private bool _isRefreshing;
         private int _vmId = 1;
         private bool _isCurrentUserFilterOn;
 
         public ReviewerSectionViewModel()
         {
-            _allReviewList = new List<BaseItemReviewViewModel>();
         }
 
         public ReviewerSectionViewModel(ReviewerGroup group)
         {
-            _allReviewList = new List<BaseItemReviewViewModel>();
             _group = group;
             ReloadCommand = new MvxCommand(async () =>
             {
@@ -94,7 +92,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        private async void UpdateReviewList()
+        private void UpdateReviewList()
         {
             var items = _allReviewList.Where(m => !IsCurrentUserFilterOn || m is ItemUserReviewViewModel);
 

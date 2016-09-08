@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Models;
@@ -88,8 +89,11 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
                     InvokeOnMainThread(
                         () =>
-                            Offers.Add(new TicketOfferViewModel(userId,
-                                Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))));
+                            Offers.Add(new TicketOfferViewModel(userId, TicketId,
+                                Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))
+                            {
+                                NotifyOfferDeleted = OfferDeleted
+                            }));
                 }
 
                 RaisePropertyChanged(() => CategoryName);
@@ -145,9 +149,19 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             {
                 InvokeOnMainThread(
                     () =>
-                        Offers.Add(new TicketOfferViewModel(userId,
-                            Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))));
+                        Offers.Add(new TicketOfferViewModel(userId, TicketId,
+                            Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))
+                        {
+                            NotifyOfferDeleted = OfferDeleted
+                        }));
             }
+        }
+
+        private void OfferDeleted(int vmId)
+        {
+            var foundTicketOfferViewModel =
+                Offers.FirstOrDefault(ticketOfferViewModel => ticketOfferViewModel.VmId == vmId);
+            InvokeOnMainThread(() => Offers.Remove(foundTicketOfferViewModel));
         }
 
         public void Init(string ticketId)
