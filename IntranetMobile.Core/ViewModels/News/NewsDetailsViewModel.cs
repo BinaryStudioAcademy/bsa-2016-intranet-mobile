@@ -11,17 +11,13 @@ namespace IntranetMobile.Core.ViewModels.News
     {
         private Models.News _dataModel;
         private string _newsId;
-        private bool _visibility;
 
         public NewsDetailsViewModel()
         {
             LikeCommand = new MvxCommand(Like);
             CommentCommand = new MvxCommand(Comment);
-            ChangeVisibilityCommand = new MvxCommand(ChangeVisibilityCommandExecute);
         }
-        public Action NotifyHideAllNews { get; set; }
 
-        public MvxCommand ChangeVisibilityCommand { get; private set; }
         public MvxCommand LikeCommand { get; private set; }
 
         public MvxCommand CommentCommand { get; private set; }
@@ -33,23 +29,6 @@ namespace IntranetMobile.Core.ViewModels.News
         public int CommentsCount => _dataModel.Comments.Count;
 
         public bool IsLiked => _dataModel.Likes.Contains(ServiceBus.UserService.CurrentUser.ServerId);
-
-        public bool Visibility
-        {
-            get { return _visibility; }
-            set
-            {
-                _visibility = value;
-                RaisePropertyChanged(() => Visibility);
-            }
-        }
-
-        private void ChangeVisibilityCommandExecute()
-        {
-            if(!_visibility)
-            NotifyHideAllNews?.Invoke();
-            Visibility = !_visibility;
-        }
 
         public UserInfo Author { get; set; }
 

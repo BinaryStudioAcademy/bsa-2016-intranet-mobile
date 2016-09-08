@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
@@ -20,13 +21,13 @@ namespace IntranetMobile.Core.ViewModels.News
                 {
                     var newDeatilsViewModel = new NewsDetailsViewModel();
                     newDeatilsViewModel.Init(new NewsDetailsViewModel.Parameters { NewsId = fullNews });
-                    newDeatilsViewModel.NotifyHideAllNews = HideAllVms;
                     News.Add(newDeatilsViewModel);
                 }
                 Title = _dataModel.Title;
             }
-            catch
+            catch(Exception ex)
             {
+                Log.Error(ex);
             }
 
         }
@@ -34,14 +35,6 @@ namespace IntranetMobile.Core.ViewModels.News
         public class Parameters
         {
             public string WeekliesId { get; set; }
-        }
-
-        private void HideAllVms()
-        {
-            foreach (var newsDetailsViewModel in News)
-            {
-                newsDetailsViewModel.Visibility = false;
-            }
         }
     }
 }
