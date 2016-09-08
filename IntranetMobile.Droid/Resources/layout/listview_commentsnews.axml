@@ -28,9 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="8dp"
             android:textSize="@dimen/roboto_regular_small"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
             app:MvxBind="Text Name" />
         <TextView
             android:text="Some body comments"
@@ -41,7 +41,7 @@
             app:MvxBind="Text Body" />
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView

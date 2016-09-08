@@ -29,5 +29,10 @@ namespace Intranet.WindowsUWP.Services
                 okButtonAction?.Invoke();
             }
         }
+
+        public void ShowConnectionLostMessage()
+        {
+            ShowPopupMessage("Internet connection unavailable");
+        }
     }
 }

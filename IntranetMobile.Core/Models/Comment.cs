@@ -11,7 +11,7 @@ namespace IntranetMobile.Core.Models
 
         public string AuthorId { get; set; }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         public string Body { get; set; }
 
@@ -21,7 +21,7 @@ namespace IntranetMobile.Core.Models
         {
             CommentId = commentDto.commentId;
             AuthorId = commentDto.authorId;
-            Date = Convert.ToString(commentDto.date.UnixTimestampToDateTime());
+            Date = commentDto.date.UnixTimestampToDateTime();
             Body = commentDto.body;
 
             // Not recreating list in case of situation if somoene is holding list's reference during update

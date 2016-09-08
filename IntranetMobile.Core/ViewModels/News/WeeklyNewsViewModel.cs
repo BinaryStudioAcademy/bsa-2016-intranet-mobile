@@ -61,7 +61,7 @@ namespace IntranetMobile.Core.ViewModels.News
         {
             try
             {
-                var allNews = await ServiceBus.NewsService.GetWeeklyNewsAsync(0, 10);
+                var allNews = await ServiceBus.NewsService.GetWeeklyNewsAsync(0, 15);
 
                 InvokeOnMainThread(News.Clear);
                 foreach (var item in allNews)

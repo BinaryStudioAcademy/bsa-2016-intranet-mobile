@@ -28,9 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="8dp"
             android:textSize="@dimen/roboto_regular_small"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
             app:MvxBind="Text Name" />
         <TextView
             android:text="Some body comments"
@@ -39,34 +39,15 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/roboto_regular"
             app:MvxBind="Text Body" />
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="DatePublication"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textSize="@dimen/text_size_very_small"
-                android:textColor="@color/colorPrimary"
-                app:MvxBind="Text Date" />
-            <TextView
-                android:text="count likes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:textColor="@color/colorPrimary"
-                app:MvxBind="Text CountLikes" />
-            <Mvx.MvxImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:gravity="right"
-                android:alpha="0.5"
-                app:MvxBind="DrawableName BoolToBlackLikeIconConverter(IsLiked); Click ClickLikeCommand" />
-        </LinearLayout>
+        <TextView
+            android:text="DatePublication"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textSize="@dimen/text_size_very_small"
+            android:textColor="@color/colorPrimary"
+            app:MvxBind="Text Date" />
     </LinearLayout>
 </LinearLayout>

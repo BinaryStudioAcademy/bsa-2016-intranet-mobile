@@ -11,19 +11,13 @@ namespace IntranetMobile.Core
         private string _body;
         private string _date;
         private string _name;
-        private string _commentId;
         private string _previewImageUri;
-
-        private string _reviewerId;
 
         public CommentsReviewerItemViewModel(Comment comment, string reviewerId)
         {
-            _reviewerId = reviewerId;
-
             Name = GetAuthor(comment.AuthorId).Result;
-            Date = comment.Date;
-            Body = comment.Body.RemoveHTMLTags();
-            _commentId = comment.CommentId;                  
+            Date = comment.Date.ToDateTimeString();
+            Body = comment.Body.RemoveHTMLTags();                
         }
 
         private async Task<string> GetAuthor(string authorId)

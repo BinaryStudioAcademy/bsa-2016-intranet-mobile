@@ -17,9 +17,9 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             set
             {
                 _isFilterActive = value;
-                DotNet.IsCurrentUserFilterOn = IsFilterActive;
-                JavaScript.IsCurrentUserFilterOn = IsFilterActive;
-                Php.IsCurrentUserFilterOn = IsFilterActive;
+                DotNet.IsCurrentUserFilterOn = _isFilterActive;
+                JavaScript.IsCurrentUserFilterOn = _isFilterActive;
+                Php.IsCurrentUserFilterOn = _isFilterActive;
             }
         }
 

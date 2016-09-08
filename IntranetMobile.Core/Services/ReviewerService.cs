@@ -97,7 +97,9 @@ namespace IntranetMobile.Core.Services
                 AuthorId = c.user.binary_id,
                 Body = c.text,
                 CommentId = c.id,
-                Date = c.created_at
+                Date = string.IsNullOrWhiteSpace(c.created_at)
+                             ? DateTime.MinValue
+                             : DateTime.Parse(c.created_at)
             }).ToList();
         }
 
