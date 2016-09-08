@@ -22,12 +22,15 @@
       android:layout_height="wrap_content"
       android:orientation="vertical"
       android:descendantFocusability="blocksDescendants">
-      <RelativeLayout
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="horizontal">
         <MvxAppCompatCircleImageView
           android:id="@+id/activity_ticket_details_author_imageview"
           android:layout_width="wrap_content"
@@ -35,34 +38,32 @@
           android:maxWidth="72dp"
           android:maxHeight="72dp"
           android:layout_centerVertical="true"
-          android:layout_marginEnd="@dimen/activity_horizontal_margin"
-          android:layout_marginRight="@dimen/activity_horizontal_margin"
           app:MvxBind="ImageUrl AuthorAvatarUrl" />
-        <TextView
-          android:id="@+id/activity_ticket_details_author_textview"
+        <LinearLayout
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/activity_horizontal_margin"
-          android:layout_marginStart="@dimen/activity_horizontal_margin"
-          android:layout_toEndOf="@id/activity_ticket_details_author_imageview"
-          android:layout_toRightOf="@id/activity_ticket_details_author_imageview"
-          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-          android:textColor="@color/colorText"
-          app:MvxBind="Text AuthorName" />
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@id/activity_ticket_details_author_textview"
-          android:layout_marginLeft="@dimen/activity_horizontal_margin"
-          android:layout_marginStart="@dimen/activity_horizontal_margin"
-          android:layout_marginTop="8dp"
-          android:layout_toEndOf="@id/activity_ticket_details_author_imageview"
-          android:layout_toRightOf="@id/activity_ticket_details_author_imageview"
-          android:textAppearance="@style/TextAppearance.AppCompat.Small"
-          android:textColor="@color/colorSecondaryText"
-          app:MvxBind="Text AuthorDepartment" />
-      </RelativeLayout>
-
+          android:layout_height="match_parent"
+          android:paddingLeft="@dimen/activity_horizontal_margin"
+          android:orientation="vertical"
+          android:gravity="center_vertical">
+          <TextView
+            android:id="@+id/activity_ticket_details_author_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorText"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            app:MvxBind="Text AuthorName" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/colorSecondaryText"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            app:MvxBind="Text AuthorDepartment" />
+        </LinearLayout>
+      </LinearLayout>
       <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
         android:id="@+id/activity_ticket_details_tags"
         android:scrollbars="horizontal"
