@@ -22,5 +22,12 @@ namespace IntranetMobile.Core.Extensions
                        ? placeholder
                        : date.ToString("dd MMM yyyy  HH:mm");
         }
+
+        public static string ToDateString(this DateTime date)
+        {
+            return date == DateTime.MinValue
+                       ? ""
+                       : date.ToString("dd MMM yyyy");
+        }
     }
 }

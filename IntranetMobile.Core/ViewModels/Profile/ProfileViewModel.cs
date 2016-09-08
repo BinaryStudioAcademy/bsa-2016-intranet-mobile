@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
@@ -56,7 +57,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string Surname => User?.LastName;
 
-        public string Birthday => (User?.Birthday ?? default(DateTime)).ToString("dd MMMM yyyy");
+        public string Birthday => (User?.Birthday ?? default(DateTime)).ToDateString();
 
         public string Gender => User?.Gender;
 
@@ -64,7 +65,7 @@ namespace IntranetMobile.Core.ViewModels.Profile
 
         public string City => User?.City;
 
-        public string HireDate => (User?.HireDate ?? default(DateTime)).ToString("dd MM yyyy");
+        public string HireDate => (User?.HireDate ?? default(DateTime)).ToDateString();
 
         public bool TechnologiesVisibility => UserTechnologyCategoryViewModels.Count != 0;
 
