@@ -8,11 +8,7 @@ namespace IntranetMobile.Droid.Converters
     {
         protected override ViewStates Convert(bool value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value)
-            {
-                return ViewStates.Visible;
-            }
-            return ViewStates.Gone;
+            return value ? ViewStates.Visible : ViewStates.Gone;
         }
     }
 }

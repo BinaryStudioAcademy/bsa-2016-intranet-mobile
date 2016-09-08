@@ -61,33 +61,24 @@ namespace IntranetMobile.Core.Services
         public async Task<List<SubscribedTicket>> GetListOfSubscribedTicketsAsync()
         {
             var subscribedTicketDto = await _restClient.GetAsync<SubscribedTicketDto>("reviewr/api/v1/myrequests");
-            var listOfSubscribedTicket = new List<SubscribedTicket>();
 
-            foreach (var s in subscribedTicketDto.message)
+            return subscribedTicketDto.message.Select(s => new SubscribedTicket
             {
-                var subTicket = new SubscribedTicket
+                Id = s.id,
+                Details = s.details,
+                DateReview = s.date_review,
+                GroupId = s.group_id,
+                OffersCount = s.offers_count,
+                UserId = s.user_id,
+                Title = s.title,
+                Pivot = new SubscribedTicket.PivotTicket
                 {
-                    Id = s.id,
-                    Details = s.details,
-                    DateReview = s.date_review,
-                    GroupId = s.group_id,
-                    OffersCount = s.offers_count,
-                    UserId = s.user_id,
-                    Title = s.title,
-                    Pivot = new SubscribedTicket.PivotTicket
-                    {
-                        UserId = s.pivot.user_id,
-                        ReviewRequestId = s.pivot.review_request_id,
-                        IsAccepted = s.pivot.isAccepted,
-                        Status = s.pivot.status
-                    }
-                };
-
-
-                listOfSubscribedTicket.Add(subTicket);
-            }
-
-            return listOfSubscribedTicket;
+                    UserId = s.pivot.user_id,
+                    ReviewRequestId = s.pivot.review_request_id,
+                    IsAccepted = s.pivot.isAccepted,
+                    Status = s.pivot.status
+                }
+            }).ToList();
         }
 
         public async Task<List<Comment>> GetListOfTicketCommentsAsync(string ticketId)

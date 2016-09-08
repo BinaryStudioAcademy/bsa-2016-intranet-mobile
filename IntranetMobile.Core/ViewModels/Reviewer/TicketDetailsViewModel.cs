@@ -11,6 +11,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private Ticket _ticket;
         private string _ticketId;
         private UserInfo _author;
+        private bool _isMyTicket;
 
         public string AuthorAvatarUrl => Author != null ? Constants.BaseUrl + Author.AvatarUri : null;
 
@@ -44,6 +45,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
+        public bool IsMyTicket => Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId);
+
         public UserInfo Author
         {
             get { return _author; }
@@ -75,12 +78,13 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 foreach (var userId in _ticket.ListOfUserIds)
                 {
                     InvokeOnMainThread(() => Offers.Clear());
-                    InvokeOnMainThread(() => Offers.Add(new TicketOfferViewModel(userId)));
+                    InvokeOnMainThread(() => Offers.Add(new TicketOfferViewModel(userId, Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId))));
                 }
 
                 RaisePropertyChanged(() => CategoryName);
                 RaisePropertyChanged(() => TicketText);
                 RaisePropertyChanged(() => ReviewDate);
+                RaisePropertyChanged(() => IsMyTicket);
             }
         }
 

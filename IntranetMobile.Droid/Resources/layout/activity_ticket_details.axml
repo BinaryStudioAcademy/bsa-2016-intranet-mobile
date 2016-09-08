@@ -176,13 +176,20 @@
           android:id="@+id/activity_ticket_details_offers_header_textview"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
           android:layout_marginLeft="@dimen/activity_horizontal_margin"
           android:layout_marginStart="@dimen/activity_horizontal_margin"
-          android:layout_toEndOf="@id/activity_ticket_details_offers_header_imageview"
           android:layout_toRightOf="@id/activity_ticket_details_offers_header_imageview"
           android:textAppearance="@style/TextAppearance.AppCompat.Medium"
           android:textColor="@color/colorText"
           android:text="Offers" />
+        <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_alignParentRight="true"
+          android:text="Join"
+          app:MvxBind="Visibility InvertedBoolToVisibilityConverter(IsMyTicket)" />
       </RelativeLayout>
 
       <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView

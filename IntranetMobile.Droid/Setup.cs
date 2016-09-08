@@ -20,9 +20,9 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.Preference;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Platform;
-using MvvmCross.Plugins.DownloadCache;
 using MvvmCross.Plugins.Sqlite;
 
 namespace IntranetMobile.Droid
@@ -84,7 +84,7 @@ namespace IntranetMobile.Droid
             return mvxFragmentsPresenter;
         }
 
-        protected override void FillValueConverters(MvvmCross.Platform.Converters.IMvxValueConverterRegistry registry)
+        protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
             registry.AddOrOverwrite("BoolToWhiteLikeIconConverter", new BoolToWhiteLikeIconConverter());
@@ -92,6 +92,7 @@ namespace IntranetMobile.Droid
             registry.AddOrOverwrite("BoolToArrowIconConverter", new BoolToArrowIconConverter());
             registry.AddOrOverwrite("BoolToVisibilityConverter", new BoolToVisibilityConverter());
             registry.AddOrOverwrite("IntToInverseVisibilityConverter", new IntToInverseVisibilityConverter());
+            registry.AddOrOverwrite("InvertedBoolToVisibilityConverter", new InvertedBoolToVisibilityConverter());
         }
 
         protected override IMvxTrace CreateDebugTrace()
