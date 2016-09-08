@@ -19,6 +19,7 @@ namespace IntranetMobile.Core.ViewModels.News
             CommentCommand = new MvxCommand(Comment);
             ChangeVisibilityCommand = new MvxCommand(ChangeVisibilityCommandExecute);
         }
+        public Action NotifyHideAllNews { get; set; }
 
         public MvxCommand ChangeVisibilityCommand { get; private set; }
         public MvxCommand LikeCommand { get; private set; }
@@ -45,6 +46,8 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private void ChangeVisibilityCommandExecute()
         {
+            if(!_visibility)
+            NotifyHideAllNews?.Invoke();
             Visibility = !_visibility;
         }
 
