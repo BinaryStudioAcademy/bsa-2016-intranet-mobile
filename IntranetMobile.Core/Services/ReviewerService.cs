@@ -33,9 +33,21 @@ namespace IntranetMobile.Core.Services
             return _restClient.GetAsync(ActionTicketPath + $"{userId}/accept/{ticketId}");
         }
 
-        public async Task<bool> CreateReviewTicketAsync(ReviewTicketRequestDto reviewTicketRequestDto)
+        public async Task<bool> CreateReviewTicketAsync(Ticket ticket)
         {
-            var result = await _restClient.PostAsync<bool>(ReviewrPath, reviewTicketRequestDto);
+            var ticketDto = new ReviewTicketRequestDto();
+
+            ticketDto.title = ticket.TitleName;
+            ticketDto.details = ticket.ReviewText;
+            ticketDto.date_review = ticket.DateReview.ToString();
+            ticketDto.formatted_date_review = ticket.DateReview.ToString();
+            ticketDto.tags = ticket.ListOfTagTitles;
+            ticketDto.group = "";
+            ticketDto.created_at = "";
+            ticketDto.formatted_created_at = "Invalid Date";
+            ticketDto.group_id = ticket.GroupId;
+
+            var result = await _restClient.PostAsync<bool>(ReviewrPath, ticketDto);
 
             return result;
         }

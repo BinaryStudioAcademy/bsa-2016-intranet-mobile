@@ -3,7 +3,7 @@ using IntranetMobile.Core.Models.Dtos;
 
 namespace IntranetMobile.Core.Interfaces
 {
-    public interface IAuthService
+    public interface IAuthService 
     {
         Task<AuthDto> Login(string email, string paswword);
 

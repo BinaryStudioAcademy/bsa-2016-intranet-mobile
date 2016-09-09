@@ -5,20 +5,23 @@
     android:id="@+id/activity_profile_nestedscrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_profile">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:descendantFocusability="blocksDescendants">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:clickable="true">
             <ImageView
                 android:id="@+id/activity_profile_position_imageview"
                 android:layout_width="wrap_content"
@@ -55,8 +58,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:clickable="true">
             <ImageView
                 android:id="@+id/activity_profile_birthday_imageview"
                 android:layout_width="wrap_content"
@@ -93,8 +97,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:clickable="true">
             <ImageView
                 android:id="@+id/activity_profile_location_imageview"
                 android:layout_width="wrap_content"
@@ -131,8 +136,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:clickable="true">
             <ImageView
                 android:id="@+id/activity_profile_hire_imageview"
                 android:layout_width="wrap_content"
@@ -176,8 +182,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin"
             app:MvxBind="Visibility BoolToVisibilityConverter(TechnologiesVisibility)">
             <ImageView
                 android:id="@+id/activity_profile_technologies_imageview"
@@ -204,7 +211,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-20dp"
-            android:padding="@dimen/activity_horizontal_margin"
             app:MvxBind="ItemsSource UserTechnologyCategoryViewModels; Visibility BoolToVisibilityConverter(TechnologiesVisibility)" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -218,8 +224,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin"
             app:MvxBind="Visibility BoolToVisibilityConverter(CertificationsVisibility)">
             <ImageView
                 android:id="@+id/activity_profile_technologies_imageview"
@@ -244,7 +251,6 @@
         <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/activity_horizontal_margin"
             app:MvxItemTemplate="@layout/item_certification"
             app:MvxBind="ItemsSource Certifications; Visibility BoolToVisibilityConverter(CertificationsVisibility)" />
         <LinearLayout
@@ -258,8 +264,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
             android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin"
             app:MvxBind="Visibility BoolToVisibilityConverter(AchievementsVisibility)">
             <ImageView
                 android:id="@+id/activity_profile_technologies_imageview"
@@ -284,7 +291,6 @@
         <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/activity_horizontal_margin"
             app:MvxItemTemplate="@layout/item_achievement"
             app:MvxBind="ItemsSource Achievements; Visibility BoolToVisibilityConverter(AchievementsVisibility)" />
     <!--<LinearLayout
