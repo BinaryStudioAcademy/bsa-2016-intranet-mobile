@@ -15,6 +15,12 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private Ticket _ticket;
         private string _ticketId;
 
+        public TicketDetailsViewModel()
+        {
+            SignCommand = new MvxCommand(SignCommandExecute);
+            CommentCommand = new MvxCommand(ShowComments);
+        }
+
         public string AuthorAvatarUrl => Author != null ? Constants.BaseUrl + Author.AvatarUri : null;
 
         public string AuthorName => Author?.FullName;
@@ -32,7 +38,9 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         public ObservableCollection<TicketOfferViewModel> Offers { get; } =
             new ObservableCollection<TicketOfferViewModel>();
 
-        public MvxCommand SignCommand => new MvxCommand(SignCommandExecute);
+        public MvxCommand SignCommand { get; private set; }
+
+        public MvxCommand CommentCommand { get; private set; }
 
         public string TicketId
         {
@@ -160,6 +168,11 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             var foundTicketOfferViewModel =
                 Offers.FirstOrDefault(ticketOfferViewModel => ticketOfferViewModel.VmId == vmId);
             InvokeOnMainThread(() => Offers.Remove(foundTicketOfferViewModel));
+        }
+
+        private void ShowComments()
+        {
+            ShowViewModel<CommentsReviewerViewModel>(new CommentsReviewerViewModel.Parameters { TicketId = _ticketId });
         }
 
         public void Init(string ticketId)

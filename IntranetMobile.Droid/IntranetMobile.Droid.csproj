@@ -435,6 +435,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_flag_black_24dp.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_flag_black_24dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_flag_black_24dp.png" />
+    <AndroidResource Include="Resources\menu\menu_ticket_details.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">

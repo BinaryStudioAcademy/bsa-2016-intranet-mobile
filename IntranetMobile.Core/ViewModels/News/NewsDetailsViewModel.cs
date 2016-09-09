@@ -15,7 +15,7 @@ namespace IntranetMobile.Core.ViewModels.News
         public NewsDetailsViewModel()
         {
             LikeCommand = new MvxCommand(Like);
-            CommentCommand = new MvxCommand(Comment);
+            CommentCommand = new MvxCommand(ShowComments);
         }
 
         public MvxCommand LikeCommand { get; private set; }
@@ -76,7 +76,7 @@ namespace IntranetMobile.Core.ViewModels.News
             RaisePropertyChanged(() => CommentsCount);
         }
        
-        private void Comment()
+        private void ShowComments()
         {
             ShowViewModel<CommentsNewsViewModel>(new CommentsNewsViewModel.Parameters {NewsId = _newsId});
         }
