@@ -271,6 +271,7 @@
     <Compile Include="Views\Fragments\Login\LoadingFragment.cs" />
     <Compile Include="Views\Fragments\Login\LoginFragment.cs" />
     <Compile Include="Converters\IntToInverseVisibilityConverter.cs" />
+    <Compile Include="Views\Activities\NewTicketActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -426,6 +427,8 @@
     <AndroidResource Include="Resources\layout\menu_reviewer_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_new_ticket.axml" />
+    <AndroidResource Include="Resources\layout\item_radio.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
