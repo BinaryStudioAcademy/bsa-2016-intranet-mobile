@@ -5,7 +5,7 @@ using IntranetMobile.Core.Models.Dtos;
 
 namespace IntranetMobile.Core.Interfaces
 {
-    public interface INewsService
+    public interface INewsService 
     {
         Task<List<News>> GetAllNewsAsync(int skip, int limit);
 
