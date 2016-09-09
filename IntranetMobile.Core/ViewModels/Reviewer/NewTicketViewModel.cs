@@ -101,7 +101,6 @@ namespace IntranetMobile.Core
                     : default(DateTime);
                 ticket.ReviewText = Details;
                 ticket.GroupId = (GroupId+1).ToString();
-                ticket.ListOfTagTitles = new List<string>();
 
                 var s = Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 

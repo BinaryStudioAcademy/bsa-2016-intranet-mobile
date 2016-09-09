@@ -78,8 +78,7 @@ namespace IntranetMobile.Core.ViewModels.News
        
         private void Comment()
         {
-            //ShowViewModel<CommentsNewsViewModel>(new CommentsNewsViewModel.Parameters {NewsId = _newsId});
-            ShowViewModel<NewTicketViewModel>();
+            ShowViewModel<CommentsNewsViewModel>(new CommentsNewsViewModel.Parameters {NewsId = _newsId});
         }
 
         public class Parameters

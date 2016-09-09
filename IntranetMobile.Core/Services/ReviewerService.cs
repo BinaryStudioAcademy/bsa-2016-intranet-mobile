@@ -47,7 +47,7 @@ namespace IntranetMobile.Core.Services
             ticketDto.formatted_created_at = "Invalid Date";
             ticketDto.group_id = ticket.GroupId;
 
-            var result = await _restClient.PostAsync<bool>(_reviewrPath, ticketDto);
+            var result = await _restClient.PostAsync<bool>(ReviewrPath, ticketDto);
 
             return result;
         }
