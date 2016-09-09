@@ -68,6 +68,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 _ticket = value;
 
                 Title = Ticket.TitleName;
+                
+                // TODO: Maybe it will be good to check for previous properties' values before raising to avoid any kind of flickering
 
                 InvokeOnMainThread(() => Tags.Clear());
                 foreach (var tagDto in Ticket.ListOfTagTitles)
