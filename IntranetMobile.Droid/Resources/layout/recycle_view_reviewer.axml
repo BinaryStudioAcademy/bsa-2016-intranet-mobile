@@ -31,8 +31,8 @@
             android:layout_margin="16dp"
             android:layout_gravity="bottom|right"
             local:elevation="4dp"
-            local:backgroundTint="@color/colorPrimary"
-            local:rippleColor="@color/colorPrimaryDark"
+            local:backgroundTint="@color/colorAccent"
+            local:rippleColor="#FFFFFF"
             local:layout_behavior="@string/fab_scroll_translation_autohide_behavior"
             local:MvxBind="Click AddReviewCommand" />
     </android.support.design.widget.CoordinatorLayout>

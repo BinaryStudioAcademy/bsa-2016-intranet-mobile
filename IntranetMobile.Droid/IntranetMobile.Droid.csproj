@@ -273,6 +273,7 @@
     <Compile Include="Views\Fragments\Login\LoginFragment.cs" />
     <Compile Include="Converters\IntToInverseVisibilityConverter.cs" />
     <Compile Include="Views\Activities\NewTicketActivity.cs" />
+    <Compile Include="Receivers\NotificationReceiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -436,6 +437,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_flag_black_24dp.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_flag_black_24dp.png" />
     <AndroidResource Include="Resources\menu\menu_ticket_details.xml" />
+    <AndroidResource Include="Resources\drawable\ic_notification.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_login.axml">
@@ -486,6 +488,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Receivers\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />
