@@ -33,6 +33,15 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             });
 
             Task.Run(ReloadData);
+
+            AddReviewCommand = new MvxCommand(AddReviewCommandExecute);
+        }
+
+        public ICommand AddReviewCommand { get; set; }
+
+        public void AddReviewCommandExecute()
+        {
+            ShowViewModel<NewTicketViewModel>();
         }
 
         public virtual bool IsRefreshing
