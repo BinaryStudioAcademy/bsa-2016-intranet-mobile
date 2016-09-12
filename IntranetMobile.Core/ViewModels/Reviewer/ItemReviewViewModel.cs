@@ -65,7 +65,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         private void ClickViewDetailsCommandExecute()
         {
-            ShowViewModel<TicketDetailsViewModel>(new {ticketId = TicketId});
+            ShowViewModel<TicketDetailsViewModel>(new TicketDetailsViewModel.Parameters { TicketId = TicketId});
         }
 
         public static ItemReviewViewModel FromModel(Ticket model, string currentUserId)

@@ -2,6 +2,7 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
 using IntranetMobile.Core.ViewModels;
+using IntranetMobile.Droid.Receivers;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace IntranetMobile.Droid.Views.Activities

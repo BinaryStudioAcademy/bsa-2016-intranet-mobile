@@ -29,6 +29,23 @@ namespace IntranetMobile.Droid.Views.Activities
                 .Commit();
         }
 
+        protected override void OnNewIntent(Android.Content.Intent intent)
+        {
+            base.OnNewIntent(intent);
+
+            var extra = intent.GetStringExtra("current_fragment");
+            if (!string.IsNullOrWhiteSpace(extra))
+            {
+                var itemId = intent.GetStringExtra("item_id");
+                if (extra.Contains("news"))
+                    ViewModel.Menu.ShowNewsDetails(itemId);
+                else if (extra.Contains("weekly"))
+                    ViewModel.Menu.ShowWeeklyDetails(itemId);
+                else if (extra.Contains("reviewer"))
+                    ViewModel.Menu.ShowReviewerDetails(itemId);
+            }
+        }
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
