@@ -142,7 +142,7 @@ namespace IntranetMobile.Droid.Receivers
                 {
                     _latestCompanyNewsDate = lastDate;
                     var notificationManager = _context.GetSystemService(Context.NotificationService) as NotificationManager;
-                    var notification = BuildNotification("We have weekly news for you", "news", latestWeeklies[0].WeeklyId);
+                    var notification = BuildNotification("We have weekly news for you", "weekly", latestWeeklies[0].WeeklyId);
                     notificationManager.Notify(NotificationId, notification);
                 }
             }
@@ -160,7 +160,7 @@ namespace IntranetMobile.Droid.Receivers
                 {
                     var request = reviewer.First();
                     var lastDate = request.DateReview;
-                    if (DateTime.Compare(_latestReviewDate, lastDate) == 0)
+                    if (DateTime.Compare(_latestReviewDate, lastDate) < 0)
                     {
                         _latestReviewDate = lastDate;
                         var notificationManager = _context.GetSystemService(Context.NotificationService) as NotificationManager;

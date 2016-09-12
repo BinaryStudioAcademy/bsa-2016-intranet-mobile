@@ -62,6 +62,11 @@ namespace IntranetMobile.Core.ViewModels
             ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters { NewsId = newsId });
         }
 
+        public void ShowWeeklyDetails(string weekliesId)
+        {
+            ShowViewModel<WeekliesDetailsViewModel>(new WeekliesDetailsViewModel.Parameters { WeekliesId = weekliesId });
+        }
+
         public void ShowSettings()
         {
             ShowViewModel<SettingsViewModel>();

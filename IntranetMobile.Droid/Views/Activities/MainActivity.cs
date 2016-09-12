@@ -39,6 +39,8 @@ namespace IntranetMobile.Droid.Views.Activities
                 var itemId = intent.GetStringExtra("item_id");
                 if (extra.Contains("news"))
                     ViewModel.Menu.ShowNewsDetails(itemId);
+                else if (extra.Contains("weekly"))
+                    ViewModel.Menu.ShowWeeklyDetails(itemId);
                 else if (extra.Contains("reviewer"))
                     ViewModel.Menu.ShowReviewerDetails(itemId);
             }
