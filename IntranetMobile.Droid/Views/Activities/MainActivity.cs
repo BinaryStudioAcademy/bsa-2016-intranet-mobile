@@ -36,10 +36,11 @@ namespace IntranetMobile.Droid.Views.Activities
             var extra = intent.GetStringExtra("current_fragment");
             if (!string.IsNullOrWhiteSpace(extra))
             {
+                var itemId = intent.GetStringExtra("item_id");
                 if (extra.Contains("news"))
-                    ViewModel.Menu.ShowNews();
+                    ViewModel.Menu.ShowNewsDetails(itemId);
                 else if (extra.Contains("reviewer"))
-                    ViewModel.Menu.ShowReviewer();
+                    ViewModel.Menu.ShowReviewerDetails(itemId);
             }
         }
 

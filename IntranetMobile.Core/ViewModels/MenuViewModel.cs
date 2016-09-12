@@ -57,6 +57,11 @@ namespace IntranetMobile.Core.ViewModels
             ShowViewModel<AllNewsViewModel>();
         }
 
+        public void ShowNewsDetails(string newsId)
+        {
+            ShowViewModel<NewsDetailsViewModel>(new NewsDetailsViewModel.Parameters { NewsId = newsId });
+        }
+
         public void ShowSettings()
         {
             ShowViewModel<SettingsViewModel>();
@@ -71,6 +76,11 @@ namespace IntranetMobile.Core.ViewModels
         public void ShowReviewer()
         {
             ShowViewModel<ReviewerViewModel>();
+        }
+
+        public void ShowReviewerDetails(string requestId)
+        {
+            ShowViewModel<TicketDetailsViewModel>(new TicketDetailsViewModel.Parameters { TicketId = requestId });
         }
 
         public void ShowUsers()

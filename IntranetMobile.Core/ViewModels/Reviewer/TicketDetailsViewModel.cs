@@ -175,9 +175,15 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             ShowViewModel<CommentsReviewerViewModel>(new CommentsReviewerViewModel.Parameters { TicketId = _ticketId });
         }
 
-        public void Init(string ticketId)
+        public void Init(Parameters arg)
         {
-            TicketId = ticketId;
+            if (arg != null)
+                TicketId = arg.TicketId;
+        }
+
+        public class Parameters
+        {
+            public string TicketId { get; set; }
         }
     }
 }
