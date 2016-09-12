@@ -19,7 +19,7 @@ namespace IntranetMobile.Droid.Services
 
         public void Error(string message, Exception e)
         {
-            Log.Error(Tag, string.Format("{0}\n{1}", message, e));
+            Log.Error(Tag, $"{message}\n{e}");
         }
 
         public void Info(string message)
