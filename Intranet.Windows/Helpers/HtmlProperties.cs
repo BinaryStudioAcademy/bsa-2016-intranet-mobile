@@ -21,11 +21,8 @@ namespace Intranet.WindowsUWP.Helpers
         // Handler for property changes in the DataContext : set the WebView
         private static void OnHtmlStringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            WebView wv = d as WebView;
-            if (wv != null)
-            {
-                wv.NavigateToString((string)e.NewValue);
-            }
+            var wv = d as WebView;
+            wv?.NavigateToString((string)e.NewValue);
         }
     }
 }

@@ -1,20 +1,12 @@
-using System;
-using Android.Content;
-using Android.Util;
-using Android.Webkit;
+﻿using System;
+using Windows.UI.Xaml.Data;
 using IntranetMobile.Core;
 
-namespace IntranetMobile.Droid.Views.Controls
+namespace Intranet.WindowsUWP.Converters
 {
-    public class NewsDetailsWebView : WebView
+    public class BinaryStudioHtmlConvertor : IValueConverter
     {
         private const string DownHtmlLayout = "</body></html>";
-        private string _text;
-
-        public NewsDetailsWebView(Context context, IAttributeSet attrs)
-            : base(context, attrs)
-        {
-        }
 
         private static string UpperHtmlLayout
             =>
@@ -33,28 +25,14 @@ namespace IntranetMobile.Droid.Views.Controls
             </head><body>"
             ;
 
-        public string Text
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
-            get { return _text; }
-            set
-            {
-                if (string.IsNullOrEmpty(value)) return;
-
-                _text = value;
-
-                var htmlString = UpperHtmlLayout + _text + DownHtmlLayout;
-
-                LoadData(htmlString, "text/html; charset=utf-8", "utf-8");
-                UpdatedHtmlContent();
-            }
+            return UpperHtmlLayout + value + DownHtmlLayout;
         }
 
-        public event EventHandler HtmlContentChanged;
-
-        private void UpdatedHtmlContent()
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            var handler = HtmlContentChanged;
-            handler?.Invoke(this, EventArgs.Empty);
+            return value;
         }
     }
 }
