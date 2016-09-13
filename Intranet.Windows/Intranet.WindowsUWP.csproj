@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BinaryStudioHtmlConvertor.cs" />
     <Compile Include="Helpers\HtmlProperties.cs" />
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\SettingsService.cs" />
