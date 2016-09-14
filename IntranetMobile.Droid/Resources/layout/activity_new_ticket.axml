@@ -120,19 +120,21 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:MvxBind="SelectedIndex GroupId">
+            android:orientation="horizontal">
             <RadioButton
+                android:id="@+id/radioNet"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text=".NET" />
             <RadioButton
+                android:id="@+id/radioJs"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="JS" />
             <RadioButton
+                android:id="@+id/radioPhp"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

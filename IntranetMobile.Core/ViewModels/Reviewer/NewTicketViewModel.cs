@@ -4,7 +4,6 @@ using System.Windows.Input;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels;
-using IntranetMobile.Core.ViewModels.Reviewer;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core
@@ -14,7 +13,7 @@ namespace IntranetMobile.Core
         private string _ticketTitle;
         private string _details;
         private string _tags;
-        private int _groupId;
+        private ReviewerGroup _group;
         private DateTime _date;
 
         public NewTicketViewModel()
@@ -67,16 +66,16 @@ namespace IntranetMobile.Core
             }
         }
 
-        public int GroupId
+        public ReviewerGroup Group
         {
             get
             {
-                return _groupId;
+                return _group;
             }
             set
             {
-                _groupId = value;
-                RaisePropertyChanged(() => GroupId);
+                _group = value;
+                RaisePropertyChanged(() => Group);
             }
         }
 
@@ -110,6 +109,11 @@ namespace IntranetMobile.Core
                 ServiceBus.AlertService.ShowMessageBox("Add Review", "Please check the date of your review");
                 return;
             }
+            else if (Group == ReviewerGroup.None)
+            {
+                ServiceBus.AlertService.ShowMessageBox("Add Review", "Please select a category");
+                return;
+            }
 
             try
             {
@@ -118,7 +122,7 @@ namespace IntranetMobile.Core
                 ticket.TitleName = TicketTitle;
                 ticket.DateReview = Date;
                 ticket.ReviewText = Details;
-                ticket.GroupId = (GroupId+1).ToString();
+                ticket.GroupId = ((int)Group).ToString();
 
                 var s = Tags.Replace(" ", ",")
                             .Replace(",,", ",")

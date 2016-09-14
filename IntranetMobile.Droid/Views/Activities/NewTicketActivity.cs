@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using IntranetMobile.Core;
 using IntranetMobile.Core.Extensions;
+using IntranetMobile.Core.Services;
 using static Android.App.DatePickerDialog;
 using static Android.App.TimePickerDialog;
 
@@ -25,6 +26,17 @@ namespace IntranetMobile.Droid.Views.Activities
             base.OnViewModelSet();
 
             ViewModel.NavigateBack = () => OnBackPressed();
+
+            var radioListener = new RadioListener();
+            radioListener.ViewModel = ViewModel;
+
+            var radioNet = FindViewById<RadioButton>(Resource.Id.radioNet);
+            var radioJs = FindViewById<RadioButton>(Resource.Id.radioJs);
+            var radioPhp = FindViewById<RadioButton>(Resource.Id.radioPhp);
+
+            radioNet.SetOnCheckedChangeListener(radioListener);
+            radioJs.SetOnCheckedChangeListener(radioListener);
+            radioPhp.SetOnCheckedChangeListener(radioListener);
 
             dateTextView = FindViewById<TextView>(Resource.Id.datepickerTextView);
             timeTextView = FindViewById<TextView>(Resource.Id.timepickerTextView);
@@ -82,6 +94,33 @@ namespace IntranetMobile.Droid.Views.Activities
             string hourStr = hour > 9 ? hour.ToString() : "0" + hour;
             string minuteStr = minute > 9 ? minute.ToString() : "0" + minute;
             timeTextView.Text = hourStr + " : " + minuteStr;
+        }
+
+        private class RadioListener : Java.Lang.Object, CompoundButton.IOnCheckedChangeListener
+        {
+            public NewTicketViewModel ViewModel { get; set; }
+
+            public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
+            {
+                if (ViewModel == null)
+                    return;
+                    
+                var id = buttonView.Id;
+                switch (id)
+                {
+                    case Resource.Id.radioNet:
+                        ViewModel.Group = ReviewerGroup.DotNet;
+                        break;
+                    case Resource.Id.radioJs:
+                        ViewModel.Group = ReviewerGroup.JavaScript;
+                        break;
+                    case Resource.Id.radioPhp:
+                        ViewModel.Group = ReviewerGroup.Php;
+                        break;
+                    default:
+                        return;
+                }
+            }
         }
     }
 }

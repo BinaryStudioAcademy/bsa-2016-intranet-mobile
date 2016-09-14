@@ -28,6 +28,8 @@ namespace IntranetMobile.Core.Services
             _restClient = client;
         }
 
+        public event Action<ReviewerGroup> ReviewAdded;
+
         public Task<bool> AcceptUserReviewForTicketAsync(string userId, string ticketId)
         {
             return _restClient.GetAsync(ActionTicketPath + $"{userId}/accept/{ticketId}");
@@ -48,6 +50,11 @@ namespace IntranetMobile.Core.Services
             ticketDto.group_id = ticket.GroupId;
 
             var result = await _restClient.PostAsync<bool>(ReviewrPath, ticketDto);
+
+            if (ReviewAdded != null)
+            {
+                ReviewAdded.Invoke((ReviewerGroup)Enum.Parse(typeof(ReviewerGroup), ticket.GroupId));
+            }
 
             return result;
         }
