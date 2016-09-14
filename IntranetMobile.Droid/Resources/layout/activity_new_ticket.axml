@@ -24,6 +24,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:hint="Title"
             app:MvxBind="Text TicketTitle" />
     </LinearLayout>
@@ -45,6 +46,7 @@
             android:id="@+id/datepickerTextView"
             android:text="DATE"
             android:background="?attr/selectableItemBackground"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -80,6 +82,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:hint="Details"
             app:MvxBind="Text Details" />
     </LinearLayout>
@@ -100,6 +103,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:hint="Tags"
             app:MvxBind="Text Tags" />
     </LinearLayout>
@@ -119,6 +123,7 @@
             android:src="@drawable/ic_group_black_24dp" />
         <RadioGroup
             android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <RadioButton
