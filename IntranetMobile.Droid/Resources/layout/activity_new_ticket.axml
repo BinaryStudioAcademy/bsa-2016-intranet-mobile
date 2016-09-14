@@ -5,81 +5,138 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include
-        android:id="@+id/activity_comments_toolbar"
+        android:id="@+id/activity_new_ticket_toolbar"
         layout="@layout/mvx_toolbar" />
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Title"
-        app:MvxBind="Text TicketTitle" />
-    <LinearLayout
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/activity_horizontal_margin">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_title_black_24dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title"
+            app:MvxBind="Text TicketTitle" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/activity_horizontal_margin">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_schedule_black_24dp" />
         <TextView
             android:id="@+id/datepickerTextView"
             android:text="DATE"
-            android:background="#EEEE99"
+            android:background="?attr/selectableItemBackground"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/colorText"
             android:clickable="true" />
         <TextView
             android:id="@+id/timepickerTextView"
             android:text="TIME"
+            android:background="?attr/selectableItemBackground"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:background="#1144AA"
-            android:layout_weight="2"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/colorText"
             android:clickable="true" />
     </LinearLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Details"
-        app:MvxBind="Text Details" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Tags"
-        app:MvxBind="Text Tags" />
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_margin="20dp"
-        android:layout_gravity="right"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="Group:"
-            android:layout_marginRight="20dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/activity_horizontal_margin">
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_event_note_black_24dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Details"
+            app:MvxBind="Text Details" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/activity_horizontal_margin">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_sms_black_24dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tags"
+            app:MvxBind="Text Tags" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/activity_horizontal_margin">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_group_black_24dp" />
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:MvxBind="SelectedIndex GroupId">
             <RadioButton
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:text="PHP" />
+                android:layout_weight="1"
+                android:text=".NET" />
             <RadioButton
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
                 android:text="JS" />
             <RadioButton
-                android:layout_width="wrap_content"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text=".NET" />
+                android:layout_weight="1"
+                android:text="PHP" />
         </RadioGroup>
     </LinearLayout>
-    <Button
-        android:text="Create"
-        android:layout_gravity="right"
-        android:layout_marginRight="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:MvxBind="Click ClickCreateTicketCommand" />
 </LinearLayout>

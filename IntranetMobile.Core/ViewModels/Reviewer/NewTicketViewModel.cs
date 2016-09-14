@@ -20,10 +20,13 @@ namespace IntranetMobile.Core
         public NewTicketViewModel()
         {
             Title = "Add Review";
-            ClickCreateTicketCommand = new MvxCommand(CreateTicket);
+            Date = DateTime.Now;
+            CreateTicketCommand = new MvxCommand(CreateTicket);
         }
 
-        public ICommand ClickCreateTicketCommand { get; set; }
+        public ICommand CreateTicketCommand { get; set; }
+
+        public Action NavigateBack { get; set; }
 
         public string TicketTitle
         {
@@ -90,8 +93,24 @@ namespace IntranetMobile.Core
             }
         }
 
-        public void CreateTicket()
+        public async void CreateTicket()
         {
+            if (string.IsNullOrWhiteSpace(TicketTitle))
+            {
+                ServiceBus.AlertService.ShowMessageBox("Add Review", "Please fill the title of your review");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(Details))
+            {
+                ServiceBus.AlertService.ShowMessageBox("Add Review", "Please fill the description of your review");
+                return;
+            }
+            else if ((Date - DateTime.Now).TotalHours < 1)
+            {
+                ServiceBus.AlertService.ShowMessageBox("Add Review", "Please check the date of your review");
+                return;
+            }
+
             try
             {
                 var ticket = new Ticket();
@@ -101,15 +120,18 @@ namespace IntranetMobile.Core
                 ticket.ReviewText = Details;
                 ticket.GroupId = (GroupId+1).ToString();
 
-                var s = Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var s = Tags.Replace(" ", ",")
+                            .Replace(",,", ",")
+                            .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var t in s)
                 {
                     ticket.ListOfTagTitles.Add(t);
                 }
 
-                ServiceBus.ReviewerService.CreateReviewTicketAsync(ticket);
-                ShowViewModel<ReviewerViewModel>();
+                await ServiceBus.ReviewerService.CreateReviewTicketAsync(ticket);
+                NavigateBack?.Invoke();
+                //ShowViewModel<ReviewerViewModel>();
             }
             catch(Exception ex)
             {
