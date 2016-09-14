@@ -12,10 +12,10 @@ namespace IntranetMobile.Core
     public class NewTicketViewModel : BaseViewModel
     {
         private string _ticketTitle;
-        private string _dateOfReview;
         private string _details;
         private string _tags;
         private int _groupId;
+        private DateTime _date;
 
         public NewTicketViewModel()
         {
@@ -50,19 +50,6 @@ namespace IntranetMobile.Core
             }
         }
 
-        public string DateOfReview
-        {
-            get
-            {
-                return _dateOfReview;
-            }
-            set
-            {
-                _dateOfReview = value;
-                RaisePropertyChanged(() => DateOfReview);
-            }
-        }
-
         public string Tags
         {
             get
@@ -89,6 +76,19 @@ namespace IntranetMobile.Core
             }
         }
 
+        public DateTime Date
+        {
+            get
+            {
+                return _date;
+            }
+            set
+            {
+                _date = value;
+                RaisePropertyChanged(() => Date);
+            }
+        }
+
         public void CreateTicket()
         {
             try
@@ -96,8 +96,8 @@ namespace IntranetMobile.Core
                 var ticket = new Ticket();
 
                 ticket.TitleName = TicketTitle;
-                ticket.DateReview = !string.IsNullOrEmpty(DateOfReview)
-                    ? DateTime.Parse(DateOfReview)
+                ticket.DateReview = Date != null
+                    ? Date
                     : default(DateTime);
                 ticket.ReviewText = Details;
                 ticket.GroupId = (GroupId+1).ToString();
