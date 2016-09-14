@@ -19,6 +19,7 @@ namespace IntranetMobile.Core
 
         public NewTicketViewModel()
         {
+            Title = "Add Review";
             ClickCreateTicketCommand = new MvxCommand(CreateTicket);
         }
 
@@ -96,9 +97,7 @@ namespace IntranetMobile.Core
                 var ticket = new Ticket();
 
                 ticket.TitleName = TicketTitle;
-                ticket.DateReview = Date != null
-                    ? Date
-                    : default(DateTime);
+                ticket.DateReview = Date;
                 ticket.ReviewText = Details;
                 ticket.GroupId = (GroupId+1).ToString();
 
@@ -112,11 +111,11 @@ namespace IntranetMobile.Core
                 ServiceBus.ReviewerService.CreateReviewTicketAsync(ticket);
                 ShowViewModel<ReviewerViewModel>();
             }
-            catch
+            catch(Exception ex)
             {
+                Log.Error(ex);
                 ServiceBus.AlertService.ShowConnectionLostMessage();
             }
-
         }
     }
 }

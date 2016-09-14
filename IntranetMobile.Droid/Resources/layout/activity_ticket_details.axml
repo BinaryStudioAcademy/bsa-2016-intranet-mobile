@@ -32,14 +32,22 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:orientation="horizontal">
-                    <MvxAppCompatCircleImageView
-                        android:id="@+id/activity_ticket_details_author_imageview"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:maxWidth="72dp"
-                        android:maxHeight="72dp"
-                        android:layout_centerVertical="true"
-                        app:MvxBind="ImageUrl AuthorAvatarUrl" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true">
+                        <ImageView
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:src="@drawable/avatar_circle_grey_280dp" />
+                        <MvxAppCompatCircleImageView
+                            android:id="@+id/activity_ticket_details_author_imageview"
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:maxHeight="72dp"
+                            android:maxWidth="72dp"
+                            app:MvxBind="ImageUrl AuthorAvatarUrl" />
+                    </RelativeLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"

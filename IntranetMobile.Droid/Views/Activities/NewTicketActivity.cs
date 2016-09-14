@@ -5,6 +5,7 @@ using Android.Text.Format;
 using Android.Views;
 using Android.Widget;
 using IntranetMobile.Core;
+using IntranetMobile.Core.Extensions;
 using static Android.App.DatePickerDialog;
 using static Android.App.TimePickerDialog;
 
@@ -41,7 +42,7 @@ namespace IntranetMobile.Droid.Views.Activities
         public void OnDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
         {
             var date = new DateTime(year, monthOfYear, dayOfMonth);
-            dateTextView.Text = date.ToString("yyyy-MMM-dd");
+            dateTextView.Text = date.ToDateString();
 
             ViewModel.Date = new DateTime(year, monthOfYear, dayOfMonth, ViewModel.Date.Hour, ViewModel.Date.Minute, 0);
         }
