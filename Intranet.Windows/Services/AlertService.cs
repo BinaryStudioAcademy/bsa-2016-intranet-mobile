@@ -8,7 +8,7 @@ namespace Intranet.WindowsUWP.Services
     {
         public void ShowPopupMessage(string text)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public async void ShowMessageBox(string title, string text)

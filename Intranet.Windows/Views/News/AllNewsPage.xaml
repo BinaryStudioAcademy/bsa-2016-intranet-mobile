@@ -74,7 +74,7 @@
                                 <Grid Height="134">
                                     <Image Source="../../Images/news_default.png" Stretch="UniformToFill"/>
                                     <Image Source="{Binding PreviewImageUri}" Stretch="UniformToFill"/>
-                                    <StackPanel Padding="8,8,0,8" Background="{StaticResource SolidAlphaBrushGray1}" VerticalAlignment="Bottom">
+                                    <StackPanel Padding="8" Background="{StaticResource SolidAlphaBrushGray1}" VerticalAlignment="Bottom">
                                         <TextBlock Text="{Binding Title}"
                                                Foreground="White"
                                                MaxLines="1"
