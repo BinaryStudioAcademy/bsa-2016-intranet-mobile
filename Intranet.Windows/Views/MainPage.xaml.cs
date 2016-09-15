@@ -50,6 +50,9 @@ namespace Intranet.WindowsUWP
                 case 1:
                     vm.Menu.ShowNews();
                     break;
+                case 2:
+                    vm.Menu.ShowReviewer();
+                    break;
                 case 3:
                     vm.Menu.ShowUsers();
                     break;
