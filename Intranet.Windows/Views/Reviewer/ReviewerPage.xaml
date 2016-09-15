@@ -21,7 +21,7 @@
             <ToggleSwitch IsOn="{Binding IsFilterActive, Mode=TwoWay}" ></ToggleSwitch>
         </StackPanel>
 
-        <Pivot HorizontalAlignment="Center" x:Name="Tabs" Grid.Row="1">
+        <Pivot HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged" Grid.Row="1">
             <PivotItem>
                 <PivotItem.Header>
                     <Grid VerticalAlignment="Center" Margin="0, 0, -16, 0">
@@ -36,7 +36,7 @@
                                 VerticalAlignment="Bottom"
                                 Padding="0"
                                 Grid.Column="1"
-                                Command="{Binding ReloadCommand}"
+                                Command="{Binding DotNet.ReloadCommand}"
                                 Style="{StaticResource GlyphButton}">
                             <Button.Content>
                                 <TextBlock Margin="0,0,0,-4"  VerticalAlignment="Bottom" Text="&#xE117;" FontFamily="Segoe MDL2 Assets"/>
@@ -101,7 +101,7 @@
                                 VerticalAlignment="Bottom"
                                 Padding="0"
                                 Grid.Column="1"
-                                Command="{Binding ReloadCommand}"
+                                Command="{Binding JavaScript.ReloadCommand}"
                                 Style="{StaticResource GlyphButton}">
                             <Button.Content>
                                 <TextBlock Margin="0,0,0,-4" VerticalAlignment="Bottom" Text="&#xE117;" FontFamily="Segoe MDL2 Assets"/>
@@ -160,14 +160,14 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="32"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Js" Grid.Column="0" VerticalAlignment="Top"/>
+                        <TextBlock Text="Php" Grid.Column="0" VerticalAlignment="Top"/>
                         <Button Width="32" Height="30"
                                 x:Name="RefreshPhpBtn"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom"
                                 Padding="0"
                                 Grid.Column="1"
-                                Command="{Binding ReloadCommand}"
+                                Command="{Binding Php.ReloadCommand}"
                                 Style="{StaticResource GlyphButton}">
                             <Button.Content>
                                 <TextBlock Margin="0,0,0,-4" VerticalAlignment="Bottom" Text="&#xE117;" FontFamily="Segoe MDL2 Assets"/>

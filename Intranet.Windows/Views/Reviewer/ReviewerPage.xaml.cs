@@ -29,5 +29,29 @@ namespace Intranet.WindowsUWP.Views.Reviewer
         {
             this.InitializeComponent();
         }
+        private void Pivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Tabs.SelectedIndex == 0)
+            {
+                RefresDotNetBtn.Visibility = Visibility.Visible;
+                RefreshJsBtn.Visibility = Visibility.Collapsed;
+                RefreshPhpBtn.Visibility = Visibility.Collapsed;
+
+            }
+            else if (Tabs.SelectedIndex == 1)
+            {
+                RefresDotNetBtn.Visibility = Visibility.Collapsed;
+                RefreshJsBtn.Visibility = Visibility.Visible;
+                RefreshPhpBtn.Visibility = Visibility.Collapsed;
+
+            }
+            else if (Tabs.SelectedIndex == 2)
+            {
+                RefresDotNetBtn.Visibility = Visibility.Collapsed;
+                RefreshJsBtn.Visibility = Visibility.Collapsed;
+                RefreshPhpBtn.Visibility = Visibility.Visible;
+
+            }
+        }
     }
 }
