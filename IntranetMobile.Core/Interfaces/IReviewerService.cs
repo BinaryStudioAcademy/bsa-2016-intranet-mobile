@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using IntranetMobile.Core.Models;
-using IntranetMobile.Core.Models.Dtos;
 using IntranetMobile.Core.Services;
 
 namespace IntranetMobile.Core.Interfaces
 {
     public interface IReviewerService
     {
+        event Action<ReviewerGroup> ReviewAdded;
+
         Task<List<Ticket>> GetListOfTicketsAsync();
         Task<List<Ticket>> GetListOfTicketsForGroupAsync(ReviewerGroup group);
         Task<List<Ticket>> GetListOfMyTicketsAsync();

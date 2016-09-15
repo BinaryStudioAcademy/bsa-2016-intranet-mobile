@@ -34,6 +34,12 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
             Task.Run(ReloadData);
 
+            ServiceBus.ReviewerService.ReviewAdded += (obj) =>
+            {
+                if (obj == _group)
+                    Task.Run(ReloadData);
+            };
+
             AddReviewCommand = new MvxCommand(AddReviewCommandExecute);
         }
 

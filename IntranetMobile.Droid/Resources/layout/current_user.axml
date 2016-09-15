@@ -13,14 +13,22 @@
         android:layout_marginBottom="4dp"
         android:paddingTop="12dp"
         android:paddingLeft="16dp">
-        <MvxAppCompatCircleImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:maxWidth="40dp"
-            android:maxHeight="40dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:layout_marginRight="24dp"
-            app:MvxBind="ImageUrl PreviewImageUri" />
+            android:layout_marginRight="24dp">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/avatar_circle_grey_280dp" />
+            <MvxAppCompatCircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:maxWidth="40dp"
+                android:maxHeight="40dp"
+                app:MvxBind="ImageUrl PreviewImageUri" />
+        </RelativeLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

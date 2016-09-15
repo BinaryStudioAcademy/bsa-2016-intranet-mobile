@@ -10,15 +10,22 @@
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:gravity="fill">
-    <MvxAppCompatCircleImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:maxWidth="40dp"
-        android:maxHeight="40dp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:layout_marginRight="16dp"
-        app:civ_border_width="0dp"
-        app:MvxBind="ImageUrl AvatarUrl" />
+        android:layout_marginRight="16dp">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/avatar_circle_grey_280dp" />
+        <MvxAppCompatCircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:maxWidth="40dp"
+            android:maxHeight="40dp"
+            app:MvxBind="ImageUrl AvatarUrl" />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

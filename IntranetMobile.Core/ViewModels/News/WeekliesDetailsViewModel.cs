@@ -7,6 +7,7 @@ namespace IntranetMobile.Core.ViewModels.News
 {
     public class WeekliesDetailsViewModel : BaseViewModel
     {
+        private string _body;
         private WeeklyNews _dataModel;
 
         public ObservableCollection<NewsDetailsViewModel> News { set; get; } =
@@ -17,11 +18,19 @@ namespace IntranetMobile.Core.ViewModels.News
             try
             {
                 _dataModel = await ServiceBus.NewsService.GetWeeklyNewsByIdAsync(arg.WeekliesId);
-                foreach (var fullNews in _dataModel.FullNews)
+                Body = "";
+                foreach (var fullNewsId in _dataModel.FullNews)
                 {
-                    var newDeatilsViewModel = new NewsDetailsViewModel();
-                    newDeatilsViewModel.Init(new NewsDetailsViewModel.Parameters { NewsId = fullNews });
-                    News.Add(newDeatilsViewModel);
+                    var newsItem = await ServiceBus.NewsService.GetNewsByIdAsync(fullNewsId);
+                    if (newsItem != null)
+                    {
+                        var header = $"<h3>{newsItem.Title}</h3>";
+                        var footer = "<br/>";
+                        Body += $"{header} {newsItem.Body} {footer}";
+                    }
+                    //var newDeatilsViewModel = new NewsDetailsViewModel();
+                    //newDeatilsViewModel.Init(new NewsDetailsViewModel.Parameters { NewsId = fullNews });
+                    //News.Add(newDeatilsViewModel);
                 }
                 Title = _dataModel.Title;
             }
@@ -29,7 +38,19 @@ namespace IntranetMobile.Core.ViewModels.News
             {
                 Log.Error(ex);
             }
+        }
 
+        public string Body
+        {
+            get
+            {
+                return _body;
+            }
+            set
+            {
+                _body = value;
+                RaisePropertyChanged(() => Body);
+            }
         }
 
         public class Parameters

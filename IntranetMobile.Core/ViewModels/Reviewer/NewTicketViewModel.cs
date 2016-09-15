@@ -4,7 +4,6 @@ using System.Windows.Input;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using IntranetMobile.Core.ViewModels;
-using IntranetMobile.Core.ViewModels.Reviewer;
 using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core
@@ -12,17 +11,21 @@ namespace IntranetMobile.Core
     public class NewTicketViewModel : BaseViewModel
     {
         private string _ticketTitle;
-        private string _dateOfReview;
         private string _details;
         private string _tags;
-        private int _groupId;
+        private ReviewerGroup _group;
+        private DateTime _date;
 
         public NewTicketViewModel()
         {
-            ClickCreateTicketCommand = new MvxCommand(CreateTicket);
+            Title = "Add Review";
+            Date = DateTime.Now;
+            CreateTicketCommand = new MvxCommand(CreateTicket);
         }
 
-        public ICommand ClickCreateTicketCommand { get; set; }
+        public ICommand CreateTicketCommand { get; set; }
+
+        public Action NavigateBack { get; set; }
 
         public string TicketTitle
         {
@@ -50,19 +53,6 @@ namespace IntranetMobile.Core
             }
         }
 
-        public string DateOfReview
-        {
-            get
-            {
-                return _dateOfReview;
-            }
-            set
-            {
-                _dateOfReview = value;
-                RaisePropertyChanged(() => DateOfReview);
-            }
-        }
-
         public string Tags
         {
             get
@@ -76,47 +66,82 @@ namespace IntranetMobile.Core
             }
         }
 
-        public int GroupId
+        public ReviewerGroup Group
         {
             get
             {
-                return _groupId;
+                return _group;
             }
             set
             {
-                _groupId = value;
-                RaisePropertyChanged(() => GroupId);
+                _group = value;
+                RaisePropertyChanged(() => Group);
             }
         }
 
-        public void CreateTicket()
+        public DateTime Date
         {
+            get
+            {
+                return _date;
+            }
+            set
+            {
+                _date = value;
+                RaisePropertyChanged(() => Date);
+            }
+        }
+
+        public async void CreateTicket()
+        {
+            if (string.IsNullOrWhiteSpace(TicketTitle))
+            {
+                ServiceBus.AlertService.ShowMessageBox("Add Review", "Please fill the title of your review");
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(Details))
+            {
+                ServiceBus.AlertService.ShowMessageBox("Add Review", "Please fill the description of your review");
+                return;
+            }
+            else if ((Date - DateTime.Now).TotalHours < 1)
+            {
+                ServiceBus.AlertService.ShowMessageBox("Add Review", "Please check the date of your review");
+                return;
+            }
+            else if (Group == ReviewerGroup.None)
+            {
+                ServiceBus.AlertService.ShowMessageBox("Add Review", "Please select a category");
+                return;
+            }
+
             try
             {
                 var ticket = new Ticket();
 
                 ticket.TitleName = TicketTitle;
-                ticket.DateReview = !string.IsNullOrEmpty(DateOfReview)
-                    ? DateTime.Parse(DateOfReview)
-                    : default(DateTime);
+                ticket.DateReview = Date;
                 ticket.ReviewText = Details;
-                ticket.GroupId = (GroupId+1).ToString();
+                ticket.GroupId = ((int)Group).ToString();
 
-                var s = Tags.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var s = Tags.Replace(" ", ",")
+                            .Replace(",,", ",")
+                            .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var t in s)
                 {
                     ticket.ListOfTagTitles.Add(t);
                 }
 
-                ServiceBus.ReviewerService.CreateReviewTicketAsync(ticket);
-                ShowViewModel<ReviewerViewModel>();
+                await ServiceBus.ReviewerService.CreateReviewTicketAsync(ticket);
+                NavigateBack?.Invoke();
+                //ShowViewModel<ReviewerViewModel>();
             }
-            catch
+            catch(Exception ex)
             {
+                Log.Error(ex);
                 ServiceBus.AlertService.ShowConnectionLostMessage();
             }
-
         }
     }
 }

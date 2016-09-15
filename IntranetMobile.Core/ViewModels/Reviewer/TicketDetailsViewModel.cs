@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,6 +31,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         public string CategoryName => Ticket?.CategoryName;
 
         public string TicketText => Ticket?.ReviewText;
+
+        public int CommentsCount { get; private set; }
 
         public string ReviewDate => Ticket?.DateReview.ToDateTimeString("No date assigned");
 
@@ -102,6 +105,27 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                     userTicket => userTicket.BinaryId.Equals(ServiceBus.UserService.CurrentUser.ServerId)) != null;
 
         public string SignText => IsSigned ? "Undo" : "Join";
+
+        public override void Resume()
+        {
+            base.Resume();
+            Task.Run(async () =>
+            {
+                try
+                {
+                    var data = await ServiceBus.ReviewerService.GetListOfTicketCommentsAsync(_ticketId);
+                    if (data != null && data.Count > 0)
+                    {
+                        CommentsCount = data.Count;
+                        InvokeOnMainThread(() => RaisePropertyChanged(() => CommentsCount));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
+            });
+        }
 
         private void RefreshTicket()
         {
