@@ -67,7 +67,13 @@
 
                                     <Ellipse Width="64" Height="64" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
                                         <Ellipse.Fill>
-                                            <ImageBrush ImageSource='{Binding PreviewImageUri}' Stretch="UniformToFill" />
+                                            <ImageBrush ImageSource="../../Images/avatar_circle_grey.png" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <Ellipse Width="64" Height="64" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding PreviewImageUri}" Stretch="UniformToFill" />
                                         </Ellipse.Fill>
                                     </Ellipse>
 
