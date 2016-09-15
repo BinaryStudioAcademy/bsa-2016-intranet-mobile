@@ -20,8 +20,8 @@ namespace IntranetMobile.Droid.Views.Activities
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
-            var list = FindViewById<MvxListView>(Resource.Id.weeklies_recycler_view);
-            list.Adapter = new WeekliesAdapter(this, (IMvxAndroidBindingContext) BindingContext);
+            //var list = FindViewById<MvxListView>(Resource.Id.weeklies_recycler_view);
+            //list.Adapter = new WeekliesAdapter(this, (IMvxAndroidBindingContext) BindingContext);
         }
     }
 

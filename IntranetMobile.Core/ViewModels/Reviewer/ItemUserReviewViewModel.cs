@@ -20,8 +20,14 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         private void ClickDeleteTicketCommandExecute()
         {
-            ServiceBus.ReviewerService.DeleteTicketAsync(TicketId);
-            NotifyItemDeleted?.Invoke(VmId);
+            ServiceBus.AlertService.ShowDialogBox("Are you sure?",
+                                                  "This review request will be deleted permanently",
+                                                  "Delete",
+                                                  "Cancel", async () =>
+            {
+                await ServiceBus.ReviewerService.DeleteTicketAsync(TicketId);
+                NotifyItemDeleted?.Invoke(VmId);
+            });
         }
 
         private void ClickViewDetailsCommandExecute()
