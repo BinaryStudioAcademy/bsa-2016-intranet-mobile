@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Data;
 using IntranetMobile.Core;
 
-namespace Intranet.WindowsUWP.Converters
+namespace Intranet.WindowsUWP.Views.Converters
 {
     public class BinaryStudioHtmlConvertor : IValueConverter
     {

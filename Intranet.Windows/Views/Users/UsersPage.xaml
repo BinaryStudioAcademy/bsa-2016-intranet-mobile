@@ -5,8 +5,9 @@
     xmlns:local="using:Intranet.WindowsUWP.Views.Users"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:Intranet.WindowsUWP.Views"
-    mc:Ignorable="d">
+    xmlns:views="using:Intranet.WindowsUWP.Views" 
+    xmlns:profile="using:IntranetMobile.Core.ViewModels.Profile"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance profile:UsersViewModel}">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
