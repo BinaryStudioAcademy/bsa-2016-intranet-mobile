@@ -26,8 +26,6 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Image Source="../../Images/logo_black_1.png" Grid.Column="0" Grid.Row="0" Stretch="Uniform"
-               VerticalAlignment="Top" />
         <Image Source="{Binding AvatarUrl}" Grid.Column="0" Grid.Row="0" Stretch="Uniform"
                VerticalAlignment="Top" />
 
