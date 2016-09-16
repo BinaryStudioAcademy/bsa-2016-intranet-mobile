@@ -76,6 +76,9 @@ namespace IntranetMobile.Core.ViewModels.Profile
         public ObservableCollection<BaseViewModel> UserTechnologyCategoryViewModels { get; } =
             new ObservableCollection<BaseViewModel>();
 
+        public ObservableCollection<UserTechnologyCategoryViewModel> CategoryViewModels { get; } =
+            new ObservableCollection<UserTechnologyCategoryViewModel>();
+
         public ObservableCollection<UserAchievementViewModel> Achievements { get; set; } =
             new ObservableCollection<UserAchievementViewModel>();
 
@@ -143,8 +146,8 @@ namespace IntranetMobile.Core.ViewModels.Profile
                         technologyCategoryIds.Add(technologyCvs.Category.Id, userTechnologyCategoryViewModel);
 
                         // TODO: Currently replaced with awful approach below
-                        //InvokeOnMainThread(
-                        //    () => { UserTechnologyCategoryViewModels.Add(userTechnologyCategoryViewModel); });
+                        InvokeOnMainThread(
+                            () => { CategoryViewModels.Add(userTechnologyCategoryViewModel); });
                     }
 
                     InvokeOnMainThread(() =>
