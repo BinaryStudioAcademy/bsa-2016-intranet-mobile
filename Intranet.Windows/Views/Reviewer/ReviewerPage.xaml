@@ -17,8 +17,8 @@
             <TextBlock Text="{Binding Title}"
                    x:Name="FrameTitle"
                    Style="{StaticResource PageTitle}"/>
-            <TextBlock Margin="16,16,0,8" Text="Show only user tickets" ></TextBlock>
-            <ToggleSwitch IsOn="{Binding IsFilterActive, Mode=TwoWay}" ></ToggleSwitch>
+            <TextBlock Margin="16,16,8,0" Text="Show only user tickets"></TextBlock>
+            <ToggleSwitch IsOn="{Binding IsFilterActive, Mode=TwoWay}"></ToggleSwitch>
         </StackPanel>
 
         <Pivot HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged" Grid.Row="1">
@@ -66,8 +66,8 @@
                                     <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="../../Images/avatar_circle_grey.png" Stretch="UniformToFill"/>
                                     <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="{Binding AuthorAvatarUrl}" Stretch="UniformToFill"/>
                                     <TextBlock Margin="0,8,0,0" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="0" Text="{Binding Title}" FontSize="17"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DateTime}" HorizontalAlignment="Right" Margin="0,0,26,0" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" VerticalAlignment="Bottom" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DateTime}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,26,0" FontSize="14"></TextBlock>
                                     <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Text="{Binding ReviewText}" TextWrapping="WrapWholeWords" Margin="0,8,20,0"></TextBlock>
                                 </Grid>
                             </DataTemplate>
@@ -94,7 +94,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="32"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Js" Grid.Column="0" VerticalAlignment="Top"/>
+                        <TextBlock Text="Js" Grid.Column="0" HorizontalAlignment="Center"  Margin="20,0,0,0"/>
                         <Button Width="32" Height="30"
                                 x:Name="RefreshJsBtn"
                                 HorizontalAlignment="Center"
@@ -132,8 +132,8 @@
                                     <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="../../Images/avatar_circle_grey.png" Stretch="UniformToFill"/>
                                     <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="{Binding AuthorAvatarUrl}" Stretch="UniformToFill"/>
                                     <TextBlock Margin="0,8,0,0" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="0" Text="{Binding Title}" FontSize="17"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DateTime}" HorizontalAlignment="Right" Margin="0,0,26,0" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" VerticalAlignment="Bottom" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DateTime}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,26,0" FontSize="14"></TextBlock>
                                     <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Text="{Binding ReviewText}" TextWrapping="WrapWholeWords" Margin="0,8,20,0"></TextBlock>
                                 </Grid>
                             </DataTemplate>
@@ -160,7 +160,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="32"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Php" Grid.Column="0" VerticalAlignment="Top"/>
+                        <TextBlock Text="Php" Grid.Column="0"/>
                         <Button Width="32" Height="30"
                                 x:Name="RefreshPhpBtn"
                                 HorizontalAlignment="Center"
@@ -198,8 +198,8 @@
                                     <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="../../Images/avatar_circle_grey.png" Stretch="UniformToFill"/>
                                     <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="{Binding AuthorAvatarUrl}" Stretch="UniformToFill"/>
                                     <TextBlock Margin="0,8,0,0" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="0" Text="{Binding Title}" FontSize="17"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DateTime}" HorizontalAlignment="Right" Margin="0,0,26,0" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" VerticalAlignment="Bottom" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DateTime}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,26,0" FontSize="14"></TextBlock>
                                     <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Text="{Binding ReviewText}" TextWrapping="WrapWholeWords" Margin="0,8,20,0"></TextBlock>
                                 </Grid>
                             </DataTemplate>
