@@ -1,4 +1,6 @@
-﻿namespace IntranetMobile.Core.ViewModels.Profile
+﻿using System.Collections.ObjectModel;
+
+namespace IntranetMobile.Core.ViewModels.Profile
 {
     public class UserTechnologyViewModel : BaseViewModel
     {
@@ -30,10 +32,18 @@
             }
         }
 
+        public bool[] StarsVisibility { get; set; } =
+            new bool[5];
+
         public void Init(string technologyName, int stars)
         {
             TechnologyName = technologyName;
             Stars = stars;
+
+            for (var i = 0; i < stars; i++)
+            {
+                StarsVisibility[i] = true;
+            }
         }
     }
 }

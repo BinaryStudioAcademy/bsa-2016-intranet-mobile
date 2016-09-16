@@ -95,7 +95,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BinaryStudioHtmlConvertor.cs" />
     <Compile Include="Helpers\HtmlProperties.cs" />
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\SettingsService.cs" />
@@ -108,7 +107,9 @@
     <Compile Include="Views\Controls\MenuItemControl.xaml.cs">
       <DependentUpon>MenuItemControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\BinaryStudioHtmlConvertor.cs" />
     <Compile Include="Views\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Views\Converters\BoolToStarOpacityConverter.cs" />
     <Compile Include="Views\Login\ForgotPasswordPage.xaml.cs">
       <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
     </Compile>
@@ -141,6 +142,9 @@
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Users\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Users\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
     </Compile>
@@ -162,6 +166,7 @@
     <Content Include="Images\exit_to_app_black.png" />
     <Content Include="Images\group_black.png" />
     <Content Include="Images\home_black.png" />
+    <Content Include="Images\ic_grade_black_24dp.png" />
     <Content Include="Images\logo_black_1.png" />
     <Content Include="Images\news_default.png" />
     <Content Include="Images\not_ready.png" />
@@ -225,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Users\ProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
