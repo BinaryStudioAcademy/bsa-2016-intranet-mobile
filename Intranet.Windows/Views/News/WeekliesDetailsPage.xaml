@@ -8,10 +8,10 @@
     xmlns:views="using:Intranet.WindowsUWP.Views"
     xmlns:controls="using:Intranet.WindowsUWP.Views.Controls"
     xmlns:helpers="using:Intranet.WindowsUWP.Helpers"
-    xmlns:converters="using:Intranet.WindowsUWP.Converters"
+    xmlns:converters1="using:Intranet.WindowsUWP.Views.Converters"
     mc:Ignorable="d">
     <views:BasePage.Resources>
-        <converters:BinaryStudioHtmlConvertor x:Key="BinaryStudioHtmlConvertor"></converters:BinaryStudioHtmlConvertor>
+        <converters1:BinaryStudioHtmlConvertor x:Key="BinaryStudioHtmlConvertor"></converters1:BinaryStudioHtmlConvertor>
     </views:BasePage.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <WebView helpers:HtmlProperties.HtmlString="{Binding Body, Converter={StaticResource BinaryStudioHtmlConvertor}}"></WebView>
