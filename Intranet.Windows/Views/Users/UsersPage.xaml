@@ -66,21 +66,21 @@
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
 
-                                    <Ellipse Width="64" Height="64" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
+                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
                                         <Ellipse.Fill>
                                             <ImageBrush ImageSource="../../Images/avatar_circle_grey.png" Stretch="UniformToFill" />
                                         </Ellipse.Fill>
                                     </Ellipse>
 
-                                    <Ellipse Width="64" Height="64" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
+                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
                                         <Ellipse.Fill>
                                             <ImageBrush ImageSource="{Binding PreviewImageUri}" Stretch="UniformToFill" />
                                         </Ellipse.Fill>
                                     </Ellipse>
 
-                                    <TextBlock Text="{Binding FullName}" Foreground="DimGray" FontSize="16"
+                                    <TextBlock Text="{Binding FullName}" Foreground="{StaticResource SolidBrushGray3}" FontSize="16"
                                                Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" />
-                                    <TextBlock Text="{Binding PositionName}" Foreground="Gray" FontSize="14"
+                                    <TextBlock Text="{Binding PositionName}" Foreground="{StaticResource SolidBrushGray1}" FontSize="14"
                                                Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" />
                                 </Grid>
                             </DataTemplate>
