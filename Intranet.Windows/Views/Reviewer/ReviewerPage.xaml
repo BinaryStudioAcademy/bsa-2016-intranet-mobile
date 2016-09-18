@@ -9,16 +9,35 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Normal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="FrameTitle.Margin" Value="12,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Compact">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="FrameTitle.Margin" Value="54,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Margin="8,0,8,0" Orientation="Horizontal">
-            <TextBlock Text="{Binding Title}"
-                   x:Name="FrameTitle"
-                   Style="{StaticResource PageTitle}"/>
-            <TextBlock Margin="16,16,8,0" Text="Show only user tickets"></TextBlock>
-            <ToggleSwitch IsOn="{Binding IsFilterActive, Mode=TwoWay}"></ToggleSwitch>
+        <StackPanel Orientation="Horizontal" x:Name="FrameTitle">
+            <TextBlock Text="{Binding Title}" Style="{StaticResource PageTitle}"/>
+            <TextBlock Margin="26,0,10,0" Text="Only My" VerticalAlignment="Center"/>
+            <ToggleSwitch IsOn="{Binding IsFilterActive, Mode=TwoWay}" VerticalAlignment="Center"/>
         </StackPanel>
 
         <Pivot HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged" Grid.Row="1">
@@ -29,7 +48,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="32"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text=".Net" Grid.Column="0"/>
+                        <TextBlock Text=".NET" Grid.Column="0"/>
                         <Button Width="32" Height="30"
                                 x:Name="RefresDotNetBtn"
                                 HorizontalAlignment="Center"
@@ -46,29 +65,48 @@
                 </PivotItem.Header>
                 <Grid DataContext="{Binding DotNet}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="396"/>
+                        <ColumnDefinition Width="296"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ListView Grid.Column="0" ItemsSource="{Binding Reviews}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Height="134">
+                                <Grid Padding="0,8,0,8" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="72"></ColumnDefinition>
-                                        <ColumnDefinition Width="162"></ColumnDefinition>
-                                        <ColumnDefinition Width="162"></ColumnDefinition>
+                                        <ColumnDefinition Width="224"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="32"></RowDefinition>
-                                        <RowDefinition Height="32"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="22"></RowDefinition>
+                                        <RowDefinition Height="22"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="../../Images/avatar_circle_grey.png" Stretch="UniformToFill"/>
-                                    <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="{Binding AuthorAvatarUrl}" Stretch="UniformToFill"/>
-                                    <TextBlock Margin="0,8,0,0" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="0" Text="{Binding Title}" FontSize="17"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" VerticalAlignment="Bottom" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DateTime}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,26,0" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Text="{Binding ReviewText}" TextWrapping="WrapWholeWords" Margin="0,8,20,0"></TextBlock>
+
+                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,0,8,0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="../../Images/avatar_circle_grey.png" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,0,8,0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding AuthorAvatarUrl}" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    
+                                    <TextBlock Grid.Column="1" 
+                                               Grid.Row="0"
+                                               VerticalAlignment="Center"
+                                               Text="{Binding Title}"
+                                               Foreground="{StaticResource SolidBrushGray3}"
+                                               FontSize="17"/>
+                                    <TextBlock Grid.Column="1"
+                                               Grid.Row="1"
+                                               Text="{Binding DateTime}" 
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Foreground="{StaticResource SolidBrushGray1}"
+                                               Margin="0,0,8,0"
+                                               FontSize="14"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -94,7 +132,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="32"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Js" Grid.Column="0" HorizontalAlignment="Center"  Margin="20,0,0,0"/>
+                        <TextBlock Text="JS" Grid.Column="0" HorizontalAlignment="Center"  Margin="20,0,0,0"/>
                         <Button Width="32" Height="30"
                                 x:Name="RefreshJsBtn"
                                 HorizontalAlignment="Center"
@@ -112,29 +150,48 @@
                 <!--Pivot content goes here-->
                 <Grid DataContext="{Binding JavaScript}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="396"/>
+                        <ColumnDefinition Width="296"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ListView Grid.Column="0" ItemsSource="{Binding Reviews}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Height="134">
+                                <Grid Padding="0,8,0,8" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="72"></ColumnDefinition>
-                                        <ColumnDefinition Width="162"></ColumnDefinition>
-                                        <ColumnDefinition Width="162"></ColumnDefinition>
+                                        <ColumnDefinition Width="224"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="32"></RowDefinition>
-                                        <RowDefinition Height="32"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="22"></RowDefinition>
+                                        <RowDefinition Height="22"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="../../Images/avatar_circle_grey.png" Stretch="UniformToFill"/>
-                                    <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="{Binding AuthorAvatarUrl}" Stretch="UniformToFill"/>
-                                    <TextBlock Margin="0,8,0,0" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="0" Text="{Binding Title}" FontSize="17"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" VerticalAlignment="Bottom" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DateTime}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,26,0" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Text="{Binding ReviewText}" TextWrapping="WrapWholeWords" Margin="0,8,20,0"></TextBlock>
+
+                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,0,8,0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="../../Images/avatar_circle_grey.png" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,0,8,0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding AuthorAvatarUrl}" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <TextBlock Grid.Column="1" 
+                                               Grid.Row="0"
+                                               VerticalAlignment="Center"
+                                               Text="{Binding Title}"
+                                               Foreground="{StaticResource SolidBrushGray3}"
+                                               FontSize="17"/>
+                                    <TextBlock Grid.Column="1"
+                                               Grid.Row="1"
+                                               Text="{Binding DateTime}" 
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Foreground="{StaticResource SolidBrushGray1}"
+                                               Margin="0,0,8,0"
+                                               FontSize="14"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -160,7 +217,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="32"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Php" Grid.Column="0"/>
+                        <TextBlock Text="PHP" Grid.Column="0"/>
                         <Button Width="32" Height="30"
                                 x:Name="RefreshPhpBtn"
                                 HorizontalAlignment="Center"
@@ -178,29 +235,48 @@
                 <!--Pivot content goes here-->
                 <Grid DataContext="{Binding Php}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="396"/>
+                        <ColumnDefinition Width="296"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ListView Grid.Column="0" ItemsSource="{Binding Reviews}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Height="134">
+                                <Grid Padding="0,8,0,8" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="72"></ColumnDefinition>
-                                        <ColumnDefinition Width="162"></ColumnDefinition>
-                                        <ColumnDefinition Width="162"></ColumnDefinition>
+                                        <ColumnDefinition Width="224"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="32"></RowDefinition>
-                                        <RowDefinition Height="32"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="22"></RowDefinition>
+                                        <RowDefinition Height="22"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="../../Images/avatar_circle_grey.png" Stretch="UniformToFill"/>
-                                    <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="{Binding AuthorAvatarUrl}" Stretch="UniformToFill"/>
-                                    <TextBlock Margin="0,8,0,0" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="0" Text="{Binding Title}" FontSize="17"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" VerticalAlignment="Bottom" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DateTime}"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,26,0" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Text="{Binding ReviewText}" TextWrapping="WrapWholeWords" Margin="0,8,20,0"></TextBlock>
+
+                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,0,8,0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="../../Images/avatar_circle_grey.png" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,0,8,0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding AuthorAvatarUrl}" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <TextBlock Grid.Column="1" 
+                                               Grid.Row="0"
+                                               VerticalAlignment="Center"
+                                               Text="{Binding Title}"
+                                               Foreground="{StaticResource SolidBrushGray3}"
+                                               FontSize="17"/>
+                                    <TextBlock Grid.Column="1"
+                                               Grid.Row="1"
+                                               Text="{Binding DateTime}" 
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Foreground="{StaticResource SolidBrushGray1}"
+                                               Margin="0,0,8,0"
+                                               FontSize="14"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

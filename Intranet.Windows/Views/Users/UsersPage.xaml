@@ -35,70 +35,62 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Pivot HorizontalAlignment="Center" Grid.Row="1">
-            <PivotItem>
-                <PivotItem.Header>
-                    <Grid VerticalAlignment="Center" Margin="0, 0, -16, 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="32" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Users" Grid.Column="0" />
-                    </Grid>
-                </PivotItem.Header>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="296" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ListView Grid.Column="0" ItemsSource="{Binding Users}"
+        <TextBlock Text="{Binding Title}"
+                   x:Name="FrameTitle"
+                   Style="{StaticResource PageTitle}"
+                   Grid.Row="0"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="296" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListView Grid.Column="0" ItemsSource="{Binding Users}"
                               SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0 8 0 8">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0,8,0,8" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="246"/>
+                            </Grid.ColumnDefinitions>
 
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="22"/>
+                                <RowDefinition Height="22"/>
+                            </Grid.RowDefinitions>
 
-                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
-                                        <Ellipse.Fill>
-                                            <ImageBrush ImageSource="../../Images/avatar_circle_grey.png" Stretch="UniformToFill" />
-                                        </Ellipse.Fill>
-                                    </Ellipse>
+                            <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Images/avatar_circle_grey.png" Stretch="UniformToFill" />
+                                </Ellipse.Fill>
+                            </Ellipse>
 
-                                    <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
-                                        <Ellipse.Fill>
-                                            <ImageBrush ImageSource="{Binding PreviewImageUri}" Stretch="UniformToFill" />
-                                        </Ellipse.Fill>
-                                    </Ellipse>
+                            <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0 0 8 0">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding PreviewImageUri}" Stretch="UniformToFill" />
+                                </Ellipse.Fill>
+                            </Ellipse>
 
-                                    <TextBlock Text="{Binding FullName}" Foreground="{StaticResource SolidBrushGray3}" FontSize="16"
+                            <TextBlock Text="{Binding FullName}" Foreground="{StaticResource SolidBrushGray3}" FontSize="17"
                                                Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" />
-                                    <TextBlock Text="{Binding PositionName}" Foreground="{StaticResource SolidBrushGray1}" FontSize="14"
+                            <TextBlock Text="{Binding PositionName}" Foreground="{StaticResource SolidBrushGray1}" FontSize="14"
                                                Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" />
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <Frame Grid.Column="1" x:Name="ProfileContent" Margin="6,0,0,0">
-                        <Frame.ContentTransitions>
-                            <TransitionCollection>
-                                <NavigationThemeTransition>
-                                    <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                        <EntranceNavigationTransitionInfo />
-                                    </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                </NavigationThemeTransition>
-                            </TransitionCollection>
-                        </Frame.ContentTransitions>
-                    </Frame>
-                </Grid>
-            </PivotItem>
-        </Pivot>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Frame Grid.Column="1" x:Name="ProfileContent" Margin="6,0,0,0">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <EntranceNavigationTransitionInfo />
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
+        </Grid>
     </Grid>
 </views:BasePage>
