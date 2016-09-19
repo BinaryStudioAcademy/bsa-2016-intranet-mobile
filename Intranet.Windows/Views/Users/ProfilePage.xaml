@@ -13,21 +13,21 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:BoolToStarOpacityConverter x:Key="BoolToStarOpacityConverter" />
         <Style TargetType="TextBlock" x:Name="EntryTitleTextBlockStyle">
-            <Setter Property="Foreground" Value="DarkGray" />
+            <Setter Property="Foreground" Value="{StaticResource SolidBrushGray1}" />
         </Style>
         <Style TargetType="TextBlock" x:Name="EntryValueTextBlockStyle">
-            <Setter Property="Foreground" Value="DimGray" />
+            <Setter Property="Foreground" Value="{StaticResource SolidBrushGray3}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="0, 0, 0, 10" />
         </Style>
     </views:BasePage.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Stretch"
           HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*" MinWidth="160"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="../../Images/logo_black_1.png" Grid.Column="0" Grid.Row="0" Stretch="Uniform"
-               VerticalAlignment="Top" />
         <Image Source="{Binding AvatarUrl}" Grid.Column="0" Grid.Row="0" Stretch="Uniform"
                VerticalAlignment="Top" />
 
@@ -65,42 +65,42 @@
                 <TextBlock Text="Name" Grid.Row="0" Grid.Column="0" Style="{StaticResource EntryTitleTextBlockStyle}" />
                 <TextBlock Text="{Binding FullName, FallbackValue='-', TargetNullValue='-'}" Grid.Row="1"
                            Grid.Column="0"
-                           FontSize="18"
                            Style="{StaticResource EntryValueTextBlockStyle}" />
 
                 <TextBlock Text="Position" Grid.Row="2" Grid.Column="0"
                            Style="{StaticResource EntryTitleTextBlockStyle}" />
                 <TextBlock Text="{Binding Position, FallbackValue='-', TargetNullValue='-'}" Grid.Row="3"
                            Grid.Column="0"
-                           FontSize="18"
                            Style="{StaticResource EntryValueTextBlockStyle}" />
 
                 <TextBlock Text="Birthday" Grid.Row="4" Grid.Column="0"
                            Style="{StaticResource EntryTitleTextBlockStyle}" />
                 <TextBlock Text="{Binding Birthday, FallbackValue='-', TargetNullValue='-'}" Grid.Row="5"
                            Grid.Column="0"
-                           FontSize="18" Style="{StaticResource EntryValueTextBlockStyle}" />
+                           Style="{StaticResource EntryValueTextBlockStyle}" />
 
                 <TextBlock Text="Country" Grid.Row="6" Grid.Column="0"
                            Style="{StaticResource EntryTitleTextBlockStyle}" />
                 <TextBlock Text="{Binding Country, FallbackValue='-', TargetNullValue='-'}" Grid.Row="7"
                            Grid.Column="0"
-                           FontSize="18" Style="{StaticResource EntryValueTextBlockStyle}" />
+                           Style="{StaticResource EntryValueTextBlockStyle}" />
 
                 <TextBlock Text="City" Grid.Row="8" Grid.Column="0" Style="{StaticResource EntryTitleTextBlockStyle}" />
                 <TextBlock Text="{Binding City, FallbackValue='-', TargetNullValue='-'}" Grid.Row="9" Grid.Column="0"
-                           FontSize="18" Style="{StaticResource EntryValueTextBlockStyle}" />
+                           Style="{StaticResource EntryValueTextBlockStyle}" />
 
                 <TextBlock Text="Hire date" Grid.Row="10" Grid.Column="0"
                            Style="{StaticResource EntryTitleTextBlockStyle}" />
                 <TextBlock Text="{Binding HireDate, FallbackValue='-', TargetNullValue='-'}" Grid.Row="11"
                            Grid.Column="0"
-                           FontSize="18" Style="{StaticResource EntryValueTextBlockStyle}" />
+                           Style="{StaticResource EntryValueTextBlockStyle}" />
 
                 <TextBlock Text="Technologies" Grid.Row="12" Grid.Column="0"
+                           Margin="0, 8, 0, 4"
                            Style="{StaticResource EntryTitleTextBlockStyle}"
                            Visibility="{Binding TechnologiesVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <ListView ItemsSource="{Binding CategoryViewModels}" Grid.Row="13" Grid.Column="0" SelectionMode="None"
+                          Margin="0, 0, 0, 8"
                           Visibility="{Binding TechnologiesVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -122,7 +122,7 @@
                                     </ListView.ItemContainerStyle>
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <Grid>
+                                            <Grid Margin="-12, 0, 0 ,0">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="150" />
                                                     <ColumnDefinition />
@@ -130,6 +130,7 @@
 
                                                 <TextBlock Text="{Binding TechnologyName}"
                                                            Style="{StaticResource EntryValueTextBlockStyle}"
+                                                           Margin="0"
                                                            VerticalAlignment="Center"/>
 
                                                 <StackPanel Orientation="Horizontal" Grid.Column="1">
@@ -159,72 +160,56 @@
                 </ListView>
 
                 <TextBlock Text="Certifications" Grid.Row="14" Grid.Column="0"
+                           Margin="0, 8, 0, 4"
                            Style="{StaticResource EntryTitleTextBlockStyle}"
                            Visibility="{Binding CertificationsVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <ListView ItemsSource="{Binding Certifications}" Grid.Row="15" Grid.Column="0" SelectionMode="None"
+                          Margin="0, 0, 0, 8"
                           Visibility="{Binding CertificationsVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="0 4 0 4">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
+                            <Grid Margin="0, 4, 0, 4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
 
-                                <Image Source="../../Images/logo_black_1.png" Width="48" Height="48" Grid.Column="0"
-                                       Grid.Row="0" Margin="0 0 8 0" Stretch="Uniform" />
-                                <Image Source="{Binding ImageUri}" Width="48" Height="48" Grid.Column="0" Grid.Row="0"
-                                       Margin="0 0 8 0" Stretch="Uniform" />
-
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-
-                                    <TextBlock Text="{Binding Name}" Grid.Row="0"
-                                               Style="{StaticResource EntryValueTextBlockStyle}"
-                                               VerticalAlignment="Bottom" />
-                                    <TextBlock Text="{Binding Category}" Grid.Row="1"
-                                               Style="{StaticResource EntryTitleTextBlockStyle}"
-                                               VerticalAlignment="Top" />
-                                </Grid>
+                                <TextBlock Text="{Binding Name}" Grid.Row="0"
+                                            Style="{StaticResource EntryValueTextBlockStyle}"
+                                            Margin="0"
+                                            VerticalAlignment="Bottom" />
+                                <TextBlock Text="{Binding Category}" Grid.Row="1"
+                                            Style="{StaticResource EntryTitleTextBlockStyle}"
+                                            Margin="0"
+                                            VerticalAlignment="Top" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 
                 <TextBlock Text="Achievements" Grid.Row="16" Grid.Column="0"
+                           Margin="0, 8, 0, 4"
                            Style="{StaticResource EntryTitleTextBlockStyle}"
                            Visibility="{Binding AchievementsVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <ListView ItemsSource="{Binding Achievements}" Grid.Row="17" Grid.Column="0" SelectionMode="None"
+                          Margin="0, 0, 0, 8"
                           Visibility="{Binding AchievementsVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="0 4 0 4">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
+                            <Grid Margin="0, 4, 0, 4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
 
-                                <Image Source="../../Images/logo_black_1.png" Width="48" Height="48" Grid.Column="0"
-                                       Grid.Row="0" Margin="0 0 8 0" Stretch="Uniform" />
-                                <Image Source="{Binding ImageUri}" Width="48" Height="48" Grid.Column="0" Grid.Row="0"
-                                       Margin="0 0 8 0" Stretch="Uniform" />
-
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-
-                                    <TextBlock Text="{Binding Name}" Grid.Row="0"
-                                               Style="{StaticResource EntryValueTextBlockStyle}"
-                                               VerticalAlignment="Bottom" />
-                                    <TextBlock Text="{Binding Category}" Grid.Row="1"
+                                <TextBlock Text="{Binding Name}" Grid.Row="0"
+                                            Style="{StaticResource EntryValueTextBlockStyle}"
+                                            Margin="0"
+                                            VerticalAlignment="Bottom" />
+                                <TextBlock Text="{Binding Category}" Grid.Row="1"
                                                Style="{StaticResource EntryTitleTextBlockStyle}"
+                                               Margin="0"
                                                VerticalAlignment="Top" />
-                                </Grid>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

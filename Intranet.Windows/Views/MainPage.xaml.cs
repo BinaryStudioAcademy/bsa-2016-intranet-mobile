@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml;
+﻿using System.Threading.Tasks;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Intranet.WindowsUWP.Views;
 using Intranet.WindowsUWP.Views.News;
@@ -20,16 +22,24 @@ namespace Intranet.WindowsUWP
             this.InitializeComponent();
             _prevSelectedMenuItem = 1;
 
-            DataContextChanged += (sender, args) =>
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                var vm = ViewModel as MainViewModel;
-                if (vm == null)
-                    return;
+                while (true)
+                {
+                    await Task.Delay(100);
 
-                vm.Menu.ShowNews();
-            };
+                    var vm = ViewModel as MainViewModel;
+                    if (vm != null)
+                    {
+                        vm.Menu.ShowNews();
+                        break;
+                    }
+                }
+            });
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
-
+        
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MainSplitView.IsPaneOpen = !MainSplitView.IsPaneOpen;
