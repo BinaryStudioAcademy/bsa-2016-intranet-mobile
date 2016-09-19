@@ -52,7 +52,7 @@
                     <ListView Grid.Column="0" ItemsSource="{Binding Reviews}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Height="134">
+                                <Grid Height="134" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="72"></ColumnDefinition>
                                         <ColumnDefinition Width="162"></ColumnDefinition>
@@ -63,7 +63,7 @@
                                         <RowDefinition Height="32"></RowDefinition>
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="../../Images/avatar_circle_grey.png" Stretch="UniformToFill"/>
+                                    <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="../../Images/user_default.png" Stretch="UniformToFill"/>
                                     <Image Margin="0,0,8,0" Grid.Column="0" Grid.RowSpan="2" Source="{Binding AuthorAvatarUrl}" Stretch="UniformToFill"/>
                                     <TextBlock Margin="0,8,0,0" Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="0" Text="{Binding Title}" FontSize="17"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AuthorName}" VerticalAlignment="Bottom" FontSize="14"></TextBlock>
