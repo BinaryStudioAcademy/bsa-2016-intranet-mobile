@@ -110,6 +110,7 @@
     <Compile Include="Views\Converters\BinaryStudioHtmlConvertor.cs" />
     <Compile Include="Views\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Views\Converters\BoolToStarOpacityConverter.cs" />
+    <Compile Include="Views\Converters\InversBoolToVisibilityConverter.cs" />
     <Compile Include="Views\Login\ForgotPasswordPage.xaml.cs">
       <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
     </Compile>
