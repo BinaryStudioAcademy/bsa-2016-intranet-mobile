@@ -34,6 +34,10 @@
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="298"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" x:Name="FrameTitle">
             <TextBlock Text="{Binding Title}" Style="{StaticResource PageTitle}"/>
             <TextBlock Margin="26,0,10,0" Text="Only My" VerticalAlignment="Center"/>
@@ -92,7 +96,7 @@
                                             <ImageBrush ImageSource="{Binding AuthorAvatarUrl}" Stretch="UniformToFill" />
                                         </Ellipse.Fill>
                                     </Ellipse>
-                                    
+
                                     <TextBlock Grid.Column="1" 
                                                Grid.Row="0"
                                                VerticalAlignment="Center"
@@ -111,18 +115,6 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Frame Grid.Column="1" x:Name="DotNetContent" Margin="6,0,0,0">
-                        <Frame.ContentTransitions>
-                            <TransitionCollection>
-                                <NavigationThemeTransition>
-                                    <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                        <EntranceNavigationTransitionInfo/>
-                                    </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                </NavigationThemeTransition>
-                            </TransitionCollection>
-                        </Frame.ContentTransitions>
-                        <TextBlock Text=" " VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Frame>
                 </Grid>
             </PivotItem>
             <PivotItem>
@@ -196,18 +188,6 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Frame Grid.Column="1" x:Name="JavaScriptContent" Margin="6,0,0,0">
-                        <Frame.ContentTransitions>
-                            <TransitionCollection>
-                                <NavigationThemeTransition>
-                                    <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                        <EntranceNavigationTransitionInfo/>
-                                    </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                </NavigationThemeTransition>
-                            </TransitionCollection>
-                        </Frame.ContentTransitions>
-                        <TextBlock Text=" " VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Frame>
                 </Grid>
             </PivotItem>
             <PivotItem>
@@ -281,20 +261,20 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Frame Grid.Column="1" x:Name="PhpContent" Margin="6,0,0,0">
-                        <Frame.ContentTransitions>
-                            <TransitionCollection>
-                                <NavigationThemeTransition>
-                                    <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                        <EntranceNavigationTransitionInfo/>
-                                    </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                </NavigationThemeTransition>
-                            </TransitionCollection>
-                        </Frame.ContentTransitions>
-                        <TextBlock Text=" " VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Frame>
                 </Grid>
             </PivotItem>
         </Pivot>
+        <Frame Grid.Row="1" Grid.Column="1" x:Name="TicketDetailsContent" Margin="6,38,0,0">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition>
+                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                            <EntranceNavigationTransitionInfo/>
+                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    </NavigationThemeTransition>
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+            <TextBlock Text=" " VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Frame>
     </Grid>
 </views:BasePage>

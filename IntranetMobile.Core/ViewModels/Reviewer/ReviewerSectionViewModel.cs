@@ -17,6 +17,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         private bool _isRefreshing;
         private int _vmId = 1;
         private bool _isCurrentUserFilterOn;
+        private BaseItemReviewViewModel _selectedItem;
 
         public ReviewerSectionViewModel()
         {
@@ -25,6 +26,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         public ReviewerSectionViewModel(ReviewerGroup group)
         {
             _group = group;
+            SelectItem = new MvxCommand<BaseItemReviewViewModel>(item => { SelectedItem = item; });
+
             ReloadCommand = new MvxCommand(async () =>
             {
                 IsRefreshing = true;
@@ -42,6 +45,8 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
             AddReviewCommand = new MvxCommand(AddReviewCommandExecute);
         }
+
+        public ICommand SelectItem { get; set; }
 
         public ICommand AddReviewCommand { get; set; }
 
@@ -72,6 +77,18 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public ObservableCollection<BaseItemReviewViewModel> Reviews { get; private set; }
             = new ObservableCollection<BaseItemReviewViewModel>();
+
+        public BaseItemReviewViewModel SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                if (_selectedItem != null)
+                    ShowViewModel<TicketDetailsViewModel>(new TicketDetailsViewModel.Parameters { TicketId = _selectedItem.TicketId });
+                RaisePropertyChanged(()=> SelectedItem);
+            }
+        }
 
         public ICommand ReloadCommand { get; private set; }
 
