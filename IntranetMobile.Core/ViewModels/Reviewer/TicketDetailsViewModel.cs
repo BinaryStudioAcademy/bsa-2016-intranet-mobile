@@ -56,7 +56,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
-        public bool IsMyTicket => Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId);
+        public bool IsMyTicket => Ticket != null && Ticket.UserServerId.Equals(ServiceBus.UserService.CurrentUser.ServerId);
 
         public UserInfo Author
         {
