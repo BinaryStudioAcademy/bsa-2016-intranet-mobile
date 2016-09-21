@@ -1,6 +1,7 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "Microsoft.Toolkit.Uwp.Notifications": "1.0.0",
     "MvvmCross": "4.2.2",
     "MvvmCross.Platform": "4.2.2",
     "MvvmCross.Plugin.DownloadCache": "4.2.2",
