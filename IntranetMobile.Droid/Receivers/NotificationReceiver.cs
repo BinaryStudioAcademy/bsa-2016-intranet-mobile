@@ -7,12 +7,11 @@ using Android.Util;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
 using IntranetMobile.Droid.Views.Activities;
-using MvvmCross.Platform;
 
 namespace IntranetMobile.Droid.Receivers
 {
     [BroadcastReceiver(Enabled = true)]
-    [IntentFilter(new[] { "com.binarystudio.intranetmobile.CHECK_SERVER_RECORDS" })]
+    [IntentFilter(new[] {"com.binarystudio.intranetmobile.CHECK_SERVER_RECORDS"})]
     public class NotificationReceiver : BroadcastReceiver
     {
         private const int CheckIntervalMin = 1;
@@ -34,7 +33,7 @@ namespace IntranetMobile.Droid.Receivers
             {
                 if (ServiceBus.UserService.CurrentUser == null)
                     return;
-                
+
                 if (_settings.IsNewsNotificationEnabled)
                 {
                     CheckCompanyNews();
@@ -56,7 +55,7 @@ namespace IntranetMobile.Droid.Receivers
         {
             if (_isRunned)
                 return;
-            
+
             try
             {
                 _isRunned = true;
@@ -83,12 +82,9 @@ namespace IntranetMobile.Droid.Receivers
                     if (allReview != null)
                     {
                         var reviewer = allReview.Where(r => !r.UserServerId.
-                                                       Equals(ServiceBus.UserService.CurrentUser.ServerId))
-                                                .OrderByDescending(i => i.DateReview);
-                        if (reviewer.Count() > 0)
-                            _latestReviewDate = reviewer.First().DateReview;
-                        else
-                            _latestReviewDate = DateTime.MinValue;
+                            Equals(ServiceBus.UserService.CurrentUser.ServerId))
+                            .OrderByDescending(i => i.DateReview);
+                        _latestReviewDate = reviewer.Any() ? reviewer.First().DateReview : DateTime.MinValue;
                     }
                 }
 
@@ -96,10 +92,10 @@ namespace IntranetMobile.Droid.Receivers
                 _alarmManager = _context.GetSystemService(Context.AlarmService) as AlarmManager;
                 var intent = new Intent(_context, typeof(NotificationReceiver));
                 _pendingIntent = PendingIntent.GetBroadcast(_context, 0, intent, PendingIntentFlags.UpdateCurrent);
-                _alarmManager.SetRepeating(AlarmType.RtcWakeup,
-                                          0,
-                                          1000 * 60 * CheckIntervalMin,
-                                      _pendingIntent);
+                _alarmManager?.SetRepeating(AlarmType.RtcWakeup,
+                    0,
+                    1000*60*CheckIntervalMin,
+                    _pendingIntent);
             }
             catch (Exception ex)
             {
@@ -125,9 +121,10 @@ namespace IntranetMobile.Droid.Receivers
                 if (DateTime.Compare(_latestCompanyNewsDate, lastDate) < 0)
                 {
                     _latestCompanyNewsDate = lastDate;
-                    var notificationManager = _context.GetSystemService(Context.NotificationService) as NotificationManager;
+                    var notificationManager =
+                        _context.GetSystemService(Context.NotificationService) as NotificationManager;
                     var notification = BuildNotification("We have company news for you", "news", latestNews[0].NewsId);
-                    notificationManager.Notify(NotificationId, notification);
+                    notificationManager?.Notify(NotificationId, notification);
                 }
             }
         }
@@ -141,9 +138,11 @@ namespace IntranetMobile.Droid.Receivers
                 if (DateTime.Compare(_latestWeeklyNewsDate, lastDate) < 0)
                 {
                     _latestCompanyNewsDate = lastDate;
-                    var notificationManager = _context.GetSystemService(Context.NotificationService) as NotificationManager;
-                    var notification = BuildNotification("We have weekly news for you", "weekly", latestWeeklies[0].WeeklyId);
-                    notificationManager.Notify(NotificationId, notification);
+                    var notificationManager =
+                        _context.GetSystemService(Context.NotificationService) as NotificationManager;
+                    var notification = BuildNotification("We have weekly news for you", "weekly",
+                        latestWeeklies[0].WeeklyId);
+                    notificationManager?.Notify(NotificationId, notification);
                 }
             }
         }
@@ -154,18 +153,20 @@ namespace IntranetMobile.Droid.Receivers
             if (allReview != null)
             {
                 var reviewer = allReview.Where(r => !r.UserServerId.
-                                               Equals(ServiceBus.UserService.CurrentUser.ServerId))
-                                        .OrderByDescending(i => i.DateReview);
-                if (reviewer.Count() > 0)
+                    Equals(ServiceBus.UserService.CurrentUser.ServerId))
+                    .OrderByDescending(i => i.DateReview);
+                if (reviewer.Any())
                 {
                     var request = reviewer.First();
                     var lastDate = request.DateReview;
                     if (DateTime.Compare(_latestReviewDate, lastDate) < 0)
                     {
                         _latestReviewDate = lastDate;
-                        var notificationManager = _context.GetSystemService(Context.NotificationService) as NotificationManager;
-                        var notification = BuildNotification("Reviewer contains new request", "reviewer", request.TicketId);
-                        notificationManager.Notify(NotificationId, notification);
+                        var notificationManager =
+                            _context.GetSystemService(Context.NotificationService) as NotificationManager;
+                        var notification = BuildNotification("Reviewer contains new request", "reviewer",
+                            request.TicketId);
+                        notificationManager?.Notify(NotificationId, notification);
                     }
                 }
             }
@@ -176,18 +177,19 @@ namespace IntranetMobile.Droid.Receivers
             var mainActivityIntent = new Intent(_context, typeof(MainActivity));
             mainActivityIntent.PutExtra("current_fragment", extrasString);
             mainActivityIntent.PutExtra("item_id", itemId);
-            var pendingIntent = PendingIntent.GetActivity(_context, 1, mainActivityIntent, PendingIntentFlags.UpdateCurrent);
+            var pendingIntent = PendingIntent.GetActivity(_context, 1, mainActivityIntent,
+                PendingIntentFlags.UpdateCurrent);
 
             var notificationBuilder = new NotificationCompat.Builder(_context)
-                                                        .SetAutoCancel(true)
-                                                        .SetSmallIcon(Resource.Drawable.ic_notification)
-                                                        .SetContentTitle("Binary Studio")
-                                                        .SetContentText(text)
-                                                        .SetContentIntent(pendingIntent);
+                .SetAutoCancel(true)
+                .SetSmallIcon(Resource.Drawable.ic_notification)
+                .SetContentTitle("Binary Studio")
+                .SetContentText(text)
+                .SetContentIntent(pendingIntent);
 
             if (_settings.IsVibrationEnabled)
             {
-                notificationBuilder.SetVibrate(new long[]{ 400, 500, 400, 400});
+                notificationBuilder.SetVibrate(new long[] {400, 500, 400, 400});
             }
 
             var notification = notificationBuilder.Build();
@@ -195,4 +197,3 @@ namespace IntranetMobile.Droid.Receivers
         }
     }
 }
-
