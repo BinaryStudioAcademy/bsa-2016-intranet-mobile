@@ -6,49 +6,67 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Intranet.WindowsUWP.Views"
+    xmlns:converters="using:Intranet.WindowsUWP.Views.Converters"
     mc:Ignorable="d">
+    
+    <views:BasePage.Resources>
+        <converters:BoolToBlackLikeIconConverter x:Key="BoolToBlackLikeIconConverter"/>
+    </views:BasePage.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView ItemsSource="{Binding Comments}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <StackPanel Orientation="Horizontal" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 10">
-                            <Ellipse Width="36" Height="36" Margin="0 0 8 0" VerticalAlignment="Top">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding PreviewImageUri}" Stretch="UniformToFill" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Name}" Margin="6 0 0 6"/>
-                                <TextBlock Text="{Binding Body}" Margin="6"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Date}" Margin="6"/>
-                                    <TextBlock Text="{Binding CountLikes}" Margin="6"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0">
+            <Button Content="Back" Margin="7" Click="OnClick"/>
+        </Grid>
+        <Grid
+            Grid.Row="1">
+            <ListView ItemsSource="{Binding Comments}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 10">
+                                <Ellipse Width="36" Height="36" Margin="0 0 8 0" VerticalAlignment="Top">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding PreviewImageUri}" Stretch="UniformToFill" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Margin="6 0 0 6"/>
+                                    <TextBlock Text="{Binding Body}" Margin="6"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Date}" Margin="6"/>
+                                        <TextBlock Text="{Binding CountLikes}" Margin="6"/>
+                                        <Button Command="{Binding ClickLikeCommand}" Background="White">
+                                            <Image Source="{Binding IsLiked, Converter={StaticResource BoolToBlackLikeIconConverter}}"/>
+                                        </Button>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <StackPanel Orientation="Horizontal">
-            <TextBox           
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Orientation="Horizontal">
+                <TextBox           
                 Text="{Binding NewComment, Mode=TwoWay}"              
                 Height="15" 
-                Width="350" 
+                Width="350"       
                 VerticalAlignment="Bottom" 
                 HorizontalAlignment="Stretch"
                 PlaceholderText="Write a comment"
                 Margin="6"/>
-            <Button 
+                <Button 
                 Content="Send" 
                 Command="{Binding ClickSendCommentCommand}" 
                 VerticalAlignment="Bottom"    
                 HorizontalAlignment="Right"
                 Margin="6"/>
-        </StackPanel>
-
+            </StackPanel>
+        </Grid>
     </Grid>
 
 </views:BasePage>

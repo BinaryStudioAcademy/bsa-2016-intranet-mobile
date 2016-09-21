@@ -28,5 +28,10 @@ namespace Intranet.WindowsUWP.Views.News
         {
             this.InitializeComponent();
         }
+
+        public void OnClick(object sender, RoutedEventArgs args)
+        {
+            this.Frame.GoBack();
+        }
     }
 }

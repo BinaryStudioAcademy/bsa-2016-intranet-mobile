@@ -14,6 +14,16 @@
     </views:BasePage.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <WebView helpers:HtmlProperties.HtmlString="{Binding Body, Converter={StaticResource BinaryStudioHtmlConvertor}}"></WebView>
+       <Grid.RowDefinitions>
+           <RowDefinition Height="Auto"/>
+           <RowDefinition Height="*"/>
+       </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Button  Content="Comments" Command="{Binding CommentCommand}" Margin="7" HorizontalAlignment="Right"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <WebView helpers:HtmlProperties.HtmlString="{Binding Body, Converter={StaticResource BinaryStudioHtmlConvertor}}"></WebView>
+        </Grid>
     </Grid>
 </views:BasePage>
