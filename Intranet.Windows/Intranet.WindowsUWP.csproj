@@ -139,6 +139,9 @@
     <Compile Include="Views\News\NewsDetailsPage.xaml.cs">
       <DependentUpon>NewsDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Reviewer\CommentsReviewerPage.xaml.cs">
+      <DependentUpon>CommentsReviewerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Reviewer\ReviewerPage.xaml.cs">
       <DependentUpon>ReviewerPage.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\News\WeekliesDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reviewer\CommentsReviewerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
