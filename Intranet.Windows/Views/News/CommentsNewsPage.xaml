@@ -40,7 +40,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding Date}" Margin="6"/>
                                         <TextBlock Text="{Binding CountLikes}" Margin="6"/>
-                                        <Button Command="{Binding ClickLikeCommand}" Background="White">
+                                        <Button Command="{Binding ClickLikeCommand}" Background="White" BorderBrush="White">
                                             <Image Source="{Binding IsLiked, Converter={StaticResource BoolToBlackLikeIconConverter}}"/>
                                         </Button>
                                     </StackPanel>
