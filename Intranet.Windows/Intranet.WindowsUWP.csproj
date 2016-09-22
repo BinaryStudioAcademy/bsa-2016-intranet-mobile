@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Views\Converters\BinaryStudioHtmlConvertor.cs" />
     <Compile Include="Views\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Views\Converters\BoolToBlackLikeIconConverter.cs" />
     <Compile Include="Views\Converters\BoolToJoinUndoConverter.cs" />
     <Compile Include="Views\Converters\BoolToStarOpacityConverter.cs" />
     <Compile Include="Views\Converters\InversBoolToVisibilityConverter.cs" />
@@ -132,8 +133,14 @@
     <Compile Include="Views\News\AllNewsPage.xaml.cs">
       <DependentUpon>AllNewsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\News\CommentsNewsPage.xaml.cs">
+      <DependentUpon>CommentsNewsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\News\NewsDetailsPage.xaml.cs">
       <DependentUpon>NewsDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reviewer\CommentsReviewerPage.xaml.cs">
+      <DependentUpon>CommentsReviewerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Reviewer\ReviewerPage.xaml.cs">
       <DependentUpon>ReviewerPage.xaml</DependentUpon>
@@ -171,6 +178,8 @@
     <Content Include="Images\exit_to_app_black.png" />
     <Content Include="Images\group_black.png" />
     <Content Include="Images\home_black.png" />
+    <Content Include="Images\ic_favorite_black_24dp.png" />
+    <Content Include="Images\ic_favorite_border_black_24dp.png" />
     <Content Include="Images\ic_clear_black_24dp.png" />
     <Content Include="Images\ic_done_black_24dp.png" />
     <Content Include="Images\ic_grade_black_24dp.png" />
@@ -225,11 +234,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\News\CommentsNewsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\News\NewsDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\News\WeekliesDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reviewer\CommentsReviewerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
