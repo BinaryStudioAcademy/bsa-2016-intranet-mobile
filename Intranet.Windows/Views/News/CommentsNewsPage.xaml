@@ -65,7 +65,7 @@
                                         <RowDefinition Height="1*"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="0" Text="{Binding Name}" Margin="6,0" FontSize="13" Foreground="{StaticResource SolidBrushGray1}"/>
-                                    <TextBlock Grid.Row="1" Text="{Binding Body}" Margin="6" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Grid.Row="1" Text="{Binding Body}" Margin="6,6,22,6" TextWrapping="WrapWholeWords"/>
                                     <StackPanel Grid.Row="2" Orientation="Horizontal">
                                         <TextBlock Text="{Binding Date}" Margin="6,0" FontSize="12" VerticalAlignment="Center" Foreground="{StaticResource SolidBrushGray1}"/>
                                         <TextBlock Text="{Binding CountLikes}" Margin="28,0,6,0" FontSize="12" VerticalAlignment="Center"/>
