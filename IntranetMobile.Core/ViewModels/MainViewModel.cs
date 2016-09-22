@@ -1,4 +1,5 @@
-﻿using IntranetMobile.Core.ViewModels.News;
+﻿using IntranetMobile.Core.Services;
+using IntranetMobile.Core.ViewModels.News;
 using MvvmCross.Platform;
 
 namespace IntranetMobile.Core.ViewModels
@@ -14,6 +15,9 @@ namespace IntranetMobile.Core.ViewModels
         {
             base.Start();
             Menu.Start();
+
+
+            ServiceBus.AlertService.ShowPopupMessage("BLAH");
         }
 
         public MenuViewModel Menu { get; }
