@@ -10,7 +10,8 @@
     xmlns:converters="using:Intranet.WindowsUWP.Views.Converters"
     mc:Ignorable="d">
     <views:BasePage.Resources>
-        <converters:BinaryStudioHtmlConvertor x:Key="BinaryStudioHtmlConvertor"></converters:BinaryStudioHtmlConvertor>
+        <converters:BinaryStudioHtmlConvertor x:Key="BinaryStudioHtmlConvertor"/>
+        <converters:BoolToBlackLikeIconConverter x:Key="BoolToBlackLikeIconConverter"/>
     </views:BasePage.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -19,9 +20,24 @@
            <RowDefinition Height="*"/>
        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Button  Content="Comments" Command="{Binding CommentCommand}" Margin="7" HorizontalAlignment="Right"/>
-        </Grid>
+        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0">
+            <Button FontFamily="Segoe MDL2 Assets"
+                    Content="&#xE90A;"
+                    Style="{StaticResource TransparentButton}"
+                    Command="{Binding CommentCommand}"
+                    Margin="3,6"
+                    BorderThickness="0"
+                    VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding CommentsCount}" VerticalAlignment="Center"/>
+            <Button FontFamily="Segoe MDL2 Assets"
+                    Content="{Binding IsLiked, Converter={StaticResource BoolToBlackLikeIconConverter}}"
+                    Style="{StaticResource TransparentButton}"
+                    Command="{Binding LikeCommand}"
+                    Margin="3,6"
+                    BorderThickness="0"
+                    VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding LikesCount}" VerticalAlignment="Center"/>
+        </StackPanel>
         <Grid Grid.Row="1">
             <WebView helpers:HtmlProperties.HtmlString="{Binding Body, Converter={StaticResource BinaryStudioHtmlConvertor}}"></WebView>
         </Grid>

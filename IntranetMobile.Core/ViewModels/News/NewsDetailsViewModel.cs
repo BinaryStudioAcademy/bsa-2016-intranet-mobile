@@ -22,13 +22,13 @@ namespace IntranetMobile.Core.ViewModels.News
 
         public MvxCommand CommentCommand { get; private set; }
 
-        public string Body => _dataModel.Body;
+        public string Body => _dataModel == null ? string.Empty : _dataModel.Body;
 
-        public int LikesCount => _dataModel.Likes.Count;
+        public int LikesCount => _dataModel?.Likes.Count ?? 0;
 
-        public int CommentsCount => _dataModel.Comments.Count;
+        public int CommentsCount => _dataModel?.Comments.Count ?? 0;
 
-        public bool IsLiked => _dataModel.Likes.Contains(ServiceBus.UserService.CurrentUser.ServerId);
+        public bool IsLiked => _dataModel?.Likes.Contains(ServiceBus.UserService.CurrentUser.ServerId) ?? false;
 
         public UserInfo Author { get; set; }
 

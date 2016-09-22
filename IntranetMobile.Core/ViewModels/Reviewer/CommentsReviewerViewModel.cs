@@ -14,7 +14,7 @@ namespace IntranetMobile.Core
         public CommentsReviewerViewModel()
         {
             Comments = new ObservableCollection<CommentsReviewerItemViewModel>();
-            ClickSendCommentCommand = new MvxCommand(SendCommentExecute);
+            SendCommentCommand = new MvxCommand(SendCommentExecute);
             Title = "Comments";
         }
 
@@ -47,7 +47,7 @@ namespace IntranetMobile.Core
             IsBusy = false;
         }
 
-        public ICommand ClickSendCommentCommand { get; private set; }
+        public ICommand SendCommentCommand { get; private set; }
 
         public string NewComment
         {

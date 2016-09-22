@@ -19,51 +19,94 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Row="0">
-            <Button Content="Back" Margin="7" Click="OnClick"/>
+            <Button
+                Style="{StaticResource TransparentButton}"
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE0A6;"
+                Margin="7"
+                BorderThickness="0"
+                Click="OnClick"/>
         </Grid>
         <Grid Row="1">
-            <ListView ItemsSource="{Binding Comments}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="54"/>
+            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding Comments}" Grid.Row="0">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <StackPanel Orientation="Horizontal" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 10">
-                                <Ellipse Width="36" Height="36" Margin="0 0 8 0" VerticalAlignment="Top">
+                            <Grid HorizontalAlignment="Left" Margin="0 0 0 10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="54"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Grid.Column="0" Width="36" Height="36" Margin="8, 0" VerticalAlignment="Top">
                                     <Ellipse.Fill>
                                         <ImageBrush ImageSource="{Binding PreviewImageUri}" Stretch="UniformToFill" />
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Name}" Margin="6 0 0 6"/>
-                                    <TextBlock Text="{Binding Body}" Margin="6"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Date}" Margin="6"/>
-                                        <TextBlock Text="{Binding CountLikes}" Margin="6"/>
-                                        <Button Command="{Binding ClickLikeCommand}" Background="White" BorderBrush="White">
-                                            <Image Source="{Binding IsLiked, Converter={StaticResource BoolToBlackLikeIconConverter}}"/>
-                                        </Button>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{Binding Name}" Margin="6,0" FontSize="13" Foreground="{StaticResource SolidBrushGray1}"/>
+                                    <TextBlock Grid.Row="1" Text="{Binding Body}" Margin="6" TextWrapping="WrapWholeWords"/>
+                                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Date}" Margin="6,0" FontSize="12" VerticalAlignment="Center" Foreground="{StaticResource SolidBrushGray1}"/>
+                                        <TextBlock Text="{Binding CountLikes}" Margin="28,0,6,0" FontSize="12" VerticalAlignment="Center"/>
+                                        <Button Command="{Binding ClickLikeCommand}"
+                                                Background="Transparent"
+                                                FontSize="12"
+                                                FontFamily="Segoe MDL2 Assets"
+                                                BorderThickness="0"
+                                                Margin="0"
+                                                Padding="2"
+                                                Height="22"
+                                                Width="22"
+                                                Content="{Binding IsLiked, Converter={StaticResource BoolToBlackLikeIconConverter}}"/>
                                     </StackPanel>
-                                </StackPanel>
-                            </StackPanel>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackPanel Orientation="Horizontal">
-                <TextBox           
-                Text="{Binding NewComment, Mode=TwoWay}"              
-                Height="15" 
-                Width="350"       
-                VerticalAlignment="Bottom" 
-                HorizontalAlignment="Stretch"
-                PlaceholderText="Write a comment"
-                Margin="6"/>
+            <Grid Grid.Row="1" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="54"/>
+                </Grid.ColumnDefinitions>
+                <TextBox  
+                    Grid.Column="0"
+                    Text="{Binding NewComment, Mode=TwoWay}"       
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Stretch"
+                    PlaceholderText="Write a comment"
+                    Margin="6"/>
                 <Button 
-                Content="Send" 
-                Command="{Binding ClickSendCommentCommand}" 
-                VerticalAlignment="Bottom"    
-                HorizontalAlignment="Right"
-                Margin="6"/>
-            </StackPanel>
+                    Grid.Column="1"
+                    FontFamily="Segoe MDL2 Assets"
+                    Content="&#xE725;"
+                    FontSize="21"
+                    Command="{Binding SendCommentCommand}" 
+                    VerticalAlignment="Center"
+                    Margin="6"/>
+            </Grid>
         </Grid>
     </Grid>
 

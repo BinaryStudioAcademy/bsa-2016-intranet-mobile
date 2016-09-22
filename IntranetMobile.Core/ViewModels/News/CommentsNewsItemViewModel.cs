@@ -112,11 +112,8 @@ namespace IntranetMobile.Core.ViewModels.News
 
         private async void ClickLikeCommandExecute()
         {
-            
-
             if (!IsLiked)
             {
-                
                 var result = await ServiceBus.NewsService.LikeCommentAsync(_newsId, _commentId);
 
                 if (result)
@@ -125,7 +122,6 @@ namespace IntranetMobile.Core.ViewModels.News
                     CountLikes = CountLikes + 1;
                 }
             }
-
             else
             {
                 var result = await ServiceBus.NewsService.UnlikeCommentAsync(_newsId, _commentId);

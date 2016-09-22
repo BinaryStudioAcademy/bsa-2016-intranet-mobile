@@ -13,7 +13,7 @@ namespace IntranetMobile.Core.ViewModels.News
         public CommentsNewsViewModel()
         {
             Comments = new ObservableCollection<CommentsNewsItemViewModel>();
-            ClickSendCommentCommand = new MvxCommand(SendCommentExecute);
+            SendCommentCommand = new MvxCommand(SendCommentExecute);
             Title = "Comments";
         }
 
@@ -46,7 +46,7 @@ namespace IntranetMobile.Core.ViewModels.News
             IsBusy = false;
         }
 
-        public ICommand ClickSendCommentCommand { get; private set; }
+        public ICommand SendCommentCommand { get; private set; }
 
         public string NewComment
         {
