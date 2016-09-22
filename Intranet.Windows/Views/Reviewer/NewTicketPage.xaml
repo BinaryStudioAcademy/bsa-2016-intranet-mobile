@@ -13,30 +13,25 @@
     </views:BasePage.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Margin="8,16,8,0">
-            <StackPanel Orientation="Horizontal" Margin="0,8,0,8">
-                <Image Width="32" Height="32" Source="../../Images/ic_title_black_24dp.png" Margin="8,0,8,0" />
-                <TextBox Text="{Binding TicketTitle, Mode=TwoWay}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,8,0,8">
-                <Image Width="32" Height="32" Source="../../Images/ic_extension_black_24dp.png" Margin="8,0,8,0"/>
-                <TextBox Text="{Binding Details, Mode=TwoWay}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,8,0,8">
-                <Image Width="32" Height="32" Source="../../Images/ic_schedule_black_24dp.png" Margin="8,0,8,0"/>
-                <DatePicker x:Name="DatePicker" DateChanged="DatePicker_OnDateChanged" />
-                <TimePicker x:Name="TimePicker" TimeChanged="TimePicker_OnTimeChanged" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,8,0,8">
-                <Image Width="32" Height="32" Source="../../Images/ic_flag_black_24dp.png"  Margin="8,0,8,0"/>
-                <TextBox Text="{Binding Tags, Mode=TwoWay}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,8,0,8">
-                <Image Width="32" Height="32" Source="../../Images/group_black.png" Margin="8,0,8,0"/>
+            <TextBox Text="{Binding TicketTitle, Mode=TwoWay}" PlaceholderText="Title" Margin="8"/>
+            <Grid Margin="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <DatePicker Grid.Column="0" x:Name="DatePicker" DateChanged="DatePicker_OnDateChanged" HorizontalAlignment="Stretch"/>
+                <TimePicker Grid.Column="2" x:Name="TimePicker" TimeChanged="TimePicker_OnTimeChanged" HorizontalAlignment="Stretch"/>
+            </Grid>
+            <TextBox Text="{Binding Details, Mode=TwoWay}" PlaceholderText="Details" Margin="8"/>
+            <TextBox Text="{Binding Tags, Mode=TwoWay}" PlaceholderText="Tags" Margin="8"/>
+            <StackPanel Orientation="Horizontal" Margin="8">
+                <TextBlock Text="Group: " VerticalAlignment="Center" Margin="0,0,16,0"/>
                 <RadioButton GroupName="1" Content=".Net" IsChecked="{Binding Group, Converter={StaticResource EnumBooleanConverter},ConverterParameter=DotNet, Mode=TwoWay}"></RadioButton>
                 <RadioButton GroupName="1" Content="Js" IsChecked="{Binding Group,  Converter={StaticResource EnumBooleanConverter},ConverterParameter=JavaScript, Mode=TwoWay}"></RadioButton>
                 <RadioButton GroupName="1" Content="Php" IsChecked="{Binding Group, Converter={StaticResource EnumBooleanConverter},ConverterParameter=Php, Mode=TwoWay}"></RadioButton>
             </StackPanel>
-            <Button Content="CreateTicket" Command="{Binding CreateTicketCommand}"/>
+            <Button Content="Create" Width="140" Command="{Binding CreateTicketCommand}" Margin="16" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </views:BasePage>

@@ -32,7 +32,6 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
-            <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -44,9 +43,7 @@
             <TextBlock Margin="26,0,10,0" Text="Only My" VerticalAlignment="Center"/>
             <ToggleSwitch IsOn="{Binding IsFilterActive, Mode=TwoWay}" VerticalAlignment="Center"/>
         </StackPanel>
-        <Button Grid.Column="0" Grid.Row="1" Content="Create Ticket" Command="{Binding CreateNewTicketCommand}"></Button>
-
-        <Pivot HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged" Grid.Row="2">
+        <Pivot HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged" Grid.Row="1">
             <PivotItem>
                 <PivotItem.Header>
                     <Grid VerticalAlignment="Center" Margin="0, 0, -16, 0">
@@ -278,5 +275,23 @@
             </Frame.ContentTransitions>
             <TextBlock Text=" " VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Frame>
+        <Button Grid.Column="1"
+                Grid.Row="1"
+                Margin="0,8,0,0"
+                VerticalAlignment="Top"
+                Style="{StaticResource TransparentButton}"
+                Command="{Binding CreateNewTicketCommand}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Text="Add Review"
+                    Margin="0,0,10,0"/>
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    FontSize="12"
+                    Text="&#xE710;"
+                    FontFamily="Segoe MDL2 Assets"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </views:BasePage>
