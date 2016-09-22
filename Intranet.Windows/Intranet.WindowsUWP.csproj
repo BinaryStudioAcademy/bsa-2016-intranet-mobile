@@ -112,6 +112,7 @@
     <Compile Include="Views\Converters\BoolToBlackLikeIconConverter.cs" />
     <Compile Include="Views\Converters\BoolToJoinUndoConverter.cs" />
     <Compile Include="Views\Converters\BoolToStarOpacityConverter.cs" />
+    <Compile Include="Views\Converters\EnumBooleanConverter.cs" />
     <Compile Include="Views\Converters\InversBoolToVisibilityConverter.cs" />
     <Compile Include="Views\Login\ForgotPasswordPage.xaml.cs">
       <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
@@ -138,6 +139,9 @@
     </Compile>
     <Compile Include="Views\News\NewsDetailsPage.xaml.cs">
       <DependentUpon>NewsDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reviewer\NewTicketPage.xaml.cs">
+      <DependentUpon>NewTicketPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Reviewer\ReviewerPage.xaml.cs">
       <DependentUpon>ReviewerPage.xaml</DependentUpon>
@@ -175,11 +179,15 @@
     <Content Include="Images\exit_to_app_black.png" />
     <Content Include="Images\group_black.png" />
     <Content Include="Images\home_black.png" />
+    <Content Include="Images\ic_extension_black_24dp.png" />
     <Content Include="Images\ic_favorite_black_24dp.png" />
     <Content Include="Images\ic_favorite_border_black_24dp.png" />
     <Content Include="Images\ic_clear_black_24dp.png" />
     <Content Include="Images\ic_done_black_24dp.png" />
+    <Content Include="Images\ic_flag_black_24dp.png" />
     <Content Include="Images\ic_grade_black_24dp.png" />
+    <Content Include="Images\ic_schedule_black_24dp.png" />
+    <Content Include="Images\ic_title_black_24dp.png" />
     <Content Include="Images\logo_black_1.png" />
     <Content Include="Images\news_default.png" />
     <Content Include="Images\not_ready.png" />
@@ -240,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\News\WeekliesDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reviewer\NewTicketPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

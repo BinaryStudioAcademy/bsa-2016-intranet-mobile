@@ -1,4 +1,6 @@
-﻿using IntranetMobile.Core.Services;
+﻿using System.Windows.Input;
+using IntranetMobile.Core.Services;
+using MvvmCross.Core.ViewModels;
 
 namespace IntranetMobile.Core.ViewModels.Reviewer
 {
@@ -8,7 +10,13 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
 
         public ReviewerViewModel()
         {
+            CreateNewTicketCommand = new MvxCommand(CreateNewTicketCommandExecute);
             Title = "Reviewer";
+        }
+
+        private void CreateNewTicketCommandExecute()
+        {
+            ShowViewModel<NewTicketViewModel>();
         }
 
         public bool IsFilterActive
@@ -23,6 +31,7 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
             }
         }
 
+        public ICommand CreateNewTicketCommand { get; set; }
         public ReviewerSectionViewModel DotNet { get; } = new ReviewerSectionViewModel(ReviewerGroup.DotNet);
         public ReviewerSectionViewModel JavaScript { get; } = new ReviewerSectionViewModel(ReviewerGroup.JavaScript);
         public ReviewerSectionViewModel Php { get; } = new ReviewerSectionViewModel(ReviewerGroup.Php);

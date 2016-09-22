@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Input;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
-using IntranetMobile.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
 
-namespace IntranetMobile.Core
+namespace IntranetMobile.Core.ViewModels.Reviewer
 {
     public class NewTicketViewModel : BaseViewModel
     {
@@ -15,12 +13,14 @@ namespace IntranetMobile.Core
         private string _tags;
         private ReviewerGroup _group;
         private DateTime _date;
+        private DateTimeOffset _dateTimeOffset;
+        private TimeSpan _timeSpan;
 
         public NewTicketViewModel()
         {
             Title = "Add Review";
             Date = DateTime.Now;
-            CreateTicketCommand = new MvxCommand(CreateTicket);
+            CreateTicketCommand = new MvxCommand(CreateTicketCommandExecute);
         }
 
         public ICommand CreateTicketCommand { get; set; }
@@ -92,24 +92,24 @@ namespace IntranetMobile.Core
             }
         }
 
-        public async void CreateTicket()
+        public async void CreateTicketCommandExecute()
         {
             if (string.IsNullOrWhiteSpace(TicketTitle))
             {
                 ServiceBus.AlertService.ShowMessageBox("Add Review", "Please fill the title of your review");
                 return;
             }
-            else if (string.IsNullOrWhiteSpace(Details))
+            if (string.IsNullOrWhiteSpace(Details))
             {
                 ServiceBus.AlertService.ShowMessageBox("Add Review", "Please fill the description of your review");
                 return;
             }
-            else if ((Date - DateTime.Now).TotalHours < 1)
+            if ((Date - DateTime.Now).TotalHours < 1)
             {
                 ServiceBus.AlertService.ShowMessageBox("Add Review", "Please check the date of your review");
                 return;
             }
-            else if (Group == ReviewerGroup.None)
+            if (Group == ReviewerGroup.None)
             {
                 ServiceBus.AlertService.ShowMessageBox("Add Review", "Please select a category");
                 return;
@@ -117,12 +117,14 @@ namespace IntranetMobile.Core
 
             try
             {
-                var ticket = new Ticket();
+                var ticket = new Ticket
+                {
+                    TitleName = TicketTitle,
+                    DateReview = Date,
+                    ReviewText = Details,
+                    GroupId = ((int) Group).ToString()
+                };
 
-                ticket.TitleName = TicketTitle;
-                ticket.DateReview = Date;
-                ticket.ReviewText = Details;
-                ticket.GroupId = ((int)Group).ToString();
 
                 var s = Tags.Replace(" ", ",")
                             .Replace(",,", ",")

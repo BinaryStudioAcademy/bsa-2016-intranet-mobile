@@ -32,6 +32,7 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
+            <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -43,8 +44,9 @@
             <TextBlock Margin="26,0,10,0" Text="Only My" VerticalAlignment="Center"/>
             <ToggleSwitch IsOn="{Binding IsFilterActive, Mode=TwoWay}" VerticalAlignment="Center"/>
         </StackPanel>
+        <Button Grid.Column="0" Grid.Row="1" Content="Create Ticket" Command="{Binding CreateNewTicketCommand}"></Button>
 
-        <Pivot HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged" Grid.Row="1">
+        <Pivot HorizontalAlignment="Center" x:Name="Tabs" SelectionChanged="Pivot_OnSelectionChanged" Grid.Row="2">
             <PivotItem>
                 <PivotItem.Header>
                     <Grid VerticalAlignment="Center" Margin="0, 0, -16, 0">
@@ -264,7 +266,7 @@
                 </Grid>
             </PivotItem>
         </Pivot>
-        <Frame Grid.Row="1" Grid.Column="1" x:Name="TicketDetailsContent" Margin="6,38,0,0">
+        <Frame Grid.Row="2" Grid.Column="1" x:Name="TicketDetailsContent" Margin="6,38,0,0">
             <Frame.ContentTransitions>
                 <TransitionCollection>
                     <NavigationThemeTransition>
