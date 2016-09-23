@@ -67,7 +67,8 @@
                        HorizontalAlignment="Left"
                        Foreground="{StaticResource SolidBrushGray3}"
                        Text="{Binding TicketText}" 
-                        FontSize="17" />
+                       TextWrapping="WrapWholeWords"
+                       FontSize="17" />
             <ListView ItemsSource="{Binding Tags}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
