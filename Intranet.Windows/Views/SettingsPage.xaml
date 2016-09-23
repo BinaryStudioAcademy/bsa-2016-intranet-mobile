@@ -42,10 +42,10 @@
             <TextBlock Text="Notifications" Foreground="Black" Style="{StaticResource TitleTextBlockStyle}"/>
             <ToggleSwitch Header="Notify about company news"
                           Margin="0,16,0,0"
-                          IsOn="{Binding IsNewsNotificationEnabled}"/>
+                          IsOn="{Binding Path=IsNewsNotificationEnabled, Mode=TwoWay}"/>
             <ToggleSwitch Header="Notify about new Reviewer tickets"
                           Margin="0,16,0,0"
-                          IsOn="{Binding IsReviewerNotificationEnabled}"/>
+                          IsOn="{Binding Path=IsReviewerNotificationEnabled, Mode=TwoWay}"/>
         </StackPanel>
     </Grid>
 </local:BasePage>

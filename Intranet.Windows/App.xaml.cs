@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -17,6 +19,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Intranet.WindowsUWP.Services;
+using IntranetMobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
@@ -27,6 +31,9 @@ namespace Intranet.WindowsUWP
     /// </summary>
     sealed partial class App : Application
     {
+        private bool _isActive;
+        private CancellationTokenSource _cancellationToken;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -50,6 +57,40 @@ namespace Intranet.WindowsUWP
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            Window.Current.CoreWindow.VisibilityChanged += (sender, args) =>
+            {
+                try
+                {
+                    if (args.Visible)
+                    {
+                        _isActive = true;
+                        _cancellationToken?.Cancel();
+                    }
+                    else
+                    {
+                        _isActive = false;
+                        _cancellationToken = new CancellationTokenSource();
+                        Task.Run(async () =>
+                        {
+                            NotificationService.Run(ServiceBus.SettingsService.GetSettings());
+                            while (true)
+                            {
+                                if (_cancellationToken != null && _cancellationToken.IsCancellationRequested)
+                                    break;
+
+                                await Task.Delay(TimeSpan.FromSeconds(NotificationService.CheckIntervalSec));
+                                if (!_isActive)
+                                    NotificationService.CheckServerState();
+                            }
+                        }, _cancellationToken.Token);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //TODO: log
+                }
+            };
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -118,7 +159,7 @@ namespace Intranet.WindowsUWP
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
-
+        
         /// <summary>
         /// Invoked when application execution is being suspended.  Application state is saved
         /// without knowing whether the application will be terminated or resumed with the contents

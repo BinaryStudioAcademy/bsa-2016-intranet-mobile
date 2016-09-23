@@ -15,9 +15,6 @@ namespace IntranetMobile.Core.ViewModels
         {
             base.Start();
             Menu.Start();
-
-
-            ServiceBus.AlertService.ShowPopupMessage("BLAH");
         }
 
         public MenuViewModel Menu { get; }
