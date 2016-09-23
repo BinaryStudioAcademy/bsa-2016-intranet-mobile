@@ -13,18 +13,27 @@
     </views:BasePage.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Margin="8,16,8,0">
-            <TextBox Text="{Binding TicketTitle, Mode=TwoWay}" PlaceholderText="Title" Margin="8"/>
-            <Grid Margin="8">
+            <TextBlock Text="Title" Margin="8,8,8,4"/>
+            <TextBox Text="{Binding TicketTitle, Mode=TwoWay}" PlaceholderText="Title" Margin="8,4,8,8"/>
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="16"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <DatePicker Grid.Column="0" x:Name="DatePicker" DateChanged="DatePicker_OnDateChanged" HorizontalAlignment="Stretch"/>
-                <TimePicker Grid.Column="2" x:Name="TimePicker" TimeChanged="TimePicker_OnTimeChanged" HorizontalAlignment="Stretch"/>
+                <StackPanel Grid.Column="0" >
+                    <TextBlock Text="Date" Margin="8,8,8,4"/>
+                    <DatePicker x:Name="DatePicker" DateChanged="DatePicker_OnDateChanged" Margin="8,4,8,8" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" >
+                    <TextBlock Text="Time" Margin="8,8,8,4"/>
+                    <TimePicker x:Name="TimePicker" TimeChanged="TimePicker_OnTimeChanged" Margin="8,4,8,8" HorizontalAlignment="Stretch"/>
+                </StackPanel>
             </Grid>
-            <TextBox Text="{Binding Details, Mode=TwoWay}" PlaceholderText="Details" Margin="8"/>
-            <TextBox Text="{Binding Tags, Mode=TwoWay}" PlaceholderText="Tags" Margin="8"/>
+            <TextBlock Text="Details" Margin="8,8,8,4"/>
+            <TextBox Text="{Binding Details, Mode=TwoWay}" PlaceholderText="Details" Margin="8,4,8,8"/>
+            <TextBlock Text="Tags" Margin="8,8,8,4"/>
+            <TextBox Text="{Binding Tags, Mode=TwoWay}" PlaceholderText="Tags" Margin="8,4,8,8"/>
             <StackPanel Orientation="Horizontal" Margin="8">
                 <TextBlock Text="Group: " VerticalAlignment="Center" Margin="0,0,16,0"/>
                 <RadioButton GroupName="1" Content=".Net" IsChecked="{Binding Group, Converter={StaticResource EnumBooleanConverter},ConverterParameter=DotNet, Mode=TwoWay}"></RadioButton>
