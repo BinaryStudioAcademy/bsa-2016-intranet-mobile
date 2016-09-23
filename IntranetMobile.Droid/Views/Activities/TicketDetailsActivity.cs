@@ -31,7 +31,7 @@ namespace IntranetMobile.Droid.Views.Activities
             {
                 case Resource.Id.menu_ticket_details_comment:
                     {
-                        ViewModel.CommentCommand.Execute();
+                        ViewModel.CommentCommand.Execute(null);
                         break;
                     }
             }
