@@ -2,6 +2,7 @@
 using System.Linq;
 using Android.App;
 using Android.Content;
+using Android.Media;
 using Android.Support.V7.App;
 using Android.Util;
 using IntranetMobile.Core.Models;
@@ -14,7 +15,7 @@ namespace IntranetMobile.Droid.Receivers
     [IntentFilter(new[] {"com.binarystudio.intranetmobile.CHECK_SERVER_RECORDS"})]
     public class NotificationReceiver : BroadcastReceiver
     {
-        private const int CheckIntervalMin = 1;
+        private const int CheckIntervalSec = 15;
         private const int NotificationId = 7;
 
         private static bool _isRunned;
@@ -94,7 +95,7 @@ namespace IntranetMobile.Droid.Receivers
                 _pendingIntent = PendingIntent.GetBroadcast(_context, 0, intent, PendingIntentFlags.UpdateCurrent);
                 _alarmManager?.SetRepeating(AlarmType.RtcWakeup,
                     0,
-                    1000*60*CheckIntervalMin,
+                    1000*CheckIntervalSec,
                     _pendingIntent);
             }
             catch (Exception ex)
@@ -191,6 +192,8 @@ namespace IntranetMobile.Droid.Receivers
             {
                 notificationBuilder.SetVibrate(new long[] {400, 500, 400, 400});
             }
+
+            notificationBuilder.SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification));
 
             var notification = notificationBuilder.Build();
             return notification;
