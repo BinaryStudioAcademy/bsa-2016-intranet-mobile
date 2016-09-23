@@ -11,29 +11,33 @@
     <views:BasePage.Resources>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:InversBoolToVisibilityConverter x:Key="InversBooleanToVisibilityCoverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityCoverter" />
         <converters:BoolToJoinUndoConverter x:Key="BoolToJoinUndoConverter" />
     </views:BasePage.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="72" />
-            <ColumnDefinition Width="224" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="22" />
             <RowDefinition Height="22" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <Button 
-            Grid.Row="0" 
-            Grid.Column="1" 
-            HorizontalAlignment="Right" 
-            Margin="7" 
-            Content="Comments"
-            Command="{Binding CommentCommand}">
-        </Button>
+
+        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0" Grid.Column="1">
+            <Button FontFamily="Segoe MDL2 Assets"
+                    Content="&#xE90A;"
+                    Style="{StaticResource TransparentButton}"
+                    Command="{Binding CommentCommand}"
+                    Margin="12,6,3,6"
+                    BorderThickness="0"
+                    VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding CommentsCount}" VerticalAlignment="Center"/>
+        </StackPanel>
 
         <Ellipse Width="42" Height="42" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="0,0,8,0">
             <Ellipse.Fill>
@@ -55,21 +59,41 @@
                    FontSize="17" />
         <TextBlock Grid.Column="1"
                    Grid.Row="2"
-                   Text="{Binding DateTime}"
+                   Text="{Binding AuthorName}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Foreground="{StaticResource SolidBrushGray1}"
                    Margin="0,0,8,0"
                    FontSize="14" />
+        <Button HorizontalAlignment="Right" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Margin="0,0,16,0"
+                Command="{Binding SignCommand}"
+                Width="80"
+                VerticalAlignment="Center"
+                Content="Delete"
+                Visibility="{Binding IsMyTicket,Converter={StaticResource BooleanToVisibilityCoverter}}"/>
         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBlock Margin="8,8,0,8"
+            <StackPanel Orientation="Horizontal" Margin="8,16,8,4">
+                <TextBlock Margin="0,0,4,0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="{StaticResource SolidBrushGray1}"
+                       Text="Date of review:"
+                       FontSize="14" />
+                <TextBlock
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="{StaticResource SolidBrushGray3}"
+                       Text="{Binding ReviewDate}"
+                       FontSize="14" />
+            </StackPanel>
+            <TextBlock Margin="8,8,12,8"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Foreground="{StaticResource SolidBrushGray3}"
                        Text="{Binding TicketText}" 
                        TextWrapping="WrapWholeWords"
                        FontSize="17" />
-            <ListView ItemsSource="{Binding Tags}">
+            <ListView ItemsSource="{Binding Tags}" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -88,108 +112,154 @@
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
             </ListView>
-            <Grid>
+            <Grid Margin="0,8,0,8">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="8" />
                     <ColumnDefinition Width="128" />
-                    <ColumnDefinition Width="128" />
-                     
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="96"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Image Grid.Column="0" Width="42" Height="42" Source="../../Images/group_black.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <TextBlock
                     Grid.Column="1"
                     Text="Offers"
                     FontSize="17"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center" />
-                <Button HorizontalAlignment="Right" Grid.Column="2" Width="48" Height="48" Margin="0,0,8,0"
+                    HorizontalAlignment="Left" />
+                <Button HorizontalAlignment="Right" Grid.Column="2" Margin="0,0,16,0"
                         Command="{Binding SignCommand}"
-                        Visibility="{Binding IsMyTicket,Converter={StaticResource InversBooleanToVisibilityCoverter}}">
-                    <StackPanel>
-                        <TextBlock
-                            Text="{Binding IsSigned, Converter={StaticResource BoolToJoinUndoConverter} }"
-                            FontSize="12"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center" />
-                    </StackPanel>
-                </Button>
-
-                <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
-                          Visibility="{Binding IsMyTicket, 
-                          Converter={StaticResource BooleanToVisibilityConverter}}"
-                          ItemsSource="{Binding Offers}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40" />
-                                    <ColumnDefinition Width="128" />
-                                    <ColumnDefinition Width="128" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="32" />
-                                    <RowDefinition Height="32" />
-                                </Grid.RowDefinitions>
-                                <Ellipse Width="32" Height="32" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
-                                         Margin="0,0,8,0">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="../../Images/avatar_circle_grey.png"
-                                                    Stretch="UniformToFill" />
-                                    </Ellipse.Fill>
-                                </Ellipse>
-
-                                <Ellipse Width="32" Height="32" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
-                                         Margin="0,0,8,0">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{Binding AuthorAvatarUrl}" Stretch="UniformToFill" />
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                                <TextBlock Grid.Column="1"
-                                           Grid.Row="0"
-                                           VerticalAlignment="Center"
-                                           Text="{Binding Name}"
-                                           Foreground="{StaticResource SolidBrushGray3}"
-                                           FontSize="17" />
-                                <TextBlock Grid.Column="1"
-                                           Grid.Row="1"
-                                           Text="{Binding Position}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Left"
-                                           Foreground="{StaticResource SolidBrushGray1}"
-                                           Margin="0,0,8,0"
-                                           FontSize="14" />
-
-                                <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition Width="50" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button HorizontalAlignment="Right" Grid.Column="0" Width="42" Height="42"
-                                            Margin="0,0,8,0"
-                                            Command="{Binding AcceptCommand}"
-                                            Visibility="{Binding IsAccepted,Converter={StaticResource InversBooleanToVisibilityCoverter}}">
-                                        <StackPanel>
-                                            <Image Source="/../../Images/ic_done_black_24dp.png"
-                                                   Stretch="UniformToFill" />
-                                        </StackPanel>
-                                    </Button>
-                                    <Button Grid.Column="1" HorizontalAlignment="Right" Width="42" Height="42"
-                                            Command="{Binding DeclineCommand}" Margin="0,0,8,0">
-                                        <StackPanel>
-                                            <Image Source="/../../Images/ic_clear_black_24dp.png"
-                                                   Stretch="UniformToFill" />
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                        Width="80"
+                        VerticalAlignment="Center"
+                        Content="{Binding IsSigned, Converter={StaticResource BoolToJoinUndoConverter} }"
+                        Visibility="{Binding IsMyTicket,Converter={StaticResource InversBooleanToVisibilityCoverter}}"/>
             </Grid>
         </StackPanel>
+        <ListView Grid.ColumnSpan="2" Grid.Row="4"
+                  Visibility="{Binding IsMyTicket, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  ItemsSource="{Binding Offers}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32" />
+                                <RowDefinition Height="32" />
+                            </Grid.RowDefinitions>
+                            <Ellipse Width="32" Height="32" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                                        HorizontalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Images/avatar_circle_grey.png"
+                                                Stretch="UniformToFill" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Ellipse Width="32" Height="32" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                                        HorizontalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding AvatarUrl}" Stretch="UniformToFill" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock Grid.Column="1"
+                                        Grid.Row="0"
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Bottom"
+                                        Text="{Binding Name}"
+                                        Foreground="{StaticResource SolidBrushGray3}"
+                                        FontSize="17" />
+                            <TextBlock Grid.Column="1"
+                                        Grid.Row="1"
+                                       Margin="8,0,0,0"
+                                        Text="{Binding Position}"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Left"
+                                        Foreground="{StaticResource SolidBrushGray1}"
+                                        FontSize="14" />
+
+                            <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Right">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
+                                <Button HorizontalAlignment="Right" Grid.Column="0" Width="32" Height="32"
+                                        Margin="0,0,8,0"
+                                        Content="&#xE10B;"
+                                        Padding="0"
+                                        FontSize="17"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Command="{Binding AcceptCommand}"
+                                        Visibility="{Binding IsAccepted,Converter={StaticResource InversBooleanToVisibilityCoverter}}">
+                                </Button>
+                                <Button Grid.Column="1" HorizontalAlignment="Right" Width="32" Height="32"
+                                        Content="&#xE10A;"
+                                        Padding="0"
+                                        FontSize="17"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Command="{Binding DeclineCommand}" Margin="0,0,8,0">
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+         <ListView Grid.ColumnSpan="2" Grid.Row="4"
+                   Visibility="{Binding IsMyTicket, Converter={StaticResource InversBooleanToVisibilityCoverter}}"
+                   ItemsSource="{Binding Offers}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32" />
+                                <RowDefinition Height="32" />
+                            </Grid.RowDefinitions>
+                            <Ellipse Width="32" Height="32" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                                        HorizontalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Images/avatar_circle_grey.png"
+                                                Stretch="UniformToFill" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Ellipse Width="32" Height="32" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                                        HorizontalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding AvatarUrl}" Stretch="UniformToFill" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock Grid.Column="1"
+                                        Grid.Row="0"
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Bottom"
+                                        Text="{Binding Name}"
+                                        Foreground="{StaticResource SolidBrushGray3}"
+                                        FontSize="17" />
+                            <TextBlock Grid.Column="1"
+                                        Grid.Row="1"
+                                       Margin="8,0,0,0"
+                                        Text="{Binding Position}"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Left"
+                                        Foreground="{StaticResource SolidBrushGray1}"
+                                        FontSize="14" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
     </Grid>
 </views:BasePage>
