@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using IntranetMobile.Core.ViewModels.Reviewer;
 using MvvmCross.Platform;
 using MvvmCross.WindowsUWP.Views;
 
@@ -25,10 +26,27 @@ namespace Intranet.WindowsUWP.Views.Reviewer
     [MvxRegion("MainContent")]
     public sealed partial class ReviewerPage : BasePage
     {
+        public static ReviewerPage Instance { get; private set; }
+
+        public Frame ContentFrame => TicketDetailsContent;
+
         public ReviewerPage()
         {
+            Instance = this;
             this.InitializeComponent();
         }
+
+        public void RefreshContent()
+        {
+            var vm = (ReviewerViewModel)DataContext;
+            if (vm != null)
+            {
+                vm.DotNet.ReloadCommand.Execute(null);
+                vm.JavaScript.ReloadCommand.Execute(null);
+                vm.Php.ReloadCommand.Execute(null);
+            }
+        }
+
         private void Pivot_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Tabs.SelectedIndex == 0)

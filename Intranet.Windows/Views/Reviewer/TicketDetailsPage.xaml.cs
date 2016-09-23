@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using IntranetMobile.Core.ViewModels.Reviewer;
 using MvvmCross.WindowsUWP.Views;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -27,6 +28,21 @@ namespace Intranet.WindowsUWP.Views.Reviewer
         public TicketDetailsPage()
         {
             this.InitializeComponent();
+            DataContextChanged += (sender, args) =>
+            {
+                var vm = ViewModel as TicketDetailsViewModel;
+                if (vm != null)
+                {
+                    vm.NotifyItemDeleted = ticketId =>
+                    {
+                        if (ReviewerPage.Instance != null && ReviewerPage.Instance.ContentFrame != null)
+                        {
+                            ReviewerPage.Instance.ContentFrame.Navigate(typeof(EmptyPage));
+                            ReviewerPage.Instance.RefreshContent();
+                        }
+                    };
+                }
+            };
         }
     }
 }

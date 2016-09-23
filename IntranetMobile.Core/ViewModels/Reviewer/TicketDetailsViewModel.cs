@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using IntranetMobile.Core.Extensions;
 using IntranetMobile.Core.Models;
 using IntranetMobile.Core.Services;
@@ -20,7 +21,12 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         {
             SignCommand = new MvxCommand(SignCommandExecute);
             CommentCommand = new MvxCommand(ShowComments);
+            ClickDeleteTicketCommand = new MvxCommand(ClickDeleteTicketCommandExecute);
         }
+
+        public ICommand ClickDeleteTicketCommand { get; private set; }
+
+        public Action<string> NotifyItemDeleted { get; set; }
 
         public string AuthorAvatarUrl => Author != null ? Constants.BaseUrl + Author.AvatarUri : null;
 
@@ -41,9 +47,9 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
         public ObservableCollection<TicketOfferViewModel> Offers { get; } =
             new ObservableCollection<TicketOfferViewModel>();
 
-        public MvxCommand SignCommand { get; private set; }
+        public ICommand SignCommand { get; private set; }
 
-        public MvxCommand CommentCommand { get; private set; }
+        public ICommand CommentCommand { get; private set; }
 
         public string TicketId
         {
@@ -134,6 +140,19 @@ namespace IntranetMobile.Core.ViewModels.Reviewer
                 Ticket = await ServiceBus.ReviewerService.GetTicketDetailsAsync(TicketId);
                 Author = await ServiceBus.UserService.GetUserInfoById(Ticket.UserServerId);
             });
+        }
+
+        private void ClickDeleteTicketCommandExecute()
+        {
+            if (IsMyTicket)
+            ServiceBus.AlertService.ShowDialogBox("Are you sure?",
+                                                  "This review request will be deleted permanently",
+                                                  "Delete",
+                                                  "Cancel", async () =>
+                                                  {
+                                                      await ServiceBus.ReviewerService.DeleteTicketAsync(TicketId);
+                                                      NotifyItemDeleted?.Invoke(TicketId);
+                                                  });
         }
 
         private async void SignCommandExecute()

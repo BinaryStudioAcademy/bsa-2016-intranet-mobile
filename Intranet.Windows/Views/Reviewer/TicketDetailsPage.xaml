@@ -66,7 +66,7 @@
                    Margin="0,0,8,0"
                    FontSize="14" />
         <Button HorizontalAlignment="Right" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Margin="0,0,16,0"
-                Command="{Binding SignCommand}"
+                Command="{Binding ClickDeleteTicketCommand}"
                 Width="80"
                 VerticalAlignment="Center"
                 Content="Delete"

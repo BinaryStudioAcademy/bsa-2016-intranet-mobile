@@ -32,6 +32,17 @@ namespace Intranet.WindowsUWP.Views.Reviewer
         public NewTicketPage()
         {
             this.InitializeComponent();
+            DataContextChanged += (sender, args) =>
+            {
+                var vm = (NewTicketViewModel)DataContext;
+                if (vm != null)
+                {
+                    vm.NavigateBack = () =>
+                    {
+                        ReviewerPage.Instance.ContentFrame.Navigate(typeof(EmptyPage));
+                    };
+                }
+            };
         }
 
         private void DatePicker_OnDateChanged(object sender, DatePickerValueChangedEventArgs e)
