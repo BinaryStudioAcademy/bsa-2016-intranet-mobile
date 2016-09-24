@@ -43,6 +43,7 @@ namespace Intranet.WindowsUWP.Views.Reviewer
                     };
                 }
             };
+            _date = new DateTime(DatePicker.Date.Year, DatePicker.Date.Month, DatePicker.Date.Day);
         }
 
         private void DatePicker_OnDateChanged(object sender, DatePickerValueChangedEventArgs e)

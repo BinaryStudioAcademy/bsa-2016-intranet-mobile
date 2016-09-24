@@ -7,10 +7,10 @@ namespace IntranetMobile.Core.ViewModels.Login
     public class UserCredentialsViewModel : BaseViewModel
     {
         private const string Tag = "UserCredentialsViewModel";
-        private string _email = "tester_a@example.com";
+        private string _email = "";
         private string _errorText;
         private bool _hasErrors;
-        private string _password = "123456";
+        private string _password = "";
 
         public UserCredentialsViewModel()
         {
